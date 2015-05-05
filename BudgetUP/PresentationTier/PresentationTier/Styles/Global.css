@@ -1,7 +1,7 @@
 ﻿body 
 {
-     background-color: rgb(0, 148, 255);
-     padding-top:50px;
+     /*background-color: rgb(215, 210, 209);*/
+     background-color: rgb(161, 156, 155);
          height:99%;
 }
 
@@ -11,7 +11,9 @@ div.contentArea
     height:99%;
     text-align:center;
     margin:0 auto;
-    background-color: rgb(128, 128, 128);
+    margin-top:50px;
+    /*background-color: rgb(161, 156, 155);*/
+    background-color: rgb(215, 210, 209);
 
 }
 
@@ -28,10 +30,16 @@ div.navbar-Footer {
 
 
  }
- .navbar,navbar-brand,active,navbar-nav,navbar-inverse
+ /*.navbar,navbar-brand,active,navbar-nav,
+ navbar-inverse,container-fluid,navbar-header,navbar-toggle,
+ ollapse, navbar-collapse*/
+ nav
  {
-     background-color:green;
+     /*background-color:green;*/
+     background-color: rgb(0, 91, 170);
+     margin-top:0px;
  }
+
  .form-control
  {
      width:50%;
@@ -39,7 +47,16 @@ div.navbar-Footer {
  }
  img
  {
-     height:50%;
-     width:25%;
+     
+ }
+ .BussLogo
+ {
+     height:100px;
+     width:100px;
  }
 
+ hr
+ {
+     width:50%;
+     color: black;
+ }
