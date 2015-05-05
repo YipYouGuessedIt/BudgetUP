@@ -22,7 +22,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#">BudgetUP</a>
+                    <a class="navbar-brand" href="./Hme.aspx">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -35,7 +35,8 @@
         </nav>
 
             <div id="ProfileContent" class="contentArea">
-                <h1>Lectures Name Profile</h1>    
+                <h1>Lectures Name Profile</h1>   <hr /> 
+                <br /> 
             </div>
         </form>
 

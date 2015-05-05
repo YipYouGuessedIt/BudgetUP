@@ -23,7 +23,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#">BudgetUP</a>
+                    <a class="navbar-brand" href="./Hme.aspx">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -38,10 +38,16 @@
         <form id="form1" runat="server">
             <div id="AddProjects" class="contentArea">
                 <h1>Project</h1><hr />
-                <asp:Label runat="server">Project Name</asp:Label><asp:TextBox runat="server" ID="Name" name="Name" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Project Head </asp:Label><asp:TextBox runat="server" ID="Prof" name="Prof" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Start date</asp:Label><asp:TextBox runat="server" ID="Date" name="Date" type ="date" CssClass="form-control"></asp:TextBox><br />
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" /><br /><br />
+                <asp:Label runat="server">Project Name</asp:Label>
+                <asp:TextBox runat="server" ID="Name" name="Name" CssClass="form-control"></asp:TextBox><br />
+
+                <asp:Label runat="server">Project Head </asp:Label>
+                <asp:TextBox runat="server" ID="Prof" name="Prof" CssClass="form-control"></asp:TextBox><br />
+
+                <asp:Label runat="server">Start date</asp:Label>
+                <asp:TextBox runat="server" ID="Date" name="Date" type ="date" CssClass="form-control"></asp:TextBox><br />
+
+                <asp:Button runat="server" class="" CssClass="btn-info btn-lg btn" Text="Add" /><br /><br />
             </div>
         </form>
 

@@ -21,19 +21,31 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#">BudgetUP</a>
+                    <a class="navbar-brand" href="./Hme.aspx">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li><a href="./Hme.aspx">My Projects</a></li> 
-                        <li> <a href="./MyProfile.aspx">Profile</a></li> 
-                        <li> <a href="f">Logout</a></li> 
+                        <li> 
+                            <a href="./Hme.aspx">
+                                My Projects 
+                            </a>
+                        </li> 
+                        <li> 
+                            <a href="./MyProfile.aspx">
+                                Profile
+                            </a>
+                        </li> 
+                        <li> 
+                            <a href="f">
+                                Logout
+                            </a>
+                        </li> 
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="contentArea">
-            <h1>Project</h1>
+            <h1>Project</h1><hr />
 
             <div id="ProjectSearch">
 				<input class="form-control" placeholder="Search..." /><br />
@@ -44,9 +56,18 @@
 			</div>
 
 			<div id="ProjectList" class="list-group">
-				<a class="list-group-item" href="">Item one</a><br />
-                <a class="list-group-item" href="">Item two</a><br />
-                <a class="list-group-item" href="">Item Three</a><br />				
+				<a class="list-group-item ui-shadow ui-btn ui-corner-all" href="">
+                    Item one
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+				</a><br />
+                <a class="list-group-item ui-shadow ui-btn ui-corner-all" href="">
+                    Item two
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+                </a><br />
+                <a class="list-group-item ui-shadow ui-btn ui-corner-all" href="">
+                    Item Three
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+                </a><br />	
 			</div>
         </div>
 
