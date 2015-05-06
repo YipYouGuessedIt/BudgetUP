@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Manage Account" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Manage.aspx.vb" Inherits="PresentationTier.Manage" %>
+﻿<%@ Page Title="Manage Account" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Manage.aspx.cs" Inherits="PresentationTier.Account.Manage" %>
 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
@@ -8,7 +8,7 @@
 
     <section id="passwordForm">
         <asp:PlaceHolder runat="server" ID="successMessage" Visible="false" ViewStateMode="Disabled">
-            <p class="message-success"><%: SuccessMessageText %></p>
+            <p class="message-success"><%: SuccessMessage %></p>
         </asp:PlaceHolder>
 
         <p>You're logged in as <strong><%: User.Identity.Name %></strong>.</p>
@@ -19,7 +19,7 @@
                 password so you can log in without an external login.
             </p>
             <fieldset>
-                <legend>Set password form</legend>
+                <legend>Set Password Form</legend>
                 <ol>
                     <li>
                         <asp:Label runat="server" AssociatedControlID="password">Password</asp:Label>
@@ -112,7 +112,7 @@
                     <td><%#: ConvertToDisplayDateTime(Item.LastUsedUtc) %></td>
                     <td>
                         <asp:Button runat="server" Text="Remove" CommandName="Delete" CausesValidation="false" 
-                            ToolTip='<%#: "Remove this " & Item.ProviderDisplayName & " login from your account" %>'
+                            ToolTip='<%# "Remove this " + Item.ProviderDisplayName + " login from your account" %>'
                             Visible="<%# CanRemoveExternalLogins %>" />
                     </td>
                     

@@ -1,13 +1,13 @@
-﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="PresentationTier.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="PresentationTier.SiteMaster" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
     <title><%: Page.Title %> - My ASP.NET Application</title>
-    <asp:PlaceHolder runat="server">        
-        <%: Scripts.Render("~/bundles/modernizr") %>
-    </asp:PlaceHolder>
+    <asp:PlaceHolder runat="server">     
+          <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>  
     <webopt:BundleReference runat="server" Path="~/Content/css" /> 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
@@ -18,7 +18,8 @@
     <asp:ScriptManager runat="server">
         <Scripts>
             <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=272931&clcid=0x409 --%>
-            <%--Framework scripts--%>
+            <%--Framework Scripts--%>
+            
             <asp:ScriptReference Name="MsAjaxBundle" />
             <asp:ScriptReference Name="jquery" />
             <asp:ScriptReference Name="jquery.ui.combined" />
@@ -31,7 +32,7 @@
             <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
             <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
             <asp:ScriptReference Name="WebFormsBundle" />
-            <%--Site scripts--%>
+            <%--Site Scripts--%>
 
         </Scripts>
     </asp:ScriptManager>
@@ -39,7 +40,8 @@
         <div class="content-wrapper">
             <div class="float-left">
                 <p class="site-title">
-                    <a runat="server" href="~/">your logo here</a></p>
+                    <a runat="server" href="~/">your logo here</a>
+                </p>
             </div>
             <div class="float-right">
                 <section id="login">
@@ -53,8 +55,7 @@
                         <LoggedInTemplate>
                             <p>
                                 Hello, <a runat="server" class="username" href="~/Account/Manage" title="Manage your account">
-                                    <asp:LoginName runat="server" CssClass="username" />
-                                </a>!
+                                    <asp:LoginName runat="server" CssClass="username" /></a>!
                                 <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
                             </p>
                         </LoggedInTemplate>
@@ -79,9 +80,7 @@
     <footer>
         <div class="content-wrapper">
             <div class="float-left">
-                <p>
-                    &copy; <%: DateTime.Now.Year %> - My ASP.NET Application
-                </p>
+                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
             </div>
         </div>
     </footer>
