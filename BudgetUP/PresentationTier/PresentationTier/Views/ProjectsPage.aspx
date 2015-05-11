@@ -28,7 +28,8 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="ProjectsPage.aspx">My Projects</a></li> 
-                        <li> <a href="ProfilePage.aspx">Profile</a></li> 
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                      
+                        <li> <a href="Setting.aspx">Settings</a></li>  
                         <li> <a href="LoginPage.aspx">Logout</a></li> 
                     </ul>
                 </div>
@@ -45,11 +46,21 @@
 				<a href="AddProject.aspx" class="btn btn-info btn-lg"  >Add new project</a><br /><br />
 			</div>
 
+            <div id="ProjectAdd">
+				<asp:Button name="enableAdmin" runat="server" CssClass="btn-info btn-lg btn" Text="Edit (AC)" OnClick="Unnamed1_Click"/><br />
+			</div>
+
 			<div id="ProjectList" class="list-group">
                 <h3>Project List</h3>
-				<a class="list-group-item" href="ObjectivesPage.aspx">Item one</a><br />
-                <a class="list-group-item" href="ObjectivesPage.aspx">Item two</a><br />
-                <a class="list-group-item" href="ObjectivesPage.aspx">Item Three</a><br />				
+				<a class="list-group-item" href="ObjectivesPage.aspx">Item one
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+				</a><br />
+                <a class="list-group-item" href="ObjectivesPage.aspx">Item two
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+                </a><br />
+                <a class="list-group-item" href="ObjectivesPage.aspx">Item Three (Admin Option to delete)
+                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
+                </a><br />				
 			</div>
         </div>
     </div>

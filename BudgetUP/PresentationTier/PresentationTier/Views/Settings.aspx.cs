@@ -5,19 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace PresentationTier.Views
+namespace PresentationTier.Styles
 {
-    public partial class ProjectsPage : System.Web.UI.Page
+    public partial class Settings : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-
-        protected void Unnamed1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
     }
 }

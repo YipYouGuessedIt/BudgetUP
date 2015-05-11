@@ -41,13 +41,15 @@ div.navbar-Footer {
 
  .form-control
  {
-     width:50%;
      margin:0 auto;
+     width:50%;
  }
+
  img
  {
      
  }
+
  .BussLogo
  {
      height:100px;
@@ -59,5 +61,4 @@ div.navbar-Footer {
      width:50%;
      color: black;
  }
-
 

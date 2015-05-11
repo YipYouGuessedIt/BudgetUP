@@ -28,7 +28,8 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="ProjectsPage.aspx">My Projects</a></li> 
-                        <li> <a href="ProfilePage.aspx">Profile</a></li> 
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                      
+                        <li> <a href="Setting.aspx">Settings</a></li>  
                         <li> <a href="LoginPage.aspx">Logout</a></li> 
                     </ul>
                 </div>
@@ -48,9 +49,15 @@
 
 			<div id="ObjectiveList" class="list-group">
                 <h3>Objective List</h3>
-				<a class="list-group-item" href="ActivitiesPage.aspx">Item one</a><br />
-                <a class="list-group-item" href="ActivitiesPage.aspx">Item two</a><br />
-                <a class="list-group-item" href="ActivitiesPage.aspx">Item Three</a><br />				
+				<a class="list-group-item" href="ActivitiesPage.aspx">Item one
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+				</a><br />
+                <a class="list-group-item" href="ActivitiesPage.aspx">Item two
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+                </a><br />
+                <a class="list-group-item" href="ActivitiesPage.aspx">Item Three(Admin Option to delete)
+                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
+                </a><br />				
 			</div>
         </div>
     </div>

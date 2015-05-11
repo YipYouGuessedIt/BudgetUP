@@ -48,9 +48,15 @@
 
 			<div id="ActivityList" class="list-group">
                 <h3>Activity List</h3>
-				<a class="list-group-item" href="IncomeandExpensesPage.aspx">Item one</a><br />
-                <a class="list-group-item" href="IncomeandExpensesPage.aspx">Item two</a><br />
-                <a class="list-group-item" href="IncomeandExpensesPage.aspx">Item Three</a><br />				
+				<a class="list-group-item" href="IncomeandExpensesPage.aspx">Item one 
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+				</a><br />
+                <a class="list-group-item" href="IncomeandExpensesPage.aspx">Item two (Admin Option for delete)
+                    <span class="glyphicon glyphicon-remove-sign pull-right"  aria-hidden="true"></span>
+                </a><br />
+                <a class="list-group-item" href="IncomeandExpensesPage.aspx">Item Three
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+                </a><br />				
 			</div>
         </div>
     </div>

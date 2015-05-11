@@ -250,6 +250,7 @@
     <Content Include="Views\Personelactivity.aspx" />
     <Content Include="Views\ProfilePage.aspx" />
     <Content Include="Views\ProjectsPage.aspx" />
+    <Content Include="Views\Register.aspx" />
     <Content Include="Views\ResourceActivity.aspx" />
     <Content Include="Views\ServiceProviderActivity.aspx" />
     <Content Include="Views\TravelActivity.aspx" />
@@ -455,6 +456,13 @@
     </Compile>
     <Compile Include="Views\ProjectsPage.aspx.designer.cs">
       <DependentUpon>ProjectsPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\ResourceActivity.aspx.cs">
       <DependentUpon>ResourceActivity.aspx</DependentUpon>

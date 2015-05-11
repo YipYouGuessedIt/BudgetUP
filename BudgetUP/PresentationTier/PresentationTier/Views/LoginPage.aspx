@@ -24,6 +24,11 @@
                     </button>
                     <a class="navbar-brand" href="#">BudgetUP</a>
                 </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="Register.aspx">Register</a></li> 
+                    </ul>
+                </div>
             </div>
         </nav>
     <div>

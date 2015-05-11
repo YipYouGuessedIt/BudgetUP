@@ -65,11 +65,21 @@
 			</div>
             <div id="ExpenseList" class="list-group">
                 <h3>Expense</h3>
-				<a class="list-group-item" href="">Item one</a><br />
-                <a class="list-group-item" href="">Item two</a><br />
-                <a class="list-group-item" href="">Item three</a><br />	
-                <a class="list-group-item" href="">Item four</a><br />
-                <a class="list-group-item" href="">Item five</a><br />				
+				<a class="list-group-item" href="">Item one 
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+				</a><br />
+                <a class="list-group-item" href="">Item two
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+                </a><br />
+                <a class="list-group-item" href="">Item three (Admin Option to delete)
+                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
+                </a><br />	
+                <a class="list-group-item" href="">Item four (Admin Option to delete)
+                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
+                </a><br />
+                <a class="list-group-item" href="">Item five (Admin Option to delete)
+                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
+                </a><br />				
 			</div>
         </div>
     </div>

@@ -7,17 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace PresentationTier.Views
 {
-    public partial class ProjectsPage : System.Web.UI.Page
+    public partial class Register : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-
-        protected void Unnamed1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
     }
 }
