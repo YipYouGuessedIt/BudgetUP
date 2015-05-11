@@ -42,7 +42,7 @@
 			</div>
 
             <div id="ActivityAdd">
-				<a href="AddActivities1.aspx" class="btn btn-info btn-lg"  >Add new Activity</a><br /><br />
+				<a href="AddActivities1.aspx" class="btn btn-info btn-lg"  >Add new Activity</a>
                 <a href="ObjectivesPage.aspx" class="btn btn-info btn-lg"  >Back</a><br /><br />
 			</div>
 

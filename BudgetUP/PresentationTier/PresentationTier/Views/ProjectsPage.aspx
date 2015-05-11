@@ -28,7 +28,8 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="ProjectsPage.aspx">My Projects</a></li> 
-                        <li> <a href="ProfilePage.aspx">Profile</a></li>                      
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                
+                        <li> <a href="ManageUsers.aspx">Manage Users</a></li>                       
                         <li> <a href="Setting.aspx">Settings</a></li>  
                         <li> <a href="LoginPage.aspx">Logout</a></li> 
                     </ul>
@@ -43,11 +44,8 @@
 			</div>
 
             <div id="ProjectAdd">
-				<a href="AddProject.aspx" class="btn btn-info btn-lg"  >Add new project</a><br /><br />
-			</div>
-
-            <div id="ProjectAdd">
-				<asp:Button name="enableAdmin" runat="server" CssClass="btn-info btn-lg btn" Text="Edit (AC)" OnClick="Unnamed1_Click"/><br />
+				<a href="AddProject.aspx" class="btn btn-info btn-lg"  >Add new project</a>
+				<asp:Button name="enableAdmin" runat="server" CssClass="btn-info btn-lg btn" Text="Edit (AC)" /><br />
 			</div>
 
 			<div id="ProjectList" class="list-group">

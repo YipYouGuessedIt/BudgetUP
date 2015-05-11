@@ -55,13 +55,15 @@
                     <asp:ListItem Value="6">Bursaries/Scholoarships(Income)</asp:ListItem>
                     <asp:ListItem Value="7">Donations(Income)</asp:ListItem>
                 </asp:DropDownList><br /><br />
-				<asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" OnClick="Unnamed1_Click" ></asp:Button><br /><br />
+				<asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" OnClick="Unnamed1_Click" ></asp:Button>
                 <a href="ActivitiesPage.aspx" class="btn btn-info btn-lg"  >Back</a><br /><br />
                 
 			</div>
 			<div id="IncomeList" class="list-group">
                 <h3>Income</h3>
-				<a class="list-group-item" href="IncomeandExpensesPage.aspx">Item one</a><br />			
+				<a class="list-group-item" href="IncomeandExpensesPage.aspx">Item one
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+				</a><br />			
 			</div>
             <div id="ExpenseList" class="list-group">
                 <h3>Expense</h3>

@@ -25,7 +25,7 @@ div.navbar-Footer {
  a.list-group-item
  {
      width:50%;
-     background-color: rgb(161,156,155);
+     background-color: rgb(0,91,170);
      margin:0 auto;
      color: white;
  }
@@ -61,4 +61,7 @@ div.navbar-Footer {
      width:50%;
      color: black;
  }
-
+ .btn
+ {
+     background-color: rgb(218,28,51);
+ }

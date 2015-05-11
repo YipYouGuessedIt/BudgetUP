@@ -43,7 +43,7 @@
 			</div>
 
             <div id="ObjectiveAdd">
-				<a href="AddObjectives.aspx" class="btn btn-info btn-lg"  >Add new Objective</a><br /><br />
+				<a href="AddObjectives.aspx" class="btn btn-info btn-lg"  >Add new Objective</a>
                 <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a><br /><br />
 			</div>
 
