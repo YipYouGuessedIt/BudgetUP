@@ -40,8 +40,6 @@
             <div class="Incomesection">
             <div id="IncomeorExpenseSearch">
 				<input class="form-control" placeholder="Search Objectives..." />
-
-
                 <br />
 			</div>
             <div id="IncomeorExpenseAdd">
