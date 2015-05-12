@@ -27,7 +27,9 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="ProjectsPage.aspx">My Projects</a></li> 
-                        <li> <a href="ProfilePage.aspx">Profile</a></li> 
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                    
+                        <li> <a href="ManageUsers.aspx">Manage Users</a></li>                    
+                        <li> <a href="Settings.aspx">Settings</a></li>  
                         <li> <a href="LoginPage.aspx">Logout</a></li> 
                     </ul>
                 </div>
