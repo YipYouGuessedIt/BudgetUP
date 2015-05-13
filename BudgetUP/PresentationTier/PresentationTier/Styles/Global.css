@@ -65,3 +65,8 @@ div.navbar-Footer {
  {
      background-color: rgb(218,28,51);
  }
+
+ .form-control
+ {
+     height: 36px;
+ }

@@ -22,24 +22,23 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#">BudgetUP</a>
+                    <a class="navbar-brand" href="ProjectsPage.aspx">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li> <a href="LoginPage.aspx">Logout</a></li> 
                     </ul>
                 </div>
             </div>
         </nav>
 
-                <div id="AddActivity" class="contentArea">
+                <div id="AddActivity" class="contentArea"><br />
                 <h1>Register</h1><hr />
                 <asp:Label runat="server">Name and Surname</asp:Label><asp:TextBox runat="server" ID="name" required name="name" CssClass="form-control" >John Smith</asp:TextBox><br />
-                <asp:Label runat="server">Email Address </asp:Label><asp:TextBox required type="email" runat="server" ID="email" name="email" CssClass="form-control" Height="25px"></asp:TextBox><br />
+                <asp:Label runat="server">Email Address </asp:Label><asp:TextBox required type="email" runat="server" ID="email" name="email" CssClass="form-control"></asp:TextBox><br />
                     
-                <asp:Label runat="server">Password</asp:Label><asp:TextBox required type="password" runat="server" ID="TextBox1" name="email" CssClass="form-control" Height="25px"></asp:TextBox><br />
+                <asp:Label runat="server">Password</asp:Label><asp:TextBox required type="password" runat="server" ID="TextBox1" name="email" CssClass="form-control" ></asp:TextBox><br />
                     
-                <asp:Label runat="server">Confirm password</asp:Label><asp:TextBox required type="password" runat="server" ID="TextBox2" name="email" CssClass="form-control" Height="25px"></asp:TextBox><br />
+                <asp:Label runat="server">Confirm password</asp:Label><asp:TextBox required type="password" runat="server" ID="TextBox2" name="email" CssClass="form-control" ></asp:TextBox><br />
                 <asp:Label runat="server">Role</asp:Label> 
                 <asp:DropDownList class="form-control" ID="DropDownList2" runat="server">
                     <asp:ListItem Value="1">Academic</asp:ListItem>
@@ -63,7 +62,7 @@
 
                 </asp:DropDownList><br /><br />
 
-                 <asp:Label runat="server">Prefered Currency</asp:Label> 
+                 <asp:Label runat="server">Preferred Currency</asp:Label> 
                 <asp:DropDownList class="form-control" ID="DropDownList1" runat="server">
                     <asp:ListItem Value="1">Rand(R)</asp:ListItem>
                     <asp:ListItem Value="2">Dollar($)</asp:ListItem>

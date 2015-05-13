@@ -37,7 +37,7 @@
 
                 <div id="AddActivity" class="contentArea">
                 <h1>Profile</h1><hr />
-                <asp:Label runat="server">Name and Surname</asp:Label><asp:TextBox runat="server" ID="name" required="true" name="name" CssClass="form-control">John Smith</asp:TextBox><br />
+                <asp:Label runat="server">Name and Surname</asp:Label><asp:TextBox runat="server" ID="name" required="true" name="name" CssClass="form-control" Height="25px">John Smith</asp:TextBox><br />
                 <asp:Label runat="server">Email Address </asp:Label><asp:TextBox required="true"  type="email" runat="server" ID="email" name="email" CssClass="form-control" Height="25px"></asp:TextBox><br />
                 <asp:Label runat="server">Role</asp:Label> 
                 <asp:DropDownList class="form-control" ID="DropDownList2" runat="server">
@@ -64,7 +64,7 @@
 
                 </asp:DropDownList><br /><br />
 
-                 <asp:Label runat="server">Prefered Currency</asp:Label> 
+                 <asp:Label runat="server">Preferred Currency</asp:Label> 
                 <asp:DropDownList class="form-control" ID="DropDownList1" runat="server">
                     <asp:ListItem Value="1">Rand(R)</asp:ListItem>
                     <asp:ListItem Value="2">Dollar($)</asp:ListItem>
