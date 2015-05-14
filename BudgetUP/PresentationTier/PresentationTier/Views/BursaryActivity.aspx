@@ -37,7 +37,7 @@
         </nav>
 
         <form id="form1" runat="server">
-            <div id="Add" class="contentArea">
+            <div id="Add" class="contentArea"><br />
                 <h1>Bursary</h1><hr />
                 <asp:Label runat="server">Number of Bursaries</asp:Label><asp:TextBox runat="server" ID="numofburs" required name="numofburs" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Type of bursary</asp:Label>                

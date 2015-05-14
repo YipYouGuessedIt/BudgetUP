@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ObjectivesPage.aspx.cs" Inherits="PresentationTier.Views.ObjectivesPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddExpense.aspx.cs" Inherits="PresentationTier.Views.AddExpense" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-        <title>Objective</title>
-    	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
+    <title>Settings</title>
+   	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	    <script src="../bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
@@ -14,7 +14,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -36,32 +35,16 @@
                 </div>
             </div>
         </nav>
-        <div class="contentArea"><br />
-            <h1>Project Name</h1><hr />
-            <h2>Project start and end date</h2>
-            <div id="ObjectiveSearch">
-				<input class="form-control" placeholder="Search Objectives..." /><br />
-			</div>
 
-            <div id="ObjectiveAdd">
-				<a href="AddObjectives.aspx" class="btn btn-info btn-lg"  >Add new Objective</a>
-                <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a><br /><br />
-			</div>
 
-			<div id="ObjectiveList" class="list-group">
-                <h3>Objective List</h3>
-				<a class="list-group-item" href="ActivitiesPage.aspx">Item one
-                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
-				</a><br />
-                <a class="list-group-item" href="ActivitiesPage.aspx">Item two
-                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
-                </a><br />
-                <a class="list-group-item" href="ActivitiesPage.aspx">Item Three(Admin Option to delete)
-                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
-                </a><br />				
-			</div>
+        <div id="AddActivity" class="contentArea">
+            <br />
+            <h1>Add Expense</h1><hr />
+            <asp:Label runat="server">Expense name</asp:Label>
+            <asp:TextBox runat="server" ID="addExpense" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+            <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a>
+            <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add Expense" /><br /><br />
         </div>
-    </div>
     </form>
 </body>
 </html>

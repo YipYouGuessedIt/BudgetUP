@@ -35,12 +35,49 @@
                 </div>
             </div>
         </nav>
-            <div id="AddActivity" class="contentArea">
-                <h1>Profile</h1><hr />
-                <asp:Label runat="server">Annual Increase</asp:Label><asp:TextBox runat="server" ID="AnnualIncrease" required="true" name="name" CssClass="form-control">6.5</asp:TextBox><br />
-                <asp:Label runat="server">Indirect/instutional Cost</asp:Label><asp:TextBox runat="server" ID="TextBox1" required="true" name="name" CssClass="form-control">10</asp:TextBox><br />
+        <div id="AddActivity" class="contentArea"><br />
+            <h1>Settings</h1>
+            <hr />
+            <h3> Users</h3>
+            <hr />
+            <a class="list-group-item" href="Register.aspx">Add Users
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+            <a class="list-group-item" href="ManageUsers.aspx">Edit Users
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+
+            <hr />
+            <h3> Incomes </h3>
+            <hr />
+
+            <a class="list-group-item" href="AddIncome.aspx">Add Incomes
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+            <a class="list-group-item" href="Incomes.aspx">Edit Incomes
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+
+            <hr />
+            <h3> Expenses </h3>
+            <hr />
+
+            <a class="list-group-item" href="AddExpense.aspx">Add Expense
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+            <a class="list-group-item" href="Expenses.aspx">Edit Expenses
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+
+            <hr />
+            <h3> General</h3>
+            <hr />
+
+            <a class="list-group-item" href="GeneralSettings.aspx">General Settings
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+            <br />
             <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a>
-            <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" /><br /><br />
         </div>
     </form>
 </body>

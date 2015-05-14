@@ -37,7 +37,7 @@
         </nav>
 
         <form id="form1" runat="server">
-            <div id="Add" class="contentArea">
+            <div id="Add" class="contentArea"><br />
                 <h1>Travel</h1>
                 <hr />
                 <asp:Label ID="Label1" runat="server" Text="">Number of travellers</asp:Label>

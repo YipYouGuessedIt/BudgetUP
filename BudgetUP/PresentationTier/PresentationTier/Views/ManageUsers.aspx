@@ -43,19 +43,15 @@
 				<input class="form-control" placeholder="Search Users..." /><br />
 			</div>
 
-            <div id="admin">
-				<asp:Button name="enableAdmin" runat="server" CssClass="btn-info btn-lg btn" Text="Edit (AC)" /><br />
-			</div>
-
-			<div id="ProjectList" class="list-group">
-                <h3>Project List</h3>
-				<a class="list-group-item" href="ObjectivesPage.aspx">David Tennent
+			<div id="ProjectList" class="list-group"><br />
+                <h3>Users</h3><hr />
+				<a class="list-group-item" href="ProfilePage.aspx">David Tennent
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
 				</a><br />
-                <a class="list-group-item" href="ObjectivesPage.aspx">Matt Smith
+                <a class="list-group-item" href="ProfilePage.aspx">Matt Smith
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
                 </a><br />
-                <a class="list-group-item" href="ObjectivesPage.aspx">Jame Cameron
+                <a class="list-group-item" href="ProfilePage.aspx">Jame Cameron
                     <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
                 </a><br />				
 			</div>

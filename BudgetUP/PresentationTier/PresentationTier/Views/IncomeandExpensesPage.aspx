@@ -34,7 +34,7 @@
                 </div>
             </div>
         </nav>
-        <div class="contentArea">
+        <div class="contentArea"><br />
             <h1>Activity Name</h1>
             <h2>Start and end date</h2>
             <div class="Incomesection">
@@ -63,21 +63,21 @@
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
 				</a><br />			
 			</div>
-            <div id="ExpenseList" class="list-group">
-                <h3>Expense</h3>
-				<a class="list-group-item" href="">Item one 
+            <div id="ExpenseList" class="list-group"><br />
+                <h3>Expense</h3><hr />
+				<a class="list-group-item" href="#">Item one 
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
 				</a><br />
-                <a class="list-group-item" href="">Item two
+                <a class="list-group-item" href="#">Item two
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
                 </a><br />
-                <a class="list-group-item" href="">Item three (Admin Option to delete)
+                <a class="list-group-item" href="#">Item three (Admin Option to delete)
                     <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
                 </a><br />	
-                <a class="list-group-item" href="">Item four (Admin Option to delete)
+                <a class="list-group-item" href="#">Item four (Admin Option to delete)
                     <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
                 </a><br />
-                <a class="list-group-item" href="">Item five (Admin Option to delete)
+                <a class="list-group-item" href="#">Item five (Admin Option to delete)
                     <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
                 </a><br />				
 			</div>

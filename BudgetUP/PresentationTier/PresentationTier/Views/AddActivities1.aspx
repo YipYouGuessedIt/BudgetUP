@@ -36,6 +36,7 @@
 
         <form id="form1" runat="server">
             <div id="AddActivity" class="contentArea">
+                <br />
                 <h1>Project</h1><hr />
                 <asp:Label runat="server">Activity Name</asp:Label><asp:TextBox runat="server" ID="title" required name="title" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Start Date </asp:Label><asp:TextBox required type="date" runat="server" ID="sdate" name="sdate" CssClass="form-control"></asp:TextBox><br />

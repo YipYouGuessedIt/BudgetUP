@@ -205,6 +205,11 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Views\AddExpense.aspx" />
+    <Content Include="Views\AddIncome.aspx" />
+    <Content Include="Views\Expenses.aspx" />
+    <Content Include="Views\GeneralSettings.aspx" />
+    <Content Include="Views\Incomes.aspx" />
     <Content Include="Views\ManageUsers.aspx" />
     <Content Include="Views\Settings.aspx" />
     <Content Include="Views\ActivitiesPage.aspx" />
@@ -334,6 +339,41 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddExpense.aspx.cs">
+      <DependentUpon>AddExpense.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\AddExpense.aspx.designer.cs">
+      <DependentUpon>AddExpense.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddIncome.aspx.cs">
+      <DependentUpon>AddIncome.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\AddIncome.aspx.designer.cs">
+      <DependentUpon>AddIncome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Expenses.aspx.cs">
+      <DependentUpon>Expenses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Expenses.aspx.designer.cs">
+      <DependentUpon>Expenses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GeneralSettings.aspx.cs">
+      <DependentUpon>GeneralSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\GeneralSettings.aspx.designer.cs">
+      <DependentUpon>GeneralSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Incomes.aspx.cs">
+      <DependentUpon>Incomes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Incomes.aspx.designer.cs">
+      <DependentUpon>Incomes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\ManageUsers.aspx.cs">
       <DependentUpon>ManageUsers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -428,12 +468,14 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PresentationTier.Styles {
+namespace PresentationTier.Views {
     
     
-    public partial class Settings {
+    public partial class AddExpense {
         
         /// <summary>
         /// form1 control.
@@ -20,5 +20,14 @@ namespace PresentationTier.Styles {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
+        /// addExpense control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox addExpense;
     }
 }

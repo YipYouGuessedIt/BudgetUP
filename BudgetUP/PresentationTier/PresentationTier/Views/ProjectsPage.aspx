@@ -36,8 +36,8 @@
                 </div>
             </div>
         </nav>
-        <div class="contentArea">
-            <h1>Project</h1>
+        <div class="contentArea"><br />
+            <h1>Project</h1><hr />
 
             <div id="ProjectSearch">
 				<input class="form-control" placeholder="Search Projects..." /><br />

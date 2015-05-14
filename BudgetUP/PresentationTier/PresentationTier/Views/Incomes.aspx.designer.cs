@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PresentationTier.Styles {
+namespace PresentationTier.Views {
     
     
-    public partial class Settings {
+    public partial class Incomes {
         
         /// <summary>
         /// form1 control.

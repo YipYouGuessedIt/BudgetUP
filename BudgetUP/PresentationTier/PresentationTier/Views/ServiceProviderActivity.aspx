@@ -37,7 +37,7 @@
         </nav>
 
         <form id="form1" runat="server">
-            <div id="Add" class="contentArea">
+            <div id="Add" class="contentArea"><br />
                 <h1>External Service Provider</h1><hr />
                 <asp:Label runat="server">Name of contractor</asp:Label><asp:TextBox runat="server" ID="name" required name="name" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Amount</asp:Label><asp:TextBox required runat="server" ID="amount" name="amount" CssClass="form-control"></asp:TextBox><br />

@@ -37,7 +37,8 @@
             </div>
         </nav>
         <div class="contentArea">
-            <h1>Objective Name</h1>
+            <br />
+            <h1>Objective Name</h1><hr />
             <h2>Milestone</h2>
             <div id="ActivitySearch">
 				<input class="form-control" placeholder="Search Objectives..." /><br />

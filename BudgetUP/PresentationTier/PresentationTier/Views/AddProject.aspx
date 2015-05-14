@@ -37,7 +37,7 @@
         </nav>
 
         <form id="form1" runat="server">
-            <div id="AddProjects" class="contentArea">
+            <div id="AddProjects" class="contentArea"><br />
                 <h1>Project</h1><hr />
                 <asp:Label runat="server">Project Title</asp:Label><asp:TextBox runat="server" ID="title" required name="title" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Overall Goal of the Project </asp:Label><asp:TextBox required runat="server" ID="goal" name="goal" CssClass="form-control"></asp:TextBox><br />

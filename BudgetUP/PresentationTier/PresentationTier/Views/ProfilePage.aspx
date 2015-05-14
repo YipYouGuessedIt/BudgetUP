@@ -35,7 +35,7 @@
             </div>
         </nav>
 
-                <div id="AddActivity" class="contentArea">
+                <div id="AddActivity" class="contentArea"><br />
                 <h1>Profile</h1><hr />
                 <asp:Label runat="server">Name and Surname</asp:Label><asp:TextBox runat="server" ID="name" required="true" name="name" CssClass="form-control" Height="25px">John Smith</asp:TextBox><br />
                 <asp:Label runat="server">Email Address </asp:Label><asp:TextBox required="true"  type="email" runat="server" ID="email" name="email" CssClass="form-control" Height="25px"></asp:TextBox><br />
