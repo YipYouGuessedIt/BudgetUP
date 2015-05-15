@@ -5,13 +5,22 @@
          height:99%;
 }
 
+div.treeView
+{
+    width:80%;
+   margin:0 auto;
+    margin-top:auto;    
+    background-color: rgb(215, 210, 209);
+    color:black;
+}
+
 div.contentArea
 {
     width:80%;
     height:99%;
     text-align:center;
     margin:0 auto;
-    margin-top:50px;
+    margin-top:10px;
     /*background-color: rgb(161, 156, 155);*/
     background-color: rgb(215, 210, 209);
 

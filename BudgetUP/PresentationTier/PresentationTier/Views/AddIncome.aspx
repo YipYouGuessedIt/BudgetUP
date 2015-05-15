@@ -41,7 +41,7 @@
             <h1>Add Income</h1><hr />
             <asp:Label runat="server">Income name</asp:Label>
             <asp:TextBox runat="server" ID="addIncome" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-            <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a>
+            <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a>
             <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add Income" /><br /><br />
         </div>
     </form>

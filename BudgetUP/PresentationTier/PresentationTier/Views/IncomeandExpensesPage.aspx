@@ -28,37 +28,45 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="ProjectsPage.aspx">My Projects</a></li> 
-                        <li> <a href="ProfilePage.aspx">Profile</a></li> 
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                    
+                        <li> <a href="ManageUsers.aspx">Manage Users</a></li>                    
+                        <li> <a href="Settings.aspx">Settings</a></li>  
                         <li> <a href="LoginPage.aspx">Logout</a></li> 
                     </ul>
                 </div>
             </div>
         </nav>
+
+        <div class="treeView">
+            <a href="ProjectsPage.aspx">Projects</a> &gt <a href="ObjectivesPage.aspx"> Project Name</a> &gt <a href="ActivitiesPage.aspx"> Objective Name</a>
+        </div>
+
         <div class="contentArea"><br />
-            <h1>Activity Name</h1>
-            <h2>Start and end date</h2>
+            <h1>Activity Name</h1><hr />
+            <!--<h2>Start and end date</h2>-->
             <div class="Incomesection">
-            <div id="IncomeorExpenseSearch">
-				<input class="form-control" placeholder="Search Objectives..." />
-                <br />
-			</div>
-            <div id="IncomeorExpenseAdd">
+                <div id="IncomeorExpenseSearch">
+				    <input class="form-control" placeholder="Search Objectives..." />
+                    <br />
+			    </div>
+                <div id="IncomeorExpenseAdd">
                 
-                <asp:DropDownList class="form-control" ID="DropDownList2" runat="server">
-                    <asp:ListItem Value="1">Personel involvment(Expense)</asp:ListItem>
-                    <asp:ListItem Value="2">Service Provider(Expense)</asp:ListItem>
-                    <asp:ListItem Value="3">Operational Expense(Expense)</asp:ListItem>
-                    <asp:ListItem Value="4">Equipment(Expense)</asp:ListItem>
-                    <asp:ListItem Value="5">Travel</asp:ListItem>
-                    <asp:ListItem Value="6">Bursaries/Scholoarships(Income)</asp:ListItem>
-                    <asp:ListItem Value="7">Donations(Income)</asp:ListItem>
-                </asp:DropDownList><br /><br />
-				<asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" OnClick="Unnamed1_Click" ></asp:Button>
-                <a href="ActivitiesPage.aspx" class="btn btn-info btn-lg"  >Back</a><br /><br />
+                    <asp:DropDownList class="form-control" ID="DropDownList2" runat="server">
+                        <asp:ListItem Value="1">Personel involvment(Expense)</asp:ListItem>
+                        <asp:ListItem Value="2">Service Provider(Expense)</asp:ListItem>
+                        <asp:ListItem Value="3">Operational Expense(Expense)</asp:ListItem>
+                        <asp:ListItem Value="4">Equipment(Expense)</asp:ListItem>
+                        <asp:ListItem Value="5">Travel</asp:ListItem>
+                        <asp:ListItem Value="6">Bursaries/Scholoarships(Income)</asp:ListItem>
+                        <asp:ListItem Value="7">Donations(Income)</asp:ListItem>
+                    </asp:DropDownList><br /><br />
+				    <asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" OnClick="Unnamed1_Click" ></asp:Button>
+                    <a href="ActivitiesPage.aspx" class="btn btn-info btn-lg"  >Back</a><br /><br />
                 
-			</div>
+			    </div>
+            </div>
 			<div id="IncomeList" class="list-group">
-                <h3>Income</h3>
+                <h3>Income</h3><hr />
 				<a class="list-group-item" href="IncomeandExpensesPage.aspx">Item one
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
 				</a><br />			

@@ -39,7 +39,7 @@
                 <h1>General Settings</h1><hr />
                 <asp:Label runat="server">Annual Increase</asp:Label><asp:TextBox runat="server" ID="AnnualIncrease" required="true" name="name" CssClass="form-control">6.5</asp:TextBox><br />
                 <asp:Label runat="server">Indirect/instutional Cost</asp:Label><asp:TextBox runat="server" ID="TextBox1" required="true" name="name" CssClass="form-control">10</asp:TextBox><br />
-            <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a>
+            <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a>
             <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" /><br /><br />
         </div>
     </form>

@@ -36,15 +36,15 @@
                 </div>
             </div>
         </nav>
-        <div class="contentArea">
-            <h1>Project</h1>
+        <div class="contentArea"><br />
+            <h1>Manage Users</h1><hr />
 
             <div id="ProjectSearch">
 				<input class="form-control" placeholder="Search Users..." /><br />
 			</div>
 
-			<div id="ProjectList" class="list-group"><br />
-                <h3>Users</h3><hr />
+			<div id="ProjectList" class="list-group">
+                <h3>Users</h3>
 				<a class="list-group-item" href="ProfilePage.aspx">David Tennent
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
 				</a><br />

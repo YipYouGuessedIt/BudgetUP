@@ -42,7 +42,7 @@
             <h1>Add Expense</h1><hr />
             <asp:Label runat="server">Expense name</asp:Label>
             <asp:TextBox runat="server" ID="addExpense" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-            <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a>
+            <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a>
             <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add Expense" /><br /><br />
         </div>
     </form>

@@ -36,6 +36,9 @@
                 </div>
             </div>
         </nav>
+        <div class="treeView">
+            <a href="ProjectsPage.aspx">Projects</a>
+        </div>
         <div class="contentArea"><br />
             <h1>Project Name</h1><hr />
             <h2>Project start and end date</h2>
