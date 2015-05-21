@@ -1,0 +1,674 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model1" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+    <EntitySet Name="Projects" EntityType="Model1.Project" />
+    <EntitySet Name="Users" EntityType="Model1.User" />
+    <EntitySet Name="Incomes" EntityType="Model1.Income" />
+    <EntitySet Name="Objectives" EntityType="Model1.Objective" />
+    <EntitySet Name="Activities" EntityType="Model1.Activity" />
+    <EntitySet Name="Expenses" EntityType="Model1.Expense" />
+    <EntitySet Name="UPStaffMembers" EntityType="Model1.UPStaffMember" />
+    <EntitySet Name="Contractors" EntityType="Model1.Contractor" />
+    <EntitySet Name="Travels" EntityType="Model1.Travel" />
+    <EntitySet Name="Equipments" EntityType="Model1.Equipment" />
+    <EntitySet Name="Operationals" EntityType="Model1.Operational" />
+    <EntitySet Name="Bursaries" EntityType="Model1.Bursary" />
+    <EntitySet Name="BursaryTypes" EntityType="Model1.BursaryType" />
+    <EntitySet Name="PostLevels" EntityType="Model1.PostLevel" />
+    <EntitySet Name="Operation_Type" EntityType="Model1.Operation_Type" />
+    <EntitySet Name="AirlineExpenses" EntityType="Model1.AirlineExpense" />
+    <EntitySet Name="Accommodations" EntityType="Model1.Accommodation" />
+    <EntitySet Name="CarExpenses" EntityType="Model1.CarExpense" />
+    <EntitySet Name="Gautrains" EntityType="Model1.Gautrain" />
+    <EntitySet Name="Visas" EntityType="Model1.Visa" />
+    <EntitySet Name="Allowances" EntityType="Model1.Allowance" />
+    <EntitySet Name="UserCredentials" EntityType="Model1.UserCredentials" />
+    <EntitySet Name="Admin_SysSettings" EntityType="Model1.Admin_SysSettings" />
+    <EntitySet Name="Project_Settings" EntityType="Model1.Project_Settings" />
+    <EntitySet Name="Titles" EntityType="Model1.Title" />
+    <EntitySet Name="Roles" EntityType="Model1.Role" />
+    <EntitySet Name="Faculties" EntityType="Model1.Faculty" />
+    <EntitySet Name="EmailDomains" EntityType="Model1.EmailDomains" />
+    <EntitySet Name="DurationTypes" EntityType="Model1.DurationType" />
+    <EntitySet Name="Notes" EntityType="Model1.Note" />
+    <AssociationSet Name="ProjectObjective" Association="Model1.ProjectObjective">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="Objective" EntitySet="Objectives" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectIncome" Association="Model1.ProjectIncome">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="Income" EntitySet="Incomes" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectBursary" Association="Model1.ProjectBursary">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="Bursary" EntitySet="Bursaries" />
+    </AssociationSet>
+    <AssociationSet Name="UserProject" Association="Model1.UserProject">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectProject_Settings" Association="Model1.ProjectProject_Settings">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="Project_Settings" EntitySet="Project_Settings" />
+    </AssociationSet>
+    <AssociationSet Name="DurationTypeProject" Association="Model1.DurationTypeProject">
+      <End Role="DurationType" EntitySet="DurationTypes" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="UserCredentialsUser" Association="Model1.UserCredentialsUser">
+      <End Role="UserCredentials" EntitySet="UserCredentials" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="ObjectiveActivity" Association="Model1.ObjectiveActivity">
+      <End Role="Objective" EntitySet="Objectives" />
+      <End Role="Activity" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="ActivityExpense" Association="Model1.ActivityExpense">
+      <End Role="Activity" EntitySet="Activities" />
+      <End Role="Expense" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="ExpenseUPStaffMember" Association="Model1.ExpenseUPStaffMember">
+      <End Role="Expense" EntitySet="Expenses" />
+      <End Role="UPStaffMember" EntitySet="UPStaffMembers" />
+    </AssociationSet>
+    <AssociationSet Name="PostLevelUPStaffMember" Association="Model1.PostLevelUPStaffMember">
+      <End Role="PostLevel" EntitySet="PostLevels" />
+      <End Role="UPStaffMember" EntitySet="UPStaffMembers" />
+    </AssociationSet>
+    <AssociationSet Name="ExpenseContractor" Association="Model1.ExpenseContractor">
+      <End Role="Expense" EntitySet="Expenses" />
+      <End Role="Contractor" EntitySet="Contractors" />
+    </AssociationSet>
+    <AssociationSet Name="ExpenseTravel" Association="Model1.ExpenseTravel">
+      <End Role="Expense" EntitySet="Expenses" />
+      <End Role="Travel" EntitySet="Travels" />
+    </AssociationSet>
+    <AssociationSet Name="TravelAirlineExpense" Association="Model1.TravelAirlineExpense">
+      <End Role="Travel" EntitySet="Travels" />
+      <End Role="AirlineExpense" EntitySet="AirlineExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="TravelAccommodation" Association="Model1.TravelAccommodation">
+      <End Role="Travel" EntitySet="Travels" />
+      <End Role="Accommodation" EntitySet="Accommodations" />
+    </AssociationSet>
+    <AssociationSet Name="TravelCarExpense" Association="Model1.TravelCarExpense">
+      <End Role="Travel" EntitySet="Travels" />
+      <End Role="CarExpense" EntitySet="CarExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="TravelGautrain" Association="Model1.TravelGautrain">
+      <End Role="Travel" EntitySet="Travels" />
+      <End Role="Gautrain" EntitySet="Gautrains" />
+    </AssociationSet>
+    <AssociationSet Name="TravelVisa" Association="Model1.TravelVisa">
+      <End Role="Travel" EntitySet="Travels" />
+      <End Role="Visa" EntitySet="Visas" />
+    </AssociationSet>
+    <AssociationSet Name="TravelAllowance" Association="Model1.TravelAllowance">
+      <End Role="Travel" EntitySet="Travels" />
+      <End Role="Allowance" EntitySet="Allowances" />
+    </AssociationSet>
+    <AssociationSet Name="ExpenseEquipment" Association="Model1.ExpenseEquipment">
+      <End Role="Expense" EntitySet="Expenses" />
+      <End Role="Equipment" EntitySet="Equipments" />
+    </AssociationSet>
+    <AssociationSet Name="ExpenseOperational" Association="Model1.ExpenseOperational">
+      <End Role="Expense" EntitySet="Expenses" />
+      <End Role="Operational" EntitySet="Operationals" />
+    </AssociationSet>
+    <AssociationSet Name="Operation_TypeOperational" Association="Model1.Operation_TypeOperational">
+      <End Role="Operation_Type" EntitySet="Operation_Type" />
+      <End Role="Operational" EntitySet="Operationals" />
+    </AssociationSet>
+    <AssociationSet Name="BursaryTypeBursary" Association="Model1.BursaryTypeBursary">
+      <End Role="BursaryType" EntitySet="BursaryTypes" />
+      <End Role="Bursary" EntitySet="Bursaries" />
+    </AssociationSet>
+    <AssociationSet Name="TitleUser" Association="Model1.TitleUser">
+      <End Role="Title" EntitySet="Titles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="RoleUser" Association="Model1.RoleUser">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FacultyUser" Association="Model1.FacultyUser">
+      <End Role="Faculty" EntitySet="Faculties" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="IncomeNote" Association="Model1.IncomeNote">
+      <End Role="Income" EntitySet="Incomes" />
+      <End Role="Note" EntitySet="Notes" />
+    </AssociationSet>
+    <AssociationSet Name="ExpenseNote" Association="Model1.ExpenseNote">
+      <End Role="Expense" EntitySet="Expenses" />
+      <End Role="Note" EntitySet="Notes" />
+    </AssociationSet>
+    <AssociationSet Name="BursaryNote" Association="Model1.BursaryNote">
+      <End Role="Bursary" EntitySet="Bursaries" />
+      <End Role="Note" EntitySet="Notes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="Goal" Type="String" Nullable="false" />
+    <Property Name="Length" Type="Int32" Nullable="false" />
+    <Property Name="DurationTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Objectives" Relationship="Model1.ProjectObjective" FromRole="Project" ToRole="Objective" />
+    <NavigationProperty Name="Incomes" Relationship="Model1.ProjectIncome" FromRole="Project" ToRole="Income" />
+    <NavigationProperty Name="Bursaries" Relationship="Model1.ProjectBursary" FromRole="Project" ToRole="Bursary" />
+    <NavigationProperty Name="User" Relationship="Model1.UserProject" FromRole="Project" ToRole="User" />
+    <NavigationProperty Name="Project_Settings" Relationship="Model1.ProjectProject_Settings" FromRole="Project" ToRole="Project_Settings" />
+    <NavigationProperty Name="DurationType" Relationship="Model1.DurationTypeProject" FromRole="Project" ToRole="DurationType" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="TitleId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="FacultyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Projects" Relationship="Model1.UserProject" FromRole="User" ToRole="Project" />
+    <NavigationProperty Name="UserCredential" Relationship="Model1.UserCredentialsUser" FromRole="User" ToRole="UserCredentials" />
+    <NavigationProperty Name="Title" Relationship="Model1.TitleUser" FromRole="User" ToRole="Title" />
+    <NavigationProperty Name="Role" Relationship="Model1.RoleUser" FromRole="User" ToRole="Role" />
+    <NavigationProperty Name="Faculty" Relationship="Model1.FacultyUser" FromRole="User" ToRole="Faculty" />
+  </EntityType>
+  <EntityType Name="Income">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="ProjectId" Type="Int32" Nullable="false" />
+    <Property Name="DonorName" Type="String" Nullable="false" MaxLength="150" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Project" Relationship="Model1.ProjectIncome" FromRole="Income" ToRole="Project" />
+    <NavigationProperty Name="Note" Relationship="Model1.IncomeNote" FromRole="Income" ToRole="Note" />
+  </EntityType>
+  <EntityType Name="Objective">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="ProjectId" Type="Int32" Nullable="false" />
+    <Property Name="ObjectiveName" Type="String" Nullable="false" MaxLength="150" />
+    <NavigationProperty Name="Project" Relationship="Model1.ProjectObjective" FromRole="Objective" ToRole="Project" />
+    <NavigationProperty Name="Activities" Relationship="Model1.ObjectiveActivity" FromRole="Objective" ToRole="Activity" />
+  </EntityType>
+  <EntityType Name="Activity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="ObjectiveId" Type="Int32" Nullable="false" />
+    <Property Name="ActivityName" Type="String" Nullable="false" MaxLength="150" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Objective" Relationship="Model1.ObjectiveActivity" FromRole="Activity" ToRole="Objective" />
+    <NavigationProperty Name="Expenses" Relationship="Model1.ActivityExpense" FromRole="Activity" ToRole="Expense" />
+  </EntityType>
+  <EntityType Name="Expense">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="ActivityId" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Activity" Relationship="Model1.ActivityExpense" FromRole="Expense" ToRole="Activity" />
+    <NavigationProperty Name="UPStaffMember" Relationship="Model1.ExpenseUPStaffMember" FromRole="Expense" ToRole="UPStaffMember" />
+    <NavigationProperty Name="Contractor" Relationship="Model1.ExpenseContractor" FromRole="Expense" ToRole="Contractor" />
+    <NavigationProperty Name="Travel" Relationship="Model1.ExpenseTravel" FromRole="Expense" ToRole="Travel" />
+    <NavigationProperty Name="Equipment" Relationship="Model1.ExpenseEquipment" FromRole="Expense" ToRole="Equipment" />
+    <NavigationProperty Name="Operational" Relationship="Model1.ExpenseOperational" FromRole="Expense" ToRole="Operational" />
+    <NavigationProperty Name="Note" Relationship="Model1.ExpenseNote" FromRole="Expense" ToRole="Note" />
+  </EntityType>
+  <EntityType Name="UPStaffMember">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="PostLevelId" Type="Int32" Nullable="false" />
+    <Property Name="DaysInvolved" Type="Int32" Nullable="false" />
+    <Property Name="SubventionLevy" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Expense" Relationship="Model1.ExpenseUPStaffMember" FromRole="UPStaffMember" ToRole="Expense" />
+    <NavigationProperty Name="PostLevel" Relationship="Model1.PostLevelUPStaffMember" FromRole="UPStaffMember" ToRole="PostLevel" />
+  </EntityType>
+  <EntityType Name="Contractor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="ContractorName" Type="String" Nullable="false" MaxLength="150" />
+    <NavigationProperty Name="Expense" Relationship="Model1.ExpenseContractor" FromRole="Contractor" ToRole="Expense" />
+  </EntityType>
+  <EntityType Name="Travel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="TravellerNo" Type="Int32" Nullable="false" />
+    <Property Name="DurationDays" Type="Int32" Nullable="false" />
+    <Property Name="DepartureDate" Type="DateTime" Nullable="false" />
+    <Property Name="Destination" Type="String" Nullable="false" MaxLength="200" />
+    <NavigationProperty Name="Expense" Relationship="Model1.ExpenseTravel" FromRole="Travel" ToRole="Expense" />
+    <NavigationProperty Name="AirlineExpense" Relationship="Model1.TravelAirlineExpense" FromRole="Travel" ToRole="AirlineExpense" />
+    <NavigationProperty Name="Accommodation" Relationship="Model1.TravelAccommodation" FromRole="Travel" ToRole="Accommodation" />
+    <NavigationProperty Name="CarExpense" Relationship="Model1.TravelCarExpense" FromRole="Travel" ToRole="CarExpense" />
+    <NavigationProperty Name="Gautrain" Relationship="Model1.TravelGautrain" FromRole="Travel" ToRole="Gautrain" />
+    <NavigationProperty Name="Visa" Relationship="Model1.TravelVisa" FromRole="Travel" ToRole="Visa" />
+    <NavigationProperty Name="Allowance" Relationship="Model1.TravelAllowance" FromRole="Travel" ToRole="Allowance" />
+  </EntityType>
+  <EntityType Name="Equipment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="EquipmentName" Type="String" Nullable="false" />
+    <NavigationProperty Name="Expense" Relationship="Model1.ExpenseEquipment" FromRole="Equipment" ToRole="Expense" />
+  </EntityType>
+  <EntityType Name="Operational">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="ExpenseId" Type="Int32" Nullable="false" />
+    <Property Name="Operation_TypeId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="PricePerUnit" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Expense" Relationship="Model1.ExpenseOperational" FromRole="Operational" ToRole="Expense" />
+    <NavigationProperty Name="Operation_Type" Relationship="Model1.Operation_TypeOperational" FromRole="Operational" ToRole="Operation_Type" />
+  </EntityType>
+  <EntityType Name="Bursary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="BursaryTypeId" Type="Int32" Nullable="false" />
+    <Property Name="ProjectId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Project" Relationship="Model1.ProjectBursary" FromRole="Bursary" ToRole="Project" />
+    <NavigationProperty Name="BursaryType" Relationship="Model1.BursaryTypeBursary" FromRole="Bursary" ToRole="BursaryType" />
+    <NavigationProperty Name="Note" Relationship="Model1.BursaryNote" FromRole="Bursary" ToRole="Note" />
+  </EntityType>
+  <EntityType Name="BursaryType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="AnnualCost" Type="Double" Nullable="false" />
+    <Property Name="DurationYears" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bursaries" Relationship="Model1.BursaryTypeBursary" FromRole="BursaryType" ToRole="Bursary" />
+  </EntityType>
+  <EntityType Name="PostLevel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="100" />
+    <Property Name="AnnualSalary" Type="String" Nullable="false" />
+    <NavigationProperty Name="UPStaffMembers" Relationship="Model1.PostLevelUPStaffMember" FromRole="PostLevel" ToRole="UPStaffMember" />
+  </EntityType>
+  <EntityType Name="Operation_Type">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="200" />
+    <NavigationProperty Name="Operationals" Relationship="Model1.Operation_TypeOperational" FromRole="Operation_Type" ToRole="Operational" />
+  </EntityType>
+  <EntityType Name="AirlineExpense">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="ReturnTicket" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Travel" Relationship="Model1.TravelAirlineExpense" FromRole="AirlineExpense" ToRole="Travel" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Accommodation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Travel" Relationship="Model1.TravelAccommodation" FromRole="Accommodation" ToRole="Travel" />
+  </EntityType>
+  <EntityType Name="CarExpense">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="UP_Fleet" Type="Boolean" Nullable="false" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Travel" Relationship="Model1.TravelCarExpense" FromRole="CarExpense" ToRole="Travel" />
+  </EntityType>
+  <EntityType Name="Gautrain">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Travel" Relationship="Model1.TravelGautrain" FromRole="Gautrain" ToRole="Travel" />
+  </EntityType>
+  <EntityType Name="Visa">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Travel" Relationship="Model1.TravelVisa" FromRole="Visa" ToRole="Travel" />
+  </EntityType>
+  <EntityType Name="Allowance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Travel" Relationship="Model1.TravelAllowance" FromRole="Allowance" ToRole="Travel" />
+  </EntityType>
+  <EntityType Name="UserCredentials">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="300" />
+    <NavigationProperty Name="User" Relationship="Model1.UserCredentialsUser" FromRole="UserCredentials" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Admin_SysSettings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="EscalationRate" Type="Double" Nullable="false" />
+    <Property Name="SubventionRate" Type="Double" Nullable="false" />
+    <Property Name="InstitutionalCost" Type="Double" Nullable="false" />
+    <Property Name="MaximumProjectSpan" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Project_Settings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="EscalationRate" Type="Double" Nullable="false" />
+    <Property Name="SubventionRate" Type="Double" Nullable="false" />
+    <Property Name="InstitutionalCost" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Project" Relationship="Model1.ProjectProject_Settings" FromRole="Project_Settings" ToRole="Project" />
+  </EntityType>
+  <EntityType Name="Title">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="20" />
+    <NavigationProperty Name="Users" Relationship="Model1.TitleUser" FromRole="Title" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="150" />
+    <NavigationProperty Name="Users" Relationship="Model1.RoleUser" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Faculty">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="FacultyName" Type="String" Nullable="false" MaxLength="150" />
+    <NavigationProperty Name="Users" Relationship="Model1.FacultyUser" FromRole="Faculty" ToRole="User" />
+  </EntityType>
+  <EntityType Name="EmailDomains">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Domain" Type="String" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="DurationType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="100" />
+    <NavigationProperty Name="Projects" Relationship="Model1.DurationTypeProject" FromRole="DurationType" ToRole="Project" />
+  </EntityType>
+  <EntityType Name="Note">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="UserNote" Type="String" Nullable="false" />
+    <NavigationProperty Name="Income" Relationship="Model1.IncomeNote" FromRole="Note" ToRole="Income" />
+    <NavigationProperty Name="Expense" Relationship="Model1.ExpenseNote" FromRole="Note" ToRole="Expense" />
+    <NavigationProperty Name="Bursary" Relationship="Model1.BursaryNote" FromRole="Note" ToRole="Bursary" />
+  </EntityType>
+  <Association Name="ProjectObjective">
+    <End Type="Model1.Project" Role="Project" Multiplicity="1" />
+    <End Type="Model1.Objective" Role="Objective" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Objective">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectIncome">
+    <End Type="Model1.Project" Role="Project" Multiplicity="1" />
+    <End Type="Model1.Income" Role="Income" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Income">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectBursary">
+    <End Type="Model1.Project" Role="Project" Multiplicity="1" />
+    <End Type="Model1.Bursary" Role="Bursary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bursary">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProject">
+    <End Type="Model1.User" Role="User" Multiplicity="1" />
+    <End Type="Model1.Project" Role="Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProjectProject_Settings">
+    <End Type="Model1.Project" Role="Project" Multiplicity="1" />
+    <End Type="Model1.Project_Settings" Role="Project_Settings" Multiplicity="1" />
+  </Association>
+  <Association Name="DurationTypeProject">
+    <End Type="Model1.DurationType" Role="DurationType" Multiplicity="1" />
+    <End Type="Model1.Project" Role="Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DurationType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="DurationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserCredentialsUser">
+    <End Type="Model1.UserCredentials" Role="UserCredentials" Multiplicity="1" />
+    <End Type="Model1.User" Role="User" Multiplicity="1" />
+  </Association>
+  <Association Name="ObjectiveActivity">
+    <End Type="Model1.Objective" Role="Objective" Multiplicity="1" />
+    <End Type="Model1.Activity" Role="Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Objective">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activity">
+        <PropertyRef Name="ObjectiveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ActivityExpense">
+    <End Type="Model1.Activity" Role="Activity" Multiplicity="1" />
+    <End Type="Model1.Expense" Role="Expense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expense">
+        <PropertyRef Name="ActivityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExpenseUPStaffMember">
+    <End Type="Model1.Expense" Role="Expense" Multiplicity="1" />
+    <End Type="Model1.UPStaffMember" Role="UPStaffMember" Multiplicity="0..1" />
+  </Association>
+  <Association Name="PostLevelUPStaffMember">
+    <End Type="Model1.PostLevel" Role="PostLevel" Multiplicity="1" />
+    <End Type="Model1.UPStaffMember" Role="UPStaffMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostLevel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UPStaffMember">
+        <PropertyRef Name="PostLevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExpenseContractor">
+    <End Type="Model1.Expense" Role="Expense" Multiplicity="1" />
+    <End Type="Model1.Contractor" Role="Contractor" Multiplicity="0..1" />
+  </Association>
+  <Association Name="ExpenseTravel">
+    <End Type="Model1.Expense" Role="Expense" Multiplicity="1" />
+    <End Type="Model1.Travel" Role="Travel" Multiplicity="0..1" />
+  </Association>
+  <Association Name="TravelAirlineExpense">
+    <End Type="Model1.Travel" Role="Travel" Multiplicity="1" />
+    <End Type="Model1.AirlineExpense" Role="AirlineExpense" Multiplicity="0..1" />
+  </Association>
+  <Association Name="TravelAccommodation">
+    <End Type="Model1.Travel" Role="Travel" Multiplicity="1" />
+    <End Type="Model1.Accommodation" Role="Accommodation" Multiplicity="0..1" />
+  </Association>
+  <Association Name="TravelCarExpense">
+    <End Type="Model1.Travel" Role="Travel" Multiplicity="1" />
+    <End Type="Model1.CarExpense" Role="CarExpense" Multiplicity="0..1" />
+  </Association>
+  <Association Name="TravelGautrain">
+    <End Type="Model1.Travel" Role="Travel" Multiplicity="1" />
+    <End Type="Model1.Gautrain" Role="Gautrain" Multiplicity="0..1" />
+  </Association>
+  <Association Name="TravelVisa">
+    <End Type="Model1.Travel" Role="Travel" Multiplicity="1" />
+    <End Type="Model1.Visa" Role="Visa" Multiplicity="0..1" />
+  </Association>
+  <Association Name="TravelAllowance">
+    <End Type="Model1.Travel" Role="Travel" Multiplicity="1" />
+    <End Type="Model1.Allowance" Role="Allowance" Multiplicity="0..1" />
+  </Association>
+  <Association Name="ExpenseEquipment">
+    <End Type="Model1.Expense" Role="Expense" Multiplicity="1" />
+    <End Type="Model1.Equipment" Role="Equipment" Multiplicity="0..1" />
+  </Association>
+  <Association Name="ExpenseOperational">
+    <End Type="Model1.Expense" Role="Expense" Multiplicity="1" />
+    <End Type="Model1.Operational" Role="Operational" Multiplicity="0..1" />
+  </Association>
+  <Association Name="Operation_TypeOperational">
+    <End Type="Model1.Operation_Type" Role="Operation_Type" Multiplicity="1" />
+    <End Type="Model1.Operational" Role="Operational" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operation_Type">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Operational">
+        <PropertyRef Name="Operation_TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BursaryTypeBursary">
+    <End Type="Model1.BursaryType" Role="BursaryType" Multiplicity="1" />
+    <End Type="Model1.Bursary" Role="Bursary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BursaryType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bursary">
+        <PropertyRef Name="BursaryTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TitleUser">
+    <End Type="Model1.Title" Role="Title" Multiplicity="1" />
+    <End Type="Model1.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Title">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="TitleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RoleUser">
+    <End Type="Model1.Role" Role="Role" Multiplicity="1" />
+    <End Type="Model1.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FacultyUser">
+    <End Type="Model1.Faculty" Role="Faculty" Multiplicity="1" />
+    <End Type="Model1.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculty">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="FacultyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IncomeNote">
+    <End Type="Model1.Income" Role="Income" Multiplicity="1" />
+    <End Type="Model1.Note" Role="Note" Multiplicity="1" />
+  </Association>
+  <Association Name="ExpenseNote">
+    <End Type="Model1.Expense" Role="Expense" Multiplicity="1" />
+    <End Type="Model1.Note" Role="Note" Multiplicity="1" />
+  </Association>
+  <Association Name="BursaryNote">
+    <End Type="Model1.Bursary" Role="Bursary" Multiplicity="1" />
+    <End Type="Model1.Note" Role="Note" Multiplicity="1" />
+  </Association>
+</Schema>

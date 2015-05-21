@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6d2ea7d2397247c78232a9e2d21bbe5a" Name="Diagram1" ZoomLevel="94" >
+        <EntityTypeShape EntityType="Model1.Project" Width="1.5" PointX="5.25" PointY="18.125" />
+        <EntityTypeShape EntityType="Model1.User" Width="1.5" PointX="3" PointY="18.25" />
+        <EntityTypeShape EntityType="Model1.Income" Width="1.5" PointX="7.5" PointY="8.375" />
+        <EntityTypeShape EntityType="Model1.Objective" Width="1.5" PointX="7.5" PointY="19" />
+        <EntityTypeShape EntityType="Model1.Activity" Width="1.5" PointX="9.75" PointY="18.75" />
+        <EntityTypeShape EntityType="Model1.Expense" Width="1.5" PointX="12" PointY="18.5" />
+        <EntityTypeShape EntityType="Model1.UPStaffMember" Width="1.5" PointX="14.25" PointY="17.875" />
+        <EntityTypeShape EntityType="Model1.Contractor" Width="1.5" PointX="14.25" PointY="14.25" />
+        <EntityTypeShape EntityType="Model1.Travel" Width="1.5" PointX="14.25" PointY="21.25" />
+        <EntityTypeShape EntityType="Model1.Equipment" Width="1.5" PointX="14.25" PointY="29.875" />
+        <EntityTypeShape EntityType="Model1.Operational" Width="1.5" PointX="19.25" PointY="18.75" />
+        <EntityTypeShape EntityType="Model1.Bursary" Width="1.5" PointX="7.5" PointY="15.75" />
+        <EntityTypeShape EntityType="Model1.BursaryType" Width="1.5" PointX="5.25" PointY="14.875" />
+        <EntityTypeShape EntityType="Model1.PostLevel" Width="1.5" PointX="12" PointY="15" />
+        <EntityTypeShape EntityType="Model1.Operation_Type" Width="1.5" PointX="17" PointY="14.125" />
+        <EntityTypeShape EntityType="Model1.AirlineExpense" Width="1.5" PointX="16.5" PointY="16.625" />
+        <EntityTypeShape EntityType="Model1.Accommodation" Width="1.5" PointX="16.5" PointY="18.875" />
+        <EntityTypeShape EntityType="Model1.CarExpense" Width="1.5" PointX="16.5" PointY="21.125" />
+        <EntityTypeShape EntityType="Model1.Gautrain" Width="1.5" PointX="16.5" PointY="23.375" />
+        <EntityTypeShape EntityType="Model1.Visa" Width="1.5" PointX="16.5" PointY="25.625" />
+        <EntityTypeShape EntityType="Model1.Allowance" Width="1.5" PointX="16.5" PointY="27.75" />
+        <EntityTypeShape EntityType="Model1.UserCredentials" Width="1.5" PointX="0.75" PointY="19" />
+        <EntityTypeShape EntityType="Model1.Admin_SysSettings" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model1.Project_Settings" Width="1.5" PointX="7.5" PointY="32.25" />
+        <EntityTypeShape EntityType="Model1.Title" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="Model1.Role" Width="1.5" PointX="0.75" PointY="22" />
+        <EntityTypeShape EntityType="Model1.Faculty" Width="1.5" PointX="0.75" PointY="24.375" />
+        <EntityTypeShape EntityType="Model1.EmailDomains" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model1.DurationType" Width="1.5" PointX="3" PointY="15" />
+        <EntityTypeShape EntityType="Model1.Note" Width="1.5" PointX="14.25" PointY="10.875" />
+        <AssociationConnector Association="Model1.ProjectObjective" />
+        <AssociationConnector Association="Model1.ProjectIncome" />
+        <AssociationConnector Association="Model1.ProjectBursary" />
+        <AssociationConnector Association="Model1.UserProject" />
+        <AssociationConnector Association="Model1.ProjectProject_Settings" />
+        <AssociationConnector Association="Model1.DurationTypeProject" />
+        <AssociationConnector Association="Model1.UserCredentialsUser" />
+        <AssociationConnector Association="Model1.ObjectiveActivity" />
+        <AssociationConnector Association="Model1.ActivityExpense" />
+        <AssociationConnector Association="Model1.ExpenseUPStaffMember" />
+        <AssociationConnector Association="Model1.PostLevelUPStaffMember" />
+        <AssociationConnector Association="Model1.ExpenseContractor" />
+        <AssociationConnector Association="Model1.ExpenseTravel" />
+        <AssociationConnector Association="Model1.TravelAirlineExpense" />
+        <AssociationConnector Association="Model1.TravelAccommodation" />
+        <AssociationConnector Association="Model1.TravelCarExpense" />
+        <AssociationConnector Association="Model1.TravelGautrain" />
+        <AssociationConnector Association="Model1.TravelVisa" />
+        <AssociationConnector Association="Model1.TravelAllowance" />
+        <AssociationConnector Association="Model1.ExpenseEquipment" />
+        <AssociationConnector Association="Model1.ExpenseOperational" />
+        <AssociationConnector Association="Model1.Operation_TypeOperational" />
+        <AssociationConnector Association="Model1.BursaryTypeBursary" />
+        <AssociationConnector Association="Model1.TitleUser" />
+        <AssociationConnector Association="Model1.RoleUser" />
+        <AssociationConnector Association="Model1.FacultyUser" />
+        <AssociationConnector Association="Model1.IncomeNote" />
+        <AssociationConnector Association="Model1.ExpenseNote" />
+        <AssociationConnector Association="Model1.BursaryNote" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

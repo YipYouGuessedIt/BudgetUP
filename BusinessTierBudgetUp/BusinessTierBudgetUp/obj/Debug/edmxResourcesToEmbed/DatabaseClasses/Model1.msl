@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Project)">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Goal" ColumnName="Goal" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="DurationTypeId" ColumnName="DurationTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TitleId" ColumnName="TitleId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Incomes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Income)">
+        <MappingFragment StoreEntitySet="Incomes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="DonorName" ColumnName="DonorName" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Objectives">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Objective)">
+        <MappingFragment StoreEntitySet="Objectives">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="ObjectiveName" ColumnName="ObjectiveName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Activities">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Activity)">
+        <MappingFragment StoreEntitySet="Activities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ObjectiveId" ColumnName="ObjectiveId" />
+          <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Expenses">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Expense)">
+        <MappingFragment StoreEntitySet="Expenses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UPStaffMembers">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.UPStaffMember)">
+        <MappingFragment StoreEntitySet="UPStaffMembers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PostLevelId" ColumnName="PostLevelId" />
+          <ScalarProperty Name="DaysInvolved" ColumnName="DaysInvolved" />
+          <ScalarProperty Name="SubventionLevy" ColumnName="SubventionLevy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contractors">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Contractor)">
+        <MappingFragment StoreEntitySet="Contractors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ContractorName" ColumnName="ContractorName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Travels">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Travel)">
+        <MappingFragment StoreEntitySet="Travels">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TravellerNo" ColumnName="TravellerNo" />
+          <ScalarProperty Name="DurationDays" ColumnName="DurationDays" />
+          <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+          <ScalarProperty Name="Destination" ColumnName="Destination" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Equipments">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Equipment)">
+        <MappingFragment StoreEntitySet="Equipments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EquipmentName" ColumnName="EquipmentName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Operationals">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Operational)">
+        <MappingFragment StoreEntitySet="Operationals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ExpenseId" ColumnName="ExpenseId" />
+          <ScalarProperty Name="Operation_TypeId" ColumnName="Operation_TypeId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="PricePerUnit" ColumnName="PricePerUnit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bursaries">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Bursary)">
+        <MappingFragment StoreEntitySet="Bursaries">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BursaryTypeId" ColumnName="BursaryTypeId" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BursaryTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.BursaryType)">
+        <MappingFragment StoreEntitySet="BursaryTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AnnualCost" ColumnName="AnnualCost" />
+          <ScalarProperty Name="DurationYears" ColumnName="DurationYears" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostLevels">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.PostLevel)">
+        <MappingFragment StoreEntitySet="PostLevels">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AnnualSalary" ColumnName="AnnualSalary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Operation_Type">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Operation_Type)">
+        <MappingFragment StoreEntitySet="Operation_Type">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AirlineExpenses">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.AirlineExpense)">
+        <MappingFragment StoreEntitySet="AirlineExpenses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReturnTicket" ColumnName="ReturnTicket" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accommodations">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Accommodation)">
+        <MappingFragment StoreEntitySet="Accommodations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarExpenses">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.CarExpense)">
+        <MappingFragment StoreEntitySet="CarExpenses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UP_Fleet" ColumnName="UP_Fleet" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gautrains">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Gautrain)">
+        <MappingFragment StoreEntitySet="Gautrains">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Visas">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Visa)">
+        <MappingFragment StoreEntitySet="Visas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Allowances">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Allowance)">
+        <MappingFragment StoreEntitySet="Allowances">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserCredentials">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.UserCredentials)">
+        <MappingFragment StoreEntitySet="UserCredentials">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admin_SysSettings">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Admin_SysSettings)">
+        <MappingFragment StoreEntitySet="Admin_SysSettings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EscalationRate" ColumnName="EscalationRate" />
+          <ScalarProperty Name="SubventionRate" ColumnName="SubventionRate" />
+          <ScalarProperty Name="InstitutionalCost" ColumnName="InstitutionalCost" />
+          <ScalarProperty Name="MaximumProjectSpan" ColumnName="MaximumProjectSpan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Project_Settings">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Project_Settings)">
+        <MappingFragment StoreEntitySet="Project_Settings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EscalationRate" ColumnName="EscalationRate" />
+          <ScalarProperty Name="SubventionRate" ColumnName="SubventionRate" />
+          <ScalarProperty Name="InstitutionalCost" ColumnName="InstitutionalCost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Titles">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Title)">
+        <MappingFragment StoreEntitySet="Titles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Role)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Faculties">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Faculty)">
+        <MappingFragment StoreEntitySet="Faculties">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailDomains">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.EmailDomains)">
+        <MappingFragment StoreEntitySet="EmailDomains">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Domain" ColumnName="Domain" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DurationTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.DurationType)">
+        <MappingFragment StoreEntitySet="DurationTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notes">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Note)">
+        <MappingFragment StoreEntitySet="Notes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserNote" ColumnName="UserNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProjectProject_Settings" TypeName="Model1.ProjectProject_Settings" StoreEntitySet="Projects">
+      <EndProperty Name="Project_Settings">
+        <ScalarProperty Name="Id" ColumnName="Project_Settings_Id" />
+      </EndProperty>
+      <EndProperty Name="Project">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserCredentialsUser" TypeName="Model1.UserCredentialsUser" StoreEntitySet="UserCredentials">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="User_Id" />
+      </EndProperty>
+      <EndProperty Name="UserCredentials">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExpenseUPStaffMember" TypeName="Model1.ExpenseUPStaffMember" StoreEntitySet="UPStaffMembers">
+      <EndProperty Name="Expense">
+        <ScalarProperty Name="Id" ColumnName="Expense_Id" />
+      </EndProperty>
+      <EndProperty Name="UPStaffMember">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExpenseContractor" TypeName="Model1.ExpenseContractor" StoreEntitySet="Contractors">
+      <EndProperty Name="Expense">
+        <ScalarProperty Name="Id" ColumnName="Expense_Id" />
+      </EndProperty>
+      <EndProperty Name="Contractor">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExpenseTravel" TypeName="Model1.ExpenseTravel" StoreEntitySet="Travels">
+      <EndProperty Name="Expense">
+        <ScalarProperty Name="Id" ColumnName="Expense_Id" />
+      </EndProperty>
+      <EndProperty Name="Travel">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TravelAirlineExpense" TypeName="Model1.TravelAirlineExpense" StoreEntitySet="AirlineExpenses">
+      <EndProperty Name="Travel">
+        <ScalarProperty Name="Id" ColumnName="Travel_Id" />
+      </EndProperty>
+      <EndProperty Name="AirlineExpense">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TravelAccommodation" TypeName="Model1.TravelAccommodation" StoreEntitySet="Accommodations">
+      <EndProperty Name="Travel">
+        <ScalarProperty Name="Id" ColumnName="Travel_Id" />
+      </EndProperty>
+      <EndProperty Name="Accommodation">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TravelCarExpense" TypeName="Model1.TravelCarExpense" StoreEntitySet="CarExpenses">
+      <EndProperty Name="Travel">
+        <ScalarProperty Name="Id" ColumnName="Travel_Id" />
+      </EndProperty>
+      <EndProperty Name="CarExpense">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TravelGautrain" TypeName="Model1.TravelGautrain" StoreEntitySet="Gautrains">
+      <EndProperty Name="Travel">
+        <ScalarProperty Name="Id" ColumnName="Travel_Id" />
+      </EndProperty>
+      <EndProperty Name="Gautrain">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TravelVisa" TypeName="Model1.TravelVisa" StoreEntitySet="Visas">
+      <EndProperty Name="Travel">
+        <ScalarProperty Name="Id" ColumnName="Travel_Id" />
+      </EndProperty>
+      <EndProperty Name="Visa">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TravelAllowance" TypeName="Model1.TravelAllowance" StoreEntitySet="Allowances">
+      <EndProperty Name="Travel">
+        <ScalarProperty Name="Id" ColumnName="Travel_Id" />
+      </EndProperty>
+      <EndProperty Name="Allowance">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExpenseEquipment" TypeName="Model1.ExpenseEquipment" StoreEntitySet="Equipments">
+      <EndProperty Name="Expense">
+        <ScalarProperty Name="Id" ColumnName="Expense_Id" />
+      </EndProperty>
+      <EndProperty Name="Equipment">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExpenseOperational" TypeName="Model1.ExpenseOperational" StoreEntitySet="Operationals">
+      <EndProperty Name="Expense">
+        <ScalarProperty Name="Id" ColumnName="Expense_Id" />
+      </EndProperty>
+      <EndProperty Name="Operational">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="IncomeNote" TypeName="Model1.IncomeNote" StoreEntitySet="Incomes">
+      <EndProperty Name="Note">
+        <ScalarProperty Name="Id" ColumnName="Note_Id" />
+      </EndProperty>
+      <EndProperty Name="Income">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ExpenseNote" TypeName="Model1.ExpenseNote" StoreEntitySet="Expenses">
+      <EndProperty Name="Note">
+        <ScalarProperty Name="Id" ColumnName="Note_Id" />
+      </EndProperty>
+      <EndProperty Name="Expense">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BursaryNote" TypeName="Model1.BursaryNote" StoreEntitySet="Bursaries">
+      <EndProperty Name="Note">
+        <ScalarProperty Name="Id" ColumnName="Note_Id" />
+      </EndProperty>
+      <EndProperty Name="Bursary">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
