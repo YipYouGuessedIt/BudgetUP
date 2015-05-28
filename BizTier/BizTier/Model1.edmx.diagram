@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fee1a06f2c0d44bf99594f5197e47222" Name="Diagram1">
+        <EntityTypeShape EntityType="dboModel.Accommodation" Width="1.5" PointX="10.5" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Activity" Width="1.5" PointX="3.75" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Admin_SysSettings" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.AirlineExpens" Width="1.5" PointX="10.5" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Allowance" Width="1.5" PointX="10.5" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Bursary" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.BursaryType" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.CarExpens" Width="1.5" PointX="10.5" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Contractor" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.DurationType" Width="1.5" PointX="1.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.EmailDomain" Width="1.5" PointX="3.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Equipment" Width="1.5" PointX="8.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Expens" Width="1.5" PointX="6" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Faculty" Width="1.5" PointX="1.5" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Gautrain" Width="1.5" PointX="10.5" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Income" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Note" Width="1.5" PointX="0.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Objective" Width="1.5" PointX="1.5" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Operation_Type" Width="1.5" PointX="6" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Operational" Width="1.5" PointX="8.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.PostLevel" Width="1.5" PointX="9" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Project_Settings" Width="1.5" PointX="1.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Project" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Role" Width="1.5" PointX="1.5" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Title" Width="1.5" PointX="1.5" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Travel" Width="1.5" PointX="8.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.UPStaffMember" Width="1.5" PointX="11.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.UserCredential" Width="1.5" PointX="3.75" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.User" Width="1.5" PointX="1.5" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dboModel.Visa" Width="1.5" PointX="10.5" PointY="30.25" IsExpanded="true" />
+        <AssociationConnector Association="dboModel.FK_TravelAccommodation" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ActivityExpense" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ObjectiveActivity" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_TravelAirlineExpense" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_TravelAllowance" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_BursaryNote" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_BursaryTypeBursary" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ProjectBursary" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_TravelCarExpense" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ExpenseContractor" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_DurationTypeProject" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ExpenseEquipment" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ExpenseNote" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ExpenseOperational" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ExpenseTravel" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ExpenseUPStaffMember" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_FacultyUser" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_TravelGautrain" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_IncomeNote" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ProjectIncome" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ProjectObjective" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_Operation_TypeOperational" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_PostLevelUPStaffMember" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_ProjectProject_Settings" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_UserProject" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_RoleUser" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_TitleUser" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_TravelVisa" ManuallyRouted="false" />
+        <AssociationConnector Association="dboModel.FK_UserCredentialsUser" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

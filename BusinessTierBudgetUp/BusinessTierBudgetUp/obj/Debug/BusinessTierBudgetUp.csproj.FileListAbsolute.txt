@@ -10,3 +10,15 @@ C:\Users\mobile4\Desktop\NO\BusinessTierBudgetUp\BusinessTierBudgetUp\obj\Debug\
 C:\Users\mobile4\Desktop\NO\BusinessTierBudgetUp\BusinessTierBudgetUp\obj\Debug\BusinessTierBudgetUp.csproj.GenerateResource.Cache
 C:\Users\mobile4\Desktop\NO\BusinessTierBudgetUp\BusinessTierBudgetUp\obj\Debug\BusinessTierBudgetUp.exe
 C:\Users\mobile4\Desktop\NO\BusinessTierBudgetUp\BusinessTierBudgetUp\obj\Debug\BusinessTierBudgetUp.pdb
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\bin\Debug\BusinessTierBudgetUp.exe.config
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\bin\Debug\BusinessTierBudgetUp.exe
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\bin\Debug\BusinessTierBudgetUp.pdb
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\bin\Debug\EntityFramework.dll
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\bin\Debug\EntityFramework.xml
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\obj\Debug\BusinessTierBudgetUp.csprojResolveAssemblyReference.cache
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\obj\Debug\BusinessTierBudgetUp.Properties.Resources.resources
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\obj\Debug\BusinessTierBudgetUp.csproj.GenerateResource.Cache
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\obj\Debug\BusinessTierBudgetUp.exe
+C:\Users\Duran\Documents\GitHub\BudgetUP\BusinessTierBudgetUp\BusinessTierBudgetUp\obj\Debug\BusinessTierBudgetUp.pdb

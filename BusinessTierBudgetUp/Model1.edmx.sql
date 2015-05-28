@@ -197,7 +197,12 @@ GO
 IF OBJECT_ID(N'[dbo].[Notes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Notes];
 GO
-
+use master;
+GO
+CREATE DATABASE dbo
+GO
+USE dbo;
+GO
 -- --------------------------------------------------
 -- Creating all tables
 -- --------------------------------------------------
