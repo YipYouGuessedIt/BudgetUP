@@ -356,6 +356,7 @@
     <Compile Include="Views\AddIncome.aspx.designer.cs">
       <DependentUpon>AddIncome.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\EventLogger.cs" />
     <Compile Include="Views\Expenses.aspx.cs">
       <DependentUpon>Expenses.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -384,6 +385,7 @@
     <Compile Include="Views\ManageUsers.aspx.designer.cs">
       <DependentUpon>ManageUsers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\ServiceContracts.cs" />
     <Compile Include="Views\Settings.aspx.cs">
       <DependentUpon>Settings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
