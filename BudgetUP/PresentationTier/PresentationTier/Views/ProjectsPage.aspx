@@ -36,8 +36,10 @@
                 </div>
             </div>
         </nav>
-        <div class="contentArea"><br />
-            <h1>Project</h1><hr />
+        <div class="contentArea">
+            <div id="wecomemsg" runat="server"></div>
+            <br />
+            <hr />
 
             <div id="ProjectSearch">
 				<input class="form-control" placeholder="Search Projects..." /><br />
