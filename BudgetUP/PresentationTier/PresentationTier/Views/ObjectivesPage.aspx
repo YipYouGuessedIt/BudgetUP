@@ -40,8 +40,7 @@
             <a href="ProjectsPage.aspx">Projects</a>
         </div>
         <div class="contentArea"><br />
-            <h1>Project Name</h1><hr />
-            <h2>Project start and end date</h2>
+            <h1 id="heaserarea" runat="server"></h1><hr />
             <div id="ObjectiveSearch">
 				<input class="form-control" placeholder="Search Objectives..." /><br />
 			</div>
@@ -53,7 +52,7 @@
 
 			<div id="ObjectiveList" class="list-group">
                 <h3>Objective List</h3>
-				<a class="list-group-item" href="ActivitiesPage.aspx">Item one
+				<%--<a class="list-group-item" href="ActivitiesPage.aspx">Item one
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
 				</a><br />
                 <a class="list-group-item" href="ActivitiesPage.aspx">Item two
@@ -61,9 +60,11 @@
                 </a><br />
                 <a class="list-group-item" href="ActivitiesPage.aspx">Item Three(Admin Option to delete)
                     <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
-                </a><br />				
+                </a><br />--%>	
+                <asp:PlaceHolder ID="ObjectiveLister" runat="server"></asp:PlaceHolder>			
 			</div>
         </div>
+        
     </div>
     </form>
 </body>

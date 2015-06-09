@@ -10,7 +10,7 @@
 namespace PresentationTier.Views {
     
     
-    public partial class ObjectivesPage {
+    public partial class ViewBursary {
         
         /// <summary>
         /// form1 control.
@@ -22,21 +22,30 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// heaserarea control.
+        /// numofburs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl heaserarea;
+        protected global::System.Web.UI.WebControls.TextBox numofburs;
         
         /// <summary>
-        /// ObjectiveLister control.
+        /// DropDownList2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder ObjectiveLister;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        
+        /// <summary>
+        /// note control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox note;
     }
 }

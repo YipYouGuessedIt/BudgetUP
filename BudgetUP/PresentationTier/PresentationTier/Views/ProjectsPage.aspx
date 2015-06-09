@@ -38,7 +38,7 @@
         </nav>
         <div class="contentArea">
             <div id="wecomemsg" runat="server"></div>
-            <br />
+           
             <hr />
 
             <div id="ProjectSearch">
@@ -47,12 +47,14 @@
 
             <div id="ProjectAdd">
 				<a href="AddProject.aspx" class="btn btn-info btn-lg"  >Add new project</a>
-				<asp:Button name="enableAdmin" runat="server" CssClass="btn-info btn-lg btn" Text="Edit (AC)" /><br />
+				<asp:Button name="enableAdmin" runat="server" CssClass="btn-info btn-lg btn" Text="Edit (AC)" OnClick="Unnamed1_Click1" /><br />
 			</div>
 
 			<div id="ProjectList" class="list-group">
-                <h3>Project List</h3>
-				<a class="list-group-item" href="ObjectivesPage.aspx">Item one
+                <h3>Project List
+                </h3>
+                <asp:PlaceHolder ID="projectList" runat="server"></asp:PlaceHolder>
+                <%--<a class="list-group-item" href="ObjectivesPage.aspx">Item one
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
 				</a><br />
                 <a class="list-group-item" href="ObjectivesPage.aspx">Item two
@@ -61,6 +63,9 @@
                 <a class="list-group-item" href="ObjectivesPage.aspx">Item Three (Admin Option to delete)
                     <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
                 </a><br />				
+			    <asp:LinkButton CssClass="list-group-item" ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Name
+                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
+			    </asp:LinkButton>--%>
 			</div>
         </div>
     </div>
