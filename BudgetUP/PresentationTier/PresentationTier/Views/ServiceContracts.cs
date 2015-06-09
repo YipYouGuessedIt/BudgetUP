@@ -50,6 +50,28 @@ namespace PresentationTier.Views
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="project"></param>
+        public void UpdateUserProject(Project project)
+        {
+            using(var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Projects
+                        .Where(ad => ad.Id == project.Id)
+                        .FirstOrDefault();
+
+                entry.UserId = project.UserId;
+                entry.Title = project.Title;
+                entry.Goal = project.Goal;
+                entry.Length = project.Length;
+                entry.DurationTypeId = project.DurationTypeId;
+                entry.Project_Settings_Id = project.Project_Settings_Id;
+                dbContext.SaveChanges();
+            }            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="description"></param>
         public void AddDurationType(string description)
         {
@@ -60,6 +82,23 @@ namespace PresentationTier.Views
                 dbContext.DurationTypes.Add(dt);
                 dbContext.SaveChanges();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="description"></param>
+        public void UpdateDurationType(DurationType durationType)
+        {
+                        using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.DurationTypes
+                        .Where(ad => ad.Id == durationType.Id)
+                        .FirstOrDefault();
+
+                entry.Description = durationType.Description;
+                dbContext.SaveChanges();
+            }  
         }
 
         /// <summary>
@@ -78,6 +117,42 @@ namespace PresentationTier.Views
             using (var dbContext = new dboEntities())
             {
                 dbContext.Project_Settings.Add(ps);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="description"></param>
+        public void UpdateDurationType(DurationType durationType)
+        {
+                        using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.DurationTypes
+                        .Where(ad => ad.Id == durationType.Id)
+                        .FirstOrDefault();
+
+                entry.Description = durationType.Description;
+                dbContext.SaveChanges();
+            }  
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="description"></param>
+        public void UpdateProjectSettings(Project_Settings projectSettings)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Project_Settings
+                        .Where(ad => ad.Id == projectSettings.Id)
+                        .FirstOrDefault();
+
+                entry.InstitutionalCost = projectSettings.InstitutionalCost;
+                entry.SubventionRate = projectSettings.SubventionRate;
+                entry.EscalationRate = projectSettings.EscalationRate;
                 dbContext.SaveChanges();
             }
         }
@@ -109,6 +184,24 @@ namespace PresentationTier.Views
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="bursary"></param>
+        public void UpdateBursary(Bursary bursary)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Bursaries
+                        .Where(ad => ad.Id == bursary.Id)
+                        .FirstOrDefault();
+
+                entry.ProjectId = bursary.ProjectId;
+                entry.Note = bursary.Note;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="description"></param>
         /// <param name="annualCost"></param>
         /// <param name="durationYears"></param>
@@ -124,6 +217,25 @@ namespace PresentationTier.Views
             using (var dbContext = new dboEntities())
             {
                 dbContext.BursaryTypes.Add(bursary);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bursary"></param>
+        public void UpdateBursaryType(BursaryType bursary)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.BursaryTypes
+                        .Where(ad => ad.Id == bursary.Id)
+                        .FirstOrDefault();
+
+                entry.Description = bursary.Description;
+                entry.AnnualCost = bursary.AnnualCost;
+                entry.DurationYears = bursary.DurationYears;
                 dbContext.SaveChanges();
             }
         }
@@ -144,6 +256,23 @@ namespace PresentationTier.Views
             using (var dbContext = new dboEntities())
             {
                 dbContext.Notes.Add(note);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="note"></param>
+        public void UpdateNotes(Note note)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Notes
+                        .Where(ad => ad.Id == note.Id)
+                        .FirstOrDefault();
+
+                entry.UserNote = note.UserNote;
                 dbContext.SaveChanges();
             }
         }
@@ -208,6 +337,14 @@ namespace PresentationTier.Views
         #endregion
 
         #region User / UserCredentials
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="titleID"></param>
+        /// <param name="name"></param>
+        /// <param name="surname"></param>
+        /// <param name="roleID"></param>
+        /// <param name="faculty"></param>
         public void AddUser(int titleID, string name, string surname, int roleID, string faculty)
         {
             User user = new User();
@@ -226,6 +363,33 @@ namespace PresentationTier.Views
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
+        public void UpdateUser(User user)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Users
+                        .Where(ad => ad.Id == user.Id)
+                        .FirstOrDefault();
+
+                entry.TitleId = user.TitleId;
+                entry.Name = user.Name;
+                entry.Surname = user.Surname;
+                entry.RoleId = user.RoleId;
+                entry.FacultyId = user.FacultyId;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="userID"></param>
         public void AddUserCredential(string email, string password, int userID)
         {
             UserCredential user = new UserCredential();
@@ -242,9 +406,31 @@ namespace PresentationTier.Views
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user"></param>
+        public void UpdateUserCredentials(UserCredential user)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.UserCredentials
+                        .Where(ad => ad.Id == user.Id)
+                        .FirstOrDefault();
+
+                entry.Email = user.Email;
+                entry.Password = user.Password;
+                dbContext.SaveChanges();
+            }
+        }
+
         #endregion
 
         #region Faculty
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="facultyName"></param>
         public void AddFaculty(string facultyName)
         {
             Faculty faculty = new Faculty();
@@ -258,9 +444,30 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="faculty"></param>
+        public void UpdateFaculty(Faculty faculty)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Faculties
+                        .Where(ad => ad.Id == faculty.Id)
+                        .FirstOrDefault();
+
+                entry.FacultyName = faculty.FacultyName;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Role
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="description"></param>
         public void AddRole(string description)
         {
             Role role = new Role();
@@ -274,14 +481,34 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="role"></param>
+        public void UpdateRole(Role role)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Roles
+                        .Where(ad => ad.Id == role.Id)
+                        .FirstOrDefault();
+
+                entry.Description = role.Description;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Title
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="description"></param>
         public void AddTitles(string description)
         {
             Title title = new Title();
 
-            //these can be determined by other functions below
             title.Description = description;
 
             using (var dbContext = new dboEntities())
@@ -290,9 +517,31 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="title"></param>
+        public void UpdateTitle(Title title)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Titles
+                        .Where(ad => ad.Id == title.Id)
+                        .FirstOrDefault();
+
+                entry.Description = title.Description;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Objectives
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="projectID"></param>
+        /// <param name="objectiveName"></param>
         public void AddObjective(int projectID, string objectiveName)
         {
             Objective objective = new Objective();
@@ -304,6 +553,23 @@ namespace PresentationTier.Views
             using (var dbContext = new dboEntities())
             {
                 dbContext.Objectives.Add(objective);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objective"></param>
+        public void UpdateObjectives(Objective objective)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Objectives
+                        .Where(ad => ad.Id == objective.Id)
+                        .FirstOrDefault();
+
+                entry.ObjectiveName = objective.ObjectiveName;
                 dbContext.SaveChanges();
             }
         }
@@ -326,9 +592,35 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="activity"></param>
+        public void UpdateActivity(Activity activity)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Activities
+                        .Where(ad => ad.Id == activity.Id)
+                        .FirstOrDefault();
+
+                entry.ActivityName = activity.ActivityName;
+                entry.StartDate = activity.StartDate;
+                entry.EndDate = activity.EndDate;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Incomes
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="projectID"></param>
+        /// <param name="donorName"></param>
+        /// <param name="amount"></param>
+        /// <param name="noteID"></param>
         public void AddIncome(int projectID, string donorName, double amount, int noteID)
         {
             Income income = new Income();
@@ -345,9 +637,34 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="income"></param>
+        public void UpdateIncome(Income income)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Incomes
+                        .Where(ad => ad.Id == income.Id)
+                        .FirstOrDefault();
+
+                entry.DonorName = income.DonorName;
+                entry.Amount = income.Amount;
+                entry.Note.UserNote = income.Note.UserNote;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Expenses
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="activityID"></param>
+        /// <param name="amount"></param>
+        /// <param name="noteID"></param>
         public void AddExpense(int activityID, double amount, int noteID)
         {
             Expens expense = new Expens();
@@ -364,7 +681,30 @@ namespace PresentationTier.Views
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="expense"></param>
+        public void UpdateExpense(Expens expense)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Expenses
+                        .Where(ad => ad.Id == expense.Id)
+                        .FirstOrDefault();
+
+                entry.Amount = expense.Amount;
+                entry.Note.UserNote = expense.Note.UserNote;
+                dbContext.SaveChanges();
+            }
+        }
+
         #region Contractor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="contractorName"></param>
+        /// <param name="expenseID"></param>
         public void AddContractor(string contractorName, int expenseID)
         {
             Contractor contractor = new Contractor();
@@ -379,9 +719,31 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="contractor"></param>
+        public void UpdateContractor(Contractor contractor)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Contractors
+                        .Where(ad => ad.Id == contractor.Id)
+                        .FirstOrDefault();
+
+                entry.ContractorName = contractor.ContractorName;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Equipment
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="equipmentName"></param>
+        /// <param name="expenseID"></param>
         public void AddEquipment(string equipmentName, int expenseID)
         {
             Equipment equipment = new Equipment();
@@ -396,9 +758,33 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="equipment"></param>
+        public void UpdateEquipment(Equipment equipment)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Equipments
+                        .Where(ad => ad.Id == equipment.Id)
+                        .FirstOrDefault();
+
+                entry.EquipmentName = equipment.EquipmentName;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Operational
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="expenseID"></param>
+        /// <param name="operationTypeID"></param>
+        /// <param name="quantity"></param>
+        /// <param name="pricePerUnit"></param>
         public void AddOperation(int expenseID, int operationTypeID, int quantity, double pricePerUnit)
         {
             Operational operation = new Operational();
@@ -417,11 +803,33 @@ namespace PresentationTier.Views
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operation"></param>
+        public void UpdateOperation(Operational operation)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Operationals
+                        .Where(ad => ad.Id == operation.Id)
+                        .FirstOrDefault();
+
+                entry.Operation_TypeId = operation.Operation_TypeId;
+                entry.Quantity = operation.Quantity;
+                entry.PricePerUnit = operation.PricePerUnit;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="description"></param>
         public void AddOperationType(string description)
         {
             Operation_Type operation = new Operation_Type();
 
-            //these can be determined by other functions below
             operation.Description = description;
 
             using (var dbContext = new dboEntities())
@@ -430,9 +838,33 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operation"></param>
+        public void UpdateOperationalType(Operation_Type operation)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Operation_Type
+                        .Where(ad => ad.Id == operation.Id)
+                        .FirstOrDefault();
+
+                entry.Description = operation.Description;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region UP Staff Member
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="postLevelID"></param>
+        /// <param name="daysInvolved"></param>
+        /// <param name="subventionLevy"></param>
+        /// <param name="expenseID"></param>
         public void AddUPStaffMember(int postLevelID, int daysInvolved, bool subventionLevy, int expenseID)
         {
             UPStaffMember upStaffMember = new UPStaffMember();
@@ -448,9 +880,36 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="upStaffMember"></param>
+        public void UpdateUPStaffMember(UPStaffMember upStaffMember)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.UPStaffMembers
+                        .Where(ad => ad.Id == upStaffMember.Id)
+                        .FirstOrDefault();
+
+                entry.PostLevelId = upStaffMember.PostLevelId;
+                entry.DaysInvolved = upStaffMember.DaysInvolved;
+                entry.SubventionLevy = upStaffMember.SubventionLevy;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Travel
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="travellerNumber"></param>
+        /// <param name="durationDays"></param>
+        /// <param name="departureDate"></param>
+        /// <param name="destination"></param>
+        /// <param name="expenseID"></param>
         public void AddTravel(int travellerNumber, int durationDays, DateTime departureDate, string destination, int expenseID)
         {
             Travel travels = new Travel();
@@ -467,9 +926,32 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="travels"></param>
+        public void UpdateTravel(Travel travels)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Travels
+                        .Where(ad => ad.Id == travels.Id)
+                        .FirstOrDefault();
+
+                entry.DurationDays = travels.DurationDays;
+                entry.Destination = travels.Destination;
+                entry.DepartureDate = travels.DepartureDate;
+                dbContext.SaveChanges();
+            }
+        }
        
         #region Accommodation
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="travelID"></param>
         public void AddAccommodation(double amount, int travelID)
         {
             Accommodation accommodation = new Accommodation();
@@ -483,9 +965,32 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="accommodation"></param>
+        public void UpdateAccomodation(Accommodation accommodation)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Accommodations
+                        .Where(ad => ad.Id == accommodation.Id)
+                        .FirstOrDefault();
+
+                entry.Amount = accommodation.Amount;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Airline Expense
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="returnTicket"></param>
+        /// <param name="amount"></param>
+        /// <param name="travelID"></param>
         public void AddAirline(bool returnTicket, double amount, int travelID)
         {
             AirlineExpens airline = new AirlineExpens();
@@ -499,9 +1004,32 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="airline"></param>
+        public void UpdateAirline(AirlineExpens airline)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.AirlineExpenses
+                        .Where(ad => ad.Id == airline.Id)
+                        .FirstOrDefault();
+
+                entry.Amount = airline.Amount;
+                entry.ReturnTicket = airline.ReturnTicket;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Allowance
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="travelID"></param>
         public void AddAllowance(double amount, int travelID)
         {
             Allowance allowance = new Allowance();
@@ -514,9 +1042,32 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="allowance"></param>
+        public void UpdateAllowance(Allowance allowance)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Allowances
+                        .Where(ad => ad.Id == allowance.Id)
+                        .FirstOrDefault();
+
+                entry.Amount = allowance.Amount;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Car Expense
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="UPFleet"></param>
+        /// <param name="amount"></param>
+        /// <param name="travelID"></param>
         public void AddCarExpense(bool UPFleet, int amount, int travelID)
         {
             CarExpens car = new CarExpens();
@@ -530,9 +1081,32 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="car"></param>
+        public void UpdateCarExpense(CarExpens car)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.CarExpenses
+                        .Where(ad => ad.Id == car.Id)
+                        .FirstOrDefault();
+
+                entry.Amount = car.Amount;
+                entry.UP_Fleet = car.UP_Fleet;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Gautrain
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="travelID"></param>
         public void AddGautrainExpense( int amount, int travelID)
         {
             Gautrain gautrain = new Gautrain();
@@ -545,9 +1119,31 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="gautrain"></param>
+        public void UpdateGautrainExpense(Gautrain gautrain)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Gautrains
+                        .Where(ad => ad.Id == gautrain.Id)
+                        .FirstOrDefault();
+
+                entry.Amount = gautrain.Amount;
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Visa
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="travelID"></param>
         public void AddVisaExpense(int amount, int travelID)
         {
             Visa visa = new Visa();
@@ -557,6 +1153,23 @@ namespace PresentationTier.Views
             using (var dbContext = new dboEntities())
             {
                 dbContext.Visas.Add(visa);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="visa"></param>
+        public void UpdateVisaExpense(Visa visa)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Visas
+                        .Where(ad => ad.Id == visa.Id)
+                        .FirstOrDefault();
+
+                entry.Amount = visa.Amount;
                 dbContext.SaveChanges();
             }
         }
@@ -581,9 +1194,25 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
-        #endregion
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="post"></param>
+        public void UpdatePostLevel(PostLevel post)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.PostLevels
+                        .Where(ad => ad.Id == post.Id)
+                        .FirstOrDefault();
+
+                entry.Description = post.Description;
+                entry.AnnualSalary = post.AnnualSalary;
+                dbContext.SaveChanges();
+            }
+        }
+        #endregion
 
     }
 }
