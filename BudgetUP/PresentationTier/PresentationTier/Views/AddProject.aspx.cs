@@ -13,5 +13,12 @@ namespace PresentationTier.Views
         {
 
         }
+
+        protected void AddProject_Click(object sender, EventArgs e)
+        {
+            ServiceContracts project = new ServiceContracts();
+            int userID = Convert.ToInt32(this.Session["userID"]);
+            project.AddProject(userID, title.Text, goal.Text,Convert.ToInt32(length.Text), Convert.ToInt32(lengthType.Text), 0);
+        }
     }
 }

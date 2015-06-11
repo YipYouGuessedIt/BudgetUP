@@ -41,10 +41,10 @@
                 <h1>Project</h1><hr />
                 <asp:Label runat="server">Project Title</asp:Label><asp:TextBox runat="server" ID="title" required name="title" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Overall Goal of the Project </asp:Label><asp:TextBox required runat="server" ID="goal" name="goal" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Start Date </asp:Label><asp:TextBox required type="date" runat="server" ID="sdate" name="sdate" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">End Date </asp:Label><asp:TextBox required type="date" runat="server" ID="edate" name="edate" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server">Project Length </asp:Label><asp:TextBox required type="number" runat="server" ID="length" name="length" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server">In </asp:Label><asp:DropDownList required type="number" runat="server" ID="lengthType" name="lengthType" CssClass="form-control"></asp:DropDownList><br />
                 <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a>
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" /><br /><br />
+                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" OnClick="AddProject_Click" /><br /><br />
             </div>
         </form>
 

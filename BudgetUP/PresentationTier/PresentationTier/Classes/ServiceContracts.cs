@@ -7,7 +7,7 @@ using BizTier;
 namespace PresentationTier.Views
 {
     /// <summary>
-    /// This contains all methods that retrieve data from and add/edit data to that databas
+    /// This contains all methods that retrieve data from and add/edit data to that database
     /// </summary>
     public class ServiceContracts
     {
@@ -21,7 +21,7 @@ namespace PresentationTier.Views
         /// <param name="length"></param>
         /// <param name="durationTypeID"></param>
         /// <param name="projectSettingsID"></param>
-        public void AddUserProject(int userID, string title, string goal, int length, int durationTypeID, int projectSettingsID)
+        public void AddProject(int userID, string title, string goal, int length, int durationTypeID, int projectSettingsID)
         {
             try
             {                
@@ -125,36 +125,19 @@ namespace PresentationTier.Views
         /// 
         /// </summary>
         /// <param name="description"></param>
-        public void UpdateDurationType(DurationType durationType)
+        public void UpdateProjectSettings(Project_Settings ps)
         {
                         using (var dbContext = new dboEntities())
             {
-                var entry = dbContext.DurationTypes
-                        .Where(ad => ad.Id == durationType.Id)
+                var entry = dbContext.Project_Settings
+                        .Where(ad => ad.Id == ps.Id)
                         .FirstOrDefault();
 
-                entry.Description = durationType.Description;
+                entry.EscalationRate = ps.EscalationRate;
+                entry.SubventionRate = ps.SubventionRate;
+                entry.InstitutionalCost = ps.InstitutionalCost;
                 dbContext.SaveChanges();
             }  
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="description"></param>
-        public void UpdateProjectSettings(Project_Settings projectSettings)
-        {
-            using (var dbContext = new dboEntities())
-            {
-                var entry = dbContext.Project_Settings
-                        .Where(ad => ad.Id == projectSettings.Id)
-                        .FirstOrDefault();
-
-                entry.InstitutionalCost = projectSettings.InstitutionalCost;
-                entry.SubventionRate = projectSettings.SubventionRate;
-                entry.EscalationRate = projectSettings.EscalationRate;
-                dbContext.SaveChanges();
-            }
         }
         #endregion
 
