@@ -40,21 +40,21 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.WebControls.TextBox goal;
         
         /// <summary>
-        /// sdate control.
+        /// length control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox sdate;
+        protected global::System.Web.UI.WebControls.TextBox length;
         
         /// <summary>
-        /// edate control.
+        /// lengthType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox edate;
+        protected global::System.Web.UI.WebControls.DropDownList lengthType;
     }
 }
