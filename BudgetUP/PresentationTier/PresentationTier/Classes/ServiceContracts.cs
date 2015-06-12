@@ -229,7 +229,7 @@ namespace PresentationTier.Views
         /// 
         /// </summary>
         /// <param name="userNote"></param>
-        public void AddNotes(string userNote)
+        public int AddNotes(string userNote)
         {
             Note note = new Note();
 
@@ -238,8 +238,12 @@ namespace PresentationTier.Views
 
             using (var dbContext = new dboEntities())
             {
-                dbContext.Notes.Add(note);
+                dbContext.Notes.Add(note);                
                 dbContext.SaveChanges();
+
+                //Not sure if this will work... TESTING
+                note = dbContext.Notes.Find(note);
+                return note.Id;
             }
         }
 
@@ -328,7 +332,7 @@ namespace PresentationTier.Views
         /// <param name="surname"></param>
         /// <param name="roleID"></param>
         /// <param name="faculty"></param>
-        public void AddUser(int titleID, string name, string surname, int roleID, string faculty)
+        public void AddUser(int titleID, string name, string surname, int roleID, int faculty)
         {
             User user = new User();
 
@@ -337,7 +341,7 @@ namespace PresentationTier.Views
             user.Name = name;
             user.Surname = surname;
             user.RoleId = roleID;
-            user.Faculty.FacultyName = faculty;
+            user.FacultyId = faculty;
 
             using (var dbContext = new dboEntities())
             {
@@ -648,7 +652,7 @@ namespace PresentationTier.Views
         /// <param name="activityID"></param>
         /// <param name="amount"></param>
         /// <param name="noteID"></param>
-        public void AddExpense(int activityID, double amount, int noteID)
+        public int AddExpense(int activityID, double amount, int noteID)
         {
             Expens expense = new Expens();
 
@@ -661,6 +665,16 @@ namespace PresentationTier.Views
             {
                 dbContext.Expenses.Add(expense);
                 dbContext.SaveChanges();
+            }
+
+            //get int ID to return
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Expenses
+                        .Where(ad => ad.ActivityId == expense.ActivityId).Where( t => t.Note_Id == expense.Note_Id)
+                        .FirstOrDefault();
+
+                return entry.Id;
             }
         }
 

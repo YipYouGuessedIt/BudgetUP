@@ -125,23 +125,6 @@ namespace PresentationTier.Views
         /// 
         /// </summary>
         /// <param name="description"></param>
-        public void UpdateDurationType(DurationType durationType)
-        {
-                        using (var dbContext = new dboEntities())
-            {
-                var entry = dbContext.DurationTypes
-                        .Where(ad => ad.Id == durationType.Id)
-                        .FirstOrDefault();
-
-                entry.Description = durationType.Description;
-                dbContext.SaveChanges();
-            }  
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="description"></param>
         public void UpdateProjectSettings(Project_Settings projectSettings)
         {
             using (var dbContext = new dboEntities())
@@ -246,7 +229,7 @@ namespace PresentationTier.Views
         /// 
         /// </summary>
         /// <param name="userNote"></param>
-        public void AddNotes(string userNote)
+        public int AddNotes(string userNote)
         {
             Note note = new Note();
 
@@ -257,6 +240,7 @@ namespace PresentationTier.Views
             {
                 dbContext.Notes.Add(note);
                 dbContext.SaveChanges();
+                return dbContext.Notes.Find(note).Id;
             }
         }
 
@@ -345,7 +329,7 @@ namespace PresentationTier.Views
         /// <param name="surname"></param>
         /// <param name="roleID"></param>
         /// <param name="faculty"></param>
-        public void AddUser(int titleID, string name, string surname, int roleID, string faculty)
+        public void AddUser(int titleID, string name, string surname, int roleID, int faculty)
         {
             User user = new User();
 
@@ -354,7 +338,7 @@ namespace PresentationTier.Views
             user.Name = name;
             user.Surname = surname;
             user.RoleId = roleID;
-            user.Faculty.FacultyName = faculty;
+            user.FacultyId = faculty;
 
             using (var dbContext = new dboEntities())
             {
@@ -665,7 +649,7 @@ namespace PresentationTier.Views
         /// <param name="activityID"></param>
         /// <param name="amount"></param>
         /// <param name="noteID"></param>
-        public void AddExpense(int activityID, double amount, int noteID)
+        public int AddExpense(int activityID, double amount, int noteID)
         {
             Expens expense = new Expens();
 
@@ -678,6 +662,11 @@ namespace PresentationTier.Views
             {
                 dbContext.Expenses.Add(expense);
                 dbContext.SaveChanges();
+
+                var entry = dbContext.Expenses
+                        .Where(ad => ad.ActivityId == activityID).Where(e => e.Note_Id == expense.Note_Id)
+                        .FirstOrDefault();
+                return entry.Id;
             }
         }
 

@@ -13,5 +13,18 @@ namespace PresentationTier.Views
         {
 
         }
+
+        protected void Unnamed8_Click(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            if(Password.Text != PasswordConfirm.Text)
+            {
+                //display error message
+                return;
+            }
+            sc.AddUser(title.SelectedIndex, name.Text, surname.Text, roles.SelectedIndex, faculty.SelectedIndex);
+            //select user here and get ID
+            sc.AddUserCredential(email.Text, Password.Text, 0/*the users ID*/);
+        }
     }
 }

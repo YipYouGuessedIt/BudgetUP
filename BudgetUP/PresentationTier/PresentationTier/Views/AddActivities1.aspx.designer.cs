@@ -22,13 +22,13 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// title control.
+        /// ActName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox title;
+        protected global::System.Web.UI.WebControls.TextBox ActName;
         
         /// <summary>
         /// sdate control.

@@ -13,5 +13,11 @@ namespace PresentationTier.Views
         {
 
         }
+
+        protected void Unnamed3_Click(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            sc.AddObjective(/*get project ID most likely through session variable*/0, ObjName.Text);
+        }
     }
 }

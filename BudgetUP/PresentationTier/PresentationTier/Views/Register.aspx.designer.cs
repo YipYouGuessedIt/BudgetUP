@@ -31,6 +31,24 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.WebControls.TextBox name;
         
         /// <summary>
+        /// surname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox surname;
+        
+        /// <summary>
+        /// title control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList title;
+        
+        /// <summary>
         /// email control.
         /// </summary>
         /// <remarks>
@@ -40,40 +58,40 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.WebControls.TextBox email;
         
         /// <summary>
-        /// TextBox1 control.
+        /// Password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox Password;
         
         /// <summary>
-        /// TextBox2 control.
+        /// PasswordConfirm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox PasswordConfirm;
         
         /// <summary>
-        /// DropDownList2 control.
+        /// roles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.WebControls.DropDownList roles;
         
         /// <summary>
-        /// DropDownList3 control.
+        /// faculty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList3;
+        protected global::System.Web.UI.WebControls.DropDownList faculty;
         
         /// <summary>
         /// DropDownList1 control.

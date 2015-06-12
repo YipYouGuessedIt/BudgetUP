@@ -209,16 +209,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\NavigationJS.js" />
-    <Content Include="Views\AddExpense.aspx" />
-    <Content Include="Views\AddIncome.aspx" />
-    <Content Include="Views\Expenses.aspx" />
     <Content Include="Views\GeneralSettings.aspx" />
-    <Content Include="Views\Incomes.aspx" />
     <Content Include="Views\ManageUsers.aspx" />
     <Content Include="Views\Settings.aspx" />
     <Content Include="Views\ActivitiesPage.aspx" />
     <Content Include="Views\AddActivities1.aspx" />
-    <Content Include="Views\AddIncomeandExpenses.aspx" />
     <Content Include="Views\AddObjectives.aspx" />
     <Content Include="Views\AddProject.aspx" />
     <Content Include="Views\BursaryActivity.aspx" />
@@ -350,41 +345,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Views\AddExpense.aspx.cs">
-      <DependentUpon>AddExpense.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\AddExpense.aspx.designer.cs">
-      <DependentUpon>AddExpense.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddIncome.aspx.cs">
-      <DependentUpon>AddIncome.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\AddIncome.aspx.designer.cs">
-      <DependentUpon>AddIncome.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\EventLogger.cs" />
-    <Compile Include="Views\Expenses.aspx.cs">
-      <DependentUpon>Expenses.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Expenses.aspx.designer.cs">
-      <DependentUpon>Expenses.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\GeneralSettings.aspx.cs">
       <DependentUpon>GeneralSettings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\GeneralSettings.aspx.designer.cs">
       <DependentUpon>GeneralSettings.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Incomes.aspx.cs">
-      <DependentUpon>Incomes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Incomes.aspx.designer.cs">
-      <DependentUpon>Incomes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\ManageUsers.aspx.cs">
       <DependentUpon>ManageUsers.aspx</DependentUpon>
@@ -418,13 +385,6 @@
     </Compile>
     <Compile Include="Views\AddActivities1.aspx.designer.cs">
       <DependentUpon>AddActivities1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddIncomeandExpenses.aspx.cs">
-      <DependentUpon>AddIncomeandExpenses.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\AddIncomeandExpenses.aspx.designer.cs">
-      <DependentUpon>AddIncomeandExpenses.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\AddObjectives.aspx.cs">
       <DependentUpon>AddObjectives.aspx</DependentUpon>

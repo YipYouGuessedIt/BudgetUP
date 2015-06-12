@@ -37,12 +37,12 @@
         <form id="form1" runat="server">
             <div id="AddActivity" class="contentArea">
                 <br />
-                <h1>Project</h1><hr />
-                <asp:Label runat="server">Activity Name</asp:Label><asp:TextBox runat="server" ID="title" required name="title" CssClass="form-control"></asp:TextBox><br />
+                <h1>Add Activity</h1><hr />
+                <asp:Label runat="server">Activity Name</asp:Label><asp:TextBox runat="server" ID="ActName" required name="ActName" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Start Date </asp:Label><asp:TextBox required type="date" runat="server" ID="sdate" name="sdate" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">End Date </asp:Label><asp:TextBox required type="date" runat="server" ID="edate" name="edate" CssClass="form-control"></asp:TextBox><br />
                 <a href="ActivitiesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" /><br /><br />
+                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" OnClick="Unnamed4_Click" /><br /><br />
             </div>
         </form>
 

@@ -13,5 +13,13 @@ namespace PresentationTier.Views
         {
 
         }
+
+        protected void Unnamed4_Click(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            int NoteID = sc.AddNotes(note.Text);
+            //get not boxes ID
+            sc.AddBursary(bursaryType.SelectedIndex, 0/*will most likely get it through session variable*/, NoteID);
+        }
     }
 }

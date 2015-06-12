@@ -13,5 +13,12 @@ namespace PresentationTier.Views
         {
 
         }
+
+        protected void Unnamed4_Click(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            int noteID = sc.AddNotes(note.Text);
+            sc.AddIncome(0/*ProjectID from session variable*/,name.Text,Convert.ToDouble(amount.Text), noteID);
+        }
     }
 }

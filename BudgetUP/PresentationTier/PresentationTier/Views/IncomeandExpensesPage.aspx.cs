@@ -92,7 +92,7 @@ namespace PresentationTier.Views
         protected void addDynamics()
         {
                 //Response.Write("<script>alert(' mdksnfc')</script>");
-                List<Expenses> px = new List<Expenses>();
+                List<Expens> px = new List<Expens>();
                 using (var dbContext2 = new dboEntities())
                 {
                     var query2 = from Objectives
