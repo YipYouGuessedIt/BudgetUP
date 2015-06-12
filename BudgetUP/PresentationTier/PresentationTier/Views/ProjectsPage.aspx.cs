@@ -13,14 +13,18 @@ namespace PresentationTier.Views
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if(Session.Count == 0)
+            if (Session.Count == 0)
             {
-               // Response.Write("<script>alert('Credentials is incorrect')</script>");
+                // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
+            
              String cont = "Welcome " + this.Session["userTitle"] + " " + this.Session["userSname"];
              wecomemsg.InnerHtml = "<h1>" + cont + "</h1>";
              this.addtoProjectLists();
+             
+            
+            
         }
 
         protected void Unnamed1_Click(object sender, EventArgs e)
@@ -74,9 +78,45 @@ namespace PresentationTier.Views
             }
         }
 
-        protected void Unnamed1_Click1(object sender, EventArgs e)
+        //public static void moop()
+        //{
+        //    ProjectsPage m = new ProjectsPage();
+        //    m.Unnamed2_TextChanged();
+        //}
+
+        protected void Unnamed2_TextChanged(object sender, EventArgs e)
         {
-            //this.
+            
+            if(searcher.Text == "")
+            {
+                foreach (LinkButton m in projectList.Controls)
+                {
+
+                        m.Visible = true;
+
+                }
+            }
+            else
+            
+            {
+                foreach(LinkButton m in projectList.Controls)
+                {
+                    if (m.Text.Split('<')[0].ToLower().ToString().Contains(searcher.Text.ToLower().ToString()))
+                    {
+                        m.Visible = true;
+                    }
+                    else
+                    {
+                        m.Visible = false;
+                    }
+                }
+                
+            }
+        }
+
+        protected void searcher_PreRender(object sender, EventArgs e)
+        {
+
         }
 
     }

@@ -9,6 +9,7 @@
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	    <script src="../bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+        <script src="../Scripts/NavigationJS.js"></script>
         <link rel="stylesheet" href="../Styles/Global.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
@@ -42,12 +43,12 @@
             <hr />
 
             <div id="ProjectSearch">
-				<input class="form-control" placeholder="Search Projects..." /><br />
+                <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Projects..." OnTextChanged="Unnamed2_TextChanged" onkeyup="posterback();" CausesValidation="True" OnPreRender="searcher_PreRender"></asp:TextBox><br />
 			</div>
 
             <div id="ProjectAdd">
 				<a href="AddProject.aspx" class="btn btn-info btn-lg"  >Add new project</a>
-				<asp:Button name="enableAdmin" runat="server" CssClass="btn-info btn-lg btn" Text="Edit (AC)" OnClick="Unnamed1_Click1" /><br />
+				<asp:Button name="enableAdmin" runat="server" CssClass="btn-info btn-lg btn" Text="Edit (AC)" /><br />
 			</div>
 
 			<div id="ProjectList" class="list-group">

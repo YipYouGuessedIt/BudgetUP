@@ -31,6 +31,15 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl wecomemsg;
         
         /// <summary>
+        /// searcher control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox searcher;
+        
+        /// <summary>
         /// projectList control.
         /// </summary>
         /// <remarks>

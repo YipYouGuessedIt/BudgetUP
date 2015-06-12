@@ -11,7 +11,10 @@ namespace PresentationTier
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string m = ";;staff";
+            string[] d = m.Split(";;".ToCharArray());
 
+            Response.Write("<script>alert('" + d.Length + "')</script>");
         }
     }
 }

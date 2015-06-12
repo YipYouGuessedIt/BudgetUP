@@ -42,7 +42,7 @@
         </div>
 
         <div class="contentArea"><br />
-            <h1>Activity Name</h1><hr />
+            <h1 id="heaserarea" runat="server"></h1><hr />
             <!--<h2>Start and end date</h2>-->
             <div class="Incomesection">
                 <div id="IncomeorExpenseSearch">
@@ -65,30 +65,18 @@
                 
 			    </div>
             </div>
-			<div id="IncomeList" class="list-group">
-                <h3>Income</h3><hr />
-				<a class="list-group-item" href="IncomeandExpensesPage.aspx">Item one
-                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
-				</a><br />			
-			</div>
-            <div id="ExpenseList" class="list-group"><br />
-                <h3>Expense</h3><hr />
-				<a class="list-group-item" href="#">Item one 
-                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
-				</a><br />
-                <a class="list-group-item" href="#">Item two
-                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
-                </a><br />
-                <a class="list-group-item" href="#">Item three (Admin Option to delete)
-                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
-                </a><br />	
-                <a class="list-group-item" href="#">Item four (Admin Option to delete)
-                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
-                </a><br />
-                <a class="list-group-item" href="#">Item five (Admin Option to delete)
-                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
-                </a><br />				
-			</div>
+			<div>
+                    <h3>Bursary</h3>
+                    <asp:PlaceHolder ID="BusaryList" runat="server"></asp:PlaceHolder>	
+                </div>
+                <div>
+                    <h3>Income</h3>
+                    <asp:PlaceHolder ID="IncomeList" runat="server"></asp:PlaceHolder>	
+                </div>
+                 <div>
+                    <h3>Expense</h3>
+                    <asp:PlaceHolder ID="Expenselist" runat="server"></asp:PlaceHolder>	
+                </div>
         </div>
     </div>
     </form>

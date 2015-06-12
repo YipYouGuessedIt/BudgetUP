@@ -42,9 +42,9 @@ namespace PresentationTier.Views
         protected void clicker(object sender, EventArgs e)
         {
             LinkButton m = (LinkButton)sender;
-            Response.Write("<script>alert('" + m.ID + "')</script>");
+            //Response.Write("<script>alert('" + m.ID + "')</script>");
             Session["ObjectiveID"] = m.ID;
-           // Response.Write("ObjectivesPage.aspx");
+            Response.Redirect("ActivitiesPage.aspx");
         }
         /// <summary>
         /// adds all dynamics

@@ -208,6 +208,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\NavigationJS.js" />
     <Content Include="Views\AddExpense.aspx" />
     <Content Include="Views\AddIncome.aspx" />
     <Content Include="Views\Expenses.aspx" />
@@ -264,8 +265,15 @@
     <Content Include="Views\ResourceActivity.aspx" />
     <Content Include="Views\ServiceProviderActivity.aspx" />
     <Content Include="Views\TravelActivity.aspx" />
+    <Content Include="Views\ViewBursary.aspx" />
+    <Content Include="Views\ViewDonation.aspx" />
+    <Content Include="Views\ViewEquipment.aspx" />
     <Content Include="Views\ViewExpenses.aspx" />
     <Content Include="Views\ViewIncome.aspx" />
+    <Content Include="Views\ViewOperationalActivity.aspx" />
+    <Content Include="Views\ViewPersonalActivity.aspx" />
+    <Content Include="Views\ViewServiceProvider.aspx" />
+    <Content Include="Views\ViewTravelActivity.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
   </ItemGroup>
@@ -385,6 +393,10 @@
     <Compile Include="Views\ManageUsers.aspx.designer.cs">
       <DependentUpon>ManageUsers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\NavClass.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\NavHandler.cs" />
     <Compile Include="Views\ServiceContracts.cs" />
     <Compile Include="Views\Settings.aspx.cs">
       <DependentUpon>Settings.aspx</DependentUpon>
@@ -548,6 +560,27 @@
     <Compile Include="Views\TravelActivity.aspx.designer.cs">
       <DependentUpon>TravelActivity.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\ViewBursary.aspx.cs">
+      <DependentUpon>ViewBursary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewBursary.aspx.designer.cs">
+      <DependentUpon>ViewBursary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewDonation.aspx.cs">
+      <DependentUpon>ViewDonation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewDonation.aspx.designer.cs">
+      <DependentUpon>ViewDonation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewEquipment.aspx.cs">
+      <DependentUpon>ViewEquipment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewEquipment.aspx.designer.cs">
+      <DependentUpon>ViewEquipment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\ViewExpenses.aspx.cs">
       <DependentUpon>ViewExpenses.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -561,6 +594,34 @@
     </Compile>
     <Compile Include="Views\ViewIncome.aspx.designer.cs">
       <DependentUpon>ViewIncome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewOperationalActivity.aspx.cs">
+      <DependentUpon>ViewOperationalActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewOperationalActivity.aspx.designer.cs">
+      <DependentUpon>ViewOperationalActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewPersonalActivity.aspx.cs">
+      <DependentUpon>ViewPersonalActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewPersonalActivity.aspx.designer.cs">
+      <DependentUpon>ViewPersonalActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewServiceProvider.aspx.cs">
+      <DependentUpon>ViewServiceProvider.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewServiceProvider.aspx.designer.cs">
+      <DependentUpon>ViewServiceProvider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewTravelActivity.aspx.cs">
+      <DependentUpon>ViewTravelActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewTravelActivity.aspx.designer.cs">
+      <DependentUpon>ViewTravelActivity.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
