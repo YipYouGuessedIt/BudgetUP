@@ -18,7 +18,8 @@ namespace PresentationTier.Views
         {
             ServiceContracts sc = new ServiceContracts();
             int noteID = sc.AddNotes(note.Text);
-            sc.AddIncome(0/*ProjectID from session variable*/,name.Text,Convert.ToDouble(amount.Text), noteID);
+            int projectID = Convert.ToInt32(this.Session["projectID"].ToString());
+            sc.AddIncome(projectID,name.Text,Convert.ToDouble(amount.Text), noteID);
         }
     }
 }

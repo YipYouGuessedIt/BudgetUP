@@ -20,7 +20,8 @@ namespace PresentationTier.Views
             //{
                 ServiceContracts sc = new ServiceContracts();
                 int noteID = sc.AddNotes(note.Text);
-                int ExpenseID = sc.AddExpense(0/*assume this will be in session variable*/, Convert.ToDouble(amount.Text), noteID);
+                int ActID = Convert.ToInt32(this.Session["ActID"].ToString());
+                int ExpenseID = sc.AddExpense(ActID, Convert.ToDouble(amount.Text), noteID);
                 sc.AddEquipment(name.Text, ExpenseID);
             //}
             //catch(Exception f)

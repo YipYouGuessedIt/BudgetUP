@@ -13,5 +13,13 @@ namespace PresentationTier.Views
         {
 
         }
+
+        protected void Unnamed5_Click(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            int oppID = Convert.ToInt32(this.Session["operationalID"].ToString());
+            int expID = Convert.ToInt32(this.Session["ActID"].ToString());// <--CHECK THIS IT MIGHT BE WRONG SESSION VAR
+            sc.AddOperation(expID, oppID, Convert.ToInt32(quantity.Text), Convert.ToInt32(amount.Text));
+        }
     }
 }

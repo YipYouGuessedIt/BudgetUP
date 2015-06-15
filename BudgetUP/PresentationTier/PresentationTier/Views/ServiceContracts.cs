@@ -72,6 +72,23 @@ namespace PresentationTier.Views
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="projectID"></param>
+        public void DeleteUserProject(int projectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Projects
+                        .Where(ad => ad.Id == projectID)
+                        .FirstOrDefault();
+
+                dbContext.Projects.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="description"></param>
         public void AddDurationType(string description)
         {
@@ -99,6 +116,23 @@ namespace PresentationTier.Views
                 entry.Description = durationType.Description;
                 dbContext.SaveChanges();
             }  
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteDurationType(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.DurationTypes
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.DurationTypes.Remove(entry);
+                dbContext.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -136,6 +170,19 @@ namespace PresentationTier.Views
                 entry.InstitutionalCost = projectSettings.InstitutionalCost;
                 entry.SubventionRate = projectSettings.SubventionRate;
                 entry.EscalationRate = projectSettings.EscalationRate;
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteProjectSettings(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Project_Settings
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Project_Settings.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -185,6 +232,23 @@ namespace PresentationTier.Views
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteBursary(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Bursaries
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Bursaries.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="description"></param>
         /// <param name="annualCost"></param>
         /// <param name="durationYears"></param>
@@ -222,6 +286,23 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteBursaryType(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.BursaryTypes
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.BursaryTypes.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Notes
@@ -239,8 +320,9 @@ namespace PresentationTier.Views
             using (var dbContext = new dboEntities())
             {
                 dbContext.Notes.Add(note);
+                int temp = dbContext.Notes.Last().Id;
                 dbContext.SaveChanges();
-                return dbContext.Notes.Find(note).Id;
+                return temp;
             }
         }
 
@@ -260,9 +342,33 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteNote(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Notes
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Notes.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Admin
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="institutionalCost"></param>
+        /// <param name="subventionRate"></param>
+        /// <param name="escalationRate"></param>
+        /// <param name="maximumProjectSpan"></param>
         public void AddAdminSysSettings(double institutionalCost, double subventionRate, double escalationRate, int maximumProjectSpan) 
         {
             Admin_SysSettings admin = new Admin_SysSettings();
@@ -279,6 +385,11 @@ namespace PresentationTier.Views
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="admin"></param>
         public void UpdateAdminSysSettings(Admin_SysSettings admin)
         {
             using(var dbContext = new dboEntities())
@@ -294,6 +405,27 @@ namespace PresentationTier.Views
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteAdminSysSettings(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Admin_SysSettings
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Admin_SysSettings.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="domain"></param>
         public void AddEmailDomain(string domain)
         {
             EmailDomain admin = new EmailDomain();
@@ -307,6 +439,10 @@ namespace PresentationTier.Views
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="emailDomain"></param>
         public void UpdateEmailDomain(EmailDomain emailDomain)
         {
             using (var dbContext = new dboEntities())
@@ -315,6 +451,23 @@ namespace PresentationTier.Views
                         .Where(ad => ad.Id == emailDomain.Id)
                         .FirstOrDefault();
                 entry.Domain = emailDomain.Domain;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteEmailDomain(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.EmailDomains
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.EmailDomains.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -371,6 +524,23 @@ namespace PresentationTier.Views
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteUser(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Users
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Users.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <param name="userID"></param>
@@ -408,6 +578,22 @@ namespace PresentationTier.Views
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteUserCredentials(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.UserCredentials
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.UserCredentials.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Faculty
@@ -442,6 +628,23 @@ namespace PresentationTier.Views
                         .FirstOrDefault();
 
                 entry.FacultyName = faculty.FacultyName;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteFaculty(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Faculties
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Faculties.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -482,6 +685,23 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteRole(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Roles
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Roles.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Title
@@ -515,6 +735,23 @@ namespace PresentationTier.Views
                         .FirstOrDefault();
 
                 entry.Description = title.Description;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteTitle(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Titles
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Titles.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -557,6 +794,23 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteObjectives(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Objectives
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Objectives.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Activities
@@ -592,6 +846,23 @@ namespace PresentationTier.Views
                 entry.ActivityName = activity.ActivityName;
                 entry.StartDate = activity.StartDate;
                 entry.EndDate = activity.EndDate;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteActivity(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Activities
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Activities.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -640,6 +911,23 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteIncome(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Incomes
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Incomes.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Expenses
@@ -649,6 +937,7 @@ namespace PresentationTier.Views
         /// <param name="activityID"></param>
         /// <param name="amount"></param>
         /// <param name="noteID"></param>
+        /// <returns></returns>
         public int AddExpense(int activityID, double amount, int noteID)
         {
             Expens expense = new Expens();
@@ -661,12 +950,10 @@ namespace PresentationTier.Views
             using (var dbContext = new dboEntities())
             {
                 dbContext.Expenses.Add(expense);
+                int temp = dbContext.Expenses.Last().Id;
                 dbContext.SaveChanges();
 
-                var entry = dbContext.Expenses
-                        .Where(ad => ad.ActivityId == activityID).Where(e => e.Note_Id == expense.Note_Id)
-                        .FirstOrDefault();
-                return entry.Id;
+                return temp;
             }
         }
 
@@ -684,6 +971,23 @@ namespace PresentationTier.Views
 
                 entry.Amount = expense.Amount;
                 entry.Note.UserNote = expense.Note.UserNote;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteExpense(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Expenses
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Expenses.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -725,6 +1029,23 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteContractor(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Contractors
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Contractors.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Equipment
@@ -761,6 +1082,23 @@ namespace PresentationTier.Views
                         .FirstOrDefault();
 
                 entry.EquipmentName = equipment.EquipmentName;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteEquipment(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Equipments
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Equipments.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -814,6 +1152,23 @@ namespace PresentationTier.Views
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteOperation(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Operationals
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Operationals.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="description"></param>
         public void AddOperationType(string description)
         {
@@ -841,6 +1196,23 @@ namespace PresentationTier.Views
                         .FirstOrDefault();
 
                 entry.Description = operation.Description;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteOperationalType(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Operation_Type
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Operation_Type.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -885,6 +1257,23 @@ namespace PresentationTier.Views
                 entry.PostLevelId = upStaffMember.PostLevelId;
                 entry.DaysInvolved = upStaffMember.DaysInvolved;
                 entry.SubventionLevy = upStaffMember.SubventionLevy;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteUPStaffMember(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.UPStaffMembers
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.UPStaffMembers.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -934,6 +1323,23 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteTravels(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Travels
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Travels.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
        
         #region Accommodation
         /// <summary>
@@ -968,6 +1374,23 @@ namespace PresentationTier.Views
                         .FirstOrDefault();
 
                 entry.Amount = accommodation.Amount;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteAccommodation(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Accommodations
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Accommodations.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -1011,6 +1434,23 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteAirline(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.AirlineExpenses
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.AirlineExpenses.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Allowance
@@ -1045,6 +1485,23 @@ namespace PresentationTier.Views
                         .FirstOrDefault();
 
                 entry.Amount = allowance.Amount;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteAllowance(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Allowances
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Allowances.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -1088,6 +1545,23 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteCarExpense(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.CarExpenses
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.CarExpenses.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #region Gautrain
@@ -1122,6 +1596,23 @@ namespace PresentationTier.Views
                         .FirstOrDefault();
 
                 entry.Amount = gautrain.Amount;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteGautrainExpense(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Gautrains
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Gautrains.Remove(entry);
                 dbContext.SaveChanges();
             }
         }
@@ -1162,6 +1653,23 @@ namespace PresentationTier.Views
                 dbContext.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeleteVisaExpense(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Visas
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Visas.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
         #endregion
 
         #endregion
@@ -1198,6 +1706,23 @@ namespace PresentationTier.Views
 
                 entry.Description = post.Description;
                 entry.AnnualSalary = post.AnnualSalary;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeletePostLevel(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.PostLevels
+                        .Where(ad => ad.Id == objectID)
+                        .FirstOrDefault();
+
+                dbContext.PostLevels.Remove(entry);
                 dbContext.SaveChanges();
             }
         }

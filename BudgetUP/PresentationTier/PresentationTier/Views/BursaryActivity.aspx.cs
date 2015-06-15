@@ -19,7 +19,8 @@ namespace PresentationTier.Views
             ServiceContracts sc = new ServiceContracts();
             int NoteID = sc.AddNotes(note.Text);
             //get not boxes ID
-            sc.AddBursary(bursaryType.SelectedIndex, 0/*will most likely get it through session variable*/, NoteID);
+            int projectID = Convert.ToInt32(this.Session["projectID"].ToString());
+            sc.AddBursary(bursaryType.SelectedIndex, projectID, NoteID);
         }
     }
 }
