@@ -38,43 +38,82 @@
 
         <form id="form1" runat="server">
             <div id="Add" class="contentArea"><br />
-                <h1>Travel</h1>
+                <h1>Travel Expenses</h1>
                 <hr />
-                <asp:Label ID="Label1" runat="server" Text="">Number of travellers</asp:Label>
+
+                <h3>General</h3>
+                <hr />
+
+                <asp:Label ID="Label1" runat="server" Text="">Number of travelers</asp:Label>
                 <asp:TextBox runat="server" ID="numoftrav" type="number" required name="numoftrav" CssClass="form-control"></asp:TextBox>
                 <br />
-                <asp:Label ID="Label2" runat="server" Text="">Number of travellers</asp:Label>
+
+                <asp:Label ID="Label2" runat="server" Text="Number of days"></asp:Label>
                 <asp:TextBox runat="server" ID="numofdays" required type="number" name="numofdays" CssClass="form-control"></asp:TextBox>
                 <br />
-                <asp:Label runat="server">Estimated date of depature </asp:Label><asp:TextBox required type="date" runat="server" ID="sdate" name="sdate" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Airline tickets Required </asp:Label>
-                <asp:DropDownList class="form-control" ID="DropDownList2" runat="server">
-                    <asp:ListItem Value="1">Yes</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:DropDownList><br />
-                                <asp:Label runat="server">Acomidation Required </asp:Label>
-                <asp:DropDownList class="form-control" ID="DropDownList1" runat="server">
-                    <asp:ListItem Value="1">Yes</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:DropDownList><br />
-                                <asp:Label runat="server">Car Rental Required </asp:Label>
-                <asp:DropDownList class="form-control" ID="DropDownList3" runat="server">
+
+                <asp:Label runat="server">Estimated date of depature </asp:Label>
+                <asp:TextBox required type="date" runat="server" ID="sdate" name="sdate" CssClass="form-control"></asp:TextBox>
+                <br />
+                
+                <asp:Label runat="server" ID="Label3">Destination</asp:Label>
+                <asp:TextBox required type="date" runat="server" ID="destination" name="sdate" CssClass="form-control"></asp:TextBox><br />
+                <br />
+                
+                
+                <h3>Visa</h3>
+                <hr />
+                <asp:Label runat="server" ID="Label4">Visa Amount</asp:Label>
+                <asp:TextBox required type="number" runat="server" ID="visaAmount" name="sdate" CssClass="form-control" value="0"></asp:TextBox>
+                <br />
+                
+                <h3>Gautrain</h3>
+                <hr />
+                <asp:Label runat="server" ID="Label5">Gautrain Amount</asp:Label>
+                <asp:TextBox required type="number" runat="server" ID="gautrainAmount" name="sdate" CssClass="form-control" value="0"></asp:TextBox>
+                <br />
+                
+                <h3>Cars</h3>
+                <hr />
+                <asp:Label runat="server" ID="Label6">Car Expense Amount</asp:Label>
+                <asp:TextBox required type="number" runat="server" ID="CarAmount" name="sdate" CssClass="form-control" value="0"></asp:TextBox>
+                <br />
+                
+                <asp:Label runat="server">University of Pretoria Fleet </asp:Label>
+                <asp:DropDownList class="form-control" ID="UPFleet" runat="server">
+                    <asp:ListItem Value="0">Yes</asp:ListItem>
                     <asp:ListItem Value="1">No</asp:ListItem>
-                    <asp:ListItem Value="2">Yes from UP fleet</asp:ListItem>
-                    <asp:ListItem Value="3">Yes from a car rental company</asp:ListItem>
-                </asp:DropDownList><br />
-                                <asp:Label runat="server">Gautrain Required </asp:Label>
-                <asp:DropDownList class="form-control" ID="DropDownList4" runat="server">
+                </asp:DropDownList>
+                <br />
+                
+                <h3>Allowances</h3>
+                <hr />
+                <asp:Label runat="server" ID="Label7">Allowances Amount</asp:Label>
+                <asp:TextBox required type="number" runat="server" ID="AllowanceAmount" name="sdate" CssClass="form-control" value="0"></asp:TextBox>
+                <br />                
+
+                <h3>Airlines</h3>
+                <hr />
+                <asp:Label runat="server" ID="Label8">Airline Expense Amount</asp:Label>
+                <asp:TextBox required type="number" runat="server" ID="AirlineAmount" name="sdate" CssClass="form-control" value="0"></asp:TextBox>
+                <br />
+
+                <asp:Label runat="server">Return Ticket </asp:Label>
+                <asp:DropDownList class="form-control" ID="returnTicket" runat="server">
+                    <asp:ListItem Value="0">Yes</asp:ListItem>
                     <asp:ListItem Value="1">No</asp:ListItem>
-                    <asp:ListItem Value="2">Yes,return ticket</asp:ListItem>
-                    <asp:ListItem Value="3">Yes,single ticket</asp:ListItem>
-                </asp:DropDownList><br />
-                                <asp:Label runat="server">Visa Required </asp:Label>
-                <asp:DropDownList class="form-control" ID="DropDownList5" runat="server">
-                    <asp:ListItem Value="1">Yes</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:DropDownList><br />
-                <asp:Label runat="server">Notes</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
+                </asp:DropDownList>
+                <br />
+
+                <h3>Accommodation</h3>
+                <hr />
+                <asp:Label runat="server" ID="Label9">Accommodation Amount</asp:Label>
+                <asp:TextBox required type="number" runat="server" ID="AccommodationAmount" name="sdate" CssClass="form-control" value="0"></asp:TextBox>
+                <br />
+               
+                <h3>Notes</h3>
+                <hr />
+                <asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" /><br /><br />
             </div>
