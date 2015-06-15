@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OperationalActivity.aspx.cs" Inherits="PresentationTier.Views.OperationalActivity" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewOperationalActivity.aspx.cs" Inherits="PresentationTier.Views.ViewOperationalActivity" %>
 
 <!DOCTYPE html>
 
@@ -39,12 +39,16 @@
         <form id="form1" runat="server">
             <div id="Add" class="contentArea"><br />
                 <h1>Operational Cost</h1><hr />
-                <asp:Label runat="server">Name of contractor</asp:Label><asp:TextBox runat="server" ID="name" required name="name" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server">Operation Type</asp:Label>
+                <br />
+                <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control" OnInit="DropDownList1_Init">
+                </asp:DropDownList>
+                <br />
                  <asp:Label runat="server">Quantity</asp:Label><asp:TextBox required type="number" runat="server" ID="quantity" name="quantity" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Total per unit</asp:Label><asp:TextBox required runat="server" type="number" ID="amount" name="amount" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Notes</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" /><br /><br />
+                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" OnClick="Unnamed5_Click" /><br /><br />
             </div>
         </form>
 

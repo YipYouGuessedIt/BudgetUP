@@ -4,8 +4,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
-</head>
+    <title>View Bursary</title>
+    	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	    <script src="../bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../Styles/Global.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    </head>
     <body>        
 
         <nav class="navbar navbar-inverse">
@@ -33,16 +39,21 @@
         <form id="form1" runat="server">
             <div id="Add" class="contentArea"><br />
                 <h1>Bursary</h1><hr />
-                <asp:Label runat="server">Number of Bursaries</asp:Label><asp:TextBox runat="server" ID="numofburs" required name="numofburs" CssClass="form-control"></asp:TextBox><br />
+                <br />
                 <asp:Label runat="server">Type of bursary</asp:Label>                
-                <asp:DropDownList class="form-control" ID="DropDownList2" runat="server">
-                    <asp:ListItem Value="1">Master</asp:ListItem>
-                    <asp:ListItem Value="2">Doctoral</asp:ListItem>
-                    <asp:ListItem Value="3">Post-doctoral fellow</asp:ListItem>
-                </asp:DropDownList><br /><br />
+                <asp:DropDownList class="form-control" ID="DropDownList2" runat="server" OnInit="DropDownList2_Init" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
+                </asp:DropDownList>
+                <asp:Label ID="Label1" runat="server" Text="Annual cost"></asp:Label>
+                <br />
+                <asp:TextBox ID="Cost" runat="server" type="number" CssClass="form-control"></asp:TextBox>
+                <br />
+                <asp:Label ID="Label4" runat="server"  Text="Years"></asp:Label>
+                <br />
+                <asp:TextBox ID="Years" runat="server" type="number" CssClass="form-control"></asp:TextBox>
+                <br />
                 <asp:Label runat="server">Notes</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" /><br /><br />
+                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Edit" OnClick="Unnamed4_Click" /><br /><br />
             </div>
     </form>
 </body>

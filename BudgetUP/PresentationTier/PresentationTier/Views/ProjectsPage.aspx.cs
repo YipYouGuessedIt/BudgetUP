@@ -87,19 +87,28 @@ namespace PresentationTier.Views
         protected void Unnamed2_TextChanged(object sender, EventArgs e)
         {
             
-            if(searcher.Text == "")
+            
+        }
+
+        protected void searcher_PreRender(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            if (searcher.Text == "")
             {
                 foreach (LinkButton m in projectList.Controls)
                 {
 
-                        m.Visible = true;
+                    m.Visible = true;
 
                 }
             }
             else
-            
             {
-                foreach(LinkButton m in projectList.Controls)
+                foreach (LinkButton m in projectList.Controls)
                 {
                     if (m.Text.Split('<')[0].ToLower().ToString().Contains(searcher.Text.ToLower().ToString()))
                     {
@@ -107,16 +116,12 @@ namespace PresentationTier.Views
                     }
                     else
                     {
+                        
                         m.Visible = false;
                     }
                 }
-                
+
             }
-        }
-
-        protected void searcher_PreRender(object sender, EventArgs e)
-        {
-
         }
 
     }

@@ -42,7 +42,8 @@
         <div class="contentArea"><br />
             <h1 id="heaserarea" runat="server"></h1><hr />
             <div id="ObjectiveSearch">
-				<input class="form-control" placeholder="Search Objectives..." /><br />
+				<asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Objectives..." ></asp:TextBox>
+			    <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" OnClick="Button1_Click" /><br />
 			</div>
 
             <div id="ObjectiveAdd">

@@ -46,9 +46,9 @@
             <!--<h2>Start and end date</h2>-->
             <div class="Incomesection">
                 <div id="IncomeorExpenseSearch">
-				    <input class="form-control" placeholder="Search Objectives..." />
-                    <br />
-			    </div>
+				    <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Incomes and Expenses..." ></asp:TextBox>
+			    <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" OnClick="Button1_Click" /><br />
+			</div>
                 <div id="IncomeorExpenseAdd">
                 
                     <asp:DropDownList class="form-control" ID="DropDownList2" runat="server">
@@ -65,18 +65,20 @@
                 
 			    </div>
             </div>
-			<div>
+            <div runat="server" id="lister">
+			<div id="bl">
                     <h3>Bursary</h3>
                     <asp:PlaceHolder ID="BusaryList" runat="server"></asp:PlaceHolder>	
                 </div>
-                <div>
+                <div id="il">
                     <h3>Income</h3>
                     <asp:PlaceHolder ID="IncomeList" runat="server"></asp:PlaceHolder>	
                 </div>
-                 <div>
+                 <div id="el">
                     <h3>Expense</h3>
                     <asp:PlaceHolder ID="Expenselist" runat="server"></asp:PlaceHolder>	
                 </div>
+            </div>
         </div>
     </div>
     </form>

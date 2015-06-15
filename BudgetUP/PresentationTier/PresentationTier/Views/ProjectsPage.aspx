@@ -32,7 +32,7 @@
                         <li> <a href="ProfilePage.aspx">Profile</a></li>                
                         <li> <a href="ManageUsers.aspx">Manage Users</a></li>                       
                         <li> <a href="Settings.aspx">Settings</a></li>  
-                        <li> <a href="LoginPage.aspx">Logout</a></li> 
+                        <li> <a id="logout" href="LoginPage.aspx" >Logout</a></li> 
                     </ul>
                 </div>
             </div>
@@ -43,7 +43,8 @@
             <hr />
 
             <div id="ProjectSearch">
-                <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Projects..." OnTextChanged="Unnamed2_TextChanged" onkeyup="posterback();" CausesValidation="True" OnPreRender="searcher_PreRender"></asp:TextBox><br />
+                <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Projects..." ></asp:TextBox>
+			    <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" OnClick="Button1_Click" /><br />
 			</div>
 
             <div id="ProjectAdd">

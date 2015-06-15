@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OperationalActivity.aspx.cs" Inherits="PresentationTier.Views.OperationalActivity" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewPersonalActivity.aspx.cs" Inherits="PresentationTier.Views.ViewPersonalActivity" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>add Operational expense</title>
+    <title>Add Personel</title>
     	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -38,13 +38,28 @@
 
         <form id="form1" runat="server">
             <div id="Add" class="contentArea"><br />
-                <h1>Operational Cost</h1><hr />
-                <asp:Label runat="server">Name of contractor</asp:Label><asp:TextBox runat="server" ID="name" required name="name" CssClass="form-control"></asp:TextBox><br />
-                 <asp:Label runat="server">Quantity</asp:Label><asp:TextBox required type="number" runat="server" ID="quantity" name="quantity" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Total per unit</asp:Label><asp:TextBox required runat="server" type="number" ID="amount" name="amount" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Notes</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
+                <h1>Personel Involvment</h1>
+                <hr />
+                <asp:Label runat="server">Select Post level </asp:Label>
+                <asp:DropDownList class="form-control" ID="DropDownList2" runat="server" OnInit="DropDownList2_Init">
+                    <asp:ListItem Value="1">Admin</asp:ListItem>
+                    <asp:ListItem Value="2">Lecturer</asp:ListItem>
+                </asp:DropDownList><br />
+                <asp:Label ID="Label1" runat="server" Text="">Duration of involvement</asp:Label>
+                <asp:TextBox runat="server" ID="numofdays" type="number" required name="numofdays" CssClass="form-control"></asp:TextBox>
+                <br />
+                <asp:Label runat="server">Subventilation levy </asp:Label>
+               <asp:DropDownList class="form-control" ID="DropDownList1" runat="server">
+                    <asp:ListItem Value="0">No</asp:ListItem>
+                    <asp:ListItem Value="1">Yes</asp:ListItem>
+                </asp:DropDownList><br />
+                <asp:Label ID="Label2" runat="server" Text="Amount"></asp:Label>
+                <br />
+                <asp:TextBox ID="amount" runat="server" CssClass="form-control"></asp:TextBox>
+                <br />
+               <asp:Label runat="server">Notes</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" /><br /><br />
+                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Edit" OnClick="Unnamed4_Click" /><br /><br />
             </div>
         </form>
 

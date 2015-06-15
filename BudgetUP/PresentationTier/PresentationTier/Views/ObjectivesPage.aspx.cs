@@ -12,6 +12,10 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["ProjectID"] == null)
+            {
+                Response.Redirect("ProjectsPage.aspx");
+            }
             List<Project> proj = new List<Project>();
             using (var dbContext = new dboEntities())
             {
@@ -73,6 +77,35 @@ namespace PresentationTier.Views
                         add.Click += new EventHandler(clicker);
 
                         ObjectiveLister.Controls.Add(add);
+                    }
+                }
+
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            
+            if (searcher.Text == "")
+            {
+                foreach (LinkButton m in ObjectiveLister.Controls)
+                {
+
+                    m.Visible = true;
+
+                }
+            }
+            else
+            {
+                foreach (LinkButton m in ObjectiveLister.Controls)
+                {
+                    if (m.Text.Split('<')[0].ToLower().ToString().Contains(searcher.Text.ToLower().ToString()))
+                    {
+                        m.Visible = true;
+                    }
+                    else
+                    {
+                        m.Visible = false;
                     }
                 }
 
