@@ -26,6 +26,7 @@ namespace BizTier
         public string Surname { get; set; }
         public int RoleId { get; set; }
         public int FacultyId { get; set; }
+        public Nullable<bool> Admin { get; set; }
     
         public virtual Faculty Faculty { get; set; }
         public virtual ICollection<Project> Projects { get; set; }

@@ -492,6 +492,7 @@ namespace PresentationTier.Views
             user.Surname = surname;
             user.RoleId = roleID;
             user.FacultyId = faculty;
+            user.Admin = false;
 
             using (var dbContext = new dboEntities())
             {
