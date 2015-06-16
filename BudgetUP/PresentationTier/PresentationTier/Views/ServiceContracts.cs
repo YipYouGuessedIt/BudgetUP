@@ -518,6 +518,7 @@ namespace PresentationTier.Views
                 entry.Surname = user.Surname;
                 entry.RoleId = user.RoleId;
                 entry.FacultyId = user.FacultyId;
+                entry.Admin = user.Admin;
                 dbContext.SaveChanges();
             }
         }
@@ -1289,7 +1290,7 @@ namespace PresentationTier.Views
         /// <param name="departureDate"></param>
         /// <param name="destination"></param>
         /// <param name="expenseID"></param>
-        public void AddTravel(int travellerNumber, int durationDays, DateTime departureDate, string destination, int expenseID)
+        public int AddTravel(int travellerNumber, int durationDays, DateTime departureDate, string destination, int expenseID)
         {
             Travel travels = new Travel();
 
@@ -1303,6 +1304,7 @@ namespace PresentationTier.Views
             {
                 dbContext.Travels.Add(travels);
                 dbContext.SaveChanges();
+                return dbContext.Travels.Last().Id;
             }
         }
 
@@ -1515,7 +1517,7 @@ namespace PresentationTier.Views
         /// <param name="UPFleet"></param>
         /// <param name="amount"></param>
         /// <param name="travelID"></param>
-        public void AddCarExpense(bool UPFleet, int amount, int travelID)
+        public void AddCarExpense(bool UPFleet, double amount, int travelID)
         {
             CarExpens car = new CarExpens();
             car.UP_Fleet = UPFleet;
@@ -1571,7 +1573,7 @@ namespace PresentationTier.Views
         /// </summary>
         /// <param name="amount"></param>
         /// <param name="travelID"></param>
-        public void AddGautrainExpense( int amount, int travelID)
+        public void AddGautrainExpense( double amount, int travelID)
         {
             Gautrain gautrain = new Gautrain();
             gautrain.Amount = amount;
@@ -1625,7 +1627,7 @@ namespace PresentationTier.Views
         /// </summary>
         /// <param name="amount"></param>
         /// <param name="travelID"></param>
-        public void AddVisaExpense(int amount, int travelID)
+        public void AddVisaExpense(double amount, int travelID)
         {
             Visa visa = new Visa();
             visa.Amount = amount;
