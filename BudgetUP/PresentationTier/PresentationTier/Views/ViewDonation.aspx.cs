@@ -10,6 +10,7 @@ namespace PresentationTier.Views
 {
     public partial class ViewDonation : System.Web.UI.Page
     {
+        int notede = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["IncID"] == null)
@@ -31,6 +32,7 @@ namespace PresentationTier.Views
                         name.Text = p.DonorName;
                         amount.Text = p.Amount.ToString();
                         note.Text = p.Note.UserNote;
+                        notede = p.Note_Id;
                     }
                 }
 
@@ -45,7 +47,11 @@ namespace PresentationTier.Views
             n.ProjectId = Convert.ToInt32(Session["ProjectID"]);
             n.Amount = Convert.ToInt32(amount.Text);
             n.DonorName = name.Text;
-            n.Note_Id = 2;
+            Note no = new Note();
+            no.Id = notede;
+            no.UserNote = note.ToString();
+            m.UpdateNotes(no);
+            m.UpdateIncome(n);
         }
     }
 }

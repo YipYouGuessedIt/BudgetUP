@@ -10,8 +10,10 @@ namespace PresentationTier.Views
 {
     public partial class ViewBursary : System.Web.UI.Page
     {
+        int notede = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (Session["BursIDID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -33,6 +35,7 @@ namespace PresentationTier.Views
                             
                            DropDownList2.SelectedValue = p.BursaryTypeId.ToString();
                             note.Text = p.Note.UserNote;
+                            notede = p.Note_Id;
                         }
                     }
 
@@ -78,36 +81,11 @@ namespace PresentationTier.Views
 
             n.BursaryTypeId = Convert.ToInt32( DropDownList2.SelectedItem.Value);
             n.ProjectId = Convert.ToInt32(Session["ProjectID"]);
-            int notenum = 0;
-            //using (var dbContext = new dboEntities())
-            //{
-            //    var query = from Projects
-            //                in dbContext.Notes
-            //                select Projects;
-                            
-
-            //    foreach (Note p in query)
-            //    {
-            //        if(p.UserNote.ToString() == note.Text)
-            //        {
-
-            //            notenum = p.Id;
-            //        }
-
-            //    }
-
-            //}
-            if(notenum == 0)
-            {
-                //m.AddNotes(note.Text);
-                using (var dbContext = new dboEntities())
-                {
-                    //notenum=dbContext.Notes.Last<Note>().Id;
-                }
-
-                
-            }
-            n.Note_Id = 3;
+            n.Note_Id = notede;
+            Note no = new Note();
+            no.Id = notede;
+            no.UserNote = note.ToString();
+            m.UpdateNotes(no);
             //Response.Write("<script>alert('"+ n.BursaryTypeId +"');</script>");
             m.UpdateBursary(n);
         }

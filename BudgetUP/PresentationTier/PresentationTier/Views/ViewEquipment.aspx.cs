@@ -11,6 +11,7 @@ namespace PresentationTier.Views
     public partial class ViewEquipment : System.Web.UI.Page
     {
         private int expid = 0;
+        int notede = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["equipID"] == null)
@@ -33,6 +34,7 @@ namespace PresentationTier.Views
                         amount.Text = p.Expens.Amount.ToString();
                         note.Text = p.Expens.Note.UserNote;
                         expid = p.Expense_Id;
+                        notede = p.Expens.Note_Id;
                     }
                 }
 
@@ -51,7 +53,11 @@ namespace PresentationTier.Views
             em.Id = expid;
             em.Amount = Convert.ToInt32(amount.Text);
             em.ActivityId = Convert.ToInt32(Session["ActID"].ToString());
-            em.Note_Id = 1;
+            em.Note_Id = notede;
+            Note no = new Note();
+            no.Id = notede;
+            no.UserNote = note.ToString();
+            m.UpdateNotes(no);
             m.UpdateExpense(em);
 
 

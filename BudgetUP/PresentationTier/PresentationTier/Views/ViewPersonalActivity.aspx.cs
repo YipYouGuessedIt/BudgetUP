@@ -11,6 +11,7 @@ namespace PresentationTier.Views
     public partial class ViewPersonalActivity : System.Web.UI.Page
     {
         int expid = 0;
+        int notede = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UPstaffID"] == null)
@@ -34,6 +35,7 @@ namespace PresentationTier.Views
                         DropDownList1.SelectedValue = Convert.ToInt32( p.SubventionLevy).ToString();
                         numofdays.Text = p.DaysInvolved.ToString();
                         note.Text = p.Expens.Note.UserNote;
+                        notede = p.Expens.Note_Id;
                     }
                 }
 
@@ -74,7 +76,11 @@ namespace PresentationTier.Views
             em.Id = expid;
             em.Amount = Convert.ToInt32(amount.Text);
             em.ActivityId = Convert.ToInt32(Session["ActID"].ToString());
-            em.Note_Id = 1;
+            em.Note_Id = notde;
+            Note no = new Note();
+            no.Id = notede;
+            no.UserNote = note.ToString();
+            m.UpdateNotes(no);
             m.UpdateExpense(em);
         }
     }
