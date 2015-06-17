@@ -11,15 +11,20 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session.Count == 0)
+            {
+                // Response.Write("<script>alert('Credentials is incorrect')</script>");
+                Response.Redirect("LoginPage.aspx");
+            }
         }
 
         protected void Unnamed5_Click(object sender, EventArgs e)
         {
             ServiceContracts sc = new ServiceContracts();
-            int oppID = Convert.ToInt32(this.Session["operationalID"].ToString());
-            int expID = Convert.ToInt32(this.Session["ActID"].ToString());// <--CHECK THIS IT MIGHT BE WRONG SESSION VAR
-            sc.AddOperation(expID, oppID, Convert.ToInt32(quantity.Text), Convert.ToInt32(amount.Text));
+            int noteID = sc.AddNotes(note.Text);
+            int actID = Convert.ToInt32(this.Session["ActID"].ToString());
+            int expID = sc.AddExpense(actID, Convert.ToInt32(quantity.Text) * Convert.ToDouble(amount.Text), noteID);            
+            sc.AddOperation(expID, oppType.SelectedIndex, Convert.ToInt32(quantity.Text), Convert.ToDouble(amount.Text));
         }
     }
 }

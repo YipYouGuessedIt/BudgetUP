@@ -11,7 +11,15 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session.Count == 0)
+            {
+                // Response.Write("<script>alert('Credentials is incorrect')</script>");
+                Response.Redirect("LoginPage.aspx");
+            }
+            if(this.Session["Admin"] != "true")
+            {
+                Response.Redirect("ProjectsPage.aspx");
+            }
         }
     }
 }

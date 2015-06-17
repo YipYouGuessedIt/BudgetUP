@@ -11,14 +11,17 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session.Count == 0)
+            {
+                // Response.Write("<script>alert('Credentials is incorrect')</script>");
+                Response.Redirect("LoginPage.aspx");
+            }
         }
 
         protected void Unnamed4_Click(object sender, EventArgs e)
         {
             ServiceContracts sc = new ServiceContracts();
             int NoteID = sc.AddNotes(note.Text);
-            //get not boxes ID
             int projectID = Convert.ToInt32(this.Session["projectID"].ToString());
             sc.AddBursary(bursaryType.SelectedIndex, projectID, NoteID);
         }
