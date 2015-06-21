@@ -41,7 +41,7 @@
                 <h1>Bursary</h1><hr />
                 <asp:Label runat="server">Number of Bursaries</asp:Label><asp:TextBox runat="server" ID="numofburs" required name="numofburs" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Type of bursary</asp:Label>                
-                <asp:DropDownList class="form-control" ID="bursaryType" runat="server">
+                <asp:DropDownList class="form-control" ID="bursaryType" runat="server" OnInit="bursaryType_Init">
                     <asp:ListItem Value="1">Master</asp:ListItem>
                     <asp:ListItem Value="2">Doctoral</asp:ListItem>
                     <asp:ListItem Value="3">Post-doctoral fellow</asp:ListItem>

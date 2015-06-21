@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BizTier;
 
 namespace PresentationTier.Views
 {
@@ -24,6 +25,27 @@ namespace PresentationTier.Views
             int NoteID = sc.AddNotes(note.Text);
             int projectID = Convert.ToInt32(this.Session["projectID"].ToString());
             sc.AddBursary(bursaryType.SelectedIndex, projectID, NoteID);
+        }
+
+        protected void bursaryType_Init(object sender, EventArgs e)
+        {
+            bursaryType.Items.Clear();
+            using (var dbContext = new dboEntities())
+            {
+                var query = from BursaryTypes
+                            in dbContext.BursaryTypes
+                            select BursaryTypes;
+
+                foreach (BursaryType p in query)
+                {
+                    // Response.Write("<script>alert('" + p.Id.ToString() + "');</script>");
+                    ListItem m = new ListItem();
+                    m.Value = p.Id.ToString();
+                    m.Text = p.Description.ToString();
+                    bursaryType.Items.Add(m);
+                }
+
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BizTier;
 
 namespace PresentationTier.Views
 {
@@ -22,9 +23,30 @@ namespace PresentationTier.Views
                 //display error message
                 return;
             }
-            sc.AddUser(title.SelectedIndex, name.Text, surname.Text, roles.SelectedIndex, faculty.SelectedIndex);
+            int userID = sc.AddUser(title.SelectedIndex, name.Text, surname.Text, roles.SelectedIndex, faculty.SelectedIndex);
             //select user here and get ID
-            sc.AddUserCredential(email.Text, Password.Text, 0/*the users ID*/);
+            sc.AddUserCredential(email.Text, Password.Text, userID);
+        }
+
+        protected void title_Init(object sender, EventArgs e)
+        {
+            title.Items.Clear();
+            using (var dbContext = new dboEntities())
+            {
+                var query = from titles
+                            in dbContext.Titles
+                            select titles;
+
+                foreach (Title p in query)
+                {
+                    // Response.Write("<script>alert('" + p.Id.ToString() + "');</script>");
+                    ListItem m = new ListItem();
+                    m.Value = p.Id.ToString();
+                    m.Text = p.Description.ToString();
+                    title.Items.Add(m);
+                }
+
+            }
         }
     }
 }

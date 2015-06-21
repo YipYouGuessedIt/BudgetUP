@@ -41,7 +41,7 @@
                 <h1>Personel Involvment</h1>
                 <hr />
                 <asp:Label runat="server">Select Post level </asp:Label>
-                <asp:DropDownList class="form-control" ID="DropDownList2" runat="server">
+                <asp:DropDownList class="form-control" ID="DropDownList2" runat="server" OnInit="DropDownList2_Init">
                     <asp:ListItem Value="1">Admin</asp:ListItem>
                     <asp:ListItem Value="2">Lecturer</asp:ListItem>
                 </asp:DropDownList><br />

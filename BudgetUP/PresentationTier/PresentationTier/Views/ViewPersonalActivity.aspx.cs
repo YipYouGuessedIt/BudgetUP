@@ -76,7 +76,7 @@ namespace PresentationTier.Views
             em.Id = expid;
             em.Amount = Convert.ToInt32(amount.Text);
             em.ActivityId = Convert.ToInt32(Session["ActID"].ToString());
-            em.Note_Id = notde;
+            em.Note_Id = notede;
             Note no = new Note();
             no.Id = notede;
             no.UserNote = note.ToString();

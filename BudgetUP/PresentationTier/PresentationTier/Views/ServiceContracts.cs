@@ -319,9 +319,10 @@ namespace PresentationTier.Views
 
             using (var dbContext = new dboEntities())
             {
-                dbContext.Notes.Add(note);
-                int temp = dbContext.Notes.Last().Id;
+                dbContext.Notes.Add(note);                
                 dbContext.SaveChanges();
+
+                int temp = dbContext.Notes.Max(item => item.Id);//dbContext.Notes.LastOrDefault().Id;
                 return temp;
             }
         }
@@ -482,7 +483,7 @@ namespace PresentationTier.Views
         /// <param name="surname"></param>
         /// <param name="roleID"></param>
         /// <param name="faculty"></param>
-        public void AddUser(int titleID, string name, string surname, int roleID, int faculty)
+        public int AddUser(int titleID, string name, string surname, int roleID, int faculty)
         {
             User user = new User();
 
@@ -498,6 +499,8 @@ namespace PresentationTier.Views
             {
                 dbContext.Users.Add(user);
                 dbContext.SaveChanges();
+                int temp = dbContext.Expenses.Max(item => item.Id);
+                return temp;
             }
         }
 
@@ -952,7 +955,7 @@ namespace PresentationTier.Views
             using (var dbContext = new dboEntities())
             {
                 dbContext.Expenses.Add(expense);
-                int temp = dbContext.Expenses.Last().Id;
+                int temp = dbContext.Expenses.Max(item => item.Id);
                 dbContext.SaveChanges();
 
                 return temp;
@@ -972,7 +975,7 @@ namespace PresentationTier.Views
                         .FirstOrDefault();
 
                 entry.Amount = expense.Amount;
-                entry.Note.UserNote = expense.Note.UserNote;
+                entry.Note_Id = expense.Note_Id;
                 dbContext.SaveChanges();
             }
         }
@@ -1304,7 +1307,7 @@ namespace PresentationTier.Views
             {
                 dbContext.Travels.Add(travels);
                 dbContext.SaveChanges();
-                return dbContext.Travels.Last().Id;
+                return dbContext.Travels.Max(item => item.Id);;
             }
         }
 
