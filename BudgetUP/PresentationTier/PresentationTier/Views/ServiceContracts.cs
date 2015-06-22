@@ -224,7 +224,8 @@ namespace PresentationTier.Views
                         .FirstOrDefault();
 
                 entry.ProjectId = bursary.ProjectId;
-                entry.Note = bursary.Note;
+                entry.BursaryTypeId = bursary.BursaryTypeId;
+                entry.Note_Id = bursary.Note_Id;
                 dbContext.SaveChanges();
             }
         }
@@ -909,7 +910,7 @@ namespace PresentationTier.Views
 
                 entry.DonorName = income.DonorName;
                 entry.Amount = income.Amount;
-                entry.Note.UserNote = income.Note.UserNote;
+                entry.Note_Id = income.Note_Id;
                 dbContext.SaveChanges();
             }
         }
@@ -972,7 +973,7 @@ namespace PresentationTier.Views
                         .FirstOrDefault();
 
                 entry.Amount = expense.Amount;
-                entry.Note.UserNote = expense.Note.UserNote;
+                entry.Note_Id = expense.Note_Id;
                 dbContext.SaveChanges();
             }
         }
@@ -1250,16 +1251,24 @@ namespace PresentationTier.Views
         /// <param name="upStaffMember"></param>
         public void UpdateUPStaffMember(UPStaffMember upStaffMember)
         {
-            using (var dbContext = new dboEntities())
+            try
             {
-                var entry = dbContext.UPStaffMembers
-                        .Where(ad => ad.Id == upStaffMember.Id)
-                        .FirstOrDefault();
+                using (var dbContext = new dboEntities())
+                {
+                    var entry = dbContext.UPStaffMembers
+                            .Where(ad => ad.Id == upStaffMember.Id)
+                            .FirstOrDefault();
 
-                entry.PostLevelId = upStaffMember.PostLevelId;
-                entry.DaysInvolved = upStaffMember.DaysInvolved;
-                entry.SubventionLevy = upStaffMember.SubventionLevy;
-                dbContext.SaveChanges();
+                    entry.PostLevelId = upStaffMember.PostLevelId;
+                    entry.DaysInvolved = upStaffMember.DaysInvolved;
+                    entry.SubventionLevy = upStaffMember.SubventionLevy;
+                    dbContext.SaveChanges();
+                }
+            }
+            catch(Exception m)
+            {
+                string mv = "";
+                mv = m.Message;
             }
         }
 

@@ -29,13 +29,18 @@ namespace PresentationTier.Views
                 {
                     if (p.Id.ToString() == Session["UPstaffID"].ToString())
                     {
-                        expid = p.Expense_Id;
-                        amount.Text = p.Expens.Amount.ToString();
-                        DropDownList2.SelectedValue = p.PostLevelId.ToString();
-                        DropDownList1.SelectedValue = Convert.ToInt32( p.SubventionLevy).ToString();
-                        numofdays.Text = p.DaysInvolved.ToString();
-                        note.Text = p.Expens.Note.UserNote;
+                        if (!IsPostBack)
+                        {
+
+                            amount.Text = p.Expens.Amount.ToString();
+                            DropDownList2.SelectedValue = p.PostLevelId.ToString();
+                            DropDownList1.SelectedValue = Convert.ToInt32(p.SubventionLevy).ToString();
+                            numofdays.Text = p.DaysInvolved.ToString();
+                            note.Text = p.Expens.Note.UserNote;
+
+                        }
                         notede = p.Expens.Note_Id;
+                        expid = p.Expense_Id;
                     }
                 }
 
@@ -69,14 +74,15 @@ namespace PresentationTier.Views
             Expens em = new Expens();
             UPStaffMember c = new UPStaffMember();
             c.Id = Convert.ToInt32(Session["UPstaffID"].ToString());
-            c.SubventionLevy = Convert.ToBoolean( DropDownList1.SelectedValue);
+            c.SubventionLevy = Convert.ToBoolean( Convert.ToInt32( DropDownList1.SelectedValue));
             c.PostLevelId = Convert.ToInt32(DropDownList2.SelectedValue);
             c.Expense_Id = expid;
+            c.DaysInvolved = Convert.ToInt32(numofdays.Text);
             m.UpdateUPStaffMember(c);
             em.Id = expid;
             em.Amount = Convert.ToInt32(amount.Text);
             em.ActivityId = Convert.ToInt32(Session["ActID"].ToString());
-            em.Note_Id = notde;
+            em.Note_Id = notede;
             Note no = new Note();
             no.Id = notede;
             no.UserNote = note.ToString();

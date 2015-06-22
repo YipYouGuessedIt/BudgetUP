@@ -286,7 +286,7 @@ namespace PresentationTier.Views
         {
             if (searcher.Text == "")
             {
-                foreach (LinkButton m in lister.Controls)
+                foreach (LinkButton m in lister.Controls.OfType<LinkButton>())
                 {
 
                     m.Visible = true;
@@ -295,7 +295,29 @@ namespace PresentationTier.Views
             }
             else
             {
-                foreach (LinkButton m in lister.Controls)
+                foreach (LinkButton m in  Expenselist.Controls)
+                {
+                    if (m.Text.Split('<')[0].ToLower().ToString().Contains(searcher.Text.ToLower().ToString()))
+                    {
+                        m.Visible = true;
+                    }
+                    else
+                    {
+                        m.Visible = false;
+                    }
+                }
+                foreach (LinkButton m in BusaryList.Controls)
+                {
+                    if (m.Text.Split('<')[0].ToLower().ToString().Contains(searcher.Text.ToLower().ToString()))
+                    {
+                        m.Visible = true;
+                    }
+                    else
+                    {
+                        m.Visible = false;
+                    }
+                }
+                foreach (LinkButton m in IncomeList.Controls)
                 {
                     if (m.Text.Split('<')[0].ToLower().ToString().Contains(searcher.Text.ToLower().ToString()))
                     {

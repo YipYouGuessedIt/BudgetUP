@@ -16,6 +16,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -37,6 +38,27 @@
                 </div>
             </div>
         </nav>
+        </div>
+        <div id="normalnav" runat="server">        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a class="navbar-brand" href="#">BudgetUP</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar2">
+                    <ul class="nav navbar-nav">
+                        <li><a href="ProjectsPage.aspx">My Projects</a></li> 
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                        
+                        <li> <a href="Settings.aspx">Settings</a></li>  
+                        <li> <a id="logout2" href="LoginPage.aspx">Logout</a></li> 
+                    </ul>
+                </div>
+            </div>
+        </nav></div>
         <div class="contentArea">
             <div id="wecomemsg" runat="server"></div>
            
@@ -56,18 +78,10 @@
                 <h3>Project List
                 </h3>
                 <asp:PlaceHolder ID="projectList" runat="server"></asp:PlaceHolder>
-                <%--<a class="list-group-item" href="ObjectivesPage.aspx">Item one
-                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
-				</a><br />
-                <a class="list-group-item" href="ObjectivesPage.aspx">Item two
-                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
-                </a><br />
-                <a class="list-group-item" href="ObjectivesPage.aspx">Item Three (Admin Option to delete)
-                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
-                </a><br />				
-			    <asp:LinkButton CssClass="list-group-item" ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Name
-                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
-			    </asp:LinkButton>--%>
+			</div>
+              <div id="AllProjects" class="list-group" runat="server">
+                <h3>All projects</h3>
+                <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
 			</div>
         </div>
     </div>

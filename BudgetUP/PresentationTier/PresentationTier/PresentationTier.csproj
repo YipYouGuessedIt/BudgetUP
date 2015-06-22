@@ -209,6 +209,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\NavigationJS.js" />
+    <Content Include="Views\EditActivity.aspx" />
+    <Content Include="Views\EditObjectives.aspx" />
+    <Content Include="Views\EditProject.aspx" />
     <Content Include="Views\GeneralSettings.aspx" />
     <Content Include="Views\ManageUsers.aspx" />
     <Content Include="Views\Settings.aspx" />
@@ -275,6 +278,7 @@
   <ItemGroup>
     <None Include="Scripts\_references.js" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="Views\Logout.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -345,6 +349,27 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditActivity.aspx.cs">
+      <DependentUpon>EditActivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\EditActivity.aspx.designer.cs">
+      <DependentUpon>EditActivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditObjectives.aspx.cs">
+      <DependentUpon>EditObjectives.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\EditObjectives.aspx.designer.cs">
+      <DependentUpon>EditObjectives.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditProject.aspx.cs">
+      <DependentUpon>EditProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\EditProject.aspx.designer.cs">
+      <DependentUpon>EditProject.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\EventLogger.cs" />
     <Compile Include="Views\GeneralSettings.aspx.cs">
       <DependentUpon>GeneralSettings.aspx</DependentUpon>
@@ -352,6 +377,9 @@
     </Compile>
     <Compile Include="Views\GeneralSettings.aspx.designer.cs">
       <DependentUpon>GeneralSettings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Logout.ashx.cs">
+      <DependentUpon>Logout.ashx</DependentUpon>
     </Compile>
     <Compile Include="Views\ManageUsers.aspx.cs">
       <DependentUpon>ManageUsers.aspx</DependentUpon>

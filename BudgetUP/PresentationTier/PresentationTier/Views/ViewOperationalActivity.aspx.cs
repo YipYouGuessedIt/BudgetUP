@@ -32,11 +32,16 @@ namespace PresentationTier.Views
                 {
                     if (p.Id.ToString() == Session["operationalID"].ToString())
                     {
-                        DropDownList1.SelectedValue = p.Operation_TypeId.ToString();
-                        amount.Text = p.PricePerUnit.ToString();
-                        quantity.Text = p.Quantity.ToString();
-                        note.Text = p.Expens.Note.UserNote;
+                        if (!IsPostBack)
+                        {
+                            DropDownList1.SelectedValue = p.Operation_TypeId.ToString();
+                            amount.Text = p.PricePerUnit.ToString();
+                            quantity.Text = p.Quantity.ToString();
+                            note.Text = p.Expens.Note.UserNote;
+
+                        }
                         notede = p.Expens.Note_Id;
+                        expid = p.Expense_Id;
                     }
                 }
 

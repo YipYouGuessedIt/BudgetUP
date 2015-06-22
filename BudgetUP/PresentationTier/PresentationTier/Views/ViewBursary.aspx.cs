@@ -30,11 +30,17 @@ namespace PresentationTier.Views
                     {
                         if (p.Id.ToString() == Session["BursIDID"].ToString())
                         {
-                            Years.Text = p.BursaryType.DurationYears.ToString();
-                            Cost.Text = p.BursaryType.AnnualCost.ToString();
-                            
-                           DropDownList2.SelectedValue = p.BursaryTypeId.ToString();
-                            note.Text = p.Note.UserNote;
+
+                            if (!IsPostBack)
+                            {
+                                Years.Text = p.BursaryType.DurationYears.ToString();
+                                Cost.Text = p.BursaryType.AnnualCost.ToString();
+
+                                DropDownList2.SelectedValue = p.BursaryTypeId.ToString();
+                                note.Text = p.Note.UserNote;
+
+                                
+                            }
                             notede = p.Note_Id;
                         }
                     }
@@ -74,17 +80,17 @@ namespace PresentationTier.Views
 
         protected void Unnamed4_Click(object sender, EventArgs e)
         {
-           // Response.Write(DropDownList2.SelectedValue + DropDownList2.SelectedItem);
+           Response.Write(DropDownList2.SelectedValue + DropDownList2.SelectedItem);
             ServiceContracts m = new ServiceContracts();
             Bursary n = new Bursary();
             n.Id = Convert.ToInt32( Session["BursIDID"].ToString());
 
             n.BursaryTypeId = Convert.ToInt32( DropDownList2.SelectedItem.Value);
-            n.ProjectId = Convert.ToInt32(Session["ProjectID"]);
+            n.ProjectId = Convert.ToInt32(Session["ProjectID"].ToString());
             n.Note_Id = notede;
             Note no = new Note();
             no.Id = notede;
-            no.UserNote = note.ToString();
+            no.UserNote = note.Text.ToString();
             m.UpdateNotes(no);
             //Response.Write("<script>alert('"+ n.BursaryTypeId +"');</script>");
             m.UpdateBursary(n);

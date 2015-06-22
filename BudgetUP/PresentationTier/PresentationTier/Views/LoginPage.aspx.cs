@@ -73,9 +73,9 @@ namespace PresentationTier
                 {
                     this.Session["userID"] = query.Id;
                     this.Session["userTitle"] = query.User.Title.Description;
+
                     this.Session["userSname"] = query.User.Surname;
-                    this.Session["Ädmin"] = query.User.Admin;
-                   // Response.Write("<script>alert('" + query.User_Id + query.User.Name + "')</script>");
+                    this.Session["Admin"] = query.User.Admin;
                     return true;
                 }
                 

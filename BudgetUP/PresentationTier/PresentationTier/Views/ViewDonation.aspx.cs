@@ -29,9 +29,13 @@ namespace PresentationTier.Views
                 {
                     if (p.Id.ToString() == Session["IncID"].ToString())
                     {
-                        name.Text = p.DonorName;
-                        amount.Text = p.Amount.ToString();
-                        note.Text = p.Note.UserNote;
+                        if (!IsPostBack)
+                        {
+                            name.Text = p.DonorName;
+                            amount.Text = p.Amount.ToString();
+                            note.Text = p.Note.UserNote;
+                            
+                        }
                         notede = p.Note_Id;
                     }
                 }
@@ -43,8 +47,8 @@ namespace PresentationTier.Views
         {
             ServiceContracts m = new ServiceContracts();
             Income n = new Income();
-            n.Id = Convert.ToInt32(Session["IncID"]);
-            n.ProjectId = Convert.ToInt32(Session["ProjectID"]);
+            n.Id = Convert.ToInt32(Session["IncID"].ToString());
+            n.ProjectId = Convert.ToInt32(Session["ProjectID"].ToString());
             n.Amount = Convert.ToInt32(amount.Text);
             n.DonorName = name.Text;
             Note no = new Note();

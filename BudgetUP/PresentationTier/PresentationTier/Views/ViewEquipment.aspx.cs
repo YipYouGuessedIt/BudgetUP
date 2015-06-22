@@ -30,9 +30,13 @@ namespace PresentationTier.Views
                 {
                     if (p.Id.ToString() == Session["equipID"].ToString())
                     {
-                        name.Text = p.EquipmentName;
-                        amount.Text = p.Expens.Amount.ToString();
-                        note.Text = p.Expens.Note.UserNote;
+                        if (!IsPostBack)
+                        {
+                            name.Text = p.EquipmentName;
+                            amount.Text = p.Expens.Amount.ToString();
+                            note.Text = p.Expens.Note.UserNote;
+                            
+                        }
                         expid = p.Expense_Id;
                         notede = p.Expens.Note_Id;
                     }
