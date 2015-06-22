@@ -50,22 +50,60 @@
             <hr />
             <h3> Incomes </h3>
             <hr />
-
-            <a class="list-group-item" href="AddIncome.aspx">Add Incomes
+            <h5> Bursaries </h5>
+            <hr />
+            <a class="list-group-item" href="AddBursaryType.aspx">Add Bursary Type
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
-            <a class="list-group-item" href="Incomes.aspx">Edit Incomes
+            <a class="list-group-item" href="ViewBursaryTypes.aspx">Edit Bursary Type
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
 
             <hr />
             <h3> Expenses </h3>
             <hr />
+            <h5> Operational Types </h5>
+            <hr />
 
-            <a class="list-group-item" href="AddExpense.aspx">Add Expense
+            <a class="list-group-item" href="AddOperationalType.aspx">Add Operational Type
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
-            <a class="list-group-item" href="Expenses.aspx">Edit Expenses
+            <a class="list-group-item" href="Expenses.aspx">Edit Operational Type
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+
+            <hr />
+            <h3> Other </h3>
+            <hr />
+            <h5> Faculties </h5>
+            <hr />
+
+            <a class="list-group-item" href="AddFaculty.aspx">Add Faculty
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+            <a class="list-group-item" href="Expenses.aspx">Edit Faculty
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+
+            <hr />
+            <h5> Roles </h5>
+            <hr />
+
+            <a class="list-group-item" href="AddRole.aspx">Add Role
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+            <a class="list-group-item" href="Expenses.aspx">Edit Role
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+
+            <hr />
+            <h5> Duration Type </h5>
+            <hr />
+
+            <a class="list-group-item" href="AddDurationType.aspx">Add Duration Type
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+            <a class="list-group-item" href="ViewDurationTypes.aspx">Edit Duration Type
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
 

@@ -209,6 +209,14 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\NavigationJS.js" />
+    <Content Include="Views\AddBursaryType.aspx" />
+    <Content Include="Views\AddDurationType.aspx" />
+    <Content Include="Views\AddFaculty.aspx" />
+    <Content Include="Views\AddOperationalType.aspx" />
+    <Content Include="Views\AddRole.aspx" />
+    <Content Include="Views\EditBursaryTypes.aspx" />
+    <Content Include="Views\EditOperationalTypes.aspx" />
+    <Content Include="Views\EditRoles.aspx" />
     <Content Include="Views\GeneralSettings.aspx" />
     <Content Include="Views\ManageUsers.aspx" />
     <Content Include="Views\Settings.aspx" />
@@ -261,7 +269,11 @@
     <Content Include="Views\ServiceProviderActivity.aspx" />
     <Content Include="Views\TravelActivity.aspx" />
     <Content Include="Views\ViewBursary.aspx" />
+    <Content Include="Views\ViewOperationalType.aspx" />
+    <Content Include="Views\ViewRoles.aspx" />
+    <Content Include="Views\ViewBursaryTypes.aspx" />
     <Content Include="Views\ViewDonation.aspx" />
+    <Content Include="Views\ViewDurationTypes.aspx" />
     <Content Include="Views\ViewEquipment.aspx" />
     <Content Include="Views\ViewExpenses.aspx" />
     <Content Include="Views\ViewIncome.aspx" />
@@ -344,6 +356,62 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddBursaryType.aspx.cs">
+      <DependentUpon>AddBursaryType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\AddBursaryType.aspx.designer.cs">
+      <DependentUpon>AddBursaryType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddDurationType.aspx.cs">
+      <DependentUpon>AddDurationType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\AddDurationType.aspx.designer.cs">
+      <DependentUpon>AddDurationType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddFaculty.aspx.cs">
+      <DependentUpon>AddFaculty.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\AddFaculty.aspx.designer.cs">
+      <DependentUpon>AddFaculty.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddOperationalType.aspx.cs">
+      <DependentUpon>AddOperationalType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\AddOperationalType.aspx.designer.cs">
+      <DependentUpon>AddOperationalType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddRole.aspx.cs">
+      <DependentUpon>AddRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\AddRole.aspx.designer.cs">
+      <DependentUpon>AddRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditBursaryTypes.aspx.cs">
+      <DependentUpon>EditBursaryTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\EditBursaryTypes.aspx.designer.cs">
+      <DependentUpon>EditBursaryTypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditOperationalTypes.aspx.cs">
+      <DependentUpon>EditOperationalTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\EditOperationalTypes.aspx.designer.cs">
+      <DependentUpon>EditOperationalTypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditRoles.aspx.cs">
+      <DependentUpon>EditRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\EditRoles.aspx.designer.cs">
+      <DependentUpon>EditRoles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\EventLogger.cs" />
     <Compile Include="Views\GeneralSettings.aspx.cs">
@@ -527,12 +595,40 @@
     <Compile Include="Views\ViewBursary.aspx.designer.cs">
       <DependentUpon>ViewBursary.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\ViewOperationalType.aspx.cs">
+      <DependentUpon>ViewOperationalType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewOperationalType.aspx.designer.cs">
+      <DependentUpon>ViewOperationalType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewRoles.aspx.cs">
+      <DependentUpon>ViewRoles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewRoles.aspx.designer.cs">
+      <DependentUpon>ViewRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewBursaryTypes.aspx.cs">
+      <DependentUpon>ViewBursaryTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewBursaryTypes.aspx.designer.cs">
+      <DependentUpon>ViewBursaryTypes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\ViewDonation.aspx.cs">
       <DependentUpon>ViewDonation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\ViewDonation.aspx.designer.cs">
       <DependentUpon>ViewDonation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewDurationTypes.aspx.cs">
+      <DependentUpon>ViewDurationTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewDurationTypes.aspx.designer.cs">
+      <DependentUpon>ViewDurationTypes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewEquipment.aspx.cs">
       <DependentUpon>ViewEquipment.aspx</DependentUpon>

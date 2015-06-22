@@ -45,14 +45,13 @@
                     <asp:ListItem Value="1">Admin</asp:ListItem>
                     <asp:ListItem Value="2">Lecturer</asp:ListItem>
                 </asp:DropDownList><br />
-                <asp:Label ID="Label1" runat="server" Text="">Duration of involvement</asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="">Duration of involvement (in days)</asp:Label>
                 <asp:TextBox runat="server" ID="numofdays" type="number" required name="numofdays" CssClass="form-control"></asp:TextBox>
                 <br />
                 <asp:Label runat="server">Subventilation levy </asp:Label>
                <asp:DropDownList class="form-control" ID="DropDownList1" runat="server">
+                    <asp:ListItem Value="0">No</asp:ListItem>
                     <asp:ListItem Value="1">Yes</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                   <asp:ListItem Value="2">I am not sure</asp:ListItem>
                 </asp:DropDownList><br /><br />
                <asp:Label runat="server">Notes</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>

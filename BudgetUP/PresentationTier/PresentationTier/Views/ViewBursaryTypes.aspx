@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="IncomeandExpensesPage.aspx.cs" Inherits="PresentationTier.Views.IncomeandExpensesPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewBursaryTypes.aspx.cs" Inherits="PresentationTier.Views.ViewBursaryTypes" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Income and Expenses</title>
+    <title>Bursary Types</title>
    	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -42,45 +42,29 @@
         </div>
 
         <div class="contentArea"><br />
-            <h1 id="heaserarea" runat="server"></h1><hr />
+            <h1 id="heaserarea" runat="server">Bursary Types</h1><hr />
             <!--<h2>Start and end date</h2>-->
             <div class="Incomesection">
                 <div id="IncomeorExpenseSearch">
-				    <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Incomes and Expenses..." ></asp:TextBox>
-			    <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" OnClick="Button1_Click" /><br />
+				    <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Bursaries..." ></asp:TextBox>
+			        <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" /><br />
 			    </div>
                 <div id="IncomeorExpenseAdd">
+                    <br /><br />
+                    <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a><asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" ></asp:Button>
+                    <br /><br />
                 
-                    <asp:DropDownList class="form-control" ID="DropDownList2" runat="server">
-                        <asp:ListItem Value="1">Personel involvment(Expense)</asp:ListItem>
-                        <asp:ListItem Value="2">Service Provider(Expense)</asp:ListItem>
-                        <asp:ListItem Value="3">Operational Expense(Expense)</asp:ListItem>
-                        <asp:ListItem Value="4">Equipment(Expense)</asp:ListItem>
-                        <asp:ListItem Value="5">Travel</asp:ListItem>
-                        <asp:ListItem Value="6">Bursaries/Scholoarships(Income)</asp:ListItem>
-                        <asp:ListItem Value="7">Donations(Income)</asp:ListItem>
-                    </asp:DropDownList><br /><br />
-				    <asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" OnClick="Unnamed1_Click" ></asp:Button>
-                    <a href="ActivitiesPage.aspx" class="btn btn-info btn-lg"  >Back</a><br /><br />
-                
+                    <div runat="server" id="lister">
+			            <div id="bl">
+                            <h3>Bursary</h3>
+                            <asp:PlaceHolder ID="BursaryList" runat="server"></asp:PlaceHolder>	
+                        </div>
+                    </div>
 			    </div>
-            </div>
-            <div runat="server" id="lister">
-			    <div id="bl">
-                    <h3>Bursary</h3>
-                    <asp:PlaceHolder ID="BusaryList" runat="server"></asp:PlaceHolder>	
-                </div>
-                <div id="il">
-                    <h3>Income</h3>
-                    <asp:PlaceHolder ID="IncomeList" runat="server"></asp:PlaceHolder>	
-                </div>
-                 <div id="el">
-                    <h3>Expense</h3>
-                    <asp:PlaceHolder ID="Expenselist" runat="server"></asp:PlaceHolder>	
-                </div>
             </div>
         </div>
     </div>
     </form>
 </body>
 </html>
+

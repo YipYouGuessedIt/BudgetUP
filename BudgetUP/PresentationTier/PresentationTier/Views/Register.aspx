@@ -35,7 +35,7 @@
                 <h1>Register</h1><hr />
                 <asp:Label runat="server">Name</asp:Label><asp:TextBox runat="server" ID="name" required name="name" CssClass="form-control" >John Smith</asp:TextBox><br />
                 <asp:Label runat="server">Surname</asp:Label><asp:TextBox runat="server" ID="surname" required name="surname" CssClass="form-control" >John Smith</asp:TextBox><br />
-                <asp:Label runat="server">Title </asp:Label><asp:DropDownList required runat="server" ID="title" name="title" CssClass="form-control"></asp:DropDownList><br />
+                <asp:Label runat="server">Title </asp:Label><asp:DropDownList required runat="server" ID="title" name="title" CssClass="form-control" OnInit="title_Init"></asp:DropDownList><br />
                 <asp:Label runat="server">Email Address </asp:Label><asp:TextBox required type="email" runat="server" ID="email" name="email" CssClass="form-control"></asp:TextBox><br />
                     
                 <asp:Label runat="server">Password</asp:Label><asp:TextBox required type="password" runat="server" ID="Password" name="email" CssClass="form-control" ></asp:TextBox><br />

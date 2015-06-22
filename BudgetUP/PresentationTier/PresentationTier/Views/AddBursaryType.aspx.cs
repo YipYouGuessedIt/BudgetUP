@@ -13,5 +13,12 @@ namespace PresentationTier.Views
         {
 
         }
+
+        protected void addBursary(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            sc.AddBursaryType(BursaryDescription.Text, Convert.ToDouble(AnnualCost.Text), Convert.ToInt32(Years.Text));
+            Response.Redirect("Settings.aspx");
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewBursary.aspx.cs" Inherits="PresentationTier.Views.AddBursary" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditOperationalTypes.aspx.cs" Inherits="PresentationTier.Views.EditOperationalTypes" %>
 
 <!DOCTYPE html>
 
@@ -39,23 +39,16 @@
     <form id="form1" runat="server">
         <div id="Add" class="contentArea">
             <br />
-            <h1>Add Bursary</h1><hr />
+            <h1>Edit Operational Type</h1><hr />
             <br />
-            <asp:label runat="server">Bursary Name</asp:label>
+            <asp:label runat="server">Operation Name</asp:label>
             <br/>
-            <asp:TextBox ID="BursaryDescription" runat="server" CssClass="form-control"></asp:TextBox>
-            <br />
-            <asp:Label ID="Label1" runat="server" Text="Annual cost"></asp:Label>
-            <br />
-            <asp:TextBox ID="Cost" runat="server" type="number" CssClass="form-control"></asp:TextBox>
-            <br />
-            <asp:Label ID="Label4" runat="server" Text="Years"></asp:Label>
-            <br />
-            <asp:TextBox ID="Years" runat="server" type="number" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="OperationDescription" runat="server" CssClass="form-control"></asp:TextBox>
             <br />
             <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Add" onclick="addBursary" /><br /><br />
+            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addBursary" /><br /><br />
         </div>
     </form>
 </body>
 </html>
+
