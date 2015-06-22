@@ -1,19 +1,20 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AddProject.aspx.cs" Inherits="PresentationTier.Views.AddProject" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewRoles.aspx.cs" Inherits="PresentationTier.Views.ViewRoles" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-        <title>Project Adder</title>
-    	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
+    <title>Role Types</title>
+   	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	    <script src="../bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="../Styles/Global.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    </head>
-    <body>        
-
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -36,18 +37,34 @@
             </div>
         </nav>
 
-        <form id="form1" runat="server">
-            <div id="AddProjects" class="contentArea"><br />
-                <h1>Project</h1><hr />
-                <asp:Label runat="server">Project Title</asp:Label><asp:TextBox runat="server" ID="title" required name="title" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Overall Goal of the Project </asp:Label><asp:TextBox required runat="server" ID="goal" name="goal" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Project Length </asp:Label><asp:TextBox required type="number" runat="server" ID="length" name="length" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">In </asp:Label><asp:DropDownList required type="number" runat="server" ID="lengthType" name="lengthType" CssClass="form-control" OnInit="lengthType_Init"></asp:DropDownList><br />
-                <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a>
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" OnClick="AddProject_Click" /><br /><br />
-            </div>
-        </form>
+        <div class="treeView">
+            <a href="ProjectsPage.aspx">Projects</a> &gt <a href="ObjectivesPage.aspx"> Project Name</a> &gt <a href="ActivitiesPage.aspx"> Objective Name</a>
+        </div>
 
-    </body>
+        <div class="contentArea"><br />
+            <h1 id="heaserarea" runat="server">Roles</h1><hr />
+            <!--<h2>Start and end date</h2>-->
+            <div class="Incomesection">
+                <div id="IncomeorExpenseSearch">
+				    <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Roles..." ></asp:TextBox>
+			        <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" /><br />
+			    </div>
+                <div id="IncomeorExpenseAdd">
+                    <br /><br />
+                    <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a><asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" ></asp:Button>
+                    <br /><br />
+                
+                    <div runat="server" id="lister">
+			            <div id="bl">
+                            <h3>Bursary</h3>
+                            <asp:PlaceHolder ID="RolesList" runat="server"></asp:PlaceHolder>	
+                        </div>
+                    </div>
+			    </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</body>
 </html>
 
