@@ -31,6 +31,7 @@ namespace PresentationTier.Views
                     if (p.Id.ToString() == Session["projectID"].ToString())
                     {
                         heaserarea.InnerText = p.Title.ToString();
+                        tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt " + p.Title.ToString();
                     }
                 }
             }
@@ -71,7 +72,7 @@ namespace PresentationTier.Views
                     if (p.ProjectId.ToString() == Session["projectID"].ToString())
                     {
                        LinkButton add = new LinkButton();
-                        add.Text = p.ObjectiveName + "<span class='glyphicon glyphicon-remove-sign pull-right' hidden='hidden' aria-hidden='true'></span>";
+                       add.Text = p.ObjectiveName + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                         add.ID = p.Id.ToString();
                         add.CssClass = "list-group-item";
                         add.Click += new EventHandler(clicker);

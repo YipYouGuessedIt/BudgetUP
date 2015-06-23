@@ -36,8 +36,8 @@
                 </div>
             </div>
         </nav>
-        <div class="treeView">
-            <a href="ProjectsPage.aspx">Projects</a>
+        <div id="tree" runat="server" class="treeView">
+            
         </div>
         <div class="contentArea"><br />
             <h1 id="heaserarea" runat="server"></h1><hr />
