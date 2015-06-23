@@ -12,7 +12,20 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session.Count == 0)
+            {
+                // Response.Write("<script>alert('Credentials is incorrect')</script>");
+                Response.Redirect("LoginPage.aspx");
+            }
+        }
 
+        private void AddPersonnel1(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            int noteID = sc.AddNotes(note.Text);
+            int expID = sc.AddExpense(Convert.ToInt32(Session["ActID"].ToString()), Convert.ToDouble(Amount.Text), noteID);
+            sc.AddUPStaffMember(Convert.ToInt32(DropDownList2.SelectedValue), Convert.ToInt32(numofdays.Text), Convert.ToBoolean(DropDownList1.SelectedIndex), expID);
+            Response.Redirect("IncomeandExpensesPage.aspx");
         }
 
         protected void DropDownList2_Init(object sender, EventArgs e)
@@ -34,6 +47,15 @@ namespace PresentationTier.Views
                 }
 
             }
+        }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            int noteID = sc.AddNotes(note.Text);
+            int expID = sc.AddExpense(Convert.ToInt32(Session["ActID"].ToString()), Convert.ToDouble(Amount.Text), noteID);
+            sc.AddUPStaffMember(DropDownList2.SelectedIndex, Convert.ToInt32(numofdays.Text), Convert.ToBoolean(DropDownList1.SelectedIndex), expID);
+            Response.Redirect("IncomeandExpensesPage.aspx");
         }
     }
 }

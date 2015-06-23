@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-        <title>Project Adder</title>
+        <title>Add Project</title>
     	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -38,7 +38,7 @@
 
         <form id="form1" runat="server">
             <div id="AddProjects" class="contentArea"><br />
-                <h1>Project</h1><hr />
+                <h1>Add Project</h1><hr />
                 <asp:Label runat="server">Project Title</asp:Label><asp:TextBox runat="server" ID="title" required name="title" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Overall Goal of the Project </asp:Label><asp:TextBox required runat="server" ID="goal" name="goal" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Project Length </asp:Label><asp:TextBox required type="number" runat="server" ID="length" name="length" CssClass="form-control"></asp:TextBox><br />

@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Add Personel</title>
+    <title>Add Personnel</title>
     	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -38,8 +38,11 @@
 
         <form id="form1" runat="server">
             <div id="Add" class="contentArea"><br />
-                <h1>Personel Involvment</h1>
+                <h1>Personnel Involvment</h1>
                 <hr />
+                
+                <asp:Label ID="Label2" runat="server" Text="">Amount</asp:Label>
+                <asp:TextBox runat="server" ID="Amount" type="number" required name="numofdays" CssClass="form-control"></asp:TextBox>
                 <asp:Label runat="server">Select Post level </asp:Label>
                 <asp:DropDownList class="form-control" ID="DropDownList2" runat="server" OnInit="DropDownList2_Init">
                     <asp:ListItem Value="1">Admin</asp:ListItem>
@@ -55,7 +58,7 @@
                 </asp:DropDownList><br /><br />
                <asp:Label runat="server">Notes</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" /><br /><br />
+                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" OnClick="Unnamed_Click"/><br /><br />
             </div>
         </form>
 

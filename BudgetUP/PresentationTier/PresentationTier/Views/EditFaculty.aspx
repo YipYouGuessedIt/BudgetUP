@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditRoles.aspx.cs" Inherits="PresentationTier.Views.EditRoles" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditFaculty.aspx.cs" Inherits="PresentationTier.Views.EditFaculty" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Edit Roles</title>
+    <title>Add Bursary</title>
     <link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -39,15 +39,15 @@
     <form id="form1" runat="server">
         <div id="Add" class="contentArea">
             <br />
-            <h1>Edit Roles</h1><hr />
+            <h1>Edit Faculty</h1><hr />
             <br />
-            <asp:label runat="server">Role Name</asp:label>
+            <asp:label runat="server">Faculty Name</asp:label>
             <br/>
-            <asp:TextBox ID="RoleDescription" runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="FacultyDescription" runat="server" CssClass="form-control"></asp:TextBox>
             <br />
             <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addBursary" />
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Delete" onclick="DeleteRoles" /><br /><br />
+            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addBursaryType" />
+            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Delete" onclick="DeleteFaculty" /><br /><br />
         </div>
     </form>
 </body>

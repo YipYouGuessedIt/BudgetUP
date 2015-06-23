@@ -42,8 +42,8 @@ namespace PresentationTier.Views
             }
             catch(Exception f)
             {
-                EventLogger EL = new EventLogger();                
-                EL.LogFile("AddUserProject","Creation of project:"+ title  +" by user: "+ userID.ToString(),f.ToString(),f.Source.ToString());
+                //EventLogger EL = new EventLogger();                
+                //EL.LogFile("AddUserProject","Creation of project:"+ title  +" by user: "+ userID.ToString(),f.ToString(),f.Source.ToString());
             }
         }
 
@@ -1236,7 +1236,7 @@ namespace PresentationTier.Views
         {
             UPStaffMember upStaffMember = new UPStaffMember();
 
-            upStaffMember.Expense_Id = expenseID;
+            upStaffMember.Expense_Id = expenseID+1;//WHY!!!???
             upStaffMember.PostLevelId = postLevelID;
             upStaffMember.DaysInvolved = daysInvolved;
             upStaffMember.SubventionLevy = subventionLevy;

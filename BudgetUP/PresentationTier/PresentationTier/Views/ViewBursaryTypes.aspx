@@ -51,7 +51,7 @@
 			    </div>
                 <div id="IncomeorExpenseAdd">
                     <br /><br />
-                    <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a><asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" ></asp:Button>
+                    <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a><asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" OnClick="AddBursary" ></asp:Button>
                     <br /><br />
                 
                     <div runat="server" id="lister">

@@ -24,6 +24,7 @@ namespace PresentationTier.Views
             ServiceContracts project = new ServiceContracts();
             int userID = Convert.ToInt32(this.Session["userID"]);
             project.AddUserProject(userID, title.Text, goal.Text,Convert.ToInt32(length.Text), Convert.ToInt32(lengthType.SelectedIndex), 1);
+            Response.Redirect("ProjectsPage.aspx");
         }
 
         protected void lengthType_Init(object sender, EventArgs e)

@@ -44,16 +44,12 @@
 			</div>
 
 			<div id="ProjectList" class="list-group">
-                <h3>Users</h3>
-				<a class="list-group-item" href="ProfilePage.aspx">David Tennent
-                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
-				</a><br />
-                <a class="list-group-item" href="ProfilePage.aspx">Matt Smith
-                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
-                </a><br />
-                <a class="list-group-item" href="ProfilePage.aspx">Jame Cameron
-                    <span class="glyphicon glyphicon-remove-sign pull-right" hidden="hidden" aria-hidden="true"></span>
-                </a><br />				
+                <div runat="server" id="lister">
+			            <div id="bl">
+                            <h3>Users</h3>
+                            <asp:PlaceHolder ID="BursaryList" runat="server"></asp:PlaceHolder>	
+                        </div>
+                    </div>			
 			</div>
         </div>
     </div>

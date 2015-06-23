@@ -8,7 +8,7 @@ using BizTier;
 
 namespace PresentationTier.Views
 {
-    public partial class EditBursaryType : System.Web.UI.Page
+    public partial class EditRoles : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,9 +25,9 @@ namespace PresentationTier.Views
             {
                 using (var dbContext = new dboEntities())
                 {
-                    var query = from BursaryTypes
+                    var query = from Roles
                                 in dbContext.Roles
-                                select BursaryTypes;
+                                select Roles;
 
 
                     foreach (Role p in query)
@@ -36,6 +36,7 @@ namespace PresentationTier.Views
                         {
                             RoleDescription.Text = p.Description.ToString();
                         }
+                        
                     }
 
                 }
@@ -52,6 +53,13 @@ namespace PresentationTier.Views
             bt.Description = RoleDescription.Text;
             sc.UpdateRole(bt);
 
+            Response.Redirect("Settings.aspx");
+        }
+
+        protected void DeleteRoles(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            sc.DeleteRole(Convert.ToInt32(this.Session["RoleTypeID"].ToString()));
             Response.Redirect("Settings.aspx");
         }
     }

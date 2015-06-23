@@ -10,7 +10,7 @@
 namespace PresentationTier.Views {
     
     
-    public partial class ManageUsers {
+    public partial class EditDurationType {
         
         /// <summary>
         /// form1 control.
@@ -22,21 +22,12 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// lister control.
+        /// RoleDescription control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lister;
-        
-        /// <summary>
-        /// BursaryList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder BursaryList;
+        protected global::System.Web.UI.WebControls.TextBox RoleDescription;
     }
 }

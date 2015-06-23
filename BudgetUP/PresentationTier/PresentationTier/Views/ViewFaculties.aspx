@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewOperationalType.aspx.cs" Inherits="PresentationTier.Views.ViewOperationalType" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ViewFaculties.aspx.cs" Inherits="PresentationTier.Views.ViewFaculties" %>
 
 <!DOCTYPE html>
 
@@ -42,13 +42,14 @@
         </div>
 
         <div class="contentArea"><br />
-            <h1 id="heaserarea" runat="server">Operational Types</h1><hr />
+            <h1 id="heaserarea" runat="server">Faculties</h1><hr />
             <!--<h2>Start and end date</h2>-->
             <div class="Incomesection">
                 <div id="IncomeorExpenseSearch">
-				    <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Operational Types..." ></asp:TextBox>
+				    <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Faculties..." ></asp:TextBox>
 			        <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" /><br />
 			    </div>
+
                 <div id="IncomeorExpenseAdd">
                     <br /><br />
                     <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a><asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" ></asp:Button>
@@ -56,7 +57,7 @@
                 
                     <div runat="server" id="lister">
 			            <div id="bl">
-                            <h3>Operational Types</h3>
+                            <h3>Faculty</h3>
                             <asp:PlaceHolder ID="BursaryList" runat="server"></asp:PlaceHolder>	
                         </div>
                     </div>
@@ -67,3 +68,4 @@
     </form>
 </body>
 </html>
+

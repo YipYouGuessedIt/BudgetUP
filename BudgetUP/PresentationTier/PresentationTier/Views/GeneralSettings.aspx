@@ -37,10 +37,12 @@
         </nav>
             <div id="AddActivity" class="contentArea"><br />
                 <h1>General Settings</h1><hr />
-                <asp:Label runat="server">Annual Increase</asp:Label><asp:TextBox runat="server" ID="AnnualIncrease" required="true" name="name" CssClass="form-control">6.5</asp:TextBox><br />
-                <asp:Label runat="server">Indirect/instutional Cost</asp:Label><asp:TextBox runat="server" ID="TextBox1" required="true" name="name" CssClass="form-control">10</asp:TextBox><br />
+                <asp:Label runat="server">Escalation Rate</asp:Label><asp:TextBox runat="server" type="number" ID="EscalationRate" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server">Subvention Rate</asp:Label><asp:TextBox runat="server" type="number" ID="Subvention" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server">Maximum Project Span</asp:Label><asp:TextBox runat="server" type="number" ID="MaximumSpan" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server">Indirect/instutional Cost</asp:Label><asp:TextBox runat="server" type="number" ID="InstutionalCost" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
             <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a>
-            <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" /><br /><br />
+            <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" OnClick="addBursaryType"/><br /><br />
         </div>
     </form>
 </body>

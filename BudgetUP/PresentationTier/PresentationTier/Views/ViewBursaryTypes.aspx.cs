@@ -12,6 +12,10 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Admin"] == "false")
+            {
+                Response.Redirect("Settings.aspx");
+            }
             using (var dbContext = new dboEntities())
             {
                 var query = from bursaryType
@@ -37,7 +41,12 @@ namespace PresentationTier.Views
             LinkButton m = (LinkButton)sender;
             char[] ma = "Income".ToCharArray();
             Session["BursaryTypeID"] = m.ID.Split(ma)[0];
-            Response.Redirect("EditBursaryType.aspx");
+            Response.Redirect("EditBursaryTypes.aspx");
+        }
+
+        public void AddBursary(object sender, EventArgs e)
+        {
+            Response.Redirect("AddBursaryType.aspx");
         }
     }
 }

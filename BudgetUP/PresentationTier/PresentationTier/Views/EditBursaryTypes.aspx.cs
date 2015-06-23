@@ -16,8 +16,10 @@ namespace PresentationTier.Views
 
             BursaryType bt = new BursaryType();
 
-            bt.Id = Convert.ToInt32(this.Session["bursaryTypeID"].ToString());
+            bt.Id = Convert.ToInt32(this.Session["BursaryTypeID"].ToString());
             bt.Description = BursaryDescription.Text;
+            bt.AnnualCost = Convert.ToDouble(AnnualCost.Text);
+            bt.DurationYears = Convert.ToInt32(Years.Text);
 
             sc.UpdateBursaryType(bt);
 
@@ -48,12 +50,30 @@ namespace PresentationTier.Views
                     {
                         if (p.Id.ToString() == Session["BursaryTypeID"].ToString())
                         {
-                            BursaryDescription.Text = p.Description.ToString();
+                            if (!IsPostBack)
+                            {
+                                BursaryDescription.Text = p.Description.ToString();
+                                AnnualCost.Text = p.AnnualCost.ToString();
+                                Years.Text = p.DurationYears.ToString();
+                            }
+
                         }
                     }
 
                 }
             }
+        }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void DeleteBursary(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            sc.DeleteBursaryType(Convert.ToInt32(this.Session["BursaryTypeID"].ToString()));
+            Response.Redirect("Settings.aspx");
         }
     }
 }

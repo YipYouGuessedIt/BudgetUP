@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditRoles.aspx.cs" Inherits="PresentationTier.Views.EditRoles" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="EditDurationType.aspx.cs" Inherits="PresentationTier.Views.EditDurationType" %>
 
 <!DOCTYPE html>
 
@@ -41,13 +41,13 @@
             <br />
             <h1>Edit Roles</h1><hr />
             <br />
-            <asp:label runat="server">Role Name</asp:label>
+            <asp:label runat="server">Duration Type</asp:label>
             <br/>
             <asp:TextBox ID="RoleDescription" runat="server" CssClass="form-control"></asp:TextBox>
             <br />
             <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addBursary" />
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Delete" onclick="DeleteRoles" /><br /><br />
+            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addBursaryType" />
+            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Delete" onclick="DeleteDurationType" /><br /><br />
         </div>
     </form>
 </body>

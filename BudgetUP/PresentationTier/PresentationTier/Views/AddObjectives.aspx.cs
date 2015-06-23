@@ -22,6 +22,7 @@ namespace PresentationTier.Views
         {
             ServiceContracts sc = new ServiceContracts();
             sc.AddObjective(Convert.ToInt32(this.Session["projectID"].ToString()), ObjName.Text);
+            Response.Redirect("ObjectivesPage.aspx");
         }
     }
 }

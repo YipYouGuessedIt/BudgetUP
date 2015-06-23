@@ -11,7 +11,7 @@ namespace PresentationTier.Views
     public partial class EditOperationalTypes : System.Web.UI.Page
     {
         
-        protected void addOPerationType(object sender, EventArgs e)
+        protected void addOperationType(object sender, EventArgs e)
         {
             ServiceContracts sc = new ServiceContracts();
 
@@ -40,21 +40,31 @@ namespace PresentationTier.Views
             {
                 using (var dbContext = new dboEntities())
                 {
-                    var query = from BursaryTypes
-                                in dbContext.BursaryTypes
-                                select BursaryTypes;
+                    var query = from OperationalType
+                                in dbContext.Operation_Type
+                                select OperationalType;
 
 
-                    foreach (BursaryType p in query)
+                    foreach (Operation_Type p in query)
                     {
                         if (p.Id.ToString() == Session["OperationalTypeID"].ToString())
                         {
-                            OperationDescription.Text = p.Description.ToString();
+                            if (!IsPostBack)
+                            {
+                                OperationDescription.Text = p.Description.ToString();
+                            }
                         }
                     }
 
                 }
             }
+        }
+
+        protected void DeleteOperationalType(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            sc.DeleteOperationalType(Convert.ToInt32(this.Session["OperationalTypeID"].ToString()));
+            Response.Redirect("Settings.aspx");
         }
         
     }

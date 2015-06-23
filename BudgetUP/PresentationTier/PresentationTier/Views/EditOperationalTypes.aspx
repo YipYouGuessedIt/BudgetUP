@@ -46,7 +46,8 @@
             <asp:TextBox ID="OperationDescription" runat="server" CssClass="form-control"></asp:TextBox>
             <br />
             <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addBursary" /><br /><br />
+            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addOperationType" />
+            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Delete" onclick="DeleteOperationalType" /><br /><br />
         </div>
     </form>
 </body>

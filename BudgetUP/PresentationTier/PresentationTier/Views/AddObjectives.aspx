@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Objective Adder</title>
+    <title>Add Objective</title>
     	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -38,7 +38,7 @@
 
         <form id="form1" runat="server"><br />
             <div id="AddObjectives" class="contentArea">
-                <h1>Project</h1><hr />
+                <h1>Add Objective</h1><hr />
                 <asp:Label runat="server">Objective Name</asp:Label><asp:TextBox runat="server" ID="ObjName" required name="ObjName" CssClass="form-control"></asp:TextBox><br />
                 <!--<asp:Label runat="server">Milestone</asp:Label><asp:TextBox required runat="server" ID="milestone" name="milestone" CssClass="form-control"></asp:TextBox><br />-->
                 <a href="ObjectivesPage.aspx" class="btn btn-info btn-lg"  >Back</a>

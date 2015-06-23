@@ -68,7 +68,7 @@
             <a class="list-group-item" href="AddOperationalType.aspx">Add Operational Type
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
-            <a class="list-group-item" href="Expenses.aspx">Edit Operational Type
+            <a class="list-group-item" href="ViewOperationalType.aspx">Edit Operational Type
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
 
@@ -81,7 +81,7 @@
             <a class="list-group-item" href="AddFaculty.aspx">Add Faculty
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
-            <a class="list-group-item" href="Expenses.aspx">Edit Faculty
+            <a class="list-group-item" href="ViewFaculties.aspx">Edit Faculty
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
 
@@ -92,7 +92,7 @@
             <a class="list-group-item" href="AddRole.aspx">Add Role
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
-            <a class="list-group-item" href="Expenses.aspx">Edit Role
+            <a class="list-group-item" href="ViewRoles.aspx">Edit Role
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
 

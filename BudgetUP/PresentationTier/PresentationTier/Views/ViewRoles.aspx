@@ -56,7 +56,7 @@
                 
                     <div runat="server" id="lister">
 			            <div id="bl">
-                            <h3>Bursary</h3>
+                            <h3>Roles</h3>
                             <asp:PlaceHolder ID="RolesList" runat="server"></asp:PlaceHolder>	
                         </div>
                     </div>

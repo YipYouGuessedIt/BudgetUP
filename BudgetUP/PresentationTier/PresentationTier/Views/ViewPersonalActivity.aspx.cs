@@ -53,10 +53,10 @@ namespace PresentationTier.Views
             using (var dbContext = new dboEntities())
             {
                 var query = from Projects
-                            in dbContext.Roles
+                            in dbContext.PostLevels
                             select Projects;
 
-                foreach (Role p in query)
+                foreach (PostLevel p in query)
                 {
                     // Response.Write("<script>alert('" + p.Id.ToString() + "');</script>");
                     ListItem m = new ListItem();

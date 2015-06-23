@@ -8,21 +8,18 @@ using BizTier;
 
 namespace PresentationTier.Views
 {
-    public partial class GeneralSettings : System.Web.UI.Page
+    public partial class EditFaculty : System.Web.UI.Page
     {
         protected void addBursaryType(object sender, EventArgs e)
         {
             ServiceContracts sc = new ServiceContracts();
 
-            Admin_SysSettings bt = new Admin_SysSettings();
+            Faculty bt = new Faculty();
 
-            bt.Id = 1;
-            bt.EscalationRate = Convert.ToDouble(EscalationRate.Text);
-            bt.InstitutionalCost = Convert.ToDouble(InstutionalCost.Text);
-            bt.MaximumProjectSpan = Convert.ToInt32(MaximumSpan.Text);
-            bt.SubventionRate = Convert.ToDouble(Subvention.Text);
+            bt.Id = Convert.ToInt32(this.Session["FacultyID"].ToString());
+            bt.FacultyName = FacultyDescription.Text;
 
-            sc.UpdateAdminSysSettings(bt);
+            sc.UpdateFaculty(bt);
 
             Response.Redirect("Settings.aspx");
         }
@@ -34,34 +31,38 @@ namespace PresentationTier.Views
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
-            if (this.Session["Admin"] == "false")
+            if (this.Session["FacultyID"] == null)
             {
-                Response.Redirect("ProjectsPage.aspx");
+                Response.Redirect("Settings.aspx");
             }
             else
             {
                 using (var dbContext = new dboEntities())
                 {
                     var query = from BursaryTypes
-                                in dbContext.Admin_SysSettings
+                                in dbContext.Faculties
                                 select BursaryTypes;
 
 
-                    foreach (Admin_SysSettings p in query)
+                    foreach (Faculty p in query)
                     {
-                        if (p.Id.ToString() == "1")
+                        if (p.Id.ToString() == Session["FacultyID"].ToString())
                         {
                             if (!IsPostBack)
                             {
-                                EscalationRate.Text = p.EscalationRate.ToString();
-                                InstutionalCost.Text = p.InstitutionalCost.ToString();
-                                MaximumSpan.Text = p.MaximumProjectSpan.ToString();
-                                Subvention.Text = p.SubventionRate.ToString();
+                                FacultyDescription.Text = p.FacultyName.ToString();
                             }
                         }
                     }
                 }
             }
+        }
+
+        protected void DeleteFaculty(object sender, EventArgs e)
+        {
+            ServiceContracts sc = new ServiceContracts();
+            sc.DeleteFaculty(Convert.ToInt32(this.Session["FacultyID"].ToString()));
+            Response.Redirect("Settings.aspx");
         }
     }
 }

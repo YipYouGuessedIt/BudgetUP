@@ -8,19 +8,19 @@ using BizTier;
 
 namespace PresentationTier.Views
 {
-    public partial class ViewOperationalTypes : System.Web.UI.Page
+    public partial class ViewRoles : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             using (var dbContext = new dboEntities())
             {
-                var query = from OperationalTypes
-                            in dbContext.Operation_Type
-                            select OperationalTypes;
+                var query = from roles
+                            in dbContext.Roles
+                            select roles;
 
 
                 //px = query2;
-                foreach (Operation_Type v in query)
+                foreach (Role v in query)
                 {
                     LinkButton add = new LinkButton();
                     add.Text = v.Description + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
@@ -36,8 +36,8 @@ namespace PresentationTier.Views
         {
             LinkButton m = (LinkButton)sender;
             char[] ma = "Income".ToCharArray();
-            Session["OperationalTypeID"] = m.ID.Split(ma)[0];
-            Response.Redirect("EditOperationalType.aspx");
+            Session["RoleID"] = m.ID.Split(ma)[0];
+            Response.Redirect("EditRoles.aspx");
         }
     }
 }
