@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Add Travel</title>
+    <title>View Travel</title>
     	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -57,7 +57,7 @@
                 <br />
                 
                 <asp:Label runat="server" ID="Label3">Destination</asp:Label>
-                <asp:TextBox required type="date" runat="server" ID="destination" name="sdate" CssClass="form-control"></asp:TextBox><br />
+                <asp:TextBox required type="text" runat="server" ID="destination" name="sdate" CssClass="form-control"></asp:TextBox><br />
                 <br />
                 
                 

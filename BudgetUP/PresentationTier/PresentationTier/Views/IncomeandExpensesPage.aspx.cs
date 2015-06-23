@@ -31,6 +31,7 @@ namespace PresentationTier.Views
                     if (p.Id.ToString() == Session["ActID"].ToString())
                     {
                         heaserarea.InnerText = p.ActivityName.ToString();
+                        tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt <a href='ObjectivesPage.aspx'>" + p.Objective.Project.Title.ToString() + "</a> &gt <a href='ActivitiesPage.aspx'>" + p.Objective.ObjectiveName + "</a> &gt " + p.ActivityName.ToString() + "";
                     }
                 }
             }
@@ -116,7 +117,7 @@ namespace PresentationTier.Views
                                 if (m.Expense_Id == v.Id)
                                 {
                                     LinkButton add = new LinkButton();
-                                    add.Text = m.ContractorName + "<span class='glyphicon glyphicon-remove-sign pull-right' hidden='hidden' aria-hidden='true'></span>";
+                                    add.Text = m.ContractorName + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                                     add.ID =  m.Id.ToString() + ";;contractor";
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
@@ -132,7 +133,7 @@ namespace PresentationTier.Views
                                 if (m.Expense_Id == v.Id)
                                 {
                                     LinkButton add = new LinkButton();
-                                    add.Text = m.EquipmentName + "<span class='glyphicon glyphicon-remove-sign pull-right' hidden='hidden' aria-hidden='true'></span>";
+                                    add.Text = m.EquipmentName + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                                     add.ID = m.Id.ToString() + ";;equipment";
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
@@ -148,7 +149,7 @@ namespace PresentationTier.Views
                                 if (m.Expense_Id == v.Id)
                                 {
                                     LinkButton add = new LinkButton();
-                                    add.Text = m.Operation_Type.Description + "<span class='glyphicon glyphicon-remove-sign pull-right' hidden='hidden' aria-hidden='true'></span>";
+                                    add.Text = m.Operation_Type.Description + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                                     add.ID = m.Id.ToString() + ";;operational";
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
@@ -164,7 +165,7 @@ namespace PresentationTier.Views
                                 if (m.Expense_Id == v.Id)
                                 {
                                     LinkButton add = new LinkButton();
-                                    add.Text = "Travel" + "<span class='glyphicon glyphicon-remove-sign pull-right' hidden='hidden' aria-hidden='true'></span>";
+                                    add.Text = "Travel" + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                                     add.ID = m.Id.ToString() + ";;travel";
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
@@ -180,7 +181,7 @@ namespace PresentationTier.Views
                                 if (m.Expense_Id == v.Id)
                                 {
                                     LinkButton add = new LinkButton();
-                                    add.Text = "UP Staff member" + "<span class='glyphicon glyphicon-remove-sign pull-right' hidden='hidden' aria-hidden='true'></span>";
+                                    add.Text = "UP Staff member" + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                                     add.ID = m.Id.ToString() + ";;staff";
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
@@ -205,7 +206,7 @@ namespace PresentationTier.Views
                         if (v.ProjectId.ToString() == Session["projectID"].ToString())
                         {
                             LinkButton add = new LinkButton();
-                            add.Text = v.DonorName  + "<span class='glyphicon glyphicon-remove-sign pull-right' hidden='hidden' aria-hidden='true'></span>";
+                            add.Text = v.DonorName + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                             add.ID = v.Id.ToString()+"Income";
                             add.CssClass = "list-group-item";
                             add.Click += new EventHandler(Iclicker);
@@ -229,7 +230,7 @@ namespace PresentationTier.Views
                         if (v.ProjectId.ToString() == Session["projectID"].ToString())
                         {
                             LinkButton add = new LinkButton();
-                            add.Text = v.BursaryType.Description + "<span class='glyphicon glyphicon-remove-sign pull-right' hidden='hidden' aria-hidden='true'></span>";
+                            add.Text = v.BursaryType.Description + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                             add.ID = v.Id.ToString() +"Burser";
                             add.CssClass = "list-group-item";
                             add.Click += new EventHandler(Bclicker);

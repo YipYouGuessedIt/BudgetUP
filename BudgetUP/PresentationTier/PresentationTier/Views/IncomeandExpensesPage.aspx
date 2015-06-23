@@ -37,8 +37,8 @@
             </div>
         </nav>
 
-        <div class="treeView">
-            <a href="ProjectsPage.aspx">Projects</a> &gt <a href="ObjectivesPage.aspx"> Project Name</a> &gt <a href="ActivitiesPage.aspx"> Objective Name</a>
+        <div id="tree" runat="server" class="treeView">
+            
         </div>
 
         <div class="contentArea"><br />

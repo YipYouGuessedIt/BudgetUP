@@ -68,7 +68,7 @@ namespace PresentationTier.Views
                     {
                         
                         LinkButton add = new LinkButton();
-                        add.Text = p.Title + " ( "+u.Surname+")"+"<span class='glyphicon glyphicon-remove-sign pull-right' hidden='hidden' aria-hidden='true'></span>";
+                        add.Text = p.Title + " ( " + u.Surname + ")" + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                         add.ID = p.Id.ToString();
                         add.CssClass = "list-group-item";
                         add.Click += new EventHandler(clicker);
@@ -120,7 +120,7 @@ namespace PresentationTier.Views
                     if (p.UserId == (int)Session["userID"])
                     {
                         LinkButton add = new LinkButton();
-                        add.Text = p.Title + "<span class='glyphicon glyphicon-remove-sign pull-right' hidden='hidden' aria-hidden='true'></span>";
+                        add.Text = p.Title + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                         add.ID = p.Id.ToString();
                         add.CssClass = "list-group-item";
                         add.Click += new EventHandler(clicker);
