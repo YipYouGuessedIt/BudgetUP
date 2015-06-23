@@ -17,7 +17,7 @@ namespace PresentationTier.Views
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
-            if(this.Session["Admin"].ToString() != "true".ToString())
+            if(this.Session["Admin"].ToString() != "True".ToString())
             {
                 Response.Redirect("ProjectsPage.aspx");
             }
@@ -45,8 +45,8 @@ namespace PresentationTier.Views
         {
             LinkButton m = (LinkButton)sender;
             char[] ma = "Income".ToCharArray();
-            Session["UserID"] = m.ID.Split(ma)[0];
-            Response.Redirect("ProfilePage.aspx");
+            Session["OtherUserID"] = m.ID.Split(ma)[0];
+            Response.Redirect("OtherProfilePage.aspx");
         }
     }
 }

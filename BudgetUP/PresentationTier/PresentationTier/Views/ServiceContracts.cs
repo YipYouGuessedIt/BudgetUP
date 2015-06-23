@@ -903,20 +903,32 @@ namespace PresentationTier.Views
         /// 
         /// </summary>
         /// <param name="income"></param>
+ 
+
+    
         public void UpdateIncome(Income income)
         {
-            using (var dbContext = new dboEntities())
+            try
             {
-                var entry = dbContext.Incomes
-                        .Where(ad => ad.Id == income.Id)
-                        .FirstOrDefault();
+                using (var dbContext = new dboEntities())
+                {
+                    var entry = dbContext.Incomes
+                            .Where(ad => ad.Id == income.Id)
+                            .FirstOrDefault();
 
-                entry.DonorName = income.DonorName;
-                entry.Amount = income.Amount;
-                entry.Note_Id = income.Note_Id;
-                dbContext.SaveChanges();
+                    entry.DonorName = income.DonorName;
+                    entry.Amount = income.Amount;
+                    entry.Note_Id = income.Note_Id;
+                    dbContext.SaveChanges();
+                }
+            }
+            catch(Exception e)
+            {
+
             }
         }
+        
+        
 
         /// <summary>
         /// 
@@ -956,9 +968,9 @@ namespace PresentationTier.Views
             using (var dbContext = new dboEntities())
             {
                 dbContext.Expenses.Add(expense);
-                int temp = dbContext.Expenses.Max(item => item.Id);
                 dbContext.SaveChanges();
 
+                int temp = dbContext.Expenses.Max(item => item.Id);
                 return temp;
             }
         }
@@ -1236,7 +1248,7 @@ namespace PresentationTier.Views
         {
             UPStaffMember upStaffMember = new UPStaffMember();
 
-            upStaffMember.Expense_Id = expenseID+1;//WHY!!!???
+            upStaffMember.Expense_Id = expenseID;//WHY!!!???
             upStaffMember.PostLevelId = postLevelID;
             upStaffMember.DaysInvolved = daysInvolved;
             upStaffMember.SubventionLevy = subventionLevy;
@@ -1316,7 +1328,7 @@ namespace PresentationTier.Views
             {
                 dbContext.Travels.Add(travels);
                 dbContext.SaveChanges();
-                return dbContext.Travels.Max(item => item.Id);;
+                return dbContext.Travels.Max(item => item.Id);
             }
         }
 

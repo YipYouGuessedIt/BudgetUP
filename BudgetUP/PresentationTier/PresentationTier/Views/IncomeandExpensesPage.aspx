@@ -56,7 +56,7 @@
                         <asp:ListItem Value="2">Service Provider(Expense)</asp:ListItem>
                         <asp:ListItem Value="3">Operational Expense(Expense)</asp:ListItem>
                         <asp:ListItem Value="4">Equipment(Expense)</asp:ListItem>
-                        <asp:ListItem Value="5">Travel</asp:ListItem>
+                        <asp:ListItem Value="5">Travel (Expense)</asp:ListItem>
                         <asp:ListItem Value="6">Bursaries/Scholoarships(Income)</asp:ListItem>
                         <asp:ListItem Value="7">Donations(Income)</asp:ListItem>
                     </asp:DropDownList><br /><br />

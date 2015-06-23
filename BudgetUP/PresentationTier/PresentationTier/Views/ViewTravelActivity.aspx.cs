@@ -77,7 +77,7 @@ namespace PresentationTier.Views
                         {
                             numoftrav.Text = p.TravellerNo.ToString();
                             numofdays.Text = p.DurationDays.ToString();
-                            sdate.Text = p.DepartureDate.ToString();
+                            sdate.Text = p.DepartureDate.Date.ToString();
                             destination.Text = p.Destination;
                             if (entry != null)
                             visaAmount.Text = entry.Amount.ToString();

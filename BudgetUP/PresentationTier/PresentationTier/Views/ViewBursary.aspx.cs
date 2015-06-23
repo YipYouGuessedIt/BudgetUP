@@ -37,9 +37,7 @@ namespace PresentationTier.Views
                                 Cost.Text = p.BursaryType.AnnualCost.ToString();
 
                                 DropDownList2.SelectedValue = p.BursaryTypeId.ToString();
-                                note.Text = p.Note.UserNote;
-
-                                
+                                note.Text = p.Note.UserNote;   
                             }
                             notede = p.Note_Id;
                         }

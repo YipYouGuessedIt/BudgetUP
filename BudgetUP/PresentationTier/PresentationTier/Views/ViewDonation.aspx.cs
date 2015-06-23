@@ -51,9 +51,10 @@ namespace PresentationTier.Views
             n.ProjectId = Convert.ToInt32(Session["ProjectID"].ToString());
             n.Amount = Convert.ToInt32(amount.Text);
             n.DonorName = name.Text;
+            n.Note_Id = notede;
             Note no = new Note();
             no.Id = notede;
-            no.UserNote = note.ToString();
+            no.UserNote = note.Text.ToString();
             m.UpdateNotes(no);
             m.UpdateIncome(n);
         }

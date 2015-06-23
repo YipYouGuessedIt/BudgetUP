@@ -1,40 +1,3 @@
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\PresentationTier.dll.config
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\PresentationTier.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\PresentationTier.pdb
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\Antlr3.Runtime.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\AspNet.ScriptManager.jQuery.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.AspNet.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.Core.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OAuth.Consumer.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OAuth.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OpenId.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\EntityFramework.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\EntityFramework.SqlServer.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.FriendlyUrls.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.Membership.OpenAuth.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.ScriptManager.MSAjax.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.ScriptManager.WebForms.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\System.Web.Optimization.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\System.Web.Providers.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\WebGrease.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\EntityFramework.xml
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\EntityFramework.SqlServer.xml
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\System.Web.Providers.xml
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.Core.xml
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OAuth.xml
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OAuth.Consumer.xml
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OpenId.xml
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.AspNet.xml
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.Membership.OpenAuth.xml
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.FriendlyUrls.xml
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.csprojResolveAssemblyReference.cache
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.dll
-C:\Users\m\Desktop\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.pdb
 C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\PresentationTier.dll.config
 C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\PresentationTier.dll
 C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\PresentationTier.pdb
@@ -71,50 +34,6 @@ C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationT
 C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.AspNet.xml
 C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.Membership.OpenAuth.xml
 C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.FriendlyUrls.xml
+C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.csprojResolveAssemblyReference.cache
 C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.dll
 C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.pdb
-<<<<<<< HEAD
-C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.csprojResolveAssemblyReference.cache
-=======
-C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\BizTier.dll
-C:\Users\Duran\Documents\GitHub\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\BizTier.pdb
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\PresentationTier.dll.config
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\PresentationTier.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\PresentationTier.pdb
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\Antlr3.Runtime.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\AspNet.ScriptManager.jQuery.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\BizTier.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.AspNet.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.Core.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OAuth.Consumer.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OAuth.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OpenId.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\EntityFramework.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\EntityFramework.SqlServer.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.FriendlyUrls.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.Membership.OpenAuth.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.ScriptManager.MSAjax.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.ScriptManager.WebForms.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\System.Web.Optimization.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\System.Web.Providers.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\WebGrease.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\BizTier.pdb
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\EntityFramework.xml
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\EntityFramework.SqlServer.xml
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\System.Web.Providers.xml
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.Core.xml
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OAuth.xml
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OAuth.Consumer.xml
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OpenId.xml
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\DotNetOpenAuth.AspNet.xml
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.Membership.OpenAuth.xml
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\Microsoft.AspNet.FriendlyUrls.xml
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.csprojResolveAssemblyReference.cache
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.dll
-C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.pdb
->>>>>>> origin/master

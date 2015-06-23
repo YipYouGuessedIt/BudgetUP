@@ -57,7 +57,7 @@
                 <br />
                 
                 <asp:Label runat="server" ID="Label3">Destination</asp:Label>
-                <asp:TextBox required type="date" runat="server" ID="destination" name="sdate" CssClass="form-control"></asp:TextBox><br />
+                <asp:TextBox required runat="server" ID="destination" name="sdate" CssClass="form-control"></asp:TextBox><br />
                 <br />
                 
                 

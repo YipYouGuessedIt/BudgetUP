@@ -24,7 +24,7 @@ namespace PresentationTier.Views
             ServiceContracts sc = new ServiceContracts();
             int NoteID = sc.AddNotes(note.Text);
             int projectID = Convert.ToInt32(this.Session["projectID"].ToString());
-            sc.AddBursary(bursaryType.SelectedIndex, projectID, NoteID);
+            sc.AddBursary(Convert.ToInt32(bursaryType.SelectedValue), projectID, NoteID);
         }
 
         protected void bursaryType_Init(object sender, EventArgs e)

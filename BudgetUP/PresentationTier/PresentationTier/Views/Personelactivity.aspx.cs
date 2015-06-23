@@ -54,7 +54,7 @@ namespace PresentationTier.Views
             ServiceContracts sc = new ServiceContracts();
             int noteID = sc.AddNotes(note.Text);
             int expID = sc.AddExpense(Convert.ToInt32(Session["ActID"].ToString()), Convert.ToDouble(Amount.Text), noteID);
-            sc.AddUPStaffMember(DropDownList2.SelectedIndex, Convert.ToInt32(numofdays.Text), Convert.ToBoolean(DropDownList1.SelectedIndex), expID);
+            sc.AddUPStaffMember(Convert.ToInt32( DropDownList2.SelectedValue), Convert.ToInt32(numofdays.Text), Convert.ToBoolean(Convert.ToInt32( DropDownList1.SelectedValue)), expID);
             Response.Redirect("IncomeandExpensesPage.aspx");
         }
     }

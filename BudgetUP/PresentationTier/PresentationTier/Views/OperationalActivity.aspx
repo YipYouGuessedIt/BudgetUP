@@ -39,7 +39,6 @@
         <form id="form1" runat="server">
             <div id="Add" class="contentArea"><br />
                 <h1>Operational Cost</h1><hr />
-                <asp:Label runat="server">Name of contractor</asp:Label><asp:TextBox runat="server" ID="name" required name="name" CssClass="form-control"></asp:TextBox><br />
                 
                  <asp:Label runat="server">Operation Type</asp:Label><asp:DropDownList required runat="server" ID="oppType" name="quantity" CssClass="form-control" OnInit="oppType_Init"></asp:DropDownList><br />
                  <asp:Label runat="server">Quantity</asp:Label><asp:TextBox required type="number" runat="server" ID="quantity" name="quantity" CssClass="form-control"></asp:TextBox><br />
