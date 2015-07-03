@@ -4,766 +4,742 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dboModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Accommodations">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="Travel_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Activities">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ObjectiveId" Type="int" Nullable="false" />
-          <Property Name="ActivityName" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="StartDate" Type="datetime" Nullable="false" />
-          <Property Name="EndDate" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Admin_SysSettings">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EscalationRate" Type="float" Nullable="false" />
-          <Property Name="SubventionRate" Type="float" Nullable="false" />
-          <Property Name="InstitutionalCost" Type="float" Nullable="false" />
-          <Property Name="MaximumProjectSpan" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AirlineExpenses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ReturnTicket" Type="bit" Nullable="false" />
-          <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="Travel_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Allowances">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="Travel_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Bursaries">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BursaryTypeId" Type="int" Nullable="false" />
-          <Property Name="ProjectId" Type="int" Nullable="false" />
-          <Property Name="Note_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="BursaryTypes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="AnnualCost" Type="float" Nullable="false" />
-          <Property Name="DurationYears" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CarExpenses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UP_Fleet" Type="bit" Nullable="false" />
-          <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="Travel_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Contractors">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ContractorName" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="Expense_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DurationTypes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="EmailDomains">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Domain" Type="nvarchar" MaxLength="200" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Equipments">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EquipmentName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Expense_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Expenses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ActivityId" Type="int" Nullable="false" />
-          <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="Note_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Faculties">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FacultyName" Type="nvarchar" MaxLength="150" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Gautrains">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="Travel_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Incomes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProjectId" Type="int" Nullable="false" />
-          <Property Name="DonorName" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="Note_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Notes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserNote" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Objectives">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProjectId" Type="int" Nullable="false" />
-          <Property Name="ObjectiveName" Type="nvarchar" MaxLength="150" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Operation_Type">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Operationals">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ExpenseId" Type="int" Nullable="false" />
-          <Property Name="Operation_TypeId" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="PricePerUnit" Type="float" Nullable="false" />
-          <Property Name="Expense_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PostLevels">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="AnnualSalary" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Project_Settings">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EscalationRate" Type="float" Nullable="false" />
-          <Property Name="SubventionRate" Type="float" Nullable="false" />
-          <Property Name="InstitutionalCost" Type="float" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Projects">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Goal" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Length" Type="int" Nullable="false" />
-          <Property Name="DurationTypeId" Type="int" Nullable="false" />
-          <Property Name="Project_Settings_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Roles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="150" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Titles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="20" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Travels">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TravellerNo" Type="int" Nullable="false" />
-          <Property Name="DurationDays" Type="int" Nullable="false" />
-          <Property Name="DepartureDate" Type="datetime" Nullable="false" />
-          <Property Name="Destination" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Expense_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UPStaffMembers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PostLevelId" Type="int" Nullable="false" />
-          <Property Name="DaysInvolved" Type="int" Nullable="false" />
-          <Property Name="SubventionLevy" Type="bit" Nullable="false" />
-          <Property Name="Expense_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserCredentials">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="User_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Users">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TitleId" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Surname" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="RoleId" Type="int" Nullable="false" />
-          <Property Name="FacultyId" Type="int" Nullable="false" />
-          <Property Name="Admin" Type="bit" />
-        </EntityType>
-        <EntityType Name="Visas">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Amount" Type="float" Nullable="false" />
-          <Property Name="Travel_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_ActivityExpense">
-          <End Role="Activities" Type="Self.Activities" Multiplicity="1" />
-          <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Activities">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Expenses">
-              <PropertyRef Name="ActivityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BursaryNote">
-          <End Role="Notes" Type="Self.Notes" Multiplicity="1" />
-          <End Role="Bursaries" Type="Self.Bursaries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Notes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bursaries">
-              <PropertyRef Name="Note_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BursaryTypeBursary">
-          <End Role="BursaryTypes" Type="Self.BursaryTypes" Multiplicity="1" />
-          <End Role="Bursaries" Type="Self.Bursaries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BursaryTypes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bursaries">
-              <PropertyRef Name="BursaryTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DurationTypeProject">
-          <End Role="DurationTypes" Type="Self.DurationTypes" Multiplicity="1" />
-          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DurationTypes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Projects">
-              <PropertyRef Name="DurationTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExpenseContractor">
-          <End Role="Expenses" Type="Self.Expenses" Multiplicity="1" />
-          <End Role="Contractors" Type="Self.Contractors" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Expenses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contractors">
-              <PropertyRef Name="Expense_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExpenseEquipment">
-          <End Role="Expenses" Type="Self.Expenses" Multiplicity="1" />
-          <End Role="Equipments" Type="Self.Equipments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Expenses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Equipments">
-              <PropertyRef Name="Expense_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExpenseNote">
-          <End Role="Notes" Type="Self.Notes" Multiplicity="1" />
-          <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Notes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Expenses">
-              <PropertyRef Name="Note_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExpenseOperational">
-          <End Role="Expenses" Type="Self.Expenses" Multiplicity="1" />
-          <End Role="Operationals" Type="Self.Operationals" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Expenses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Operationals">
-              <PropertyRef Name="Expense_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExpenseTravel">
-          <End Role="Expenses" Type="Self.Expenses" Multiplicity="1" />
-          <End Role="Travels" Type="Self.Travels" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Expenses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Travels">
-              <PropertyRef Name="Expense_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ExpenseUPStaffMember">
-          <End Role="Expenses" Type="Self.Expenses" Multiplicity="1" />
-          <End Role="UPStaffMembers" Type="Self.UPStaffMembers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Expenses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UPStaffMembers">
-              <PropertyRef Name="Expense_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FacultyUser">
-          <End Role="Faculties" Type="Self.Faculties" Multiplicity="1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Faculties">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="FacultyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_IncomeNote">
-          <End Role="Notes" Type="Self.Notes" Multiplicity="1" />
-          <End Role="Incomes" Type="Self.Incomes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Notes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Incomes">
-              <PropertyRef Name="Note_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ObjectiveActivity">
-          <End Role="Objectives" Type="Self.Objectives" Multiplicity="1" />
-          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Objectives">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Activities">
-              <PropertyRef Name="ObjectiveId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Operation_TypeOperational">
-          <End Role="Operation_Type" Type="Self.Operation_Type" Multiplicity="1" />
-          <End Role="Operationals" Type="Self.Operationals" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Operation_Type">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Operationals">
-              <PropertyRef Name="Operation_TypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PostLevelUPStaffMember">
-          <End Role="PostLevels" Type="Self.PostLevels" Multiplicity="1" />
-          <End Role="UPStaffMembers" Type="Self.UPStaffMembers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PostLevels">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UPStaffMembers">
-              <PropertyRef Name="PostLevelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProjectBursary">
-          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
-          <End Role="Bursaries" Type="Self.Bursaries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Projects">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bursaries">
-              <PropertyRef Name="ProjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProjectIncome">
-          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
-          <End Role="Incomes" Type="Self.Incomes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Projects">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Incomes">
-              <PropertyRef Name="ProjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProjectObjective">
-          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
-          <End Role="Objectives" Type="Self.Objectives" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Projects">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Objectives">
-              <PropertyRef Name="ProjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProjectProject_Settings">
-          <End Role="Project_Settings" Type="Self.Project_Settings" Multiplicity="1" />
-          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project_Settings">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Projects">
-              <PropertyRef Name="Project_Settings_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RoleUser">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Roles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TitleUser">
-          <End Role="Titles" Type="Self.Titles" Multiplicity="1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Titles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="TitleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TravelAccommodation">
-          <End Role="Travels" Type="Self.Travels" Multiplicity="1" />
-          <End Role="Accommodations" Type="Self.Accommodations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Travels">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Accommodations">
-              <PropertyRef Name="Travel_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TravelAirlineExpense">
-          <End Role="Travels" Type="Self.Travels" Multiplicity="1" />
-          <End Role="AirlineExpenses" Type="Self.AirlineExpenses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Travels">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AirlineExpenses">
-              <PropertyRef Name="Travel_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TravelAllowance">
-          <End Role="Travels" Type="Self.Travels" Multiplicity="1" />
-          <End Role="Allowances" Type="Self.Allowances" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Travels">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Allowances">
-              <PropertyRef Name="Travel_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TravelCarExpense">
-          <End Role="Travels" Type="Self.Travels" Multiplicity="1" />
-          <End Role="CarExpenses" Type="Self.CarExpenses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Travels">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CarExpenses">
-              <PropertyRef Name="Travel_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TravelGautrain">
-          <End Role="Travels" Type="Self.Travels" Multiplicity="1" />
-          <End Role="Gautrains" Type="Self.Gautrains" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Travels">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Gautrains">
-              <PropertyRef Name="Travel_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TravelVisa">
-          <End Role="Travels" Type="Self.Travels" Multiplicity="1" />
-          <End Role="Visas" Type="Self.Visas" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Travels">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Visas">
-              <PropertyRef Name="Travel_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserCredentialsUser">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="UserCredentials" Type="Self.UserCredentials" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserCredentials">
-              <PropertyRef Name="User_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserProject">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Projects">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="dboModelStoreContainer">
-          <EntitySet Name="Accommodations" EntityType="Self.Accommodations" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Activities" EntityType="Self.Activities" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Admin_SysSettings" EntityType="Self.Admin_SysSettings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AirlineExpenses" EntityType="Self.AirlineExpenses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Allowances" EntityType="Self.Allowances" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Bursaries" EntityType="Self.Bursaries" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BursaryTypes" EntityType="Self.BursaryTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CarExpenses" EntityType="Self.CarExpenses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Contractors" EntityType="Self.Contractors" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DurationTypes" EntityType="Self.DurationTypes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EmailDomains" EntityType="Self.EmailDomains" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Equipments" EntityType="Self.Equipments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Faculties" EntityType="Self.Faculties" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Gautrains" EntityType="Self.Gautrains" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Incomes" EntityType="Self.Incomes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Objectives" EntityType="Self.Objectives" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Operation_Type" EntityType="Self.Operation_Type" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Operationals" EntityType="Self.Operationals" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PostLevels" EntityType="Self.PostLevels" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Project_Settings" EntityType="Self.Project_Settings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Titles" EntityType="Self.Titles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Travels" EntityType="Self.Travels" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UPStaffMembers" EntityType="Self.UPStaffMembers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserCredentials" EntityType="Self.UserCredentials" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Visas" EntityType="Self.Visas" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ActivityExpense" Association="Self.FK_ActivityExpense">
-            <End Role="Activities" EntitySet="Activities" />
-            <End Role="Expenses" EntitySet="Expenses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BursaryNote" Association="Self.FK_BursaryNote">
-            <End Role="Notes" EntitySet="Notes" />
-            <End Role="Bursaries" EntitySet="Bursaries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BursaryTypeBursary" Association="Self.FK_BursaryTypeBursary">
-            <End Role="BursaryTypes" EntitySet="BursaryTypes" />
-            <End Role="Bursaries" EntitySet="Bursaries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DurationTypeProject" Association="Self.FK_DurationTypeProject">
-            <End Role="DurationTypes" EntitySet="DurationTypes" />
-            <End Role="Projects" EntitySet="Projects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExpenseContractor" Association="Self.FK_ExpenseContractor">
-            <End Role="Expenses" EntitySet="Expenses" />
-            <End Role="Contractors" EntitySet="Contractors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExpenseEquipment" Association="Self.FK_ExpenseEquipment">
-            <End Role="Expenses" EntitySet="Expenses" />
-            <End Role="Equipments" EntitySet="Equipments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExpenseNote" Association="Self.FK_ExpenseNote">
-            <End Role="Notes" EntitySet="Notes" />
-            <End Role="Expenses" EntitySet="Expenses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExpenseOperational" Association="Self.FK_ExpenseOperational">
-            <End Role="Expenses" EntitySet="Expenses" />
-            <End Role="Operationals" EntitySet="Operationals" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExpenseTravel" Association="Self.FK_ExpenseTravel">
-            <End Role="Expenses" EntitySet="Expenses" />
-            <End Role="Travels" EntitySet="Travels" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ExpenseUPStaffMember" Association="Self.FK_ExpenseUPStaffMember">
-            <End Role="Expenses" EntitySet="Expenses" />
-            <End Role="UPStaffMembers" EntitySet="UPStaffMembers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FacultyUser" Association="Self.FK_FacultyUser">
-            <End Role="Faculties" EntitySet="Faculties" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IncomeNote" Association="Self.FK_IncomeNote">
-            <End Role="Notes" EntitySet="Notes" />
-            <End Role="Incomes" EntitySet="Incomes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ObjectiveActivity" Association="Self.FK_ObjectiveActivity">
-            <End Role="Objectives" EntitySet="Objectives" />
-            <End Role="Activities" EntitySet="Activities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Operation_TypeOperational" Association="Self.FK_Operation_TypeOperational">
-            <End Role="Operation_Type" EntitySet="Operation_Type" />
-            <End Role="Operationals" EntitySet="Operationals" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PostLevelUPStaffMember" Association="Self.FK_PostLevelUPStaffMember">
-            <End Role="PostLevels" EntitySet="PostLevels" />
-            <End Role="UPStaffMembers" EntitySet="UPStaffMembers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectBursary" Association="Self.FK_ProjectBursary">
-            <End Role="Projects" EntitySet="Projects" />
-            <End Role="Bursaries" EntitySet="Bursaries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectIncome" Association="Self.FK_ProjectIncome">
-            <End Role="Projects" EntitySet="Projects" />
-            <End Role="Incomes" EntitySet="Incomes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectObjective" Association="Self.FK_ProjectObjective">
-            <End Role="Projects" EntitySet="Projects" />
-            <End Role="Objectives" EntitySet="Objectives" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProjectProject_Settings" Association="Self.FK_ProjectProject_Settings">
-            <End Role="Project_Settings" EntitySet="Project_Settings" />
-            <End Role="Projects" EntitySet="Projects" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RoleUser" Association="Self.FK_RoleUser">
-            <End Role="Roles" EntitySet="Roles" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TitleUser" Association="Self.FK_TitleUser">
-            <End Role="Titles" EntitySet="Titles" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TravelAccommodation" Association="Self.FK_TravelAccommodation">
-            <End Role="Travels" EntitySet="Travels" />
-            <End Role="Accommodations" EntitySet="Accommodations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TravelAirlineExpense" Association="Self.FK_TravelAirlineExpense">
-            <End Role="Travels" EntitySet="Travels" />
-            <End Role="AirlineExpenses" EntitySet="AirlineExpenses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TravelAllowance" Association="Self.FK_TravelAllowance">
-            <End Role="Travels" EntitySet="Travels" />
-            <End Role="Allowances" EntitySet="Allowances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TravelCarExpense" Association="Self.FK_TravelCarExpense">
-            <End Role="Travels" EntitySet="Travels" />
-            <End Role="CarExpenses" EntitySet="CarExpenses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TravelGautrain" Association="Self.FK_TravelGautrain">
-            <End Role="Travels" EntitySet="Travels" />
-            <End Role="Gautrains" EntitySet="Gautrains" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TravelVisa" Association="Self.FK_TravelVisa">
-            <End Role="Travels" EntitySet="Travels" />
-            <End Role="Visas" EntitySet="Visas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserCredentialsUser" Association="Self.FK_UserCredentialsUser">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="UserCredentials" EntitySet="UserCredentials" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProject" Association="Self.FK_UserProject">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Projects" EntitySet="Projects" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="dboModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="dboModelStoreContainer">
+    <EntitySet Name="Accommodations" EntityType="dboModel.Store.Accommodations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Activities" EntityType="dboModel.Store.Activities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Admin_SysSettings" EntityType="dboModel.Store.Admin_SysSettings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AirlineExpenses" EntityType="dboModel.Store.AirlineExpenses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Allowances" EntityType="dboModel.Store.Allowances" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bursaries" EntityType="dboModel.Store.Bursaries" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BursaryTypes" EntityType="dboModel.Store.BursaryTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Contractors" EntityType="dboModel.Store.Contractors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmailDomains" EntityType="dboModel.Store.EmailDomains" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Equipments" EntityType="dboModel.Store.Equipments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Expenses" EntityType="dboModel.Store.Expenses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Faculties" EntityType="dboModel.Store.Faculties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Gautrains" EntityType="dboModel.Store.Gautrains" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Incomes" EntityType="dboModel.Store.Incomes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Notes" EntityType="dboModel.Store.Notes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Objectives" EntityType="dboModel.Store.Objectives" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Operation_Type" EntityType="dboModel.Store.Operation_Type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Operationals" EntityType="dboModel.Store.Operationals" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PostLevels" EntityType="dboModel.Store.PostLevels" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Project_Settings" EntityType="dboModel.Store.Project_Settings" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Projects" EntityType="dboModel.Store.Projects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="dboModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Titles" EntityType="dboModel.Store.Titles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Travels" EntityType="dboModel.Store.Travels" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UPStaffMembers" EntityType="dboModel.Store.UPStaffMembers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserCredentials" EntityType="dboModel.Store.UserCredentials" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="dboModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Visas" EntityType="dboModel.Store.Visas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Cars" EntityType="dboModel.Store.Cars" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_TravelAccommodation" Association="dboModel.Store.FK_TravelAccommodation">
+      <End Role="Travels" EntitySet="Travels" />
+      <End Role="Accommodations" EntitySet="Accommodations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActivityExpense" Association="dboModel.Store.FK_ActivityExpense">
+      <End Role="Activities" EntitySet="Activities" />
+      <End Role="Expenses" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjectiveActivity" Association="dboModel.Store.FK_ObjectiveActivity">
+      <End Role="Objectives" EntitySet="Objectives" />
+      <End Role="Activities" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TravelAirlineExpense" Association="dboModel.Store.FK_TravelAirlineExpense">
+      <End Role="Travels" EntitySet="Travels" />
+      <End Role="AirlineExpenses" EntitySet="AirlineExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TravelAllowance" Association="dboModel.Store.FK_TravelAllowance">
+      <End Role="Travels" EntitySet="Travels" />
+      <End Role="Allowances" EntitySet="Allowances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BursaryNote" Association="dboModel.Store.FK_BursaryNote">
+      <End Role="Notes" EntitySet="Notes" />
+      <End Role="Bursaries" EntitySet="Bursaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BursaryTypeBursary" Association="dboModel.Store.FK_BursaryTypeBursary">
+      <End Role="BursaryTypes" EntitySet="BursaryTypes" />
+      <End Role="Bursaries" EntitySet="Bursaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectBursary" Association="dboModel.Store.FK_ProjectBursary">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="Bursaries" EntitySet="Bursaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseContractor" Association="dboModel.Store.FK_ExpenseContractor">
+      <End Role="Expenses" EntitySet="Expenses" />
+      <End Role="Contractors" EntitySet="Contractors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseEquipment" Association="dboModel.Store.FK_ExpenseEquipment">
+      <End Role="Expenses" EntitySet="Expenses" />
+      <End Role="Equipments" EntitySet="Equipments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseNote" Association="dboModel.Store.FK_ExpenseNote">
+      <End Role="Notes" EntitySet="Notes" />
+      <End Role="Expenses" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseOperational" Association="dboModel.Store.FK_ExpenseOperational">
+      <End Role="Expenses" EntitySet="Expenses" />
+      <End Role="Operationals" EntitySet="Operationals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseTravel" Association="dboModel.Store.FK_ExpenseTravel">
+      <End Role="Expenses" EntitySet="Expenses" />
+      <End Role="Travels" EntitySet="Travels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseUPStaffMember" Association="dboModel.Store.FK_ExpenseUPStaffMember">
+      <End Role="Expenses" EntitySet="Expenses" />
+      <End Role="UPStaffMembers" EntitySet="UPStaffMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FacultyUser" Association="dboModel.Store.FK_FacultyUser">
+      <End Role="Faculties" EntitySet="Faculties" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TravelGautrain" Association="dboModel.Store.FK_TravelGautrain">
+      <End Role="Travels" EntitySet="Travels" />
+      <End Role="Gautrains" EntitySet="Gautrains" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IncomeNote" Association="dboModel.Store.FK_IncomeNote">
+      <End Role="Notes" EntitySet="Notes" />
+      <End Role="Incomes" EntitySet="Incomes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectIncome" Association="dboModel.Store.FK_ProjectIncome">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="Incomes" EntitySet="Incomes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectObjective" Association="dboModel.Store.FK_ProjectObjective">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="Objectives" EntitySet="Objectives" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operation_TypeOperational" Association="dboModel.Store.FK_Operation_TypeOperational">
+      <End Role="Operation_Type" EntitySet="Operation_Type" />
+      <End Role="Operationals" EntitySet="Operationals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostLevelUPStaffMember" Association="dboModel.Store.FK_PostLevelUPStaffMember">
+      <End Role="PostLevels" EntitySet="PostLevels" />
+      <End Role="UPStaffMembers" EntitySet="UPStaffMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectProject_Settings" Association="dboModel.Store.FK_ProjectProject_Settings">
+      <End Role="Project_Settings" EntitySet="Project_Settings" />
+      <End Role="Projects" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProject" Association="dboModel.Store.FK_UserProject">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Projects" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleUser" Association="dboModel.Store.FK_RoleUser">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TitleUser" Association="dboModel.Store.FK_TitleUser">
+      <End Role="Titles" EntitySet="Titles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TravelVisa" Association="dboModel.Store.FK_TravelVisa">
+      <End Role="Travels" EntitySet="Travels" />
+      <End Role="Visas" EntitySet="Visas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserCredentialsUser" Association="dboModel.Store.FK_UserCredentialsUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserCredentials" EntitySet="UserCredentials" />
+    </AssociationSet>
+    <AssociationSet Name="ExpensCar" Association="dboModel.Store.ExpensCar">
+      <End Role="Expens" EntitySet="Expenses" />
+      <End Role="Car" EntitySet="Cars" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Accommodations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Travel_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Activities">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ObjectiveId" Type="int" Nullable="false" />
+    <Property Name="ActivityName" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Admin_SysSettings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EscalationRate" Type="float" Nullable="false" />
+    <Property Name="SubventionRate" Type="float" Nullable="false" />
+    <Property Name="InstitutionalCost" Type="float" Nullable="false" />
+    <Property Name="MaximumProjectSpan" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AirlineExpenses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReturnTicket" Type="bit" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Travel_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Allowances">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Travel_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bursaries">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BursaryTypeId" Type="int" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+    <Property Name="Note_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BursaryTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="AnnualCost" Type="float" Nullable="false" />
+    <Property Name="DurationYears" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Contractors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContractorName" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="Expense_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmailDomains">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Domain" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Equipments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EquipmentName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Expense_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Expenses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActivityId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Note_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Faculties">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FacultyName" Type="nvarchar" Nullable="false" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Gautrains">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Travel_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Incomes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+    <Property Name="DonorName" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Note_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserNote" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Objectives">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+    <Property Name="ObjectiveName" Type="nvarchar" Nullable="false" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Operation_Type">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Operationals">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExpenseId" Type="int" Nullable="false" />
+    <Property Name="Operation_TypeId" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="PricePerUnit" Type="float" Nullable="false" />
+    <Property Name="Expense_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PostLevels">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="AnnualSalary" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Project_Settings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EscalationRate" Type="float" Nullable="false" />
+    <Property Name="SubventionRate" Type="float" Nullable="false" />
+    <Property Name="InstitutionalCost" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Goal" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Length" Type="int" Nullable="false" />
+    <Property Name="Project_Settings_Id" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="true" />
+    <Property Name="EndDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Titles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Travels">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DurationDays" Type="int" Nullable="false" />
+    <Property Name="DepartureDate" Type="datetime" Nullable="false" />
+    <Property Name="Destination" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Expense_Id" Type="int" Nullable="false" />
+    <Property Name="DepatureLocation" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UPStaffMembers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostLevelId" Type="int" Nullable="false" />
+    <Property Name="DaysInvolved" Type="int" Nullable="false" />
+    <Property Name="SubventionLevy" Type="bit" Nullable="false" />
+    <Property Name="Expense_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserCredentials">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="300" />
+    <Property Name="User_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TitleId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="FacultyId" Type="int" Nullable="false" />
+    <Property Name="Admin" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Visas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Travel_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UPFleet" Type="bit" Nullable="false" />
+    <Property Name="ExpensId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TravelAccommodation">
+    <End Role="Travels" Type="dboModel.Store.Travels" Multiplicity="1" />
+    <End Role="Accommodations" Type="dboModel.Store.Accommodations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Travels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Accommodations">
+        <PropertyRef Name="Travel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActivityExpense">
+    <End Role="Activities" Type="dboModel.Store.Activities" Multiplicity="1" />
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activities">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expenses">
+        <PropertyRef Name="ActivityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObjectiveActivity">
+    <End Role="Objectives" Type="dboModel.Store.Objectives" Multiplicity="1" />
+    <End Role="Activities" Type="dboModel.Store.Activities" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Objectives">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activities">
+        <PropertyRef Name="ObjectiveId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TravelAirlineExpense">
+    <End Role="Travels" Type="dboModel.Store.Travels" Multiplicity="1" />
+    <End Role="AirlineExpenses" Type="dboModel.Store.AirlineExpenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Travels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AirlineExpenses">
+        <PropertyRef Name="Travel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TravelAllowance">
+    <End Role="Travels" Type="dboModel.Store.Travels" Multiplicity="1" />
+    <End Role="Allowances" Type="dboModel.Store.Allowances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Travels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Allowances">
+        <PropertyRef Name="Travel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BursaryNote">
+    <End Role="Notes" Type="dboModel.Store.Notes" Multiplicity="1" />
+    <End Role="Bursaries" Type="dboModel.Store.Bursaries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Notes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bursaries">
+        <PropertyRef Name="Note_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BursaryTypeBursary">
+    <End Role="BursaryTypes" Type="dboModel.Store.BursaryTypes" Multiplicity="1" />
+    <End Role="Bursaries" Type="dboModel.Store.Bursaries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BursaryTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bursaries">
+        <PropertyRef Name="BursaryTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectBursary">
+    <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="1" />
+    <End Role="Bursaries" Type="dboModel.Store.Bursaries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bursaries">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseContractor">
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="Contractors" Type="dboModel.Store.Contractors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expenses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contractors">
+        <PropertyRef Name="Expense_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseEquipment">
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="Equipments" Type="dboModel.Store.Equipments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expenses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Equipments">
+        <PropertyRef Name="Expense_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseNote">
+    <End Role="Notes" Type="dboModel.Store.Notes" Multiplicity="1" />
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Notes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expenses">
+        <PropertyRef Name="Note_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseOperational">
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="Operationals" Type="dboModel.Store.Operationals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expenses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Operationals">
+        <PropertyRef Name="Expense_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseTravel">
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="Travels" Type="dboModel.Store.Travels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expenses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Travels">
+        <PropertyRef Name="Expense_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseUPStaffMember">
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="UPStaffMembers" Type="dboModel.Store.UPStaffMembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expenses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UPStaffMembers">
+        <PropertyRef Name="Expense_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FacultyUser">
+    <End Role="Faculties" Type="dboModel.Store.Faculties" Multiplicity="1" />
+    <End Role="Users" Type="dboModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculties">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="FacultyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TravelGautrain">
+    <End Role="Travels" Type="dboModel.Store.Travels" Multiplicity="1" />
+    <End Role="Gautrains" Type="dboModel.Store.Gautrains" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Travels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Gautrains">
+        <PropertyRef Name="Travel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IncomeNote">
+    <End Role="Notes" Type="dboModel.Store.Notes" Multiplicity="1" />
+    <End Role="Incomes" Type="dboModel.Store.Incomes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Notes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Incomes">
+        <PropertyRef Name="Note_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectIncome">
+    <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="1" />
+    <End Role="Incomes" Type="dboModel.Store.Incomes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Incomes">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectObjective">
+    <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="1" />
+    <End Role="Objectives" Type="dboModel.Store.Objectives" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Objectives">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operation_TypeOperational">
+    <End Role="Operation_Type" Type="dboModel.Store.Operation_Type" Multiplicity="1" />
+    <End Role="Operationals" Type="dboModel.Store.Operationals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operation_Type">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Operationals">
+        <PropertyRef Name="Operation_TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostLevelUPStaffMember">
+    <End Role="PostLevels" Type="dboModel.Store.PostLevels" Multiplicity="1" />
+    <End Role="UPStaffMembers" Type="dboModel.Store.UPStaffMembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PostLevels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UPStaffMembers">
+        <PropertyRef Name="PostLevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectProject_Settings">
+    <End Role="Project_Settings" Type="dboModel.Store.Project_Settings" Multiplicity="1" />
+    <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project_Settings">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Projects">
+        <PropertyRef Name="Project_Settings_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProject">
+    <End Role="Users" Type="dboModel.Store.Users" Multiplicity="1" />
+    <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Projects">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoleUser">
+    <End Role="Roles" Type="dboModel.Store.Roles" Multiplicity="1" />
+    <End Role="Users" Type="dboModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TitleUser">
+    <End Role="Titles" Type="dboModel.Store.Titles" Multiplicity="1" />
+    <End Role="Users" Type="dboModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Titles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="TitleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TravelVisa">
+    <End Role="Travels" Type="dboModel.Store.Travels" Multiplicity="1" />
+    <End Role="Visas" Type="dboModel.Store.Visas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Travels">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Visas">
+        <PropertyRef Name="Travel_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserCredentialsUser">
+    <End Role="Users" Type="dboModel.Store.Users" Multiplicity="1" />
+    <End Role="UserCredentials" Type="dboModel.Store.UserCredentials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserCredentials">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ExpensCar">
+    <End Role="Expens" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="Car" Type="dboModel.Store.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expens">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Car">
+        <PropertyRef Name="ExpensId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dboModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -839,16 +815,6 @@
           <Property Name="DurationYears" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Bursaries" Relationship="Self.FK_BursaryTypeBursary" FromRole="BursaryTypes" ToRole="Bursaries" />
         </EntityType>
-        <EntityType Name="CarExpens">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UP_Fleet" Type="Boolean" Nullable="false" />
-          <Property Name="Amount" Type="Double" Nullable="false" />
-          <Property Name="Travel_Id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Travel" Relationship="Self.FK_TravelCarExpense" FromRole="CarExpenses" ToRole="Travels" />
-        </EntityType>
         <EntityType Name="Contractor">
           <Key>
             <PropertyRef Name="Id" />
@@ -857,14 +823,6 @@
           <Property Name="ContractorName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Expense_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Expens" Relationship="Self.FK_ExpenseContractor" FromRole="Contractors" ToRole="Expenses" />
-        </EntityType>
-        <EntityType Name="DurationType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Projects" Relationship="Self.FK_DurationTypeProject" FromRole="DurationTypes" ToRole="Projects" />
         </EntityType>
         <EntityType Name="EmailDomain">
           <Key>
@@ -897,6 +855,7 @@
           <NavigationProperty Name="Operationals" Relationship="Self.FK_ExpenseOperational" FromRole="Expenses" ToRole="Operationals" />
           <NavigationProperty Name="Travels" Relationship="Self.FK_ExpenseTravel" FromRole="Expenses" ToRole="Travels" />
           <NavigationProperty Name="UPStaffMembers" Relationship="Self.FK_ExpenseUPStaffMember" FromRole="Expenses" ToRole="UPStaffMembers" />
+          <NavigationProperty Name="Cars" Relationship="dboModel.ExpensCar" FromRole="Expens" ToRole="Car" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
@@ -996,14 +955,14 @@
           <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Goal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Length" Type="Int32" Nullable="false" />
-          <Property Name="DurationTypeId" Type="Int32" Nullable="false" />
           <Property Name="Project_Settings_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Bursaries" Relationship="Self.FK_ProjectBursary" FromRole="Projects" ToRole="Bursaries" />
-          <NavigationProperty Name="DurationType" Relationship="Self.FK_DurationTypeProject" FromRole="Projects" ToRole="DurationTypes" />
           <NavigationProperty Name="Incomes" Relationship="Self.FK_ProjectIncome" FromRole="Projects" ToRole="Incomes" />
           <NavigationProperty Name="Objectives" Relationship="Self.FK_ProjectObjective" FromRole="Projects" ToRole="Objectives" />
           <NavigationProperty Name="Project_Settings" Relationship="Self.FK_ProjectProject_Settings" FromRole="Projects" ToRole="Project_Settings" />
           <NavigationProperty Name="User" Relationship="Self.FK_UserProject" FromRole="Projects" ToRole="Users" />
+          <Property Name="StartDate" Type="DateTime" Nullable="true" />
+          <Property Name="EndDate" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -1026,7 +985,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TravellerNo" Type="Int32" Nullable="false" />
           <Property Name="DurationDays" Type="Int32" Nullable="false" />
           <Property Name="DepartureDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Destination" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
@@ -1034,10 +992,10 @@
           <NavigationProperty Name="Accommodations" Relationship="Self.FK_TravelAccommodation" FromRole="Travels" ToRole="Accommodations" />
           <NavigationProperty Name="AirlineExpenses" Relationship="Self.FK_TravelAirlineExpense" FromRole="Travels" ToRole="AirlineExpenses" />
           <NavigationProperty Name="Allowances" Relationship="Self.FK_TravelAllowance" FromRole="Travels" ToRole="Allowances" />
-          <NavigationProperty Name="CarExpenses" Relationship="Self.FK_TravelCarExpense" FromRole="Travels" ToRole="CarExpenses" />
           <NavigationProperty Name="Expens" Relationship="Self.FK_ExpenseTravel" FromRole="Travels" ToRole="Expenses" />
           <NavigationProperty Name="Gautrains" Relationship="Self.FK_TravelGautrain" FromRole="Travels" ToRole="Gautrains" />
           <NavigationProperty Name="Visas" Relationship="Self.FK_TravelVisa" FromRole="Travels" ToRole="Visas" />
+          <Property Name="DepatureLocation" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="UPStaffMember">
           <Key>
@@ -1183,18 +1141,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TravelCarExpense">
-          <End Role="Travels" Type="Self.Travel" Multiplicity="1" />
-          <End Role="CarExpenses" Type="Self.CarExpens" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Travels">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CarExpenses">
-              <PropertyRef Name="Travel_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ExpenseContractor">
           <End Role="Expenses" Type="Self.Expens" Multiplicity="1" />
           <End Role="Contractors" Type="Self.Contractor" Multiplicity="*" />
@@ -1204,18 +1150,6 @@
             </Principal>
             <Dependent Role="Contractors">
               <PropertyRef Name="Expense_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DurationTypeProject">
-          <End Role="DurationTypes" Type="Self.DurationType" Multiplicity="1" />
-          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DurationTypes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Projects">
-              <PropertyRef Name="DurationTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1443,9 +1377,7 @@
           <EntitySet Name="Allowances" EntityType="Self.Allowance" />
           <EntitySet Name="Bursaries" EntityType="Self.Bursary" />
           <EntitySet Name="BursaryTypes" EntityType="Self.BursaryType" />
-          <EntitySet Name="CarExpenses" EntityType="Self.CarExpens" />
           <EntitySet Name="Contractors" EntityType="Self.Contractor" />
-          <EntitySet Name="DurationTypes" EntityType="Self.DurationType" />
           <EntitySet Name="EmailDomains" EntityType="Self.EmailDomain" />
           <EntitySet Name="Equipments" EntityType="Self.Equipment" />
           <EntitySet Name="Expenses" EntityType="Self.Expens" />
@@ -1498,17 +1430,9 @@
             <End Role="Projects" EntitySet="Projects" />
             <End Role="Bursaries" EntitySet="Bursaries" />
           </AssociationSet>
-          <AssociationSet Name="FK_TravelCarExpense" Association="Self.FK_TravelCarExpense">
-            <End Role="Travels" EntitySet="Travels" />
-            <End Role="CarExpenses" EntitySet="CarExpenses" />
-          </AssociationSet>
           <AssociationSet Name="FK_ExpenseContractor" Association="Self.FK_ExpenseContractor">
             <End Role="Expenses" EntitySet="Expenses" />
             <End Role="Contractors" EntitySet="Contractors" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DurationTypeProject" Association="Self.FK_DurationTypeProject">
-            <End Role="DurationTypes" EntitySet="DurationTypes" />
-            <End Role="Projects" EntitySet="Projects" />
           </AssociationSet>
           <AssociationSet Name="FK_ExpenseEquipment" Association="Self.FK_ExpenseEquipment">
             <End Role="Expenses" EntitySet="Expenses" />
@@ -1582,308 +1506,325 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserCredentials" EntitySet="UserCredentials" />
           </AssociationSet>
+          <EntitySet Name="Cars" EntityType="dboModel.Car" />
+          <AssociationSet Name="ExpensCar" Association="dboModel.ExpensCar">
+            <End Role="Expens" EntitySet="Expenses" />
+            <End Role="Car" EntitySet="Cars" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Car" >
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UPFleet" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Expen" Relationship="dboModel.ExpensCar" FromRole="Car" ToRole="Expens" />
+          <Property Name="ExpensId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ExpensCar">
+          <End Type="dboModel.Expens" Role="Expens" Multiplicity="1" />
+          <End Type="dboModel.Car" Role="Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Expens">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="ExpensId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dboModelStoreContainer" CdmEntityContainer="dboEntities">
-          <EntitySetMapping Name="Accommodations">
-            <EntityTypeMapping TypeName="dboModel.Accommodation">
-              <MappingFragment StoreEntitySet="Accommodations">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Travel_Id" ColumnName="Travel_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Activities">
-            <EntityTypeMapping TypeName="dboModel.Activity">
-              <MappingFragment StoreEntitySet="Activities">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ObjectiveId" ColumnName="ObjectiveId" />
-                <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Admin_SysSettings">
-            <EntityTypeMapping TypeName="dboModel.Admin_SysSettings">
-              <MappingFragment StoreEntitySet="Admin_SysSettings">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="EscalationRate" ColumnName="EscalationRate" />
-                <ScalarProperty Name="SubventionRate" ColumnName="SubventionRate" />
-                <ScalarProperty Name="InstitutionalCost" ColumnName="InstitutionalCost" />
-                <ScalarProperty Name="MaximumProjectSpan" ColumnName="MaximumProjectSpan" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AirlineExpenses">
-            <EntityTypeMapping TypeName="dboModel.AirlineExpens">
-              <MappingFragment StoreEntitySet="AirlineExpenses">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ReturnTicket" ColumnName="ReturnTicket" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Travel_Id" ColumnName="Travel_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Allowances">
-            <EntityTypeMapping TypeName="dboModel.Allowance">
-              <MappingFragment StoreEntitySet="Allowances">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Travel_Id" ColumnName="Travel_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Bursaries">
-            <EntityTypeMapping TypeName="dboModel.Bursary">
-              <MappingFragment StoreEntitySet="Bursaries">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="BursaryTypeId" ColumnName="BursaryTypeId" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-                <ScalarProperty Name="Note_Id" ColumnName="Note_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BursaryTypes">
-            <EntityTypeMapping TypeName="dboModel.BursaryType">
-              <MappingFragment StoreEntitySet="BursaryTypes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="AnnualCost" ColumnName="AnnualCost" />
-                <ScalarProperty Name="DurationYears" ColumnName="DurationYears" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CarExpenses">
-            <EntityTypeMapping TypeName="dboModel.CarExpens">
-              <MappingFragment StoreEntitySet="CarExpenses">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UP_Fleet" ColumnName="UP_Fleet" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Travel_Id" ColumnName="Travel_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Contractors">
-            <EntityTypeMapping TypeName="dboModel.Contractor">
-              <MappingFragment StoreEntitySet="Contractors">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ContractorName" ColumnName="ContractorName" />
-                <ScalarProperty Name="Expense_Id" ColumnName="Expense_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DurationTypes">
-            <EntityTypeMapping TypeName="dboModel.DurationType">
-              <MappingFragment StoreEntitySet="DurationTypes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EmailDomains">
-            <EntityTypeMapping TypeName="dboModel.EmailDomain">
-              <MappingFragment StoreEntitySet="EmailDomains">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Domain" ColumnName="Domain" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Equipments">
-            <EntityTypeMapping TypeName="dboModel.Equipment">
-              <MappingFragment StoreEntitySet="Equipments">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="EquipmentName" ColumnName="EquipmentName" />
-                <ScalarProperty Name="Expense_Id" ColumnName="Expense_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Expenses">
-            <EntityTypeMapping TypeName="dboModel.Expens">
-              <MappingFragment StoreEntitySet="Expenses">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Note_Id" ColumnName="Note_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Faculties">
-            <EntityTypeMapping TypeName="dboModel.Faculty">
-              <MappingFragment StoreEntitySet="Faculties">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Gautrains">
-            <EntityTypeMapping TypeName="dboModel.Gautrain">
-              <MappingFragment StoreEntitySet="Gautrains">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Travel_Id" ColumnName="Travel_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Incomes">
-            <EntityTypeMapping TypeName="dboModel.Income">
-              <MappingFragment StoreEntitySet="Incomes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-                <ScalarProperty Name="DonorName" ColumnName="DonorName" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Note_Id" ColumnName="Note_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Notes">
-            <EntityTypeMapping TypeName="dboModel.Note">
-              <MappingFragment StoreEntitySet="Notes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserNote" ColumnName="UserNote" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Objectives">
-            <EntityTypeMapping TypeName="dboModel.Objective">
-              <MappingFragment StoreEntitySet="Objectives">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-                <ScalarProperty Name="ObjectiveName" ColumnName="ObjectiveName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Operation_Type">
-            <EntityTypeMapping TypeName="dboModel.Operation_Type">
-              <MappingFragment StoreEntitySet="Operation_Type">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Operationals">
-            <EntityTypeMapping TypeName="dboModel.Operational">
-              <MappingFragment StoreEntitySet="Operationals">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ExpenseId" ColumnName="ExpenseId" />
-                <ScalarProperty Name="Operation_TypeId" ColumnName="Operation_TypeId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="PricePerUnit" ColumnName="PricePerUnit" />
-                <ScalarProperty Name="Expense_Id" ColumnName="Expense_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PostLevels">
-            <EntityTypeMapping TypeName="dboModel.PostLevel">
-              <MappingFragment StoreEntitySet="PostLevels">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="AnnualSalary" ColumnName="AnnualSalary" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Project_Settings">
-            <EntityTypeMapping TypeName="dboModel.Project_Settings">
-              <MappingFragment StoreEntitySet="Project_Settings">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="EscalationRate" ColumnName="EscalationRate" />
-                <ScalarProperty Name="SubventionRate" ColumnName="SubventionRate" />
-                <ScalarProperty Name="InstitutionalCost" ColumnName="InstitutionalCost" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="dboModel.Project">
-              <MappingFragment StoreEntitySet="Projects">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Goal" ColumnName="Goal" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
-                <ScalarProperty Name="DurationTypeId" ColumnName="DurationTypeId" />
-                <ScalarProperty Name="Project_Settings_Id" ColumnName="Project_Settings_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="dboModel.Role">
-              <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Titles">
-            <EntityTypeMapping TypeName="dboModel.Title">
-              <MappingFragment StoreEntitySet="Titles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Travels">
-            <EntityTypeMapping TypeName="dboModel.Travel">
-              <MappingFragment StoreEntitySet="Travels">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TravellerNo" ColumnName="TravellerNo" />
-                <ScalarProperty Name="DurationDays" ColumnName="DurationDays" />
-                <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
-                <ScalarProperty Name="Destination" ColumnName="Destination" />
-                <ScalarProperty Name="Expense_Id" ColumnName="Expense_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UPStaffMembers">
-            <EntityTypeMapping TypeName="dboModel.UPStaffMember">
-              <MappingFragment StoreEntitySet="UPStaffMembers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="PostLevelId" ColumnName="PostLevelId" />
-                <ScalarProperty Name="DaysInvolved" ColumnName="DaysInvolved" />
-                <ScalarProperty Name="SubventionLevy" ColumnName="SubventionLevy" />
-                <ScalarProperty Name="Expense_Id" ColumnName="Expense_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserCredentials">
-            <EntityTypeMapping TypeName="dboModel.UserCredential">
-              <MappingFragment StoreEntitySet="UserCredentials">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="dboModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="Admin" ColumnName="Admin" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TitleId" ColumnName="TitleId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Visas">
-            <EntityTypeMapping TypeName="dboModel.Visa">
-              <MappingFragment StoreEntitySet="Visas">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Travel_Id" ColumnName="Travel_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dboModelStoreContainer" CdmEntityContainer="dboEntities">
+    <EntitySetMapping Name="Accommodations">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Accommodation)">
+        <MappingFragment StoreEntitySet="Accommodations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Travel_Id" ColumnName="Travel_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Activities">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Activity)">
+        <MappingFragment StoreEntitySet="Activities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ObjectiveId" ColumnName="ObjectiveId" />
+          <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admin_SysSettings">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Admin_SysSettings)">
+        <MappingFragment StoreEntitySet="Admin_SysSettings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EscalationRate" ColumnName="EscalationRate" />
+          <ScalarProperty Name="SubventionRate" ColumnName="SubventionRate" />
+          <ScalarProperty Name="InstitutionalCost" ColumnName="InstitutionalCost" />
+          <ScalarProperty Name="MaximumProjectSpan" ColumnName="MaximumProjectSpan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AirlineExpenses">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.AirlineExpens)">
+        <MappingFragment StoreEntitySet="AirlineExpenses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReturnTicket" ColumnName="ReturnTicket" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Travel_Id" ColumnName="Travel_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Allowances">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Allowance)">
+        <MappingFragment StoreEntitySet="Allowances">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Travel_Id" ColumnName="Travel_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bursaries">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Bursary)">
+        <MappingFragment StoreEntitySet="Bursaries">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BursaryTypeId" ColumnName="BursaryTypeId" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="Note_Id" ColumnName="Note_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BursaryTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.BursaryType)">
+        <MappingFragment StoreEntitySet="BursaryTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AnnualCost" ColumnName="AnnualCost" />
+          <ScalarProperty Name="DurationYears" ColumnName="DurationYears" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Contractors">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Contractor)">
+        <MappingFragment StoreEntitySet="Contractors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ContractorName" ColumnName="ContractorName" />
+          <ScalarProperty Name="Expense_Id" ColumnName="Expense_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailDomains">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.EmailDomain)">
+        <MappingFragment StoreEntitySet="EmailDomains">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Domain" ColumnName="Domain" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Equipments">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Equipment)">
+        <MappingFragment StoreEntitySet="Equipments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EquipmentName" ColumnName="EquipmentName" />
+          <ScalarProperty Name="Expense_Id" ColumnName="Expense_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Expenses">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Expens)">
+        <MappingFragment StoreEntitySet="Expenses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Note_Id" ColumnName="Note_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Faculties">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Faculty)">
+        <MappingFragment StoreEntitySet="Faculties">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gautrains">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Gautrain)">
+        <MappingFragment StoreEntitySet="Gautrains">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Travel_Id" ColumnName="Travel_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Incomes">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Income)">
+        <MappingFragment StoreEntitySet="Incomes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="DonorName" ColumnName="DonorName" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Note_Id" ColumnName="Note_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notes">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Note)">
+        <MappingFragment StoreEntitySet="Notes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserNote" ColumnName="UserNote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Objectives">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Objective)">
+        <MappingFragment StoreEntitySet="Objectives">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="ObjectiveName" ColumnName="ObjectiveName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Operation_Type">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Operation_Type)">
+        <MappingFragment StoreEntitySet="Operation_Type">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Operationals">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Operational)">
+        <MappingFragment StoreEntitySet="Operationals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ExpenseId" ColumnName="ExpenseId" />
+          <ScalarProperty Name="Operation_TypeId" ColumnName="Operation_TypeId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="PricePerUnit" ColumnName="PricePerUnit" />
+          <ScalarProperty Name="Expense_Id" ColumnName="Expense_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostLevels">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.PostLevel)">
+        <MappingFragment StoreEntitySet="PostLevels">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AnnualSalary" ColumnName="AnnualSalary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Project_Settings">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Project_Settings)">
+        <MappingFragment StoreEntitySet="Project_Settings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EscalationRate" ColumnName="EscalationRate" />
+          <ScalarProperty Name="SubventionRate" ColumnName="SubventionRate" />
+          <ScalarProperty Name="InstitutionalCost" ColumnName="InstitutionalCost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Project)">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Goal" ColumnName="Goal" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Project_Settings_Id" ColumnName="Project_Settings_Id" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Role)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Titles">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Title)">
+        <MappingFragment StoreEntitySet="Titles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Travels">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Travel)">
+        <MappingFragment StoreEntitySet="Travels">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DurationDays" ColumnName="DurationDays" />
+          <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+          <ScalarProperty Name="Destination" ColumnName="Destination" />
+          <ScalarProperty Name="Expense_Id" ColumnName="Expense_Id" />
+          <ScalarProperty Name="DepatureLocation" ColumnName="DepatureLocation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UPStaffMembers">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.UPStaffMember)">
+        <MappingFragment StoreEntitySet="UPStaffMembers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PostLevelId" ColumnName="PostLevelId" />
+          <ScalarProperty Name="DaysInvolved" ColumnName="DaysInvolved" />
+          <ScalarProperty Name="SubventionLevy" ColumnName="SubventionLevy" />
+          <ScalarProperty Name="Expense_Id" ColumnName="Expense_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserCredentials">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.UserCredential)">
+        <MappingFragment StoreEntitySet="UserCredentials">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TitleId" ColumnName="TitleId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Visas">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Visa)">
+        <MappingFragment StoreEntitySet="Visas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Travel_Id" ColumnName="Travel_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cars">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Car)">
+        <MappingFragment StoreEntitySet="Cars">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UPFleet" ColumnName="UPFleet" />
+          <ScalarProperty Name="ExpensId" ColumnName="ExpensId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -1897,7 +1838,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
