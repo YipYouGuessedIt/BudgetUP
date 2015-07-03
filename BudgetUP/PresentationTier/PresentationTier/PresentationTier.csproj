@@ -41,6 +41,9 @@
     <Reference Include="BizTier">
       <HintPath>..\..\..\BizTier\BizTier\bin\Debug\BizTier.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\..\..\..\..\Downloads\EPPlus 4.0.4\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -457,6 +460,7 @@
       <DependentUpon>EditRoles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\EventLogger.cs" />
+    <Compile Include="Views\ExcelExport.cs" />
     <Compile Include="Views\GeneralSettings.aspx.cs">
       <DependentUpon>GeneralSettings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

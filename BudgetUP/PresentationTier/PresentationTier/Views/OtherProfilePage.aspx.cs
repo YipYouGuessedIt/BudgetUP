@@ -141,6 +141,8 @@ namespace PresentationTier.Views
         {
             ServiceContracts sc = new ServiceContracts();
             sc.DeleteUser(Convert.ToInt32(Session["OtherUserID"].ToString()));
+
+
         }
     }
 }
