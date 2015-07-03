@@ -15,18 +15,18 @@ namespace BizTier
 using System;
     using System.Collections.Generic;
     
-public partial class Visa
+public partial class Car
 {
 
     public int Id { get; set; }
 
-    public double Amount { get; set; }
+    public bool UPFleet { get; set; }
 
-    public int Travel_Id { get; set; }
+    public int ExpensId { get; set; }
 
 
 
-    public virtual Travel Travel { get; set; }
+    public virtual Expens Expen { get; set; }
 
 }
 
