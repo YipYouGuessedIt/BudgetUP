@@ -17,9 +17,19 @@ namespace PresentationTier.Views
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
-            if(this.Session["Admin"].ToString() != "True".ToString())
+            if(this.Session["Admin"].ToString() != "False".ToString())
             {
                 Response.Redirect("ProjectsPage.aspx");
+            }
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
             }
             using (var dbContext = new dboEntities())
             {
@@ -47,6 +57,11 @@ namespace PresentationTier.Views
             char[] ma = "Income".ToCharArray();
             Session["OtherUserID"] = m.ID.Split(ma)[0];
             Response.Redirect("OtherProfilePage.aspx");
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

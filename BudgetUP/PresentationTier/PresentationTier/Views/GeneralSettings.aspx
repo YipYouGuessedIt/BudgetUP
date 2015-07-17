@@ -14,6 +14,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+                <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -26,21 +27,44 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                       <li><a href="ProjectsPage.aspx">My Projects</a></li> 
-                        <li> <a href="ProfilePage.aspx">Profile</a></li>                    
-                        <li> <a href="ManageUsers.aspx">Manage Users</a></li>                    
+                        <li><a href="ProjectsPage.aspx">My Projects</a></li> 
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                
+                        <li> <a href="ManageUsers.aspx">Manage Users</a></li>                       
                         <li> <a href="Settings.aspx">Settings</a></li>  
-                        <li> <a href="LoginPage.aspx">Logout</a></li> 
+                        <li> <a id="logout" href="LoginPage.aspx" >Logout</a></li> 
                     </ul>
                 </div>
             </div>
         </nav>
+        </div>
+        <div id="normalnav" runat="server">        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a class="navbar-brand" href="#">BudgetUP</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar2">
+                    <ul class="nav navbar-nav">
+                        <li><a href="ProjectsPage.aspx">My Projects</a></li> 
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                        
+                        <li> <a href="Settings.aspx">Settings</a></li>  
+                        <li> <a id="logout2" href="LoginPage.aspx">Logout</a></li> 
+                    </ul>
+                </div>
+            </div>
+        </nav></div>
             <div id="AddActivity" class="contentArea"><br />
                 <h1>General Settings</h1><hr />
-                <asp:Label runat="server">Escalation Rate</asp:Label><asp:TextBox runat="server" type="number" ID="EscalationRate" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Subvention Rate</asp:Label><asp:TextBox runat="server" type="number" ID="Subvention" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Maximum Project Span</asp:Label><asp:TextBox runat="server" type="number" ID="MaximumSpan" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Indirect/instutional Cost</asp:Label><asp:TextBox runat="server" type="number" ID="InstutionalCost" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                		<p>Fill in the fields and click the add button to edit the current Activity.Note that all required fields are marked with a *.</p>
+		<hr/>
+                <asp:Label runat="server">Escalation Rate*</asp:Label><asp:TextBox runat="server" type="number" ID="EscalationRate" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server">Subvention Rate*</asp:Label><asp:TextBox runat="server" type="number" ID="Subvention" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server">Maximum Project Span*</asp:Label><asp:TextBox runat="server" type="number" ID="MaximumSpan" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server">Indirect/instutional Cost*</asp:Label><asp:TextBox runat="server" type="number" ID="InstutionalCost" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
             <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a>
             <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" OnClick="addBursaryType"/><br /><br />
         </div>

@@ -14,38 +14,86 @@ namespace PresentationTier.Views
         {
             if (Session.Count == 0)
             {
+
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
+            }
+            sdate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            edate.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
 
         protected void AddProject_Click(object sender, EventArgs e)
         {
+            using (var dbContext = new dboEntities())
+            {
             ServiceContracts project = new ServiceContracts();
             int userID = Convert.ToInt32(this.Session["userID"]);
-            project.AddUserProject(userID, title.Text, goal.Text,Convert.ToInt32(length.Text), Convert.ToInt32(lengthType.SelectedIndex), 1);
+            DateTime start = Convert.ToDateTime(sdate.Text);
+            DateTime end = Convert.ToDateTime(edate.Text);
+            if (end > start)
+            {
+                int length;
+                if(end.Day < start.Day)
+                {
+                    length = (end.Year - start.Year) * 12 + end.Month - start.Month - 1;
+                }
+                else
+                {
+                    length = (end.Year - start.Year) * 12 + end.Month - start.Month;
+                    if(length == 0)
+                    {
+                        length = 1;
+                    }
+                }
+
+                 var query = from adminSyssettings
+                 in dbContext.Admin_SysSettings
+                 select adminSyssettings;
+
+                 int value2 = query.Count<Admin_SysSettings>();
+                 int num = 1;
+
+                  foreach (Admin_SysSettings mi in query)
+                  {
+                  if(num == value2)
+                  {
+                        ServiceContracts mn = new ServiceContracts();
+                        mn.AddProjectSettings(mi.EscalationRate, mi.SubventionRate, mi.InstitutionalCost);
+                        var query2 = from Project_Settings
+                        in dbContext.Project_Settings
+                        select Project_Settings;
+
+                        int value = query2.Count<Project_Settings>();
+                        int counter = 1;
+                        foreach (Project_Settings m in query2)
+                        {
+                            if (counter == value2)
+                            {
+                                project.AddUserProject(userID, title.Text, goal.Text, length, m.Id , start, end);
+                            }
+                        }
+                  }
+                    num++;
+                                
+                  }
+                       
+            }    
+ 
+                
+            }
             Response.Redirect("ProjectsPage.aspx");
         }
 
-        protected void lengthType_Init(object sender, EventArgs e)
-        {
-            lengthType.Items.Clear();
-            using (var dbContext = new dboEntities())
-            {
-                var query = from DurationTypes
-                            in dbContext.DurationTypes
-                            select DurationTypes;
-
-                foreach (DurationType p in query)
-                {
-                    // Response.Write("<script>alert('" + p.Id.ToString() + "');</script>");
-                    ListItem m = new ListItem();
-                    m.Value = p.Id.ToString();
-                    m.Text = p.Description.ToString();
-                    lengthType.Items.Add(m);
-                }
-
-            }
-        }
+       
     }
 }

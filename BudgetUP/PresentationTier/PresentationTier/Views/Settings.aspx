@@ -14,6 +14,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+         <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -26,15 +27,36 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                       <li><a href="ProjectsPage.aspx">My Projects</a></li> 
-                        <li> <a href="ProfilePage.aspx">Profile</a></li>                    
-                        <li> <a href="ManageUsers.aspx">Manage Users</a></li>                    
+                        <li><a href="ProjectsPage.aspx">My Projects</a></li> 
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                
+                        <li> <a href="ManageUsers.aspx">Manage Users</a></li>                       
                         <li> <a href="Settings.aspx">Settings</a></li>  
-                        <li> <a href="LoginPage.aspx">Logout</a></li> 
+                        <li> <a id="logout" href="LoginPage.aspx" >Logout</a></li> 
                     </ul>
                 </div>
             </div>
         </nav>
+        </div>
+        <div id="normalnav" runat="server">        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a class="navbar-brand" href="#">BudgetUP</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar2">
+                    <ul class="nav navbar-nav">
+                        <li><a href="ProjectsPage.aspx">My Projects</a></li> 
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                        
+                        <li> <a href="Settings.aspx">Settings</a></li>  
+                        <li> <a id="logout2" href="LoginPage.aspx">Logout</a></li> 
+                    </ul>
+                </div>
+            </div>
+        </nav></div>
         <div id="AddActivity" class="contentArea"><br />
             <h1>Settings</h1>
             <hr />
@@ -97,7 +119,29 @@
             </a>
 
             <hr />
-            <h5> Duration Type </h5>
+            <h5> Domain </h5>
+            <hr />
+
+            <a class="list-group-item" href="AddDomain.aspx">Add Domain
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+            <a class="list-group-item" href="ViewDomain.aspx">Edit Domain
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+
+            <hr />
+            <h5> Post </h5>
+            <hr />
+
+            <a class="list-group-item" href="AddPost.aspx">Add Post
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+            <a class="list-group-item" href="ViewPost.aspx">Edit Post
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+
+            <hr />
+<%--            <h5> Duration Type </h5>
             <hr />
 
             <a class="list-group-item" href="AddDurationType.aspx">Add Duration Type
@@ -107,11 +151,14 @@
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
 
-            <hr />
+            <hr />--%>
             <h3> General</h3>
             <hr />
 
             <a class="list-group-item" href="GeneralSettings.aspx">General Settings
+                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
+            </a>
+            <a class="list-group-item" href="AddGeneralSettings.aspx">Add General Settings
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
             <br />

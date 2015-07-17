@@ -19,6 +19,20 @@ namespace PresentationTier.Views
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
+            if (this.Session["UserID"] == null)
+            {
+                Response.Redirect("ProjectsPage.aspx");
+            }
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
+            }
             using (var dbContext = new dboEntities())
             {
                 var query = from Projects

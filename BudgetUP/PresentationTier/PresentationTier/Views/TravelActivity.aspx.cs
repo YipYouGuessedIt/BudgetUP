@@ -16,6 +16,29 @@ namespace PresentationTier.Views
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
+            if (Session.Count == 0)
+            {
+
+                // Response.Write("<script>alert('Credentials is incorrect')</script>");
+                Response.Redirect("LoginPage.aspx");
+            }
+
+            if (this.Session["ActID"] == null)
+            {
+                Response.Redirect("ProjectsPage.aspx");
+            }
+
+
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
+            }
         }
 
         protected void Unnamed4_Click(object sender, EventArgs e)
@@ -27,16 +50,15 @@ namespace PresentationTier.Views
             double amounts = Convert.ToDouble(AccommodationAmount.Text);
             amounts += Convert.ToDouble(AirlineAmount.Text);
             amounts += Convert.ToDouble(AllowanceAmount.Text);
-            amounts += Convert.ToDouble(CarAmount.Text);
             amounts += Convert.ToDouble(gautrainAmount.Text);
             amounts += Convert.ToDouble(visaAmount.Text);
 
             int expID = sc.AddExpense(actID,amounts,noteID);
 
-            int travelID = sc.AddTravel(Convert.ToInt32(numoftrav.Text), Convert.ToInt32(numofdays.Text), Convert.ToDateTime(sdate.Text), destination.Text, expID);
+            int travelID = sc.AddTravel(0, Convert.ToInt32(numofdays.Text), Convert.ToDateTime(sdate.Text), destination.Text, expID,destination0.Text);
             sc.AddVisaExpense(Convert.ToDouble(visaAmount.Text), travelID);
             sc.AddGautrainExpense(Convert.ToDouble(gautrainAmount.Text), travelID);
-            sc.AddCarExpense(Convert.ToBoolean(UPFleet.SelectedIndex),Convert.ToDouble(CarAmount.Text), travelID);
+            //sc.AddCarExpense(Convert.ToBoolean(UPFleet.SelectedIndex),Convert.ToDouble(CarAmount.Text), travelID);
             sc.AddAllowance(Convert.ToDouble(AllowanceAmount.Text), travelID);
             sc.AddAirline(Convert.ToBoolean(returnTicket.SelectedIndex), Convert.ToDouble(AllowanceAmount.Text), travelID);
             sc.AddAccommodation(Convert.ToDouble(AccommodationAmount.Text), travelID);

@@ -25,9 +25,19 @@ namespace PresentationTier.Views
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
-            if (this.Session["Admin"].ToString() != "true".ToString())
+            if (this.Session["Admin"].ToString() != "False".ToString())
             {
                 Response.Redirect("ProjectsPage.aspx");
+            }
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
             }
 
             using (var dbContext = new dboEntities())
@@ -48,6 +58,11 @@ namespace PresentationTier.Views
                     BursaryList.Controls.Add(add);
                 }
             }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

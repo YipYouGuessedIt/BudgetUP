@@ -14,6 +14,7 @@
     </head>
     <body>        
 
+              <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -27,19 +28,42 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="ProjectsPage.aspx">My Projects</a></li> 
-                        <li> <a href="ProfilePage.aspx">Profile</a></li>                    
-                        <li> <a href="ManageUsers.aspx">Manage Users</a></li>                    
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                
+                        <li> <a href="ManageUsers.aspx">Manage Users</a></li>                       
                         <li> <a href="Settings.aspx">Settings</a></li>  
-                        <li> <a href="LoginPage.aspx">Logout</a></li> 
+                        <li> <a id="logout" href="LoginPage.aspx" >Logout</a></li> 
                     </ul>
                 </div>
             </div>
         </nav>
+        </div>
+        <div id="normalnav" runat="server">        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                        
+                    </button>
+                    <a class="navbar-brand" href="#">BudgetUP</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar2">
+                    <ul class="nav navbar-nav">
+                        <li><a href="ProjectsPage.aspx">My Projects</a></li> 
+                        <li> <a href="ProfilePage.aspx">Profile</a></li>                        
+                        <li> <a href="Settings.aspx">Settings</a></li>  
+                        <li> <a id="logout2" href="LoginPage.aspx">Logout</a></li> 
+                    </ul>
+                </div>
+            </div>
+        </nav></div>
 
         <form id="form1" runat="server"><br />
             <div id="AddObjectives" class="contentArea">
                 <h1>Edit Objective</h1><hr />
-                <asp:Label runat="server">Objective Name</asp:Label><asp:TextBox runat="server" ID="ObjName" required name="ObjName" CssClass="form-control"></asp:TextBox><br />
+                		<p>Fill in the fields and click the add button to edit the current Objective.Note that all required fields are marked with a *.</p>
+		<hr/>
+                <asp:Label runat="server">Objective Name*</asp:Label><asp:TextBox runat="server" ID="ObjName" required name="ObjName" CssClass="form-control"></asp:TextBox><br />
                 <!--<asp:Label runat="server">Milestone</asp:Label><asp:TextBox required runat="server" ID="milestone" name="milestone" CssClass="form-control"></asp:TextBox><br />-->
                 <a href="ObjectivesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Edit" OnClick="Unnamed3_Click" />

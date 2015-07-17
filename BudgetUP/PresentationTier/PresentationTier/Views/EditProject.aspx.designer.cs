@@ -13,6 +13,24 @@ namespace PresentationTier.Views {
     public partial class EditProject {
         
         /// <summary>
+        /// adminnav control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl adminnav;
+        
+        /// <summary>
+        /// normalnav control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl normalnav;
+        
+        /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>
@@ -40,22 +58,22 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.WebControls.TextBox goal;
         
         /// <summary>
-        /// length control.
+        /// sdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox length;
+        protected global::System.Web.UI.WebControls.TextBox sdate;
         
         /// <summary>
-        /// lengthType control.
+        /// edate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList lengthType;
+        protected global::System.Web.UI.WebControls.TextBox edate;
         
         /// <summary>
         /// Button1 control.

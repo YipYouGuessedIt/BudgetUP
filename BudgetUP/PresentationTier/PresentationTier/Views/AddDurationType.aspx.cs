@@ -17,7 +17,7 @@ namespace PresentationTier.Views
         protected void addRole(object sender, EventArgs e)
         {
             ServiceContracts sc = new ServiceContracts();
-            sc.AddDurationType(DurationName.Text);
+            //sc.AddDurationType(DurationName.Text);
             Response.Redirect("Settings.aspx");
         }
     }

@@ -70,6 +70,11 @@ namespace PresentationTier.Views
                 Session["UPstaffID"] = container[0];
                 Response.Redirect("ViewPersonalActivity.aspx");
             }
+            else if (container[2].ToString() == "car")
+            {
+                Session["car"] = container[0];
+                Response.Redirect("ViewCar.aspx");
+            }
             else
             {
 
@@ -185,6 +190,28 @@ namespace PresentationTier.Views
                                     add.ID = m.Id.ToString() + ";;staff";
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
+                                    if (m.SubventionLevy == false)
+                                    {
+                                        IncomeList.Controls.Add(add);
+                                    }
+                                    else
+                                    {
+                                        Expenselist.Controls.Add(add);
+                                    }
+                                }
+                            }
+                            var query8 = from Objectives
+                                         in dbContext2.Travels
+                                         select Objectives;
+                            foreach (Travel m in query8)
+                            {
+                                if (m.Expense_Id == v.Id)
+                                {
+                                    LinkButton add = new LinkButton();
+                                    add.Text = "Car" + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
+                                    add.ID = m.Id.ToString() + ";;car";
+                                    add.CssClass = "list-group-item";
+                                    add.Click += new EventHandler(Eclicker);
                                     Expenselist.Controls.Add(add);
                                 }
                             }
@@ -276,6 +303,10 @@ namespace PresentationTier.Views
             else if (Convert.ToInt32(DropDownList2.SelectedValue) == 7)
             {
                 Response.Redirect("DonationActivity.aspx");
+            }
+            else if (Convert.ToInt32(DropDownList2.SelectedValue) == 8)
+            {
+                Response.Redirect("CarActivity.aspx");
             }
             else
             {

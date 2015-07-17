@@ -24,6 +24,16 @@ namespace PresentationTier.Views
             {
                 Response.Redirect("ProjectsPage.aspx");
             }
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
+            }
             using (var dbContext = new dboEntities())
             {
                 var query = from Projects
@@ -56,11 +66,11 @@ namespace PresentationTier.Views
                         if (entry3 != null)
                         acc = entry3.Id;
 
-                        var entry4 = dbContext.CarExpenses
-                        .Where(ad => ad.Travel_Id == i)
-                        .FirstOrDefault();
-                        if (entry4 != null)
-                        car = entry4.Id;
+                        //var entry4 = dbContext.CarExpenses
+                        //.Where(ad => ad.Travel_Id == i)
+                        //.FirstOrDefault();
+                        //if (entry4 != null)
+                        //car = entry4.Id;
 
                         var entry5 = dbContext.AirlineExpenses
                         .Where(ad => ad.Travel_Id == i)
@@ -75,7 +85,7 @@ namespace PresentationTier.Views
                         allow = entry6.Id;
                         if (!IsPostBack)
                         {
-                            numoftrav.Text = p.TravellerNo.ToString();
+                           // numoftrav.Text = p.TravellerNo.ToString();
                             numofdays.Text = p.DurationDays.ToString();
                             sdate.Text = p.DepartureDate.Date.ToString();
                             destination.Text = p.Destination;
@@ -87,11 +97,11 @@ namespace PresentationTier.Views
                             if (entry3 != null)
                             AccommodationAmount.Text = entry3.Amount.ToString();
 
-                            if (entry4 != null)
-                            {
-                                CarAmount.Text = entry4.Amount.ToString();
-                                UPFleet.SelectedValue = Convert.ToBoolean(entry4.UP_Fleet).ToString();
-                            }
+                            //if (entry4 != null)
+                            //{
+                            //    CarAmount.Text = entry4.Amount.ToString();
+                            //    UPFleet.SelectedValue = Convert.ToBoolean(entry4.UP_Fleet).ToString();
+                            //}
 
                             if (entry5 != null)
                             {
@@ -126,11 +136,12 @@ namespace PresentationTier.Views
                 ServiceContracts m = new ServiceContracts();
                 Travel t = new Travel();
                 t.Id = Convert.ToInt32(Session["TravelID"].ToString());
-                t.TravellerNo = Convert.ToInt32(numoftrav.Text);
+                //t.TravellerNo = Convert.ToInt32(numoftrav.Text);
                 t.Expense_Id = expid;
                 t.DurationDays = Convert.ToInt32(numofdays.Text);
                 t.DepartureDate = Convert.ToDateTime(sdate.Text);
                 t.Destination = destination.Text;
+                t.DepatureLocation = destination0.Text;
                 m.UpdateTravel(t);
 
                 Visa v = new Visa();
@@ -145,12 +156,12 @@ namespace PresentationTier.Views
                 g.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
                 m.UpdateGautrainExpense(g);
 
-                CarExpens c = new CarExpens();
-                c.Id = car;
-                c.Amount = Convert.ToInt32(CarAmount.Text);
-                c.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                c.UP_Fleet = Convert.ToBoolean(Convert.ToInt32(UPFleet.SelectedValue));
-                m.UpdateCarExpense(c);
+                //CarExpens c = new CarExpens();
+                //c.Id = car;
+                //c.Amount = Convert.ToInt32(CarAmount.Text);
+                //c.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                //c.UP_Fleet = Convert.ToBoolean(Convert.ToInt32(UPFleet.SelectedValue));
+                //m.UpdateCarExpense(c);
 
                 Allowance a = new Allowance();
                 a.Id = allow;

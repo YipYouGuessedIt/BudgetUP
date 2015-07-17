@@ -16,6 +16,16 @@ namespace PresentationTier.Views
             {
                 Response.Redirect("ProjectsPage.aspx");
             }
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
+            }
 
             using (var dbContext = new dboEntities())
             {
@@ -44,6 +54,7 @@ namespace PresentationTier.Views
             Objective n = new Objective();
             n.Id = Convert.ToInt32(Session["ObjectiveID"].ToString());
             n.ObjectiveName = ObjName.Text;
+            
         }
         protected void Unnamed3_Click2(object sender, EventArgs e)
         {

@@ -19,11 +19,11 @@ div.contentArea
     width:80%;
     height:99%;
     text-align:center;
-    margin:0 auto;
     margin-top:10px;
     /*background-color: rgb(161, 156, 155);*/
     background-color: rgb(215, 210, 209);
-
+    margin-right: auto;
+    margin-bottom: 0;
 }
 
 div.navbar-Footer {

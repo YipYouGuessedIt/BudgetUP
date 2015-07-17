@@ -12,9 +12,19 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["ProjectID"] == null)
+            if (Session["projectID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
+            }
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
             }
             List<Project> proj = new List<Project>();
             using (var dbContext = new dboEntities())

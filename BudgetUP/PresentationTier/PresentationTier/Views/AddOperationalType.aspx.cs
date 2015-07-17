@@ -11,7 +11,26 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session.Count == 0)
+            {
 
+                // Response.Write("<script>alert('Credentials is incorrect')</script>");
+                Response.Redirect("LoginPage.aspx");
+            }
+            if (this.Session["Admin"].ToString() == "False".ToString())
+            {
+                Response.Redirect("ProjectsPage.aspx");
+            }
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
+            }
         }
 
         protected void addOperationalType(object sender, EventArgs e)

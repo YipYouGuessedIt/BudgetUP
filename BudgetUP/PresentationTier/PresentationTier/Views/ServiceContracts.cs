@@ -21,30 +21,35 @@ namespace PresentationTier.Views
         /// <param name="length"></param>
         /// <param name="durationTypeID"></param>
         /// <param name="projectSettingsID"></param>
-        public void AddUserProject(int userID, string title, string goal, int length, int durationTypeID, int projectSettingsID)
+        public void AddUserProject(int userID, string title, string goal, int length, int projectSettingsID,DateTime start,DateTime end)
         {
-            try
-            {                
+            //try
+            //{
+                DateTime m = start;
+                DateTime e = end;
                 Project project = new Project();
                 project.UserId = userID;
                 project.Title = title;
                 project.Goal = goal;
                 project.Length = length;
+                project.StartDate = m;
+                project.EndDate = m;
 
                 //these can be an object sent to another function if done on same page
-                project.DurationTypeId = durationTypeID;
+                
                 project.Project_Settings_Id = projectSettingsID;
                 using(var dbContext = new dboEntities())
                 {
                     dbContext.Projects.Add(project);
                     dbContext.SaveChanges();
                 }
-            }
-            catch(Exception f)
-            {
-                //EventLogger EL = new EventLogger();                
-                //EL.LogFile("AddUserProject","Creation of project:"+ title  +" by user: "+ userID.ToString(),f.ToString(),f.Source.ToString());
-            }
+           // }
+            //catch(Exception f)
+            //{
+                
+            //    //EventLogger EL = new EventLogger();                
+            //    //EL.LogFile("AddUserProject","Creation of project:"+ title  +" by user: "+ userID.ToString(),f.ToString(),f.Source.ToString());
+            //}
         }
 
         /// <summary>
@@ -59,12 +64,14 @@ namespace PresentationTier.Views
                         .Where(ad => ad.Id == project.Id)
                         .FirstOrDefault();
 
-                entry.UserId = project.UserId;
+                entry.UserId = entry.UserId;
                 entry.Title = project.Title;
                 entry.Goal = project.Goal;
-                entry.Length = project.Length;
-                entry.DurationTypeId = project.DurationTypeId;
-                entry.Project_Settings_Id = project.Project_Settings_Id;
+                entry.Length = entry.Length;
+                entry.StartDate = project.StartDate;
+                entry.EndDate = project.EndDate;
+                //entry.DurationTypeId = project.DurationTypeId;
+                entry.Project_Settings_Id = entry.Project_Settings_Id;
                 dbContext.SaveChanges();
             }            
         }
@@ -90,50 +97,50 @@ namespace PresentationTier.Views
         /// 
         /// </summary>
         /// <param name="description"></param>
-        public void AddDurationType(string description)
-        {
-            DurationType dt = new DurationType();
-            dt.Description = description;
-            using (var dbContext = new dboEntities())
-            {
-                dbContext.DurationTypes.Add(dt);
-                dbContext.SaveChanges();
-            }
-        }
+        //public void AddDurationType(string description)
+        //{
+        //   // DurationType dt = new DurationType();
+        //    dt.Description = description;
+        //    using (var dbContext = new dboEntities())
+        //    {
+        //        dbContext.DurationTypes.Add(dt);
+        //        dbContext.SaveChanges();
+        //    }
+        //}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="description"></param>
-        public void UpdateDurationType(DurationType durationType)
-        {
-                        using (var dbContext = new dboEntities())
-            {
-                var entry = dbContext.DurationTypes
-                        .Where(ad => ad.Id == durationType.Id)
-                        .FirstOrDefault();
+        //public void UpdateDurationType(DurationType durationType)
+        //{
+        //                using (var dbContext = new dboEntities())
+        //    {
+        //        var entry = dbContext.DurationTypes
+        //                .Where(ad => ad.Id == durationType.Id)
+        //                .FirstOrDefault();
 
-                entry.Description = durationType.Description;
-                dbContext.SaveChanges();
-            }  
-        }
+        //        entry.Description = durationType.Description;
+        //        dbContext.SaveChanges();
+        //    }  
+        //}
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="objectID"></param>
-        public void DeleteDurationType(int objectID)
-        {
-            using (var dbContext = new dboEntities())
-            {
-                var entry = dbContext.DurationTypes
-                        .Where(ad => ad.Id == objectID)
-                        .FirstOrDefault();
+        //public void DeleteDurationType(int objectID)
+        //{
+        //    using (var dbContext = new dboEntities())
+        //    {
+        //        var entry = dbContext.DurationTypes
+        //                .Where(ad => ad.Id == objectID)
+        //                .FirstOrDefault();
 
-                dbContext.DurationTypes.Remove(entry);
-                dbContext.SaveChanges();
-            }
-        }
+        //        dbContext.DurationTypes.Remove(entry);
+        //        dbContext.SaveChanges();
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -924,7 +931,7 @@ namespace PresentationTier.Views
             }
             catch(Exception e)
             {
-
+                throw e;
             }
         }
         
@@ -1314,11 +1321,11 @@ namespace PresentationTier.Views
         /// <param name="departureDate"></param>
         /// <param name="destination"></param>
         /// <param name="expenseID"></param>
-        public int AddTravel(int travellerNumber, int durationDays, DateTime departureDate, string destination, int expenseID)
+        public int AddTravel(int travellerNumber, int durationDays, DateTime departureDate, string destination, int expenseID,string departue)
         {
             Travel travels = new Travel();
 
-            travels.TravellerNo = travellerNumber;
+            travels.DepatureLocation = departue;
             travels.DurationDays = durationDays;
             travels.DepartureDate = departureDate;
             travels.Destination = destination;
@@ -1541,16 +1548,15 @@ namespace PresentationTier.Views
         /// <param name="UPFleet"></param>
         /// <param name="amount"></param>
         /// <param name="travelID"></param>
-        public void AddCarExpense(bool UPFleet, double amount, int travelID)
+        public void AddCarExpense(bool UPFleet,int exp)
         {
-            CarExpens car = new CarExpens();
-            car.UP_Fleet = UPFleet;
-            car.Amount = amount;
-            car.Travel_Id = travelID;
+            Car car = new Car();
+            car.UPFleet = UPFleet;
+            car.ExpensId = exp;
 
             using (var dbContext = new dboEntities())
             {
-                dbContext.CarExpenses.Add(car);
+                dbContext.Cars.Add(car);
                 dbContext.SaveChanges();
             }
         }
@@ -1559,16 +1565,16 @@ namespace PresentationTier.Views
         /// 
         /// </summary>
         /// <param name="car"></param>
-        public void UpdateCarExpense(CarExpens car)
+        public void UpdateCarExpense(Car car)
         {
             using (var dbContext = new dboEntities())
             {
-                var entry = dbContext.CarExpenses
+                var entry = dbContext.Cars
                         .Where(ad => ad.Id == car.Id)
                         .FirstOrDefault();
 
-                entry.Amount = car.Amount;
-                entry.UP_Fleet = car.UP_Fleet;
+
+                entry.UPFleet = car.UPFleet;
                 dbContext.SaveChanges();
             }
         }
@@ -1581,11 +1587,11 @@ namespace PresentationTier.Views
         {
             using (var dbContext = new dboEntities())
             {
-                var entry = dbContext.CarExpenses
+                var entry = dbContext.Cars
                         .Where(ad => ad.Id == objectID)
                         .FirstOrDefault();
 
-                dbContext.CarExpenses.Remove(entry);
+                dbContext.Cars.Remove(entry);
                 dbContext.SaveChanges();
             }
         }

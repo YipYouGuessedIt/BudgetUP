@@ -26,6 +26,7 @@ namespace PresentationTier.Views
             int userID = sc.AddUser(title.SelectedIndex, name.Text, surname.Text, roles.SelectedIndex, faculty.SelectedIndex);
             //select user here and get ID
             sc.AddUserCredential(email.Text, Password.Text, userID);
+            Response.Redirect("Login.aspx");
         }
 
         protected void title_Init(object sender, EventArgs e)

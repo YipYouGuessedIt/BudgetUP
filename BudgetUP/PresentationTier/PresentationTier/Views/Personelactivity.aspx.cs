@@ -17,15 +17,29 @@ namespace PresentationTier.Views
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
+            if (this.Session["ActID"] == null)
+            {
+                Response.Redirect("ProjectsPage.aspx");
+            }
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
+            }
         }
 
         private void AddPersonnel1(object sender, EventArgs e)
         {
-            ServiceContracts sc = new ServiceContracts();
-            int noteID = sc.AddNotes(note.Text);
-            int expID = sc.AddExpense(Convert.ToInt32(Session["ActID"].ToString()), Convert.ToDouble(Amount.Text), noteID);
-            sc.AddUPStaffMember(Convert.ToInt32(DropDownList2.SelectedValue), Convert.ToInt32(numofdays.Text), Convert.ToBoolean(DropDownList1.SelectedIndex), expID);
-            Response.Redirect("IncomeandExpensesPage.aspx");
+            //ServiceContracts sc = new ServiceContracts();
+            //int noteID = sc.AddNotes(note.Text);
+            //int expID = sc.AddExpense(Convert.ToInt32(Session["ActID"].ToString()), Convert.ToDouble(), noteID);
+            //sc.AddUPStaffMember(Convert.ToInt32(DropDownList2.SelectedValue), Convert.ToInt32(numofdays.Text), Convert.ToBoolean(DropDownList1.SelectedIndex), expID);
+            //Response.Redirect("IncomeandExpensesPage.aspx");
         }
 
         protected void DropDownList2_Init(object sender, EventArgs e)
@@ -51,11 +65,25 @@ namespace PresentationTier.Views
 
         protected void Unnamed_Click(object sender, EventArgs e)
         {
-            ServiceContracts sc = new ServiceContracts();
-            int noteID = sc.AddNotes(note.Text);
-            int expID = sc.AddExpense(Convert.ToInt32(Session["ActID"].ToString()), Convert.ToDouble(Amount.Text), noteID);
-            sc.AddUPStaffMember(Convert.ToInt32( DropDownList2.SelectedValue), Convert.ToInt32(numofdays.Text), Convert.ToBoolean(Convert.ToInt32( DropDownList1.SelectedValue)), expID);
-            Response.Redirect("IncomeandExpensesPage.aspx");
+            using (var dbContext = new dboEntities())
+            {
+                var query = from PostLevel
+                            in dbContext.PostLevels
+                            select PostLevel;
+
+
+                foreach (PostLevel p in query)
+                {
+                    if(p.Id == Convert.ToInt32(DropDownList2.SelectedValue))
+                    {
+                    ServiceContracts sc = new ServiceContracts();
+                    int noteID = sc.AddNotes(note.Text);
+                    int expID = sc.AddExpense(Convert.ToInt32(Session["ActID"].ToString()), Convert.ToDouble( p.AnnualSalary), noteID);
+                    sc.AddUPStaffMember(Convert.ToInt32(DropDownList2.SelectedValue), Convert.ToInt32(numofdays.Text), Convert.ToBoolean(Convert.ToInt32(DropDownList1.SelectedValue)), expID);
+                    Response.Redirect("IncomeandExpensesPage.aspx");
+                    }
+                }
+            }
         }
     }
 }
