@@ -20,6 +20,7 @@ namespace PresentationTier.Views
             {
                 adminnav.Visible = true;
                 normalnav.Visible = false;
+                setview.Visible = true;
             }
             else
             {
@@ -134,5 +135,10 @@ namespace PresentationTier.Views
             
             m.DeleteUserProject(Convert.ToInt32(Session["projectID"].ToString()));
         }
+
+         protected void Unnamed6_Click(object sender, EventArgs e)
+         {
+             Response.Redirect("editSettings.aspx");
+         }
     }
 }

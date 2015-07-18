@@ -231,6 +231,7 @@
     <Content Include="Views\EditOperationalTypes.aspx" />
     <Content Include="Views\EditProject.aspx" />
     <Content Include="Views\EditRoles.aspx" />
+    <Content Include="Views\editSettings.aspx" />
     <Content Include="Views\GeneralSettings.aspx" />
     <Content Include="Views\ManageUsers.aspx" />
     <Content Include="Views\OtherProfilePage.aspx" />
@@ -503,6 +504,13 @@
     </Compile>
     <Compile Include="Views\EditRoles.aspx.designer.cs">
       <DependentUpon>EditRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\editSettings.aspx.cs">
+      <DependentUpon>editSettings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\editSettings.aspx.designer.cs">
+      <DependentUpon>editSettings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\EventLogger.cs" />
     <Compile Include="Views\ExcelExport.cs" />

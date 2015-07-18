@@ -28,8 +28,11 @@ namespace PresentationTier.Views
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
-            sdate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            edate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            if (!IsPostBack)
+            {
+                sdate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                edate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            }
         }
 
         protected void AddProject_Click(object sender, EventArgs e)
@@ -40,7 +43,7 @@ namespace PresentationTier.Views
             int userID = Convert.ToInt32(this.Session["userID"]);
             DateTime start = Convert.ToDateTime(sdate.Text);
             DateTime end = Convert.ToDateTime(edate.Text);
-            if (end > start)
+            if (end >= start)
             {
                 int length;
                 if(end.Day < start.Day)
@@ -77,10 +80,11 @@ namespace PresentationTier.Views
                         int counter = 1;
                         foreach (Project_Settings m in query2)
                         {
-                            if (counter == value2)
+                            if (counter == value)
                             {
                                 project.AddUserProject(userID, title.Text, goal.Text, length, m.Id , start, end);
                             }
+                            counter++;
                         }
                   }
                     num++;

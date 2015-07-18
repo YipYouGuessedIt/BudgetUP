@@ -33,7 +33,7 @@ namespace PresentationTier.Views
                 project.Goal = goal;
                 project.Length = length;
                 project.StartDate = m;
-                project.EndDate = m;
+                project.EndDate = e;
 
                 //these can be an object sent to another function if done on same page
                 

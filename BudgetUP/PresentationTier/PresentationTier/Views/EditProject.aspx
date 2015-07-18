@@ -67,6 +67,8 @@
                 <asp:Label runat="server">End Date *</asp:Label><asp:TextBox required type="date" runat="server" ID="edate" name="sdate" CssClass="form-control"></asp:TextBox><br />
                 <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a>
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Edit" OnClick="AddProject_Click" />
+                 <asp:Button runat="server" ID="setview" CssClass="btn-info btn-lg btn" Text="View settings" OnClick="Unnamed6_Click" Visible="False"  />
+
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Delete" OnClick="AddProject_Click2" ID="Button1" /><br /><br />
             </div>
         </form>

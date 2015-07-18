@@ -14,7 +14,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="adminnav" runat="server">
+
+                <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -37,6 +38,7 @@
             </div>
         </nav>
         </div>
+
         <div id="normalnav" runat="server">        <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">

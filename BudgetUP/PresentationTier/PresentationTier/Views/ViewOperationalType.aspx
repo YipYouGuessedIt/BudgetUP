@@ -68,7 +68,7 @@
                     		<h2>Search</h2>
                     <p>type in here to filter the list of operation type</p>
 				    <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Operational Types..." ></asp:TextBox>
-			        <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" /><br />
+			        <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" OnClick="Button1_Click" /><br />
 			    </div>
                 <div id="IncomeorExpenseAdd">
                     <br /><br />

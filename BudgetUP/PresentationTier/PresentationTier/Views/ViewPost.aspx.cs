@@ -63,5 +63,36 @@ namespace PresentationTier.Views
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            if (searcher.Text == "")
+            {
+                foreach (LinkButton m in BursaryList.Controls)
+                {
+
+                    m.Visible = true;
+
+                }
+
+            }
+            else
+            {
+                foreach (LinkButton m in BursaryList.Controls)
+                {
+                    if (m.Text.Split('<')[0].ToLower().ToString().Contains(searcher.Text.ToLower().ToString()))
+                    {
+                        m.Visible = true;
+                    }
+                    else
+                    {
+
+                        m.Visible = false;
+                    }
+                }
+
+
+            }
+        }
     }
 }

@@ -60,6 +60,37 @@ namespace PresentationTier.Views
             Response.Redirect("EditRoles.aspx");
         }
 
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            if (searcher.Text == "")
+            {
+                foreach (LinkButton m in RolesList.Controls)
+                {
+
+                    m.Visible = true;
+
+                }
+                
+            }
+            else
+            {
+                foreach (LinkButton m in  RolesList.Controls)
+                {
+                    if (m.Text.Split('<')[0].ToLower().ToString().Contains(searcher.Text.ToLower().ToString()))
+                    {
+                        m.Visible = true;
+                    }
+                    else
+                    {
+
+                        m.Visible = false;
+                    }
+                }
+                
+
+            }
+        }
+
         
     }
 }
