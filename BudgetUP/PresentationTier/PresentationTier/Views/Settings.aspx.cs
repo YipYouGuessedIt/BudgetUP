@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using PresentationTier.Views;
 
 namespace PresentationTier.Styles
 {
@@ -31,6 +32,15 @@ namespace PresentationTier.Styles
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
+        }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            ExcelExport temp = new ExcelExport();
+            var ProjectFile = temp.PrintProject(1);
+            this.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment;  filename=" + /*temp.ProjectName +*/" " + DateTime.Now.ToString() + "");
+            Response.BinaryWrite(ProjectFile.GetAsByteArray());
         }
     }
 }
