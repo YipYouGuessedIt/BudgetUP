@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using PresentationTier.Views;
+using System.IO;
 
 namespace PresentationTier.Styles
 {
@@ -38,9 +39,15 @@ namespace PresentationTier.Styles
         {
             ExcelExport temp = new ExcelExport();
             var ProjectFile = temp.PrintProject(1);
-            this.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-            Response.AddHeader("content-disposition", "attachment;  filename=" + /*temp.ProjectName +*/" " + DateTime.Now.ToString() + "");
-            Response.BinaryWrite(ProjectFile.GetAsByteArray());
+
+            var memoryStream = new MemoryStream();
+            ProjectFile.CopyTo(memoryStream);
+
+            Response.Clear();
+            Response.ContentType = "application/force-download";
+            Response.AddHeader("content-disposition", "attachment; filename=" + /*temp.ProjectName +*/" " + DateTime.Now.ToString(@"yyyy-MM-dd") + ".xlsx");
+            Response.BinaryWrite(memoryStream.ToArray());
+            Response.End();
         }
     }
 }

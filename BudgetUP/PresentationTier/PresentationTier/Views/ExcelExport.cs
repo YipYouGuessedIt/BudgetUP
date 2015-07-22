@@ -10,6 +10,10 @@ using System.Web.UI.WebControls;
 
 namespace PresentationTier.Views
 {
+    /*Notes
+     * 1. CHeck yes/no for travels stuffs
+     * 
+     */
     public class ExcelExport
     {
         public string ProjectName;
