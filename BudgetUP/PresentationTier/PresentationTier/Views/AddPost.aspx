@@ -69,7 +69,7 @@
             <br/>
             <asp:TextBox ID="FacultyName" runat="server" CssClass="form-control"></asp:TextBox>
             <br />
-            Salary Amount*<asp:TextBox ID="FacultyName0" type="number" runat="server" required CssClass="form-control"></asp:TextBox>
+            Salary Amount(In Rands)*<asp:TextBox ID="FacultyName0" type="number" runat="server" required CssClass="form-control"></asp:TextBox>
             <br />
             <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Add" onclick="addRole" /><br /><br />

@@ -67,13 +67,6 @@
                 <asp:Label runat="server">Type of bursary*</asp:Label>                
                 <asp:DropDownList class="form-control" ID="DropDownList2" runat="server" OnInit="DropDownList2_Init" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
                 </asp:DropDownList>
-                <asp:Label ID="Label1" runat="server" Text="Annual cost*"></asp:Label>
-                <br />
-                <asp:TextBox ID="Cost" runat="server" type="number" CssClass="form-control"></asp:TextBox>
-                <br />
-                <asp:Label ID="Label4" runat="server"  Text="Years*"></asp:Label>
-                <br />
-                <asp:TextBox ID="Years" runat="server" type="number" CssClass="form-control"></asp:TextBox>
                 <br />
                 <asp:Label runat="server">Notes*</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>

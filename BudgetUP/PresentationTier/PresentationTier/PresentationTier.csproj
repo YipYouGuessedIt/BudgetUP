@@ -43,7 +43,7 @@
       <HintPath>..\..\..\BizTier\BizTier\bin\Debug\BizTier.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus">
-      <HintPath>..\..\..\..\..\..\Downloads\EPPlus 4.0.4\EPPlus.dll</HintPath>
+      <HintPath>..\EPPlus 4.0.4(1)\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />

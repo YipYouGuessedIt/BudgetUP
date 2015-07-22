@@ -43,8 +43,6 @@ namespace PresentationTier.Views
 
                             if (!IsPostBack)
                             {
-                                Years.Text = p.BursaryType.DurationYears.ToString();
-                                Cost.Text = p.BursaryType.AnnualCost.ToString();
 
                                 DropDownList2.SelectedValue = p.BursaryTypeId.ToString();
                                 note.Text = p.Note.UserNote;   

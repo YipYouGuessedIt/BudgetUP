@@ -85,41 +85,50 @@
                 
                 <h3>Visa</h3>
                 <hr />
-                <asp:Label runat="server" ID="Label4">Visa Amount</asp:Label>
-                <asp:TextBox required type="number" runat="server" ID="visaAmount" name="sdate" CssClass="form-control" value="0"></asp:TextBox>
-                <br />
+                <asp:DropDownList required runat="server" ID="fleet" CssClass="form-control" OnInit="oppType_Init">
+                    <asp:ListItem Value="0">Yes</asp:ListItem>
+                    <asp:ListItem Value="1">No</asp:ListItem>
+                </asp:DropDownList>
                 
                 <h3>Gautrain</h3>
                 <hr />
-                <asp:Label runat="server" ID="Label5">Gautrain Amount</asp:Label>
-                <asp:TextBox required type="number" runat="server" ID="gautrainAmount" name="sdate" CssClass="form-control" value="0"></asp:TextBox>
+                <asp:DropDownList required runat="server" ID="fleet0" CssClass="form-control" OnInit="oppType_Init">
+                    <asp:ListItem Value="0">Yes</asp:ListItem>
+                    <asp:ListItem Value="1">No</asp:ListItem>
+                </asp:DropDownList>
                 <br />
                 
                 <br />
                 
                 <h3>Perdeeum</h3>
                 <hr />
-                <asp:Label runat="server" ID="Label7">Allowances Amount</asp:Label>
-                <asp:TextBox required type="number" runat="server" ID="AllowanceAmount" name="sdate" CssClass="form-control" value="0"></asp:TextBox>
-                <br />                
-
+                <asp:DropDownList required runat="server" ID="fleet1" CssClass="form-control" OnInit="oppType_Init">
+                    <asp:ListItem Value="0">Yes</asp:ListItem>
+                    <asp:ListItem Value="1">No</asp:ListItem>
+                </asp:DropDownList>
+                <br />
                 <h3>Airlines</h3>
                 <hr />
-                <asp:Label runat="server" ID="Label8">Airline Expense Amount</asp:Label>
-                <asp:TextBox required type="number" runat="server" ID="AirlineAmount" name="sdate" CssClass="form-control" value="0"></asp:TextBox>
-                <br />
-
-                <asp:Label runat="server">Return Ticket </asp:Label>
-                <asp:DropDownList class="form-control" ID="returnTicket" runat="server">
+                <asp:Label runat="server">Airline Ticket </asp:Label>
+                <asp:DropDownList required runat="server" ID="fleet2" CssClass="form-control" OnInit="oppType_Init">
                     <asp:ListItem Value="0">Yes</asp:ListItem>
                     <asp:ListItem Value="1">No</asp:ListItem>
                 </asp:DropDownList>
                 <br />
 
+                <asp:Label runat="server">Return Ticket </asp:Label>
+                <asp:DropDownList class="form-control" ID="returnTicket" runat="server">
+                    <asp:ListItem Value="0">No</asp:ListItem>
+                    <asp:ListItem Value="1">Yes</asp:ListItem>
+                </asp:DropDownList>
+                <br />
+
                 <h3>Accommodation</h3>
                 <hr />
-                <asp:Label runat="server" ID="Label9">Accommodation Amount</asp:Label>
-                <asp:TextBox required type="number" runat="server" ID="AccommodationAmount" name="sdate" CssClass="form-control" value="0"></asp:TextBox>
+                <asp:DropDownList required runat="server" ID="fleet3" CssClass="form-control" OnInit="oppType_Init">
+                    <asp:ListItem Value="0">Yes</asp:ListItem>
+                    <asp:ListItem Value="1">No</asp:ListItem>
+                </asp:DropDownList>
                 <br />
                
                 <h3>Notes*</h3>

@@ -60,7 +60,7 @@ namespace PresentationTier.Views
             using (var dbContext = new dboEntities())
             {
                 var query2 = from Project
-                                     in dbContext.Projects
+                             in dbContext.Projects
                              select Project;
 
                 foreach (Project m in query2)
@@ -83,7 +83,7 @@ namespace PresentationTier.Views
                         {
 
                         }
-                        Response.Redirect("ActivitiesPage.aspx");
+                        Response.Redirect("IncomeandExpensesPage.aspx");
                     }
                 }
 
@@ -95,6 +95,7 @@ namespace PresentationTier.Views
             ServiceContracts m = new ServiceContracts();
 
             m.DeleteUserProject(Convert.ToInt32(Session["ActID"].ToString()));
+            Response.Redirect("IncomeandExpensesPage.aspx");
         }
     }
 }

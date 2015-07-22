@@ -76,7 +76,8 @@
             <div id="ActivityAdd">
                 <p>Click on add to add a new activity or click back to go to the objectives page</p>
 				<a href="AddActivities1.aspx" class="btn btn-info btn-lg"  >Add new Activity</a>
-                <a href="ObjectivesPage.aspx" class="btn btn-info btn-lg"  >Back</a><br /><br />
+                <a href="EditObjectives.aspx" class="btn btn-info btn-lg"  >Edit objective</a>
+                <a href="ObjectivesPage.aspx" class="btn btn-info btn-lg"  >Back</a><br />
 			</div>
 
 			<div id="n" class="list-group">

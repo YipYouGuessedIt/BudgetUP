@@ -18,6 +18,10 @@ namespace PresentationTier.Views
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
+            if (Session["OtherUserID"] == null)
+            {
+                Response.Redirect("ProjectsPage.aspx");
+            }
             if (this.Session["Admin"].ToString() == "False".ToString())
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -132,25 +136,51 @@ namespace PresentationTier.Views
 
         protected void Unnamed6_Click(object sender, EventArgs e)
         {
+            if (password.Text != passwordconfirm.Text)
+            {
+                bool mi = checkEmailDomain();
+                if (mi == true)
+                {
+                    User u = new User();
+                    u.Id = Convert.ToInt32(Session["OtherUserID"].ToString());
+                    u.Name = name.Text;
+                    u.Surname = name0.Text;
+                    u.TitleId = Convert.ToInt32(DropDownList4.SelectedValue);
+                    u.RoleId = Convert.ToInt32(DropDownList2.SelectedValue);
+                    u.FacultyId = Convert.ToInt32(DropDownList3.SelectedValue);
+                    u.Admin = Convert.ToBoolean(Convert.ToInt32(DropDownList1.SelectedValue));
+                    ServiceContracts m = new ServiceContracts();
+                    m.UpdateUser(u);
+                    UserCredential c = new UserCredential();
+                    c.User_Id = Convert.ToInt32(Session["OtherUserID"].ToString());
+                    c.Email = email.Text;
+                    c.Password = password.Text;
+                    c.Id = uc;
+                    m.UpdateUserCredentials(c);
+                }
+            }
+            else
+            {
 
-            User u = new User();
-            u.Id = Convert.ToInt32(Session["OtherUserID"].ToString());
-            u.Name = name.Text;
-            u.Surname = name0.Text;
-            u.TitleId = Convert.ToInt32(DropDownList4.SelectedValue);
-            u.RoleId = Convert.ToInt32(DropDownList2.SelectedValue);
-            u.FacultyId = Convert.ToInt32(DropDownList3.SelectedValue);
-            u.Admin = Convert.ToBoolean(Convert.ToInt32(DropDownList1.SelectedValue));
-            ServiceContracts m = new ServiceContracts();
-            m.UpdateUser(u);
-            UserCredential c = new UserCredential();
-            c.User_Id = Convert.ToInt32(Session["OtherUserID"].ToString());
-            c.Email = email.Text;
-            c.Password = password.Text;
-            c.Id = uc;
-            m.UpdateUserCredentials(c);
+            }
         }
 
+        private Boolean checkEmailDomain()
+        {
+            string dom = email.Text.Split('@')[1];
+            List<EmailDomain> cred = new List<EmailDomain>();
+            using (var dbContext = new dboEntities())
+            {
+                var query = dbContext.EmailDomains.Where(b => b.Domain == dom).FirstOrDefault();
+                if (query == null)
+                {
+                    Response.Write("<script>alert('Email Domain is incorrect')</script>");
+                    return false;
+                }
+                return true;
+
+            }
+        }
         protected void Unnamed_Click(object sender, EventArgs e)
         {
             ServiceContracts sc = new ServiceContracts();

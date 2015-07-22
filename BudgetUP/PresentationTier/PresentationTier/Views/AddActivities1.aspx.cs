@@ -32,6 +32,11 @@ namespace PresentationTier.Views
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
+            if (!IsPostBack)
+            {
+                sdate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                edate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            }
 
         }
 

@@ -21,7 +21,7 @@ namespace PresentationTier.Views
         /// <param name="length"></param>
         /// <param name="durationTypeID"></param>
         /// <param name="projectSettingsID"></param>
-        public void AddUserProject(int userID, string title, string goal, int length, int projectSettingsID,DateTime start,DateTime end)
+        public int AddUserProject(int userID, string title, string goal, int length, int projectSettingsID,DateTime start,DateTime end)
         {
             //try
             //{
@@ -42,7 +42,23 @@ namespace PresentationTier.Views
                 {
                     dbContext.Projects.Add(project);
                     dbContext.SaveChanges();
+
+                    var query2 = from Projects
+                            in dbContext.Users
+                                 select Projects;
+                    var proj = query2.ToList<User>();
+                    int counter = 0;
+                    foreach (User p in proj)
+                    {
+
+                        if (p.Id == userID)
+                        {
+                          return  p.Projects.Max(item => item.Id);
+
+                        }
+                    }
                 }
+                return 1;
            // }
             //catch(Exception f)
             //{
@@ -507,7 +523,7 @@ namespace PresentationTier.Views
             {
                 dbContext.Users.Add(user);
                 dbContext.SaveChanges();
-                int temp = dbContext.Expenses.Max(item => item.Id);
+                int temp = dbContext.Users.Max(item => item.Id);
                 return temp;
             }
         }

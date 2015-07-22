@@ -42,7 +42,7 @@ namespace PresentationTier.Views
                         if (!IsPostBack)
                         {
 
-                            amount.Text = p.Expens.Amount.ToString();
+                          //  amount.Text = p.Expens.Amount.ToString();
                             DropDownList2.SelectedValue = p.PostLevelId.ToString();
                             DropDownList1.SelectedValue = Convert.ToInt32(p.SubventionLevy).ToString();
                             numofdays.Text = p.DaysInvolved.ToString();
@@ -80,6 +80,17 @@ namespace PresentationTier.Views
 
         protected void Unnamed4_Click(object sender, EventArgs e)
         {
+            using (var dbContext = new dboEntities())
+            {
+                var query = from PostLevel
+                            in dbContext.PostLevels
+                            select PostLevel;
+
+
+                foreach (PostLevel p in query)
+                {
+                    if(p.Id == Convert.ToInt32(DropDownList2.SelectedValue))
+                    {
             ServiceContracts m = new ServiceContracts();
             Expens em = new Expens();
             UPStaffMember c = new UPStaffMember();
@@ -90,14 +101,17 @@ namespace PresentationTier.Views
             c.DaysInvolved = Convert.ToInt32(numofdays.Text);
             m.UpdateUPStaffMember(c);
             em.Id = expid;
-            em.Amount = Convert.ToInt32(amount.Text);
+            em.Amount = Convert.ToDouble( p.AnnualSalary);
             em.ActivityId = Convert.ToInt32(Session["ActID"].ToString());
             em.Note_Id = notede;
             Note no = new Note();
             no.Id = notede;
-            no.UserNote = note.ToString();
+            no.UserNote = note.Text.ToString();
             m.UpdateNotes(no);
             m.UpdateExpense(em);
+                    }
+                }
+            }
         }
     }
 }

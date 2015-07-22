@@ -25,7 +25,7 @@ namespace PresentationTier.Views
             int noteID = sc.AddNotes(note.Text);
             int actID = Convert.ToInt32(this.Session["ActID"].ToString());
             int expID = sc.AddExpense(actID, Convert.ToInt32(quantity.Text) * Convert.ToDouble(amount.Text), noteID);            
-            sc.AddOperation(expID, oppType.SelectedIndex, Convert.ToInt32(quantity.Text), Convert.ToDouble(amount.Text));
+            sc.AddOperation(expID, Convert.ToInt32(oppType.SelectedValue), Convert.ToInt32(quantity.Text), Convert.ToDouble(amount.Text));
         }
 
         protected void oppType_Init(object sender, EventArgs e)
@@ -47,6 +47,11 @@ namespace PresentationTier.Views
                 }
 
             }
+        }
+
+        protected void oppType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

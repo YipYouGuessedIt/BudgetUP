@@ -12,6 +12,14 @@ namespace PresentationTier.Views
     {
         protected void Eclicker(object sender, EventArgs e)
         {
+            
+            LinkButton m = (LinkButton)sender;
+            char[] ma = "Income".ToCharArray();
+            Session["PostID"] = m.ID.Split(ma)[0];
+            Response.Redirect("Post.aspx");
+        }
+        protected void Page_Load(object sender, EventArgs e)
+        {
             if (Session.Count == 0)
             {
 
@@ -32,13 +40,6 @@ namespace PresentationTier.Views
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
-            LinkButton m = (LinkButton)sender;
-            char[] ma = "Income".ToCharArray();
-            Session["PostID"] = m.ID.Split(ma)[0];
-            Response.Redirect("EditDomain.aspx");
-        }
-        protected void Page_Load(object sender, EventArgs e)
-        {
             using (var dbContext = new dboEntities())
             {
                 var query = from OperationalTypes
@@ -61,7 +62,7 @@ namespace PresentationTier.Views
 
         protected void Unnamed1_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("AddPost.aspx");
         }
 
         protected void Button1_Click(object sender, EventArgs e)

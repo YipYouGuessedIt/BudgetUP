@@ -158,9 +158,7 @@
             <a class="list-group-item" href="GeneralSettings.aspx">General Settings
                     <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
             </a>
-            <a class="list-group-item" href="AddGeneralSettings.aspx">Add General Settings
-                    <span class="glyphicon glyphicon-menu-right pull-right" aria-hidden="true"></span>
-            </a>
+            
             <br />
             <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a>
 

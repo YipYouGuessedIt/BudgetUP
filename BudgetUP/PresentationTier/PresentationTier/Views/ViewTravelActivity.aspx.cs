@@ -18,6 +18,13 @@ namespace PresentationTier.Views
         int car = 0;
         int allow = 0;
         int air = 0;
+        int visaid2 = 0;
+        int gaut2 = 0;
+        int acc2 = 0;
+        int car2 = 0;
+        int allow2 = 0;
+        int air2 = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["TravelID"] == null)
@@ -87,15 +94,41 @@ namespace PresentationTier.Views
                         {
                            // numoftrav.Text = p.TravellerNo.ToString();
                             numofdays.Text = p.DurationDays.ToString();
-                            sdate.Text = p.DepartureDate.Date.ToString();
+                            sdate.Text = p.DepartureDate.Date.ToString("yyyy-MM-dd");
                             destination.Text = p.Destination;
+                            destination0.Text = p.DepatureLocation;
                             if (entry != null)
-                            visaAmount.Text = entry.Amount.ToString();
+                            {
+                                fleet4.SelectedIndex = 0;
+                                visaid2 = 1;
+                            }
+                            else
+                            {
+                                fleet4.SelectedIndex = 1;
+                            }
+                            //visaAmount.Text = entry.Amount.ToString();
                             if (entry2 != null)
-                            gautrainAmount.Text = entry2.Amount.ToString();
+                            {
+                                fleet3.SelectedIndex = 0;
+                                gaut2 = 1;
+                            }
+                            else
+                            {
+                                fleet3.SelectedIndex = 1;
+                            }
+                           // gautrainAmount.Text = entry2.Amount.ToString();
 
                             if (entry3 != null)
-                            AccommodationAmount.Text = entry3.Amount.ToString();
+                            {
+                                
+                                fleet0.SelectedIndex = 0;
+                                acc2 = 1;
+                            }
+                            else
+                            {
+                                fleet0.SelectedIndex = 1;
+                            }
+                           // AccommodationAmount.Text = entry3.Amount.ToString();
 
                             //if (entry4 != null)
                             //{
@@ -105,11 +138,23 @@ namespace PresentationTier.Views
 
                             if (entry5 != null)
                             {
-                                AirlineAmount.Text = entry5.Amount.ToString();
-                                returnTicket.SelectedValue = Convert.ToBoolean(entry5.ReturnTicket).ToString();
+                                air2 = 1;
+                                fleet1.SelectedIndex = 0;
+                                returnTicket.SelectedIndex = Convert.ToInt32(entry5.ReturnTicket);
+                            }
+                            else
+                            {
+                                fleet1.SelectedIndex = 1;
                             }
                             if (entry6 != null)
-                            AllowanceAmount.Text = entry6.Amount.ToString();
+                            {
+                                fleet2.SelectedIndex = 0;
+                                allow2 = 1;
+                            }
+                            else
+                            {
+                                fleet2.SelectedIndex = 1;
+                            }
 
 
                             note.Text = p.Expens.Note.UserNote;
@@ -125,14 +170,18 @@ namespace PresentationTier.Views
             }
         }
 
+        protected void oppType_Init(object sender, EventArgs e)
+        {
+           
+        }
         protected void Unnamed4_Click(object sender, EventArgs e)
         {
-            if (expid == 0 || notede == 0 || visaid == 0 || gaut == 0 || acc == 0 || car == 0 || allow == 0 || air == 0)
-            {
+            //if (expid == 0 || notede == 0 || visaid == 0 || gaut == 0 || acc == 0 || car == 0 || allow == 0 || air == 0)
+            //{
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 ServiceContracts m = new ServiceContracts();
                 Travel t = new Travel();
                 t.Id = Convert.ToInt32(Session["TravelID"].ToString());
@@ -144,17 +193,132 @@ namespace PresentationTier.Views
                 t.DepatureLocation = destination0.Text;
                 m.UpdateTravel(t);
 
-                Visa v = new Visa();
-                v.Id = visaid;
-                v.Amount = Convert.ToInt32(visaAmount.Text);
-                v.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                m.UpdateVisaExpense(v);
+                if(fleet4.SelectedIndex == 0)
+                {
+                    if(visaid2 == 1)
+                    {
 
-                Gautrain g = new Gautrain();
-                g.Id = gaut;
-                g.Amount = Convert.ToInt32(gautrainAmount.Text);
-                g.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                m.UpdateGautrainExpense(g);
+                    }
+                    else
+                    {
+                        m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                    }
+                }
+                else
+                {
+                    if (visaid2 == 1)
+                    {
+                        m.DeleteVisaExpense(visaid);
+                    }
+                    else
+                    {
+                        //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                    }
+                }
+                if (fleet3.SelectedIndex == 0)
+                {
+                    if (gaut2 == 1)
+                    {
+
+                    }
+                    else
+                    {
+                        m.AddGautrainExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                    }
+                }
+                else
+                {
+                    if (gaut2 == 1)
+                    {
+                        m.DeleteGautrainExpense(gaut);
+                    }
+                    else
+                    {
+                        //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                    }
+                }
+                if (fleet2.SelectedIndex == 0)
+                {
+                    if (allow2 == 1)
+                    {
+
+                    }
+                    else
+                    {
+                        m.AddAllowance(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                    }
+                }
+                else
+                {
+                    if (allow2 == 1)
+                    {
+                        m.DeleteAllowance(allow);
+                    }
+                    else
+                    {
+                        //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                    }
+                }
+                if (fleet1.SelectedIndex == 0)
+                {
+                    if (air2 == 1)
+                    {
+                        AirlineExpens ai = new AirlineExpens();
+                        ai.Id = air;
+                        //ai.Amount = Convert.ToInt32(AirlineAmount.Text);
+                        ai.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                        ai.ReturnTicket = Convert.ToBoolean(Convert.ToInt32(returnTicket.SelectedValue));
+                        m.UpdateAirline(ai);
+                    }
+                    else
+                    {
+                        m.AddAirline(Convert.ToBoolean( returnTicket.SelectedIndex),0, Convert.ToInt32(Session["TravelID"].ToString()));
+                    }
+                }
+                else
+                {
+                    if (air2 == 1)
+                    {
+                        m.DeleteAirline(air);
+                    }
+                    else
+                    {
+                        //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                    }
+                }
+                if (fleet0.SelectedIndex == 0)
+                {
+                    if (acc2 == 1)
+                    {
+
+                    }
+                    else
+                    {
+                        m.AddAccommodation(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                    }
+                }
+                else
+                {
+                    if (acc2 == 1)
+                    {
+                        m.DeleteAccommodation(acc);
+                    }
+                    else
+                    {
+                        //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                    }
+                }
+                //Visa v = new Visa();
+                //v.Id = visaid;
+                //v.Amount = Convert.ToInt32(visaAmount.Text);
+                //v.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                //m.UpdateVisaExpense(v);
+
+                //Gautrain g = new Gautrain();
+                //g.Id = gaut;
+                //g.Amount = Convert.ToInt32(gautrainAmount.Text);
+                //g.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                //m.UpdateGautrainExpense(g);
 
                 //CarExpens c = new CarExpens();
                 //c.Id = car;
@@ -163,30 +327,25 @@ namespace PresentationTier.Views
                 //c.UP_Fleet = Convert.ToBoolean(Convert.ToInt32(UPFleet.SelectedValue));
                 //m.UpdateCarExpense(c);
 
-                Allowance a = new Allowance();
-                a.Id = allow;
-                a.Amount = Convert.ToInt32(AllowanceAmount.Text);
-                a.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                m.UpdateAllowance(a);
+                //Allowance a = new Allowance();
+                //a.Id = allow;
+                //a.Amount = Convert.ToInt32(AllowanceAmount.Text);
+                //a.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                //m.UpdateAllowance(a);
 
-                AirlineExpens ai = new AirlineExpens();
-                ai.Id = air;
-                ai.Amount = Convert.ToInt32(AirlineAmount.Text);
-                ai.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                ai.ReturnTicket = Convert.ToBoolean(Convert.ToInt32(returnTicket.SelectedValue));
-                m.UpdateAirline(ai);
 
-                Accommodation ac = new Accommodation();
-                ac.Id = acc;
-                ac.Amount = Convert.ToInt32(AccommodationAmount.Text);
-                ac.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                m.UpdateAccomodation(ac);
+
+                //Accommodation ac = new Accommodation();
+                //ac.Id = acc;
+                //ac.Amount = Convert.ToInt32(AccommodationAmount.Text);
+                //ac.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                //m.UpdateAccomodation(ac);
 
                 Expens ex = new Expens();
                 ex.Id = expid;
                 ex.ActivityId = Convert.ToInt32(Session["ActID"].ToString());
-                ex.Amount = Convert.ToInt32(AccommodationAmount.Text) + Convert.ToInt32(AirlineAmount.Text) + Convert.ToInt32(AllowanceAmount.Text) + Convert.ToInt32(CarAmount.Text) + Convert.ToInt32(gautrainAmount.Text) + Convert.ToInt32(visaAmount.Text);
-            }
+                ex.Amount = 0;
+            //}
         }
     }
 }

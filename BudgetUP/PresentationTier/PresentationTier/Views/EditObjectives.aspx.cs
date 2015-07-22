@@ -54,12 +54,14 @@ namespace PresentationTier.Views
             Objective n = new Objective();
             n.Id = Convert.ToInt32(Session["ObjectiveID"].ToString());
             n.ObjectiveName = ObjName.Text;
+            Response.Redirect("ActivitiesPage.aspx");
             
         }
         protected void Unnamed3_Click2(object sender, EventArgs e)
         {
             ServiceContracts m = new ServiceContracts();
             m.DeleteObjectives(Convert.ToInt32(Session["ObjectiveID"].ToString()));
+            Response.Redirect("ActivitiesPage.aspx");
         }
     }
 }

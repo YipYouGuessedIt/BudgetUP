@@ -17,6 +17,10 @@ namespace PresentationTier.Views
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
+            if (Session["RoleTypeID"] == null)
+            {
+                Response.Redirect("ProjectsPage.aspx");
+            }
             if (this.Session["Admin"].ToString() == "True".ToString())
             {
                 adminnav.Visible = true;

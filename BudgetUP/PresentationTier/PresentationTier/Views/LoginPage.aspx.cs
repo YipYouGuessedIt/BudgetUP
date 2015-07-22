@@ -29,6 +29,7 @@ namespace PresentationTier
                 }
                 else
                 {
+                    Response.Write("<script>alert('Details are incorrect')</script>");
                     Response.Redirect("LoginPage.aspx");
                 }
             }
@@ -66,7 +67,7 @@ namespace PresentationTier
                 var query = dbContext.UserCredentials.Where(b => b.Email == UserEmail.Text && b.Password == Pass.Text).FirstOrDefault();
                 if (query == null)
                 {
-                    Response.Write("<script>alert('Credentials is incorrect')</script>");
+                    
                     return false;
                 }
                 else

@@ -16,6 +16,16 @@ namespace PresentationTier.Views
             {
                 Response.Redirect("ProjectsPage.aspx");
             }
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
+            }
             List<Activity> proj = new List<Activity>();
             using (var dbContext = new dboEntities())
             {
@@ -201,11 +211,11 @@ namespace PresentationTier.Views
                                 }
                             }
                             var query8 = from Objectives
-                                         in dbContext2.Travels
+                                         in dbContext2.Cars
                                          select Objectives;
-                            foreach (Travel m in query8)
+                            foreach (Car m in query8)
                             {
-                                if (m.Expense_Id == v.Id)
+                                if (m.ExpensId == v.Id)
                                 {
                                     LinkButton add = new LinkButton();
                                     add.Text = "Car" + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";

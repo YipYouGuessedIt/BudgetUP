@@ -70,7 +70,7 @@ namespace PresentationTier.Views
             em.Note_Id = notede;
             Note no = new Note();
             no.Id = notede;
-            no.UserNote = note.ToString();
+            no.UserNote = note.Text.ToString();
             m.UpdateNotes(no);
             m.UpdateExpense(em);
 

@@ -87,6 +87,7 @@
                 <asp:Label runat="server">Email Address* </asp:Label><asp:TextBox required="true"  type="email" runat="server" ID="email" name="email" CssClass="form-control" Height="25px"></asp:TextBox>
                     <br />
                 <asp:Label runat="server" ID="Label3">Password*</asp:Label><asp:TextBox required="true"  type="password" runat="server" ID="password"  name="email" CssClass="form-control" Height="25px"></asp:TextBox>
+                    <asp:Label runat="server" ID="Label4">Password*</asp:Label><asp:TextBox required="true"  type="password" runat="server" ID="passwordconfirm"  name="email" CssClass="form-control" Height="25px"></asp:TextBox><br />
                     <br />
                     <br />
                 <asp:Label runat="server">Role*</asp:Label> 

@@ -82,7 +82,7 @@ namespace PresentationTier.Views
                         {
                             if (counter == value)
                             {
-                                project.AddUserProject(userID, title.Text, goal.Text, length, m.Id , start, end);
+                                this.Session["projectID"] = project.AddUserProject(userID, title.Text, goal.Text, length, m.Id , start, end);
                             }
                             counter++;
                         }
@@ -92,10 +92,11 @@ namespace PresentationTier.Views
                   }
                        
             }    
+
  
                 
             }
-            Response.Redirect("ProjectsPage.aspx");
+            Response.Redirect("ObjectivesPage.aspx");
         }
 
        

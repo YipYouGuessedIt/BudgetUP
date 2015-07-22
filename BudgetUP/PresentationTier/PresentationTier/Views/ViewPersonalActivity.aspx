@@ -77,10 +77,6 @@
                     <asp:ListItem Value="0">No</asp:ListItem>
                     <asp:ListItem Value="1">Yes</asp:ListItem>
                 </asp:DropDownList><br />
-                <asp:Label ID="Label2" runat="server" Text="Amount(in Rands)*"></asp:Label>
-                <br />
-                <asp:TextBox ID="amount" runat="server" type="number" CssClass="form-control"></asp:TextBox>
-                <br />
                <asp:Label runat="server">Notes</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Edit" OnClick="Unnamed4_Click" /><br /><br />

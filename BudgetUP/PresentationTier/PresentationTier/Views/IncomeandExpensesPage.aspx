@@ -87,6 +87,7 @@
                         <asp:ListItem Value="7">Donations(Income)</asp:ListItem>
                     </asp:DropDownList><br /><br />
 				    <asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" OnClick="Unnamed1_Click" ></asp:Button>
+                    <a href="EditActivities.aspx" class="btn btn-info btn-lg"  >Edit activity</a>
                     <a href="ActivitiesPage.aspx" class="btn btn-info btn-lg"  >Back</a><br /><br />
                 
 			    </div>

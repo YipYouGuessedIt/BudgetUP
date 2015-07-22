@@ -62,7 +62,7 @@
                 <h1>Car Expense</h1><hr />
                 		<p>Fill in the fields and click the add button to add a new Car expense.Note that all required fields are marked with a *.</p>
 		<hr/>
-                 <asp:Label runat="server">Operation Type*</asp:Label><asp:DropDownList required runat="server" ID="fleet" CssClass="form-control" OnInit="oppType_Init">
+                 <asp:Label runat="server">UP Fleet*</asp:Label><asp:DropDownList required runat="server" ID="fleet" CssClass="form-control" OnInit="oppType_Init">
                     <asp:ListItem Value="0">Yes</asp:ListItem>
                     <asp:ListItem Value="1">No</asp:ListItem>
                 </asp:DropDownList><br />

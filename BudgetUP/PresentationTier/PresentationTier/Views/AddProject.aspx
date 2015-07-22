@@ -67,7 +67,7 @@
                 <asp:Label runat="server">Overall Goal of the Project* </asp:Label><asp:TextBox required runat="server" ID="goal" name="goal" CssClass="form-control"></asp:TextBox><br />
                 <%--<asp:Label runat="server">Start Date</asp:Label><asp:TextBox required type="number" runat="server" ID="length" name="length" CssClass="form-control"></asp:TextBox><br />--%>
                 <asp:Label runat="server">Start Date* </asp:Label><asp:TextBox required type="date" runat="server" ID="sdate" name="sdate" CssClass="form-control">2015-01-01</asp:TextBox><br />
-                <asp:Label runat="server">Start Date* </asp:Label><asp:TextBox required type="date" runat="server" ID="edate"  name="sdate" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server">End Date* </asp:Label><asp:TextBox required type="date" runat="server" ID="edate"  name="sdate" CssClass="form-control"></asp:TextBox><br />
                 <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a>
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" OnClick="AddProject_Click" /><br /><br />
             </div>
