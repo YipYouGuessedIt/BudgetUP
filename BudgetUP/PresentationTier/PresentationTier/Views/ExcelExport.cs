@@ -32,7 +32,8 @@ namespace PresentationTier.Views
 
             public Project_Settings projSettings = new Project_Settings();
             public List<Income> incomeList = new List<Income>();
-            public List<Bursary> bursaryList = new List<Bursary>();
+            public List<BursaryType> bursaryList = new List<BursaryType>();
+            public List<Bursary> bursary2List = new List<Bursary>();
             public List<UPStaffMember> staffIncome = new List<UPStaffMember>();
 
             public List<obj> objList = new List<obj>();
@@ -116,6 +117,8 @@ namespace PresentationTier.Views
                 row++;
 
                 firstAmountRow = row+1;
+
+                #region Write Amount Table
                 #region Column Headings
                 //write column headings
                 ws.Cells[row, col++].Value = "Objectives".ToUpper();
@@ -173,7 +176,11 @@ namespace PresentationTier.Views
                         ws.Cells[row, col++].Value = activity.actName.ToString();
                         ws.Cells[row, col++].Value = activity.startDate.Date.ToString("dd MMMM yyyy");
                         ws.Cells[row, col++].Value = activity.endDate.Date.ToString("dd MMMM yyyy");
-
+                        int AmountOfMonths = ((activity.endDate.Year - activity.startDate.Year) * 12) + activity.endDate.Month - activity.startDate.Month;
+                        if(AmountOfMonths == 0)
+                        {
+                            AmountOfMonths = 1;
+                        }
                         ExpenseColumns = col;
                         double total = 0;
                         int monthCount = 1;
@@ -204,7 +211,7 @@ namespace PresentationTier.Views
                                     {
                                         if (monthCount > MonthInc)
                                         {
-                                            total += upstaff.Expens.Amount;
+                                            total += upstaff.Expens.Amount/AmountOfMonths;
                                             int years = monthCount / 12;
                                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                             ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
@@ -212,7 +219,7 @@ namespace PresentationTier.Views
                                         }
                                         else
                                         {
-                                            total += upstaff.Expens.Amount;
+                                            total += upstaff.Expens.Amount/AmountOfMonths;
                                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                             ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
                                         }
@@ -253,7 +260,7 @@ namespace PresentationTier.Views
                                     {
                                         if (monthCount > MonthInc)
                                         {
-                                            total += listRowValue.Expens.Amount;
+                                            total += listRowValue.Expens.Amount / AmountOfMonths;
                                             int years = monthCount / 12;
                                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                             ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
@@ -261,7 +268,7 @@ namespace PresentationTier.Views
                                         }
                                         else
                                         {
-                                            total += listRowValue.Expens.Amount;
+                                            total += listRowValue.Expens.Amount / AmountOfMonths;
                                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                             ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
                                         }
@@ -302,7 +309,7 @@ namespace PresentationTier.Views
                                     {
                                         if (monthCount > MonthInc)
                                         {
-                                            total += listRowValue.Expens.Amount;
+                                            total += listRowValue.Expens.Amount / AmountOfMonths;
                                             int years = monthCount / 12;
                                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                             ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
@@ -310,7 +317,7 @@ namespace PresentationTier.Views
                                         }
                                         else
                                         {
-                                            total += listRowValue.Expens.Amount;
+                                            total += listRowValue.Expens.Amount / AmountOfMonths;
                                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                             ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
                                         }
@@ -351,7 +358,7 @@ namespace PresentationTier.Views
                                     {
                                         if (monthCount > MonthInc)
                                         {
-                                            total += listRowValue.Expen.Amount;
+                                            total += listRowValue.Expen.Amount / AmountOfMonths;
                                             int years = monthCount / 12;
                                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                             ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
@@ -359,7 +366,7 @@ namespace PresentationTier.Views
                                         }
                                         else
                                         {
-                                            total += listRowValue.Expen.Amount;
+                                            total += listRowValue.Expen.Amount / AmountOfMonths;
                                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                             ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
                                         }
@@ -661,7 +668,7 @@ namespace PresentationTier.Views
                                     {
                                         if (monthCount > MonthInc)
                                         {
-                                            total += listRowValue.Expens.Amount;
+                                            total += listRowValue.Expens.Amount / AmountOfMonths;
                                             int years = monthCount / 12;
                                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                             ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
@@ -669,7 +676,7 @@ namespace PresentationTier.Views
                                         }
                                         else
                                         {
-                                            total += listRowValue.Expens.Amount;
+                                            total += listRowValue.Expens.Amount / AmountOfMonths;
                                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                             ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
                                         }
@@ -698,7 +705,7 @@ namespace PresentationTier.Views
                 
                 //Total Columns
                 ws.Cells[row, 1].Value = "Total Expenses";
-                FormatColumnTotal(ws, 1, row + 1, row);
+                FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
                 for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
                 {
                     ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
@@ -711,13 +718,18 @@ namespace PresentationTier.Views
 
                 #region Write Incomes
 
-                ws.Cells[row, 1].Value = "Incomes and Donations";
-                FormatAmountCells(ws, 1, row, LastAmountColumn, row);
+                ws.Cells[row, 1].Value = "Minus other donations, in-kind support and pledges / Incomes and Donations (Pick one?)";
+                FormatAmountCells(ws, 1, LastAmountColumn, row, row);
                 row++;
                 col = descriptionColumn;
 
+                int incomeRowStart = row + 1;
+                int incomeRowLast = 1;
+
+                #region Donations
                 if (projectInfo.incomeList.Count() != 0)
                 {
+                    int AmountOfMonths = ((projectInfo.endDate.Year - projectInfo.startDate.Year) * 12) + projectInfo.endDate.Month - projectInfo.startDate.Month;
                     double total = 0;
                     int colSub = 1;
                     DateTime tempStartDate = projectInfo.startDate;
@@ -739,17 +751,17 @@ namespace PresentationTier.Views
                             {
                                 if (monthCount > MonthInc)
                                 {
-                                    total += income.Amount;
+                                    total += income.Amount / AmountOfMonths;
                                     int years = monthCount / 12;
                                     ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                    ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                    ws.Cells[row, col].Value = total;
                                     colSub++;
                                 }
                                 else
                                 {
-                                    total += income.Amount;
+                                    total += income.Amount / AmountOfMonths;
                                     ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                    ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    ws.Cells[row, col].Value = total;
                                 }
                             }
                             monthCount++;
@@ -763,56 +775,633 @@ namespace PresentationTier.Views
                         tempStartDate = projectInfo.startDate;
                         row++;
                     }
-                    //while (tempStartDate < projectInfo.endDate)
-                    //{
-                    //    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                    //    ws.Cells[row, col].Value = 0;
-                    //    col = descriptionColumn;
-                    //    foreach (Income income in projectInfo.incomeList)
-                    //    {
-                            
-                    //        ws.Cells[row, col++].Value = income.DonorName;
-                    //        //Write note value
-                    //        ws.Cells[row, col++].Value = "7." + noteID++;
+                }
+                #endregion
 
-                    //        if (projectInfo.startDate <= tempStartDate && projectInfo.endDate >= tempStartDate)
-                    //        {
-                    //            if (monthCount > MonthInc)
-                    //            {
-                    //                total += income.Amount;
-                    //                int years = monthCount / 12;
-                    //                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                    //                ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
-                    //                colSub++;
-                    //            }
-                    //            else
-                    //            {
-                    //                total += income.Amount;
-                    //                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                    //                ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
-                    //            }
-                    //        }
-                    //        monthCount++;
-                    //        tempStartDate = tempStartDate.AddMonths(1);
-                    //        col++;
-                    //        total = 0;
-                    //    }                        
-                    //}
-                    //ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                    //ws.Cells[row, LastAmountColumn+1].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                    //col = ExpenseColumns;
-                    //row++;
+                #region up staff income
+                if (projectInfo.staffIncome.Count() != 0)
+                {
+                    double total = 0;
+                    int colSub = 1;
+                    DateTime tempStartDate = projectInfo.startDate;
+                    int AmountOfMonths = ((projectInfo.endDate.Year - projectInfo.startDate.Year) * 12) + projectInfo.endDate.Month - projectInfo.startDate.Month;
+                        
+                    int monthCount = 1;
+                    int noteID = 1;
+                    foreach (UPStaffMember income in projectInfo.staffIncome)
+                    {
+
+                        ws.Cells[row, col++].Value = "UP Staff";
+                        //Write note value
+                        ws.Cells[row, col++].Value = "8." + noteID++;
+
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col].Value = 0;
+
+                        while (tempStartDate < projectInfo.endDate)
+                        {
+                            if (projectInfo.startDate <= tempStartDate && projectInfo.endDate >= tempStartDate)
+                            {
+                                if (monthCount > MonthInc)
+                                {
+                                    total += income.Expens.Amount / AmountOfMonths;
+                                    int years = monthCount / 12;
+                                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                    ws.Cells[row, col].Value = total; 
+                                    colSub++;
+                                }
+                                else
+                                {
+                                    total += income.Expens.Amount / AmountOfMonths;
+                                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                    ws.Cells[row, col].Value = total;
+                                }
+                            }
+                            monthCount++;
+                            tempStartDate = tempStartDate.AddMonths(1);
+                            col++;
+                            total = 0;
+                        }
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, LastAmountColumn + 1].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                        col = ExpenseColumns;
+                        tempStartDate = projectInfo.startDate;
+                        row++;
+                    }
+                    #endregion
+                }
+                incomeRowLast = row - 1;
+                FormatAmountCells(ws, FirstAmountColumn, firstAmountRow, LastAmountColumn, lastAmountRow);
+
+                //Total Columns
+                ws.Cells[row, 1].Value = "Total Incomes";
+                FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
+                for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+                {
+                    ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, i].Formula = SumRange(i, incomeRowStart, i, incomeRowLast - 1);
+                }
+                int incomeTotals = row;
+                #endregion
+
+                row = row + 2;
+                #region Incomes - Expenses
+                ws.Cells[row, 1].Value = "Sub Total";
+                ws.Cells[row, FirstAmountColumn -1].Value = "*" ;
+                FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
+                for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+                {
+                    ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, i].Formula = MinusStuff(i,ExpenseTotalRow,i,incomeTotals);
+                }
+                int SubTotalRow = row;
+                #endregion
+
+                row = row+1;
+                #region INSTITUTIONAL/ INDIRECT COST
+                int indirectTotals = 1;
+                ws.Cells[row, 1].Value = "INSTITUTIONAL/ INDIRECT COST";
+                FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
+                for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+                {
+                    ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, i].Formula = "=(" + GetExcelColumnName(i) + SubTotalRow +"* " +projectInfo.projSettings.InstitutionalCost + ")";
+                }
+                indirectTotals = row;
+                #endregion
+
+                
+                row = row + 2;
+                #region bursaries/Scholarships
+                int bursaryTotals = 1;
+                ws.Cells[row, 1].Value = "Bursaries/Scholarships";
+
+                //Write note value
+                ws.Cells[row, FirstAmountColumn-1].Value = "9";
+                col = FirstAmountColumn;
+                if (projectInfo.bursaryList.Count() != 0)
+                {
+                    int AmountOfMonths = ((projectInfo.endDate.Year - projectInfo.startDate.Year) * 12) + projectInfo.endDate.Month - projectInfo.startDate.Month;
+                    if(AmountOfMonths == 0)
+                    {
+                        AmountOfMonths = 1;
+                    }
+                    double total = 0;
+                    DateTime tempStartDate = projectInfo.startDate;
+                    int monthCount = 1;
+                    while(tempStartDate >= projectInfo.startDate && tempStartDate <= projectInfo.endDate)
+                    {
+                        foreach (BursaryType bursary in projectInfo.bursaryList)
+                        {
+                            total += bursary.AnnualCost / AmountOfMonths;
+                        }
+
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col++].Value = total;
+                        total = 0;
+                        tempStartDate = tempStartDate.AddMonths(1);
+                    }
+
+                    ws.Cells[row, lastAmountRow+1].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, lastAmountRow+1].Formula = SumRange(firstAmountRow, row, lastAmountRow, row - 1);
+                }
+                bursaryTotals = row++;
+                #endregion
+
+                #region FUNDING OPPORTUNITY
+                ws.Cells[row, 1].Value = "FUNDING OPPORTUNITY";
+                FormatFinalTotal(ws, 1, LastAmountColumn + 1, row);
+                for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+                {
+                    ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, i].Formula = "=" + GetExcelColumnName(i) + SubTotalRow + "+" + GetExcelColumnName(i) + indirectTotals + "-" + GetExcelColumnName(i) + bursaryTotals;
                 }
 
                 #endregion
 
+#endregion
+
 
                 #region Notes
                 //Write main notes heading
-                col = 1; 
-                //ws.Cells[row, col].Value = "Budget Notes";
-                //FormatColumnHeadings(ws, 1, LastAmountColumn, row++);
+                col = 1;
+                row += 2;
 
+                ws.Cells[row, col].Value = "*The indirect/institutional cost, charged by the University of Pretoria on all projects, is [current percentage]% of total project expenses";
+
+                row += 2;
+                ws.Cells[row, col].Value = "Budget Notes";
+                FormatHeadings(ws, 1, 5, row++);
+
+                #region Write UP Staff
+                col=1;
+                ws.Cells[row++, col].Value = "1. UP Staff Members";
+                ws.Cells[row, col++].Value = "ID";
+                ws.Cells[row, col++].Value = "Note ID";
+                ws.Cells[row, col++].Value = "Note";
+                ws.Cells[row, col++].Value = "Subvention Levy";
+                ws.Cells[row, col++].Value = "Amount";
+                col = 1;
+                row++;
+                foreach (Proj.obj objective in projectInfo.objList)
+                {
+                    foreach (Proj.obj.act activity in objective.ActivitysList)
+                    {
+                        #region Write each expense
+                        #region UP staff
+                        //====================UP staff====================    
+                        if (activity.upstaffList.Count() != 0)
+                        {
+                            //Write note value                                                      
+
+                            foreach (UPStaffMember upstaff in activity.upstaffList)
+                            {
+                                ws.Cells[row, col++].Value = upstaff.Expens.Note_Id;
+                                ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+
+                                using (var dbContext = new dboEntities())
+                                {
+                                    //get project details
+                                    var queryNotes = from note
+                                                in dbContext.Notes
+                                                     where note.Id == upstaff.Expens.Note_Id
+                                                     select note;
+
+                                    foreach (Note qn in queryNotes)
+                                    {
+                                        ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
+                                    }
+                                }
+                                if (upstaff.SubventionLevy == false)
+                                {
+                                    ws.Cells[row, col++].Value = "No";
+                                }
+                                else
+                                {
+                                    ws.Cells[row, col++].Value = "Yes";
+                                }
+
+
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = upstaff.Expens.Amount;
+                                col = 1;
+                                row++;
+                            }
+                        }
+                        #endregion
+                        #endregion
+                    }                    
+                }              
+                #endregion
+
+                row += 2;
+
+                #region Write Contractors
+                col=1;
+                ws.Cells[row++, col].Value = "2. External Service Provider";
+                ws.Cells[row, col++].Value = "ID";
+                ws.Cells[row, col++].Value = "Note ID";
+                ws.Cells[row, col++].Value = "Note";
+                ws.Cells[row, col++].Value = "Amount";
+                row++;
+                col=1;
+                foreach (Proj.obj objective in projectInfo.objList)
+                {
+                    foreach (Proj.obj.act activity in objective.ActivitysList)
+                    {
+                        #region Write each expense
+                        if (activity.contrList.Count() != 0)
+                        {
+                            //Write note value                                                      
+
+                            foreach (Contractor item in activity.contrList)
+                            {
+                                ws.Cells[row, col++].Value = item.Expens.Note_Id;
+                                ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+
+                                using (var dbContext = new dboEntities())
+                                {
+                                    //get project details
+                                    var queryNotes = from note
+                                                in dbContext.Notes
+                                                     where note.Id == item.Expens.Note_Id
+                                                     select note;
+
+                                    foreach (Note qn in queryNotes)
+                                    {
+                                        ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
+                                    }
+                                }
+
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = item.Expens.Amount;
+                                col = 1;
+                                row++;
+                            }
+                        }
+                        #endregion
+                    }
+                }
+                #endregion
+
+                row += 2;
+
+                #region Write Operational Expense Notes
+                col = 1;
+                ws.Cells[row++, col].Value = "3. Operational Expense Notes";
+                ws.Cells[row, col++].Value = "ID";
+                ws.Cells[row, col++].Value = "Note ID";
+                ws.Cells[row, col++].Value = "Note";
+                ws.Cells[row, col++].Value = "Type";
+                ws.Cells[row, col++].Value = "Amount";
+                row++;
+                col = 1;
+                foreach (Proj.obj objective in projectInfo.objList)
+                {
+                    foreach (Proj.obj.act activity in objective.ActivitysList)
+                    {
+                        #region Write each expense
+                        if (activity.OperatList.Count() != 0)
+                        {
+                            //Write note value                                                      
+
+                            foreach (Operational item in activity.OperatList)
+                            {
+                                ws.Cells[row, col++].Value = item.Expens.Note_Id;
+                                ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+
+                                using (var dbContext = new dboEntities())
+                                {
+                                    var queryNotes = from note
+                                                in dbContext.Notes
+                                                     where note.Id == item.Expens.Note_Id
+                                                     select note;
+                                    foreach(Note qn in queryNotes)
+                                    {
+                                        ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
+                                    }
+                                    
+
+                                    var queryOp = from operation
+                                                in dbContext.Operation_Type
+                                                 where operation.Id == item.Operation_TypeId
+                                                 select operation;
+
+                                    foreach (Operation_Type qn in queryOp)
+                                    {
+                                        ws.Cells[row, col++].Value = qn.Description + "\n\r\n\r";
+                                    }
+                                }
+
+
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = item.Expens.Amount;
+                                col = 1;
+                                row++;
+                            }
+                        }
+                        #endregion
+                    }
+                }
+                #endregion
+
+                row += 2;
+
+                #region Write Car Notes
+                col = 1;
+                ws.Cells[row++, col].Value = "4. Car Expense Notes";
+                ws.Cells[row, col++].Value = "ID";
+                ws.Cells[row, col++].Value = "Note ID";
+                ws.Cells[row, col++].Value = "Note";
+                ws.Cells[row, col++].Value = "UP Fleet";
+                row++;
+                col = 1;
+                foreach (Proj.obj objective in projectInfo.objList)
+                {
+                    foreach (Proj.obj.act activity in objective.ActivitysList)
+                    {
+                        #region Write each expense
+                        if (activity.OperatList.Count() != 0)
+                        {
+                            //Write note value                                                      
+
+                            foreach (Car item in activity.carList)
+                            {
+                                ws.Cells[row, col++].Value = item.Expen.Note_Id;
+                                ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+
+                                using (var dbContext = new dboEntities())
+                                {
+                                    var queryNotes = from note
+                                                in dbContext.Notes
+                                                     where note.Id == item.Expen.Note_Id
+                                                     select note;
+                                    foreach (Note qn in queryNotes)
+                                    {
+                                        ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
+                                    }
+                                }
+
+                                if (item.UPFleet == false)
+                                {
+                                    ws.Cells[row, col++].Value = "No";
+                                }
+                                else
+                                {
+                                    ws.Cells[row, col++].Value = "Yes";
+                                }
+
+                                col = 1;
+                                row++;
+                            }
+                        }
+                        #endregion
+                    }
+                }
+                #endregion
+
+                row += 2;
+
+                #region Write Travel Notes
+                col = 1;
+                ws.Cells[row++, col].Value = "5. Travel Expense Notes";
+                ws.Cells[row, col++].Value = "ID";
+                ws.Cells[row, col++].Value = "Note ID";
+                ws.Cells[row, col++].Value = "Note";
+                ws.Cells[row, col++].Value = "Departure Location";
+                ws.Cells[row, col++].Value = "Destination";
+                ws.Cells[row, col++].Value = "Departure Date";
+                ws.Cells[row, col++].Value = "Duration (Days)";
+                ws.Cells[row, col++].Value = "Accomodation";
+                ws.Cells[row, col++].Value = "Airline";
+                ws.Cells[row, col++].Value = "Allowance";
+                ws.Cells[row, col++].Value = "Gautrain";
+                ws.Cells[row, col++].Value = "Visa";
+                row++;
+                col = 1;
+                foreach (Proj.obj objective in projectInfo.objList)
+                {
+                    foreach (Proj.obj.act activity in objective.ActivitysList)
+                    {
+                        #region Write each expense
+                        if (activity.travList.Count() != 0)
+                        {
+                            //Write note value                                                      
+
+                            foreach (Travel item in activity.travList)
+                            {
+                                ws.Cells[row, col++].Value = item.Expens.Note_Id;
+                                ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+
+                                using (var dbContext = new dboEntities())
+                                {
+                                    var queryNotes = from note
+                                                in dbContext.Notes
+                                                     where note.Id == item.Expens.Note_Id
+                                                     select note;
+                                    foreach (Note qn in queryNotes)
+                                    {
+                                        ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
+                                    }
+                                }
+
+                                ws.Cells[row, col++].Value =item.DepatureLocation;
+                                ws.Cells[row, col++].Value = item.Destination;
+                                ws.Cells[row, col++].Value = item.DepartureDate;
+                                ws.Cells[row, col++].Value = item.DurationDays;
+
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
+
+                                col = 1;
+                                row++;
+                            }
+                        }
+                        #endregion
+                    }
+                }
+                #endregion
+
+                row += 2;
+
+                #region Write Car Notes
+                col = 1;
+                ws.Cells[row++, col].Value = "6. Equipment Notes";
+                ws.Cells[row, col++].Value = "ID";
+                ws.Cells[row, col++].Value = "Note ID";
+                ws.Cells[row, col++].Value = "Note";
+                ws.Cells[row, col++].Value = "Item Amount";
+                row++;
+                col = 1;
+                foreach (Proj.obj objective in projectInfo.objList)
+                {
+                    foreach (Proj.obj.act activity in objective.ActivitysList)
+                    {
+                        #region Write each expense
+                        if (activity.OperatList.Count() != 0)
+                        {
+                            //Write note value                                                      
+
+                            foreach (Equipment item in activity.equipList)
+                            {
+                                ws.Cells[row, col++].Value = item.Expens.Note_Id;
+                                ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+
+                                using (var dbContext = new dboEntities())
+                                {
+                                    var queryNotes = from note
+                                                in dbContext.Notes
+                                                     where note.Id == item.Expens.Note_Id
+                                                     select note;
+                                    foreach (Note qn in queryNotes)
+                                    {
+                                        ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
+                                    }
+                                }
+
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = item.Expens.Amount;
+
+                                col = 1;
+                                row++;
+                            }
+                        }
+                        #endregion
+                    }
+                }
+                #endregion
+
+                row += 2;
+
+                #region Write Income Notes
+                col = 1;
+                ws.Cells[row++, col].Value = "7. Incomes/Donations/Gifts";
+                ws.Cells[row, col++].Value = "ID";
+                ws.Cells[row, col++].Value = "Note ID";
+                ws.Cells[row, col++].Value = "Note";
+                ws.Cells[row, col++].Value = "Item Amount";
+                row++;
+                col = 1;
+                int itemID = 1;
+                foreach (Income item in projectInfo.incomeList)
+                {
+                    ws.Cells[row, col++].Value = item.Note_Id;
+                    ws.Cells[row, col++].Value = "1." + itemID++;
+
+                    using (var dbContext = new dboEntities())
+                    {
+                        var queryNotes = from note
+                                    in dbContext.Notes
+                                         where note.Id == item.Note_Id
+                                         select note;
+                        foreach (Note qn in queryNotes)
+                        {
+                            ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
+                        }
+                    }
+
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, col++].Value = item.Amount;
+
+                    col = 1;
+                    row++;
+                }
+                #endregion
+
+                row += 2;
+
+                #region Write UP Staff income
+                col = 1;
+                ws.Cells[row++, col].Value = "8. UP Staff Members Income Notes";
+                ws.Cells[row, col++].Value = "ID";
+                ws.Cells[row, col++].Value = "Note ID";
+                ws.Cells[row, col++].Value = "Note";
+                ws.Cells[row, col++].Value = "Subvention Levy";
+                ws.Cells[row, col++].Value = "Amount";
+                col = 1;
+                row++;
+                itemID = 1;
+                foreach (UPStaffMember item in projectInfo.staffIncome)
+                {
+                    ws.Cells[row, col++].Value = item.Expens.Note_Id;
+                    ws.Cells[row, col++].Value = "8." + itemID++;
+
+                    using (var dbContext = new dboEntities())
+                    {
+                        //get project details
+                        var queryNotes = from note
+                                    in dbContext.Notes
+                                         where note.Id == item.Expens.Note_Id
+                                            select note;
+
+                        foreach (Note qn in queryNotes)
+                        {
+                            ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
+                        }
+                    }
+                    if (item.SubventionLevy == false)
+                    {
+                        ws.Cells[row, col++].Value = "No";
+                    }
+                    else
+                    {
+                        ws.Cells[row, col++].Value = "Yes";
+                    }
+
+
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, col++].Value = item.Expens.Amount;
+                    col = 1;
+                    row++;
+                     
+                }
+                #endregion
+
+                row += 2;
+
+                #region WriteDonation
+                col = 1;
+                ws.Cells[row++, col].Value = "9. Bursaries/Scholarships";
+                ws.Cells[row, col++].Value = "ID";
+                ws.Cells[row, col++].Value = "Note ID";
+                ws.Cells[row, col++].Value = "Note";
+                ws.Cells[row, col++].Value = "Type";
+                col = 1;
+                row++;
+                itemID = 1;
+                foreach (Bursary item in projectInfo.bursary2List)
+                {
+                    ws.Cells[row, col++].Value = item.Note_Id;
+                    ws.Cells[row, col++].Value = "9" ;
+
+                    using (var dbContext = new dboEntities())
+                    {
+                        //get project details
+                        var queryNotes = from note
+                                    in dbContext.Notes
+                                         where note.Id == item.Note_Id
+                                         select note;
+
+                        foreach (Note qn in queryNotes)
+                        {
+                            ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
+                        }
+                    }
+
+                    ws.Cells[row, col++].Value = item.BursaryType.Description;
+                    col = 1;
+                    row++;
+
+                }
+                #endregion
                 #endregion
 
                 //FInal Worksheet formatting
@@ -826,6 +1415,16 @@ namespace PresentationTier.Views
         }
 
         #region Math
+        public string MinusStuff(int col1, int row1, int col2, int row2)
+        {
+            //double body = 1 + (interestRate / timesPerYear);
+            //double exponent = timesPerYear * years;
+            //amount = amount * Math.Pow(body, exponent);
+            string sum = "=(" + GetExcelColumnName(col1) + row1 + "-" + GetExcelColumnName(col2) + row2 + ")";//"POWER("++",1+"+(interestRate / timesPerYear)+")"
+            return sum;
+        }
+        
+        
         public string SumRange(int col1, int row1, int col2, int row2)
         {
             //double body = 1 + (interestRate / timesPerYear);
@@ -903,8 +1502,12 @@ namespace PresentationTier.Views
                             in dbContext.Bursaries
                                    where bursary.ProjectId == ProjectID
                                    select bursary;
-
-                projectInfo.bursaryList = queryBursary.ToList<Bursary>();               
+                projectInfo.bursary2List = queryBursary.ToList<Bursary>();
+                foreach(Bursary b in queryBursary)
+                {
+                    projectInfo.bursaryList.Add(b.BursaryType);
+                }
+               
 
 
                 //get Objective
@@ -1214,6 +1817,16 @@ namespace PresentationTier.Views
             using (var range = worksheet.Cells[startRow, startCol, endRow, endCol])
             {
                 range.AutoFitColumns();
+            }
+        }
+
+        public void FormatFinalTotal(ExcelWorksheet worksheet, int startCol, int endCol, int row)
+        {
+            using (var range = worksheet.Cells[row, startCol, row, endCol])
+            {
+                range.Style.Font.Bold = true;
+                range.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
             }
         }
 

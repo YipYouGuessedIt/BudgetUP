@@ -83,6 +83,8 @@
 				<a href="AddObjectives.aspx" class="btn btn-info btn-lg"  >Add new Objective</a>
                 <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a><br /><br />
                 <a href="EditProject.aspx" class="btn btn-info btn-lg"  >Edit Project</a><br /><br />
+                <asp:Button ID="DownloadReport" runat="server" CssClass="btn-info btn-lg btn" Text="Download Budget" OnClick="DownloadReport_Click" />
+                <br />
 			    <hr />
             </div>
 
@@ -94,8 +96,6 @@
                 <asp:PlaceHolder ID="ObjectiveLister" runat="server"></asp:PlaceHolder>			
 			</div>
         </div>
-        
-    </div>
     </form>
 </body>
 </html>

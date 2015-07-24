@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BizTier;
+using System.IO;
 
 namespace PresentationTier.Views
 {
@@ -165,6 +166,30 @@ namespace PresentationTier.Views
             {
                 errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void DownloadReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExcelExport temp = new ExcelExport();
+                var ProjectFile = temp.PrintProject(Convert.ToInt32(Session["projectID"].ToString()));
+
+                var memoryStream = new MemoryStream();
+                ProjectFile.CopyTo(memoryStream);
+
+                Response.Clear();
+                Response.ContentType = "application/force-download";
+                Response.AddHeader("content-disposition", "attachment; filename=" + temp.ProjectName +" " + DateTime.Now.ToString(@"yyyy-MM-dd") + ".xlsx");
+                Response.BinaryWrite(memoryStream.ToArray());
+                Response.End();
             }
             catch (Exception err)
             {

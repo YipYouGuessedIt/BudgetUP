@@ -45,29 +45,7 @@ namespace PresentationTier.Styles
             }
         }
 
-        protected void Unnamed_Click(object sender, EventArgs e)
-        {
-            try
-            {
-            ExcelExport temp = new ExcelExport();
-            var ProjectFile = temp.PrintProject(1);
-
-            var memoryStream = new MemoryStream();
-            ProjectFile.CopyTo(memoryStream);
-
-            Response.Clear();
-            Response.ContentType = "application/force-download";
-            Response.AddHeader("content-disposition", "attachment; filename=" + /*temp.ProjectName +*/" " + DateTime.Now.ToString(@"yyyy-MM-dd") + ".xlsx");
-            Response.BinaryWrite(memoryStream.ToArray());
-            Response.End();
-            }
-            catch (Exception err)
-            {
-
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
-            }
-        }
+  
 
         protected void Unnamed1_Click(object sender, EventArgs e)
         {
