@@ -11,6 +11,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (this.Session["ActID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -25,16 +28,48 @@ namespace PresentationTier.Views
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed5_Click(object sender, EventArgs e)
         {
+            try
+    {
             ServiceContracts sc = new ServiceContracts();
             int noteID = sc.AddNotes(note.Text);
             int actID = Convert.ToInt32(this.Session["ActID"].ToString());
             int expID = sc.AddExpense(actID, Convert.ToDouble( quantity.Text) , noteID);
             sc.AddCarExpense(Convert.ToBoolean(fleet.SelectedIndex), expID);
+            Response.Redirect("IncomeandExpensesPage.aspx");
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
             
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

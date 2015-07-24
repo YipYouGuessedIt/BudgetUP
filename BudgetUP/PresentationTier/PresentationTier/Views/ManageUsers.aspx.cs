@@ -12,6 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -49,19 +52,50 @@ namespace PresentationTier.Views
                     BursaryList.Controls.Add(add);
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Eclicker(object sender, EventArgs e)
         {
+            try
+            {
             LinkButton m = (LinkButton)sender;
             char[] ma = "Income".ToCharArray();
             Session["OtherUserID"] = m.ID.Split(ma)[0];
             Response.Redirect("OtherProfilePage.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

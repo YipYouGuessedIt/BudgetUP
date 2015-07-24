@@ -11,6 +11,7 @@ namespace PresentationTier
 {
     public class Global : HttpApplication
     {
+        public static string genericErr = "An Error Occured Please contact ... for more help";
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup

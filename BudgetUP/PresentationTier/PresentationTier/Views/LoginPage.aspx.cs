@@ -13,29 +13,39 @@ namespace PresentationTier
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            errormsg.Visible = false;
         }
 
         protected void Unnamed3_Click(object sender, EventArgs e)
         {
             //Response.Redirect("ProjectsPage.aspx");
-           Boolean domaincorrect = checkEmailDomain();
-            if(domaincorrect == true)
+            try
             {
-                Boolean creds = checkCred();
-                if(creds == true)
+                Boolean domaincorrect = checkEmailDomain();
+                if (domaincorrect == true)
                 {
-                    Response.Redirect("ProjectsPage.aspx");
+                    Boolean creds = checkCred();
+                    if (creds == true)
+                    {
+                        Response.Redirect("ProjectsPage.aspx");
+                    }
+                    else
+                    {
+                        errormsg.Visible = true;
+                        messageforerror.Text = "The credentials entered were incorrect";
+
+                    }
                 }
                 else
                 {
-                    Response.Write("<script>alert('Details are incorrect')</script>");
-                    Response.Redirect("LoginPage.aspx");
+                    Pass.Text = "";
                 }
             }
-            else
+            catch(Exception err)
             {
-                Pass.Text = "";
+                
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;   
             }
         }
         /// <summary>
@@ -45,6 +55,8 @@ namespace PresentationTier
         /// <returns>true if it exists but false if it does not exist</returns>
         private Boolean checkEmailDomain()
         {
+            try
+            { 
             string dom = UserEmail.Text.Split('@')[1];
             List<EmailDomain> cred = new List<EmailDomain>();
             using (var dbContext = new dboEntities())
@@ -52,16 +64,27 @@ namespace PresentationTier
                 var query = dbContext.EmailDomains.Where(b => b.Domain == dom).FirstOrDefault();
                 if(query == null)
                 {
-                    Response.Write("<script>alert('Email Domain is incorrect')</script>");
+                    errormsg.Visible = true;
+                    messageforerror.Text = "The domain entered was incorrect";
                     return false;
                 }
                 return true;
                  
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+                return false;
+            }
         }
 
         private Boolean checkCred()
         {
+            try
+            { 
             using (var dbContext = new dboEntities())
             {
                 var query = dbContext.UserCredentials.Where(b => b.Email == UserEmail.Text && b.Password == Pass.Text).FirstOrDefault();
@@ -82,7 +105,30 @@ namespace PresentationTier
                 
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+                return false;
+            }
             
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

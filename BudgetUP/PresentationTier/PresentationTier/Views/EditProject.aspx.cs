@@ -12,6 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            { 
+            errormsg.Visible = true;
             if (Session["projectID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -74,6 +77,13 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void lengthType_Init(object sender, EventArgs e)
@@ -99,6 +109,8 @@ namespace PresentationTier.Views
 
         protected void AddProject_Click(object sender, EventArgs e)
         {
+            try
+            { 
             DateTime start = Convert.ToDateTime(sdate.Text);
             DateTime end = Convert.ToDateTime(edate.Text);
             if (end > start)
@@ -126,19 +138,60 @@ namespace PresentationTier.Views
                 p.EndDate = Convert.ToDateTime(edate.Text);
                 // p.DurationTypeId = Convert.ToInt32(lengthType.SelectedValue);
                 m.UpdateUserProject(p);
+                Response.Redirect("ObjectivesPage.aspx");
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
 
         }
          protected void AddProject_Click2(object sender, EventArgs e)
         {
+             try
+             { 
             ServiceContracts m = new ServiceContracts();
             
             m.DeleteUserProject(Convert.ToInt32(Session["projectID"].ToString()));
+             }
+             catch (Exception err)
+             {
+
+                 errormsg.Visible = true;
+                 messageforerror.Text = Class1.genericErr;
+             }
         }
 
          protected void Unnamed6_Click(object sender, EventArgs e)
          {
+             try
+             { 
              Response.Redirect("editSettings.aspx");
+             }
+             catch (Exception err)
+             {
+
+                 errormsg.Visible = true;
+                 messageforerror.Text = Class1.genericErr;
+             }
+         }
+
+         protected void Unnamed1_Click(object sender, EventArgs e)
+         {
+             try
+             {
+                 errormsg.Visible = false;
+                 Response.Redirect(Request.Url.AbsoluteUri);
+             }
+             catch (Exception err)
+             {
+
+                 errormsg.Visible = true;
+                 messageforerror.Text = Class1.genericErr;
+             }
          }
     }
 }

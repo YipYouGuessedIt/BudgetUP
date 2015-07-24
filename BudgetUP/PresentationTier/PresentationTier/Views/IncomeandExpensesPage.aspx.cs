@@ -12,6 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session["ActID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -46,10 +49,18 @@ namespace PresentationTier.Views
                 }
             }
             this.addDynamics();
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Eclicker(object sender, EventArgs e)
         {
+            try{
             LinkButton m = (LinkButton)sender;
             char[] ma = ";;".ToCharArray();
             string[] container = m.ID.Split(ma);
@@ -89,28 +100,55 @@ namespace PresentationTier.Views
             {
 
             }
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
             
         }
 
         protected void Iclicker(object sender, EventArgs e)
         {
+            try
+            {
             LinkButton m = (LinkButton)sender;
             char[] ma = "Income".ToCharArray();
             Session["IncID"] = m.ID.Split(ma)[0];
             Response.Redirect("ViewDonation.aspx");
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Bclicker(object sender, EventArgs e)
         {
+            try
+            { 
             LinkButton m = (LinkButton)sender;
             char[] ma = "Burser".ToCharArray(); 
             Session["BursIDID"] = m.ID.Split(ma)[0];
             Response.Redirect("ViewBursary.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
 
         protected void addDynamics()
         {
+            try
+            {
                 //Response.Write("<script>alert(' mdksnfc')</script>");
                 List<Expens> px = new List<Expens>();
                 using (var dbContext2 = new dboEntities())
@@ -278,6 +316,13 @@ namespace PresentationTier.Views
                     }
                 }
             }
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
         //
         //Bursary End
@@ -285,6 +330,8 @@ namespace PresentationTier.Views
 
         protected void Unnamed1_Click(object sender, EventArgs e)
         {
+            try
+            {
             if(Convert.ToInt32( DropDownList2.SelectedValue) == 1)
             {
                 Response.Redirect("Personelactivity.aspx");
@@ -322,10 +369,34 @@ namespace PresentationTier.Views
             {
 
             }
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click2(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            try
+            { 
             if (searcher.Text == "")
             {
                 foreach (LinkButton m in lister.Controls.OfType<LinkButton>())
@@ -371,6 +442,13 @@ namespace PresentationTier.Views
                     }
                 }
 
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
     }

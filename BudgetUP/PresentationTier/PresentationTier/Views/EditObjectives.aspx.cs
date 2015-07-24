@@ -10,8 +10,12 @@ namespace PresentationTier.Views
 {
     public partial class EditObjectives : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            { 
+                errormsg.Visible = false;
             if (Session["ObjectiveID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -46,22 +50,62 @@ namespace PresentationTier.Views
                     }
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed3_Click(object sender, EventArgs e)
         {
+            try
+            {
             ServiceContracts m = new ServiceContracts();
             Objective n = new Objective();
             n.Id = Convert.ToInt32(Session["ObjectiveID"].ToString());
             n.ObjectiveName = ObjName.Text;
             Response.Redirect("ActivitiesPage.aspx");
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
             
         }
         protected void Unnamed3_Click2(object sender, EventArgs e)
         {
+            try
+            {
             ServiceContracts m = new ServiceContracts();
             m.DeleteObjectives(Convert.ToInt32(Session["ObjectiveID"].ToString()));
             Response.Redirect("ActivitiesPage.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

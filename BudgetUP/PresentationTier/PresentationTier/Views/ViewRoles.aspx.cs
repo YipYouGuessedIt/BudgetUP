@@ -12,6 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
 
@@ -50,18 +53,36 @@ namespace PresentationTier.Views
                     RolesList.Controls.Add(add);                    
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Iclicker(object sender, EventArgs e)
         {
+            try
+            {
             LinkButton m = (LinkButton)sender;
             char[] ma = "Income".ToCharArray();
-            Session["RoleID"] = m.ID.Split(ma)[0];
+            Session["RoleTypeID"] = m.ID.Split(ma)[0];
             Response.Redirect("EditRoles.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            try
+            {
             if (searcher.Text == "")
             {
                 foreach (LinkButton m in RolesList.Controls)
@@ -88,6 +109,28 @@ namespace PresentationTier.Views
                 }
                 
 
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
 

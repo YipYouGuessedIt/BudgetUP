@@ -13,6 +13,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
 
@@ -23,10 +26,7 @@ namespace PresentationTier.Views
             {
                 Response.Redirect("ProjectsPage.aspx");
             }
-            if (this.Session["DomainID"] == null)
-            {
-                Response.Redirect("ProjectsPage.aspx");
-            }
+            
             if (this.Session["Admin"].ToString() == "True".ToString())
             {
                 adminnav.Visible = true;
@@ -55,22 +55,50 @@ namespace PresentationTier.Views
                     BursaryList.Controls.Add(add);
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed1_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
         protected void Eclicker(object sender, EventArgs e)
         {
+            try
+            {
             LinkButton m = (LinkButton)sender;
             char[] ma = "Income".ToCharArray();
             Session["DomainID"] = m.ID.Split(ma)[0];
             Response.Redirect("EditDomain.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            try
+            {
             if (searcher.Text == "")
             {
                 foreach (LinkButton m in BursaryList.Controls)
@@ -97,6 +125,13 @@ namespace PresentationTier.Views
                 }
 
 
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
     }

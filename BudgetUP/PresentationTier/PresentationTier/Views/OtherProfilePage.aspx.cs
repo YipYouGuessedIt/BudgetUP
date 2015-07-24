@@ -13,6 +13,9 @@ namespace PresentationTier.Views
         private int uc = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -54,13 +57,19 @@ namespace PresentationTier.Views
 
                         if (!IsPostBack)
                         {
-                            DropDownList2.SelectedValue = p.RoleId.ToString();
-                            DropDownList3.SelectedValue = p.FacultyId.ToString();
-                            DropDownList4.SelectedValue = p.Faculty.ToString();
-                            name.Text = p.Name;
-                            name0.Text = p.Surname;
-                            email.Text = query2.Email;
-                            password.Text = query2.Password;
+                            if (query2 != null)
+                            {
+
+                                DropDownList1.SelectedValue = Convert.ToInt32(p.Admin).ToString();
+                                DropDownList2.SelectedValue = p.RoleId.ToString();
+                                DropDownList3.SelectedValue = p.FacultyId.ToString();
+                                DropDownList4.SelectedValue = p.Faculty.ToString();
+                                name.Text = p.Name;
+                                name0.Text = p.Surname;
+                                email.Text = query2.Email;
+                                password.Text = query2.Password;
+                                passwordconfirm.Text = query2.Password;
+                            }
 
 
                         }
@@ -69,10 +78,19 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void DropDownList2_Init(object sender, EventArgs e)
         {
+            try
+            {
             DropDownList2.Items.Clear();
             using (var dbContext = new dboEntities())
             {
@@ -90,10 +108,19 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void DropDownList3_Init(object sender, EventArgs e)
         {
+            try
+            {
             DropDownList3.Items.Clear();
             using (var dbContext = new dboEntities())
             {
@@ -111,10 +138,19 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void DropDownList4_Init(object sender, EventArgs e)
         {
+            try
+            {
             DropDownList4.Items.Clear();
             using (var dbContext = new dboEntities())
             {
@@ -132,10 +168,20 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+
         }
 
         protected void Unnamed6_Click(object sender, EventArgs e)
         {
+            try
+            {
             if (password.Text != passwordconfirm.Text)
             {
                 bool mi = checkEmailDomain();
@@ -157,16 +203,28 @@ namespace PresentationTier.Views
                     c.Password = password.Text;
                     c.Id = uc;
                     m.UpdateUserCredentials(c);
+                    Response.Redirect("Settings.aspx");
                 }
+                
             }
             else
             {
+                errormsg.Visible = true;
+                messageforerror.Text = "The two passwords dont match";
+            }
+            }
+            catch (Exception err)
+            {
 
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
 
         private Boolean checkEmailDomain()
         {
+            try
+            {
             string dom = email.Text.Split('@')[1];
             List<EmailDomain> cred = new List<EmailDomain>();
             using (var dbContext = new dboEntities())
@@ -174,19 +232,54 @@ namespace PresentationTier.Views
                 var query = dbContext.EmailDomains.Where(b => b.Domain == dom).FirstOrDefault();
                 if (query == null)
                 {
-                    Response.Write("<script>alert('Email Domain is incorrect')</script>");
+                    errormsg.Visible = true;
+                    messageforerror.Text = "Email Domain is incorrect";
                     return false;
+                    
                 }
                 return true;
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+                return false;
+            }
         }
         protected void Unnamed_Click(object sender, EventArgs e)
         {
+            try
+            {
             ServiceContracts sc = new ServiceContracts();
             sc.DeleteUser(Convert.ToInt32(Session["OtherUserID"].ToString()));
+            Response.Redirect("Settings.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
 
 
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

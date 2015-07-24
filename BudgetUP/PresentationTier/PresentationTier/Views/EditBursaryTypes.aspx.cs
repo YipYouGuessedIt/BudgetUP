@@ -12,6 +12,8 @@ namespace PresentationTier.Views
     {
         protected void addBursaryType(object sender, EventArgs e)
         {
+            try
+            {
             ServiceContracts sc = new ServiceContracts();
 
             BursaryType bt = new BursaryType();
@@ -24,10 +26,20 @@ namespace PresentationTier.Views
             sc.UpdateBursaryType(bt);
 
             Response.Redirect("Settings.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -76,6 +88,13 @@ namespace PresentationTier.Views
 
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed_Click(object sender, EventArgs e)
@@ -85,9 +104,33 @@ namespace PresentationTier.Views
 
         protected void DeleteBursary(object sender, EventArgs e)
         {
+            try
+            {
             ServiceContracts sc = new ServiceContracts();
             sc.DeleteBursaryType(Convert.ToInt32(this.Session["BursaryTypeID"].ToString()));
             Response.Redirect("Settings.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

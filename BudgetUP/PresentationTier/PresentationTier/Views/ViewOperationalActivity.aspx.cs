@@ -14,6 +14,8 @@ namespace PresentationTier.Views
         int notede = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            { 
             if (Session["operationalID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -56,10 +58,19 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed5_Click(object sender, EventArgs e)
         {
+            try
+            { 
             ServiceContracts m = new ServiceContracts();
             Expens em = new Expens();
             Operational c = new Operational();
@@ -78,10 +89,20 @@ namespace PresentationTier.Views
             no.UserNote = note.ToString();
             m.UpdateNotes(no);
             m.UpdateExpense(em);
+            Response.Redirect("IncomeandExpensesPage.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void DropDownList1_Init(object sender, EventArgs e)
         {
+            try
+            { 
             DropDownList1.Items.Clear();
             using (var dbContext = new dboEntities())
             {
@@ -98,6 +119,28 @@ namespace PresentationTier.Views
                     DropDownList1.Items.Add(m);
                 }
 
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
     }

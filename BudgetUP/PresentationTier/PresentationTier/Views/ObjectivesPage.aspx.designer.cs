@@ -13,6 +13,24 @@ namespace PresentationTier.Views {
     public partial class ObjectivesPage {
         
         /// <summary>
+        /// errormsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errormsg;
+        
+        /// <summary>
+        /// messageforerror control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label messageforerror;
+        
+        /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>

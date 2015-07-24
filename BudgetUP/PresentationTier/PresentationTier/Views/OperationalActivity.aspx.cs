@@ -12,24 +12,67 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
+            if (this.Session["Admin"].ToString() == "False".ToString())
+            {
+                Response.Redirect("ProjectsPage.aspx");
+            }
+
+            if (this.Session["ActID"] == null)
+            {
+                Response.Redirect("ProjectsPage.aspx");
+            }
+
+
+            if (this.Session["Admin"].ToString() == "True".ToString())
+            {
+                adminnav.Visible = true;
+                normalnav.Visible = false;
+            }
+            else
+            {
+                adminnav.Visible = false;
+                normalnav.Visible = true;
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed5_Click(object sender, EventArgs e)
         {
+            try
+            {
             ServiceContracts sc = new ServiceContracts();
             int noteID = sc.AddNotes(note.Text);
             int actID = Convert.ToInt32(this.Session["ActID"].ToString());
             int expID = sc.AddExpense(actID, Convert.ToInt32(quantity.Text) * Convert.ToDouble(amount.Text), noteID);            
             sc.AddOperation(expID, Convert.ToInt32(oppType.SelectedValue), Convert.ToInt32(quantity.Text), Convert.ToDouble(amount.Text));
+            Response.Redirect("IncomeandExpensesPage.aspx");  
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void oppType_Init(object sender, EventArgs e)
         {
+            try
+            {
             oppType.Items.Clear();
             using (var dbContext = new dboEntities())
             {
@@ -47,11 +90,33 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void oppType_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

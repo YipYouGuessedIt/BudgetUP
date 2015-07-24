@@ -12,14 +12,25 @@ namespace PresentationTier.Views
     {
         protected void Eclicker(object sender, EventArgs e)
         {
-            
+            try
+            {
             LinkButton m = (LinkButton)sender;
             char[] ma = "Income".ToCharArray();
             Session["PostID"] = m.ID.Split(ma)[0];
             Response.Redirect("Post.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
 
@@ -58,15 +69,47 @@ namespace PresentationTier.Views
                     BursaryList.Controls.Add(add);
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed1_Click(object sender, EventArgs e)
         {
+            try
+            {
             Response.Redirect("AddPost.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+        protected void Unnamed1_Click2(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            try
+            {
             if (searcher.Text == "")
             {
                 foreach (LinkButton m in BursaryList.Controls)
@@ -93,6 +136,13 @@ namespace PresentationTier.Views
                 }
 
 
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
     }

@@ -9,11 +9,18 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="../bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+    <script src="../Scripts/NavigationJS.js"></script>
     <link rel="stylesheet" href="../Styles/Global.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
     <form id="form1" runat="server">
+        <div runat="server" id="errormsg">
+                <div id="errorinner">
+                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
+                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
+                </div>
+            </div>
         <div id ="regDiv" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -87,14 +94,14 @@
                     
                 <asp:Label runat="server">Confirm password</asp:Label><asp:TextBox required type="password" runat="server" placeholder="1234" ID="PasswordConfirm" name="email" CssClass="form-control" ></asp:TextBox><br />
                 <asp:Label runat="server">Role</asp:Label> 
-                <asp:DropDownList class="form-control" ID="roles" runat="server">
+                <asp:DropDownList class="form-control" ID="roles" runat="server" OnInit="DropDownList4_Init" OnSelectedIndexChanged="roles_SelectedIndexChanged">
                     <asp:ListItem Value="1">Academic</asp:ListItem>
                     <asp:ListItem Value="2">Student</asp:ListItem>
                     <asp:ListItem Value="3">Support Personel</asp:ListItem>
                 </asp:DropDownList><br /><br />
 
                 <asp:Label runat="server">Faculty</asp:Label> 
-                <asp:DropDownList class="form-control" ID="faculty" runat="server">
+                <asp:DropDownList class="form-control" ID="faculty" runat="server" OnInit="DropDownList3_Init">
                     <asp:ListItem Value="1">Humanities</asp:ListItem>
                     <asp:ListItem Value="2">Education</asp:ListItem>
                     <asp:ListItem Value="3">Theology</asp:ListItem>

@@ -221,6 +221,7 @@
     <Content Include="Views\AddOperationalType.aspx" />
     <Content Include="Views\AddPost.aspx" />
     <Content Include="Views\AddRole.aspx" />
+    <Content Include="Views\AddTitle.aspx" />
     <Content Include="Views\CarActivity.aspx" />
     <Content Include="Views\EditActivity.aspx" />
     <Content Include="Views\EditBursaryTypes.aspx" />
@@ -232,6 +233,7 @@
     <Content Include="Views\EditProject.aspx" />
     <Content Include="Views\EditRoles.aspx" />
     <Content Include="Views\editSettings.aspx" />
+    <Content Include="Views\EditTitle.aspx" />
     <Content Include="Views\GeneralSettings.aspx" />
     <Content Include="Views\ManageUsers.aspx" />
     <Content Include="Views\OtherProfilePage.aspx" />
@@ -301,6 +303,7 @@
     <Content Include="Views\ViewPost.aspx" />
     <Content Include="Views\ViewRoles.aspx" />
     <Content Include="Views\ViewServiceProvider.aspx" />
+    <Content Include="Views\ViewTitles.aspx" />
     <Content Include="Views\ViewTravelActivity.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -435,6 +438,13 @@
     <Compile Include="Views\AddRole.aspx.designer.cs">
       <DependentUpon>AddRole.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddTitle.aspx.cs">
+      <DependentUpon>AddTitle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\AddTitle.aspx.designer.cs">
+      <DependentUpon>AddTitle.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\CarActivity.aspx.cs">
       <DependentUpon>CarActivity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -442,6 +452,7 @@
     <Compile Include="Views\CarActivity.aspx.designer.cs">
       <DependentUpon>CarActivity.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Class1.cs" />
     <Compile Include="Views\EditActivity.aspx.cs">
       <DependentUpon>EditActivity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -512,6 +523,13 @@
     <Compile Include="Views\editSettings.aspx.designer.cs">
       <DependentUpon>editSettings.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditTitle.aspx.cs">
+      <DependentUpon>EditTitle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\EditTitle.aspx.designer.cs">
+      <DependentUpon>EditTitle.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\EventLogger.cs" />
     <Compile Include="Views\ExcelExport.cs" />
     <Compile Include="Views\GeneralSettings.aspx.cs">
@@ -521,6 +539,7 @@
     <Compile Include="Views\GeneralSettings.aspx.designer.cs">
       <DependentUpon>GeneralSettings.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\globals.cs" />
     <Compile Include="Views\Logout.ashx.cs">
       <DependentUpon>Logout.ashx</DependentUpon>
     </Compile>
@@ -816,6 +835,13 @@
     </Compile>
     <Compile Include="Views\ViewServiceProvider.aspx.designer.cs">
       <DependentUpon>ViewServiceProvider.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewTitles.aspx.cs">
+      <DependentUpon>ViewTitles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ViewTitles.aspx.designer.cs">
+      <DependentUpon>ViewTitles.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\ViewTravelActivity.aspx.cs">
       <DependentUpon>ViewTravelActivity.aspx</DependentUpon>

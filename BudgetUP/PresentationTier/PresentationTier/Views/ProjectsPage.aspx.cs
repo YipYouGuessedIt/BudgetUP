@@ -12,7 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -35,13 +37,21 @@ namespace PresentationTier.Views
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
-             
-             
-            
+
+
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
             
         }
         private void adminadder()
-        {
+        {try
+        { 
+
             AllProjects.Visible = true;
             List<Project> proj = new List<Project>();
             List<User> users = new List<User>();
@@ -78,11 +88,28 @@ namespace PresentationTier.Views
                 }
 
             }
+        }
+        catch (Exception err)
+        {
+
+            errormsg.Visible = true;
+            messageforerror.Text = Class1.genericErr;
+        }
 
         }
         protected void Unnamed1_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
@@ -95,17 +122,29 @@ namespace PresentationTier.Views
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void clicker(object sender,EventArgs e)
-        {
+        {   
+            try
+            { 
+
             LinkButton m = (LinkButton)sender ;
             //Response.Write("<script>alert('" + m.ID + "')</script>");
             this.Session["projectID"] = m.ID;
             Response.Redirect("ObjectivesPage.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
         /// <summary>
         /// Populates all dynaimc objects such as projects and names
         /// </summary>
         protected void addtoProjectLists()
         {
+            try
+            { 
             List<Project> proj = new List<Project>();
             using (var dbContext = new dboEntities())
             {
@@ -129,6 +168,13 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         //public static void moop()
@@ -150,6 +196,8 @@ namespace PresentationTier.Views
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            try
+            { 
             if (searcher.Text == "")
             {
                 foreach (LinkButton m in projectList.Controls)
@@ -193,6 +241,13 @@ namespace PresentationTier.Views
                     }
                 }
 
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
 

@@ -27,6 +27,9 @@ namespace PresentationTier.Views
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session["TravelID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -139,12 +142,12 @@ namespace PresentationTier.Views
                             if (entry5 != null)
                             {
                                 air2 = 1;
-                                fleet1.SelectedIndex = 0;
+                                fleet11.SelectedIndex = 0;
                                 returnTicket.SelectedIndex = Convert.ToInt32(entry5.ReturnTicket);
                             }
                             else
                             {
-                                fleet1.SelectedIndex = 1;
+                                fleet11.SelectedIndex = 1;
                             }
                             if (entry6 != null)
                             {
@@ -168,6 +171,13 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void oppType_Init(object sender, EventArgs e)
@@ -182,6 +192,8 @@ namespace PresentationTier.Views
             //}
             //else
             //{
+            try
+            {
                 ServiceContracts m = new ServiceContracts();
                 Travel t = new Travel();
                 t.Id = Convert.ToInt32(Session["TravelID"].ToString());
@@ -259,7 +271,7 @@ namespace PresentationTier.Views
                         //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
                     }
                 }
-                if (fleet1.SelectedIndex == 0)
+                if (fleet11.SelectedIndex == 0)
                 {
                     if (air2 == 1)
                     {
@@ -345,7 +357,30 @@ namespace PresentationTier.Views
                 ex.Id = expid;
                 ex.ActivityId = Convert.ToInt32(Session["ActID"].ToString());
                 ex.Amount = 0;
+                Response.Redirect("IncomeandExpensesPage.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
             //}
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

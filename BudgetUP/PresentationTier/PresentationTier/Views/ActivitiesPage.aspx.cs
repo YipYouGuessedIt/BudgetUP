@@ -12,6 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            { 
+                errormsg.Visible = false;
             if (Session["ObjectiveID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -47,17 +50,36 @@ namespace PresentationTier.Views
             }
 
             this.addDynamics();
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
          protected void clicker(object sender, EventArgs e)
         {
+             try
+             { 
             LinkButton m = (LinkButton)sender;
             //Response.Write("<script>alert('" + m.ID + "')</script>");
             Session["ActID"] = m.ID;
             Response.Redirect("IncomeandExpensesPage.aspx");
+             }
+             catch (Exception err)
+             {
+
+                 errormsg.Visible = true;
+                 messageforerror.Text = Class1.genericErr;
+             }
         }
 
         protected void addDynamics()
-         {   List<Activity> proj = new List<Activity>();
+         {   
+            try
+            { 
+            List<Activity> proj = new List<Activity>();
              using (var dbContext = new dboEntities())
              {
                  var query = from Objectives
@@ -81,10 +103,19 @@ namespace PresentationTier.Views
 
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
          }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            try
+            { 
             if (searcher.Text == "")
             {
                 foreach (LinkButton m in ActivityList.Controls)
@@ -108,6 +139,28 @@ namespace PresentationTier.Views
                     }
                 }
 
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
         /// <summary>

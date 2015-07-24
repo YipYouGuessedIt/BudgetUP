@@ -13,6 +13,9 @@ namespace PresentationTier.Views
         int notede = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session["IncID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -51,10 +54,19 @@ namespace PresentationTier.Views
                 }
 
             }
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            try
+            {
             ServiceContracts m = new ServiceContracts();
             Income n = new Income();
             n.Id = Convert.ToInt32(Session["IncID"].ToString());
@@ -67,6 +79,29 @@ namespace PresentationTier.Views
             no.UserNote = note.Text.ToString();
             m.UpdateNotes(no);
             m.UpdateIncome(n);
+            Response.Redirect("IncomeandExpensesPage.aspx");
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

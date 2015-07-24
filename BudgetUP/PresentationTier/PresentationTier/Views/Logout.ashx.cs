@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Caching;
 
 namespace PresentationTier.Views
 {
@@ -13,8 +14,8 @@ namespace PresentationTier.Views
 
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.Write("hello");
-            context.Session.Clear();
+            //context.Response.Write("hello");
+            context.Session.Abandon();
             context.Response.Redirect("ProjectsPage.aspx");
         }
 

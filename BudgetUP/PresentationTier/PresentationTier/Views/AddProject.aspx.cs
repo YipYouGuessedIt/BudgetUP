@@ -12,6 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            { 
+            errormsg.Visible = false;
             if (Session.Count == 0)
             {
 
@@ -33,10 +36,18 @@ namespace PresentationTier.Views
                 sdate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 edate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void AddProject_Click(object sender, EventArgs e)
         {
+            try { 
             using (var dbContext = new dboEntities())
             {
             ServiceContracts project = new ServiceContracts();
@@ -97,6 +108,28 @@ namespace PresentationTier.Views
                 
             }
             Response.Redirect("ObjectivesPage.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
        

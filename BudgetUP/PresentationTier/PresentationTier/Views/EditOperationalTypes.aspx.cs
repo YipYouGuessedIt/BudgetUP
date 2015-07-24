@@ -13,6 +13,8 @@ namespace PresentationTier.Views
         
         protected void addOperationType(object sender, EventArgs e)
         {
+            try
+            {
             ServiceContracts sc = new ServiceContracts();
 
             Operation_Type bt = new Operation_Type();
@@ -23,10 +25,20 @@ namespace PresentationTier.Views
             sc.UpdateOperationalType(bt);
 
             Response.Redirect("Settings.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -72,13 +84,44 @@ namespace PresentationTier.Views
 
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void DeleteOperationalType(object sender, EventArgs e)
         {
+            try
+    {
             ServiceContracts sc = new ServiceContracts();
             sc.DeleteOperationalType(Convert.ToInt32(this.Session["OperationalTypeID"].ToString()));
             Response.Redirect("Settings.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
         
     }

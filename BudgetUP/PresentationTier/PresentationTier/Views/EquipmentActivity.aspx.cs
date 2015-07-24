@@ -11,6 +11,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
 
@@ -38,23 +41,53 @@ namespace PresentationTier.Views
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
 
         }
 
         protected void Unnamed4_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 ServiceContracts sc = new ServiceContracts();
                 int noteID = sc.AddNotes(note.Text);
                 int ActID = Convert.ToInt32(this.Session["ActID"].ToString());
                 int ExpenseID = sc.AddExpense(ActID, Convert.ToDouble(amount.Text), noteID);
                 sc.AddEquipment(name.Text, ExpenseID);
+                Response.Redirect("IncomeandExpensesPage.aspx");
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
             //}
             //catch(Exception f)
             //{
                
             //}
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

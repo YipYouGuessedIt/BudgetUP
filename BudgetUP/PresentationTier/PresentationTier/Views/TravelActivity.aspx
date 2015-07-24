@@ -9,6 +9,7 @@
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	    <script src="../bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+            <script src="../Scripts/NavigationJS.js"></script>
         <link rel="stylesheet" href="../Styles/Global.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
     </head>
@@ -59,6 +60,14 @@
         </nav></div>
 
         <form id="form1" runat="server">
+            <div runat="server" id="errormsg">
+                <div id="errorinner">
+                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
+                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
+                    <asp:ScriptManager ID="ScriptManager1" runat="server">
+                    </asp:ScriptManager>
+                </div>
+            </div>
             <div id="Add" class="contentArea"><br />
                 <h1>Travel Expenses</h1>
                 <hr />
@@ -100,7 +109,7 @@
                 
                 <br />
                 
-                <h3>Perdeeum</h3>
+                <h3>Per diem</h3>
                 <hr />
                 <asp:DropDownList required runat="server" ID="fleet1" CssClass="form-control" OnInit="oppType_Init">
                     <asp:ListItem Value="0">Yes</asp:ListItem>
@@ -109,19 +118,25 @@
                 <br />
                 <h3>Airlines</h3>
                 <hr />
-                <asp:Label runat="server">Airline Ticket </asp:Label>
-                <asp:DropDownList required runat="server" ID="fleet2" CssClass="form-control" OnInit="oppType_Init">
+
+                        
+                    <asp:Label runat="server">Airline Ticket </asp:Label>
+                
+                <asp:DropDownList required runat="server" ID="fleet11" CssClass="form-control" OnInit="oppType_Init" OnSelectedIndexChanged="fleet2_SelectedIndexChanged">
                     <asp:ListItem Value="0">Yes</asp:ListItem>
                     <asp:ListItem Value="1">No</asp:ListItem>
                 </asp:DropDownList>
                 <br />
 
-                <asp:Label runat="server">Return Ticket </asp:Label>
+                <asp:Label runat="server" ID="ReturnLabeler">Return Ticket </asp:Label>
                 <asp:DropDownList class="form-control" ID="returnTicket" runat="server">
                     <asp:ListItem Value="0">No</asp:ListItem>
                     <asp:ListItem Value="1">Yes</asp:ListItem>
                 </asp:DropDownList>
-                <br />
+               
+                        
+                 <br />
+ 
 
                 <h3>Accommodation</h3>
                 <hr />

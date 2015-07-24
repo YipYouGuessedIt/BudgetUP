@@ -11,6 +11,10 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                Page.MaintainScrollPositionOnPostBack = true;
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -42,17 +46,27 @@ namespace PresentationTier.Views
             if (!IsPostBack)
             {
                 sdate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+
                
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
 
         protected void oppType_Init(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void Unnamed4_Click(object sender, EventArgs e)
         {
+            try
+            {
             int actID = Convert.ToInt32(Session["ActID"].ToString());
             ServiceContracts sc = new ServiceContracts();
             int noteID = sc.AddNotes(note.Text.ToString());
@@ -78,7 +92,7 @@ namespace PresentationTier.Views
             {
                 sc.AddAllowance(0, travelID);
             }
-            if (fleet2.SelectedIndex == 0)
+            if (fleet11.SelectedIndex == 0)
             {
                 sc.AddAirline(Convert.ToBoolean(returnTicket.SelectedIndex), 0, travelID);
             }
@@ -86,9 +100,45 @@ namespace PresentationTier.Views
             {
                 sc.AddAccommodation(0, travelID);
             }
+            Response.Redirect("IncomeandExpensesPage.aspx");
+}
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }            
             
+        }
+
+        protected void Alerter()
+        {
             
-            
+        }
+
+        protected void fleet2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            returnTicket.SelectedValue = (1).ToString();
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void fleet2_TextChanged(object sender, EventArgs e)
+        {
+            Response.Write("<script>alert('works');</script>");
         }
     }
 }

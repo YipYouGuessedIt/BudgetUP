@@ -12,20 +12,32 @@ namespace PresentationTier.Views
     {
         protected void Eclicker(object sender, EventArgs e)
         {
+            try
+            {
             LinkButton m = (LinkButton)sender;
             char[] ma = "Income".ToCharArray();
             Session["OperationalTypeID"] = m.ID.Split(ma)[0];
             Response.Redirect("EditOperationalTypes.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session.Count == 0)
+            try
+            {
+                errormsg.Visible = false;
+                if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
-            if (this.Session["Admin"].ToString() != "False".ToString())
+            if (this.Session["Admin"].ToString() == "False".ToString())
             {
                 Response.Redirect("ProjectsPage.aspx");
             }
@@ -58,11 +70,28 @@ namespace PresentationTier.Views
                     BursaryList.Controls.Add(add);
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
 
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)

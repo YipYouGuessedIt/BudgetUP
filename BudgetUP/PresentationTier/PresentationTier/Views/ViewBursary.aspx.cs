@@ -13,6 +13,9 @@ namespace PresentationTier.Views
         int notede = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             
             if (Session["BursIDID"] == null)
             {
@@ -52,12 +55,21 @@ namespace PresentationTier.Views
                     }
 
                 }
-               
+
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }   
             //}
         }
 
         protected void loader()
         {
+            try
+            {
             DropDownList2.Items.Clear();
             using (var dbContext = new dboEntities())
             {
@@ -75,6 +87,13 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
 
         }
 
@@ -86,6 +105,8 @@ namespace PresentationTier.Views
 
         protected void Unnamed4_Click(object sender, EventArgs e)
         {
+            try
+            {
            Response.Write(DropDownList2.SelectedValue + DropDownList2.SelectedItem);
             ServiceContracts m = new ServiceContracts();
             Bursary n = new Bursary();
@@ -100,11 +121,43 @@ namespace PresentationTier.Views
             m.UpdateNotes(no);
             //Response.Write("<script>alert('"+ n.BursaryTypeId +"');</script>");
             m.UpdateBursary(n);
+            Response.Redirect("IncomeandExpensesPage.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void DropDownList2_Init(object sender, EventArgs e)
         {
+            try
+            { 
             this.loader();
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

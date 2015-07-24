@@ -12,6 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            { 
+            errormsg.Visible = false;
             if (Session["projectID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -47,6 +50,13 @@ namespace PresentationTier.Views
             }
 
             this.addDynamics();
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         /// <summary>
@@ -56,16 +66,27 @@ namespace PresentationTier.Views
         /// <param name="e"></param>
         protected void clicker(object sender, EventArgs e)
         {
+            try
+            { 
             LinkButton m = (LinkButton)sender;
             //Response.Write("<script>alert('" + m.ID + "')</script>");
             Session["ObjectiveID"] = m.ID;
             Response.Redirect("ActivitiesPage.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
         /// <summary>
         /// adds all dynamics
         /// </summary>
         protected void addDynamics()
         {
+            try
+            { 
             List<Objective> proj = new List<Objective>();
             using (var dbContext = new dboEntities())
             {
@@ -92,11 +113,19 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            
+            try
+            { 
             if (searcher.Text == "")
             {
                 foreach (LinkButton m in ObjectiveLister.Controls)
@@ -120,6 +149,28 @@ namespace PresentationTier.Views
                     }
                 }
 
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
     }

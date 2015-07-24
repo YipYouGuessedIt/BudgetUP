@@ -12,6 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session["ActID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -53,10 +56,19 @@ namespace PresentationTier.Views
                     }
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed4_Click(object sender, EventArgs e)
         {
+            try
+            { 
             using (var dbContext = new dboEntities())
             {
                 var query2 = from Project
@@ -88,14 +100,45 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
 
         }
         protected void Unnamed4_Click2(object sender, EventArgs e)
         {
+            try
+            { 
             ServiceContracts m = new ServiceContracts();
 
             m.DeleteUserProject(Convert.ToInt32(Session["ActID"].ToString()));
             Response.Redirect("IncomeandExpensesPage.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

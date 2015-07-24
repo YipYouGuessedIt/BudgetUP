@@ -12,6 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if(this.Session["Admin"] == null)
             {
                 adminnav.Visible = false;
@@ -33,15 +36,24 @@ namespace PresentationTier.Views
                     regDiv.Visible = false;
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed8_Click(object sender, EventArgs e)
         {
+            try
+            {
             ServiceContracts sc = new ServiceContracts();
             if (Password.Text != PasswordConfirm.Text)
             {
-                //display error message
-                //return;
+                errormsg.Visible = true;
+                messageforerror.Text = "The two passwords dont match";
             }
             else
             {
@@ -63,27 +75,107 @@ namespace PresentationTier.Views
                     
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         private Boolean checkEmailDomain()
         {
-            string dom = email.Text.Split('@')[1];
+            try
+            {
+                string dom = email.Text.Split('@')[1];
             List<EmailDomain> cred = new List<EmailDomain>();
             using (var dbContext = new dboEntities())
             {
                 var query = dbContext.EmailDomains.Where(b => b.Domain == dom).FirstOrDefault();
                 if (query == null)
                 {
-                    Response.Write("<script>alert('Email Domain is incorrect')</script>");
+                    errormsg.Visible = true;
+                    messageforerror.Text = "Email Domain is incorrect";
                     return false;
                 }
                 return true;
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+                return false;
+            }
+        }
+
+        protected void DropDownList3_Init(object sender, EventArgs e)
+        {
+            try
+    {
+            faculty.Items.Clear();
+            using (var dbContext = new dboEntities())
+            {
+                var query = from Projects
+                            in dbContext.Faculties
+                            select Projects;
+
+                foreach (Faculty p in query)
+                {
+
+                    ListItem m = new ListItem();
+                    m.Value = p.Id.ToString();
+                    m.Text = p.FacultyName.ToString();
+                    faculty.Items.Add(m);
+                }
+
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void DropDownList4_Init(object sender, EventArgs e)
+        {
+            try
+            {
+            roles.Items.Clear();
+            using (var dbContext = new dboEntities())
+            {
+                var query = from Projects
+                            in dbContext.Roles
+                            select Projects;
+
+                foreach (Role p in query)
+                {
+
+                    ListItem m = new ListItem();
+                    m.Value = p.Id.ToString();
+                    m.Text = p.Description.ToString();
+                    roles.Items.Add(m);
+                }
+
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void title_Init(object sender, EventArgs e)
         {
+            try
+            {
             title.Items.Clear();
             using (var dbContext = new dboEntities())
             {
@@ -100,6 +192,33 @@ namespace PresentationTier.Views
                     title.Items.Add(m);
                 }
 
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void roles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
     }

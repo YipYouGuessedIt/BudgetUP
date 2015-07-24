@@ -10,10 +10,15 @@ namespace PresentationTier.Views
 {
     public partial class ViewCar : System.Web.UI.Page
     {
+
+
         private int expid = 0;
         int notede = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session["car"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -54,10 +59,19 @@ namespace PresentationTier.Views
                 }
 
             }
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed5_Click(object sender, EventArgs e)
         {
+            try
+            {
             Car c = new Car();
             Expens ex = new Expens();
             c.Id = Convert.ToInt32(Session["car"].ToString());
@@ -74,6 +88,29 @@ namespace PresentationTier.Views
             con.UpdateNotes(no);
             con.UpdateExpense(ex);
             con.UpdateCarExpense(c);
+            Response.Redirect("IncomeandExpensesPage.aspx");
+                        }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

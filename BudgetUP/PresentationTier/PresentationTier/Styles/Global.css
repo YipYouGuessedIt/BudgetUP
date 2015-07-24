@@ -82,3 +82,19 @@ div.navbar-Footer {
  {
      height: 36px;
  }
+ div#errormsg
+ {
+     position:absolute;
+     background-color:rgba(0,0,0,0.4);
+     height:100%;
+     width:100%;
+ }
+ div#errorinner
+ {
+     margin-top:20%;
+     height:20%;
+     width:25%;
+     background-color:white;
+     margin:auto;
+     margin-top:15%;
+ }

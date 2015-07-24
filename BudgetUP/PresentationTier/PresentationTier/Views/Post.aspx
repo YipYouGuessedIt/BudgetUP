@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="../bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+    <script src="../Scripts/NavigationJS.js"></script>
     <link rel="stylesheet" href="../Styles/Global.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
@@ -59,6 +60,12 @@
         </nav></div>
 
     <form id="form1" runat="server">
+        			<div runat="server" id="errormsg">
+                <div id="errorinner">
+                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
+                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
+                </div>
+            </div>
         <div id="Add" class="contentArea">
             <br />
             <h1>Add Post</h1><hr />
@@ -72,7 +79,7 @@
             Salary Amount*<asp:TextBox ID="FacultyName0" type="number" required runat="server" CssClass="form-control"></asp:TextBox>
             <br />
             <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="save" onclick="addRole" />
+            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addRole" />
             <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" OnClick="Button1_Click" Text="Delete" />
             <br /><br />
         </div>

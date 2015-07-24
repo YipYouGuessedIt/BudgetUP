@@ -12,6 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            { 
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -30,6 +33,14 @@ namespace PresentationTier.Views
             {
                 adminnav.Visible = false;
                 normalnav.Visible = true;
+            
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
 
@@ -44,6 +55,8 @@ namespace PresentationTier.Views
 
         protected void DropDownList2_Init(object sender, EventArgs e)
         {
+            try
+            {
             DropDownList2.Items.Clear();
             using (var dbContext = new dboEntities())
             {
@@ -61,10 +74,19 @@ namespace PresentationTier.Views
                 }
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed_Click(object sender, EventArgs e)
         {
+            try
+            {
             using (var dbContext = new dboEntities())
             {
                 var query = from PostLevel
@@ -83,6 +105,28 @@ namespace PresentationTier.Views
                     Response.Redirect("IncomeandExpensesPage.aspx");
                     }
                 }
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
     }

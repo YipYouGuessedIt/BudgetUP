@@ -13,6 +13,9 @@ namespace PresentationTier.Styles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
 
@@ -33,10 +36,19 @@ namespace PresentationTier.Styles
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void Unnamed_Click(object sender, EventArgs e)
         {
+            try
+            {
             ExcelExport temp = new ExcelExport();
             var ProjectFile = temp.PrintProject(1);
 
@@ -48,6 +60,28 @@ namespace PresentationTier.Styles
             Response.AddHeader("content-disposition", "attachment; filename=" + /*temp.ProjectName +*/" " + DateTime.Now.ToString(@"yyyy-MM-dd") + ".xlsx");
             Response.BinaryWrite(memoryStream.ToArray());
             Response.End();
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

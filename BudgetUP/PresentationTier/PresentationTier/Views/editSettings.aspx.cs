@@ -12,6 +12,9 @@ namespace PresentationTier.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            { 
+            errormsg.Visible = true;
             if (Session.Count == 0)
             {
 
@@ -57,10 +60,19 @@ namespace PresentationTier.Views
                     }
                 }
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
 
         protected void addBursaryType(object sender, EventArgs e)
         {
+            try
+            { 
             using (var dbContext = new dboEntities())
             {
                 var query = from BursaryTypes
@@ -86,6 +98,28 @@ namespace PresentationTier.Views
                             //Subvention.Text = p.Project_Settings.SubventionRate.ToString();
                     }
                 }
+            }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
             }
         }
     }
