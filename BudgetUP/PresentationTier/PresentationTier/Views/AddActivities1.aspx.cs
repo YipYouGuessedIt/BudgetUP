@@ -71,12 +71,14 @@ namespace PresentationTier.Views
                         {
                             ServiceContracts sc = new ServiceContracts();
                             sc.AddActivity(Convert.ToInt32(Session["ObjectiveID"].ToString()), ActName.Text, Convert.ToDateTime(sdate.Text), Convert.ToDateTime(edate.Text));
+                            Response.Redirect("ActivitiesPage.aspx");
                         }
                         else
                         {
-
+                            errormsg.Visible = true;
+                            messageforerror.Text = "End date is befor start date";
                         }
-                        Response.Redirect("ActivitiesPage.aspx");
+                        
                     }
                 }
 

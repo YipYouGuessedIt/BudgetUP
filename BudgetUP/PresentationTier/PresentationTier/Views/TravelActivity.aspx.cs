@@ -66,8 +66,8 @@ namespace PresentationTier.Views
 
         protected void Unnamed4_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 bool mi = checkdate();
                 if (mi == true)
                 {
@@ -111,13 +111,13 @@ namespace PresentationTier.Views
                     errormsg.Visible = true;
                     messageforerror.Text ="Date of departure is out of bounds of the Activity";
                 }
-}
-            catch (Exception err)
-            {
+//}
+//            catch (Exception err)
+//            {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
-            }            
+//                errormsg.Visible = true;
+//                messageforerror.Text = Class1.genericErr;
+//            }            
             
         }
 
@@ -130,7 +130,8 @@ namespace PresentationTier.Views
         {
             using (var dbContext = new dboEntities())
             {
-                var query = dbContext.Activities.Where(b => b.Id == Convert.ToInt32(Session["ActID"].ToString())).FirstOrDefault();
+                int n = Convert.ToInt32(Session["ActID"].ToString());
+                var query = dbContext.Activities.Where(b => b.Id == n).FirstOrDefault();
                 if (query == null)
                     return false;
 
