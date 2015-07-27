@@ -38,12 +38,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BizTier, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="BizTier">
       <HintPath>..\..\..\BizTier\BizTier\bin\Debug\BizTier.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus">
-      <HintPath>..\EPPlus 4.0.4(1)\EPPlus.dll</HintPath>
+      <HintPath>..\..\..\..\..\EPPlus 4.0.4(1)\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />

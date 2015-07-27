@@ -108,6 +108,7 @@ namespace PresentationTier.Views
             {
             ServiceContracts sc = new ServiceContracts();
             sc.DeleteBursaryType(Convert.ToInt32(this.Session["BursaryTypeID"].ToString()));
+            this.Session["BursaryTypeID"] = null;
             Response.Redirect("Settings.aspx");
             }
             catch (Exception err)

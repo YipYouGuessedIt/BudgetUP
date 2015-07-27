@@ -180,6 +180,22 @@ namespace PresentationTier.Views
             }
         }
 
+        protected bool checkdate()
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var query = dbContext.Activities.Where(b => b.Id == Convert.ToInt32(Session["ActID"].ToString()) ).FirstOrDefault();
+                if (query == null)
+                    return false;
+
+                if (query.StartDate < Convert.ToDateTime(sdate.Text) || query.EndDate > Convert.ToDateTime(sdate.Text))
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
         protected void oppType_Init(object sender, EventArgs e)
         {
            
@@ -194,170 +210,179 @@ namespace PresentationTier.Views
             //{
             try
             {
-                ServiceContracts m = new ServiceContracts();
-                Travel t = new Travel();
-                t.Id = Convert.ToInt32(Session["TravelID"].ToString());
-                //t.TravellerNo = Convert.ToInt32(numoftrav.Text);
-                t.Expense_Id = expid;
-                t.DurationDays = Convert.ToInt32(numofdays.Text);
-                t.DepartureDate = Convert.ToDateTime(sdate.Text);
-                t.Destination = destination.Text;
-                t.DepatureLocation = destination0.Text;
-                m.UpdateTravel(t);
-
-                if(fleet4.SelectedIndex == 0)
+                bool mi = checkdate();
+                if (mi == true)
                 {
-                    if(visaid2 == 1)
-                    {
+                    ServiceContracts m = new ServiceContracts();
+                    Travel t = new Travel();
+                    t.Id = Convert.ToInt32(Session["TravelID"].ToString());
+                    //t.TravellerNo = Convert.ToInt32(numoftrav.Text);
+                    t.Expense_Id = expid;
+                    t.DurationDays = Convert.ToInt32(numofdays.Text);
+                    t.DepartureDate = Convert.ToDateTime(sdate.Text);
+                    t.Destination = destination.Text;
+                    t.DepatureLocation = destination0.Text;
+                    m.UpdateTravel(t);
 
+                    if (fleet4.SelectedIndex == 0)
+                    {
+                        if (visaid2 == 1)
+                        {
+
+                        }
+                        else
+                        {
+                            m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                        }
                     }
                     else
                     {
-                        m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                        if (visaid2 == 1)
+                        {
+                            m.DeleteVisaExpense(visaid);
+                        }
+                        else
+                        {
+                            //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                        }
                     }
+                    if (fleet3.SelectedIndex == 0)
+                    {
+                        if (gaut2 == 1)
+                        {
+
+                        }
+                        else
+                        {
+                            m.AddGautrainExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                        }
+                    }
+                    else
+                    {
+                        if (gaut2 == 1)
+                        {
+                            m.DeleteGautrainExpense(gaut);
+                        }
+                        else
+                        {
+                            //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                        }
+                    }
+                    if (fleet2.SelectedIndex == 0)
+                    {
+                        if (allow2 == 1)
+                        {
+
+                        }
+                        else
+                        {
+                            m.AddAllowance(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                        }
+                    }
+                    else
+                    {
+                        if (allow2 == 1)
+                        {
+                            m.DeleteAllowance(allow);
+                        }
+                        else
+                        {
+                            //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                        }
+                    }
+                    if (fleet11.SelectedIndex == 0)
+                    {
+                        if (air2 == 1)
+                        {
+                            AirlineExpens ai = new AirlineExpens();
+                            ai.Id = air;
+                            //ai.Amount = Convert.ToInt32(AirlineAmount.Text);
+                            ai.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                            ai.ReturnTicket = Convert.ToBoolean(Convert.ToInt32(returnTicket.SelectedValue));
+                            m.UpdateAirline(ai);
+                        }
+                        else
+                        {
+                            m.AddAirline(Convert.ToBoolean(returnTicket.SelectedIndex), 0, Convert.ToInt32(Session["TravelID"].ToString()));
+                        }
+                    }
+                    else
+                    {
+                        if (air2 == 1)
+                        {
+                            m.DeleteAirline(air);
+                        }
+                        else
+                        {
+                            //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                        }
+                    }
+                    if (fleet0.SelectedIndex == 0)
+                    {
+                        if (acc2 == 1)
+                        {
+
+                        }
+                        else
+                        {
+                            m.AddAccommodation(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                        }
+                    }
+                    else
+                    {
+                        if (acc2 == 1)
+                        {
+                            m.DeleteAccommodation(acc);
+                        }
+                        else
+                        {
+                            //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
+                        }
+                    }
+                    //Visa v = new Visa();
+                    //v.Id = visaid;
+                    //v.Amount = Convert.ToInt32(visaAmount.Text);
+                    //v.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                    //m.UpdateVisaExpense(v);
+
+                    //Gautrain g = new Gautrain();
+                    //g.Id = gaut;
+                    //g.Amount = Convert.ToInt32(gautrainAmount.Text);
+                    //g.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                    //m.UpdateGautrainExpense(g);
+
+                    //CarExpens c = new CarExpens();
+                    //c.Id = car;
+                    //c.Amount = Convert.ToInt32(CarAmount.Text);
+                    //c.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                    //c.UP_Fleet = Convert.ToBoolean(Convert.ToInt32(UPFleet.SelectedValue));
+                    //m.UpdateCarExpense(c);
+
+                    //Allowance a = new Allowance();
+                    //a.Id = allow;
+                    //a.Amount = Convert.ToInt32(AllowanceAmount.Text);
+                    //a.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                    //m.UpdateAllowance(a);
+
+
+
+                    //Accommodation ac = new Accommodation();
+                    //ac.Id = acc;
+                    //ac.Amount = Convert.ToInt32(AccommodationAmount.Text);
+                    //ac.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
+                    //m.UpdateAccomodation(ac);
+
+                    Expens ex = new Expens();
+                    ex.Id = expid;
+                    ex.ActivityId = Convert.ToInt32(Session["ActID"].ToString());
+                    ex.Amount = 0;
+                    Response.Redirect("IncomeandExpensesPage.aspx");
                 }
                 else
                 {
-                    if (visaid2 == 1)
-                    {
-                        m.DeleteVisaExpense(visaid);
-                    }
-                    else
-                    {
-                        //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
-                    }
+                    errormsg.Visible = true;
+                    messageforerror.Text = "Date of depature is out of bounds of the activities date";
                 }
-                if (fleet3.SelectedIndex == 0)
-                {
-                    if (gaut2 == 1)
-                    {
-
-                    }
-                    else
-                    {
-                        m.AddGautrainExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
-                    }
-                }
-                else
-                {
-                    if (gaut2 == 1)
-                    {
-                        m.DeleteGautrainExpense(gaut);
-                    }
-                    else
-                    {
-                        //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
-                    }
-                }
-                if (fleet2.SelectedIndex == 0)
-                {
-                    if (allow2 == 1)
-                    {
-
-                    }
-                    else
-                    {
-                        m.AddAllowance(0, Convert.ToInt32(Session["TravelID"].ToString()));
-                    }
-                }
-                else
-                {
-                    if (allow2 == 1)
-                    {
-                        m.DeleteAllowance(allow);
-                    }
-                    else
-                    {
-                        //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
-                    }
-                }
-                if (fleet11.SelectedIndex == 0)
-                {
-                    if (air2 == 1)
-                    {
-                        AirlineExpens ai = new AirlineExpens();
-                        ai.Id = air;
-                        //ai.Amount = Convert.ToInt32(AirlineAmount.Text);
-                        ai.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                        ai.ReturnTicket = Convert.ToBoolean(Convert.ToInt32(returnTicket.SelectedValue));
-                        m.UpdateAirline(ai);
-                    }
-                    else
-                    {
-                        m.AddAirline(Convert.ToBoolean( returnTicket.SelectedIndex),0, Convert.ToInt32(Session["TravelID"].ToString()));
-                    }
-                }
-                else
-                {
-                    if (air2 == 1)
-                    {
-                        m.DeleteAirline(air);
-                    }
-                    else
-                    {
-                        //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
-                    }
-                }
-                if (fleet0.SelectedIndex == 0)
-                {
-                    if (acc2 == 1)
-                    {
-
-                    }
-                    else
-                    {
-                        m.AddAccommodation(0, Convert.ToInt32(Session["TravelID"].ToString()));
-                    }
-                }
-                else
-                {
-                    if (acc2 == 1)
-                    {
-                        m.DeleteAccommodation(acc);
-                    }
-                    else
-                    {
-                        //m.AddVisaExpense(0, Convert.ToInt32(Session["TravelID"].ToString()));
-                    }
-                }
-                //Visa v = new Visa();
-                //v.Id = visaid;
-                //v.Amount = Convert.ToInt32(visaAmount.Text);
-                //v.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                //m.UpdateVisaExpense(v);
-
-                //Gautrain g = new Gautrain();
-                //g.Id = gaut;
-                //g.Amount = Convert.ToInt32(gautrainAmount.Text);
-                //g.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                //m.UpdateGautrainExpense(g);
-
-                //CarExpens c = new CarExpens();
-                //c.Id = car;
-                //c.Amount = Convert.ToInt32(CarAmount.Text);
-                //c.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                //c.UP_Fleet = Convert.ToBoolean(Convert.ToInt32(UPFleet.SelectedValue));
-                //m.UpdateCarExpense(c);
-
-                //Allowance a = new Allowance();
-                //a.Id = allow;
-                //a.Amount = Convert.ToInt32(AllowanceAmount.Text);
-                //a.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                //m.UpdateAllowance(a);
-
-
-
-                //Accommodation ac = new Accommodation();
-                //ac.Id = acc;
-                //ac.Amount = Convert.ToInt32(AccommodationAmount.Text);
-                //ac.Travel_Id = Convert.ToInt32(Session["TravelID"].ToString());
-                //m.UpdateAccomodation(ac);
-
-                Expens ex = new Expens();
-                ex.Id = expid;
-                ex.ActivityId = Convert.ToInt32(Session["ActID"].ToString());
-                ex.Amount = 0;
-                Response.Redirect("IncomeandExpensesPage.aspx");
             }
             catch (Exception err)
             {
@@ -374,6 +399,23 @@ namespace PresentationTier.Views
             {
                 errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ServiceContracts m = new ServiceContracts();
+                m.DeleteTravels(Convert.ToInt32(this.Session["TravelID"].ToString()));
+                this.Session["TravelID"] = null;
+                Response.Redirect("IncomeandExpensesPage.aspx");
             }
             catch (Exception err)
             {

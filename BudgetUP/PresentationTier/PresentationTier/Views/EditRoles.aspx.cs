@@ -96,6 +96,7 @@ namespace PresentationTier.Views
             {
             ServiceContracts sc = new ServiceContracts();
             sc.DeleteRole(Convert.ToInt32(this.Session["RoleTypeID"].ToString()));
+            this.Session["RoleTypeID"] = null;
             Response.Redirect("Settings.aspx");
             }
             catch (Exception err)

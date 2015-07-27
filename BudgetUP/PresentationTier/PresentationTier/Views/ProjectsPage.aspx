@@ -89,7 +89,7 @@
 			<div id="ProjectList" class="list-group">
                 <h3>Project List
                 </h3>
-                <p>Below is a list of Projects you have created a budget for,click on one to view it. </p>
+                <p id="projnote" runat="server">Below is a list of Projects you have created a budget for,click on one to view it. </p>
                 <asp:PlaceHolder ID="projectList" runat="server"></asp:PlaceHolder>
 			</div>
               <div id="AllProjects" class="list-group" runat="server">

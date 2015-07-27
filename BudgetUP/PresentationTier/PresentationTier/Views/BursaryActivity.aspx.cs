@@ -14,6 +14,7 @@ namespace PresentationTier.Views
         {
             try
             {
+                errormsg.Visible = false;
             if (Session.Count == 0)
             {
                
@@ -22,10 +23,6 @@ namespace PresentationTier.Views
                 Response.Redirect("LoginPage.aspx");
             }
             if (Session["projectID"] == null)
-            {
-                Response.Redirect("ProjectsPage.aspx");
-            }
-            if (this.Session["Admin"].ToString() == "False".ToString())
             {
                 Response.Redirect("ProjectsPage.aspx");
             }

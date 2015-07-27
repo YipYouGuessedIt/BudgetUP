@@ -74,7 +74,8 @@
                 <asp:Label runat="server">Value*</asp:Label><asp:TextBox required runat="server" ID="amount" name="amount" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Notes*</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
-                <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Edit" OnClick="Button1_Click" />
+                <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Save" OnClick="Button1_Click" />
+                <asp:Button ID="Button2" runat="server" CssClass="btn-info btn-lg btn" OnClick="Button2_Click" Text="Remove" />
                <br /><br />
             </div>
         </form>

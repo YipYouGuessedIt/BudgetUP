@@ -74,10 +74,10 @@
             <br />
             <asp:label runat="server">Operation Name*</asp:label>
             <br/>
-            <asp:TextBox ID="OperationDescription" required runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="OperationDescription" required runat="server" CssClass="form-control" OnTextChanged="OperationDescription_TextChanged"></asp:TextBox>
             <br />
             <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addOperationType" />
+            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Save" onclick="addOperationType" />
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Delete" onclick="DeleteOperationalType" /><br /><br />
         </div>
     </form>

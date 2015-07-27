@@ -97,6 +97,7 @@ namespace PresentationTier.Views
             {
             ServiceContracts sc = new ServiceContracts();
             sc.DeleteFaculty(Convert.ToInt32(this.Session["FacultyID"].ToString()));
+            this.Session["FacultyID"] = null;
             Response.Redirect("Settings.aspx");
             }
             catch (Exception err)

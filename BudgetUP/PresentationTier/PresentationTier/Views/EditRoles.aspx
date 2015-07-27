@@ -78,7 +78,7 @@
             <asp:TextBox ID="RoleDescription" runat="server" CssClass="form-control"></asp:TextBox>
             <br />
             <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addBursary" />
+            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Save" onclick="addBursary" />
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Delete" onclick="DeleteRoles" /><br /><br />
         </div>
     </form>

@@ -73,7 +73,7 @@
                 <asp:Label runat="server">Objective Name*</asp:Label><asp:TextBox runat="server" ID="ObjName" required name="ObjName" CssClass="form-control"></asp:TextBox><br />
                 <!--<asp:Label runat="server">Milestone</asp:Label><asp:TextBox required runat="server" ID="milestone" name="milestone" CssClass="form-control"></asp:TextBox><br />-->
                 <a href="ActivitiesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Edit" OnClick="Unnamed3_Click" />
+                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" OnClick="Unnamed3_Click" />
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Delete" OnClick="Unnamed3_Click2" ID="Button1" /><br /><br />
             </div>
         </form>

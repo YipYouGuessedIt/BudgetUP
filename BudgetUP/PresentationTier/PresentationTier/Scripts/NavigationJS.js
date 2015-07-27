@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+
+    $('#normalnav a[href = "Settings.aspx"]').hide();
 var clicker = 0;
     $('#fleet11').click(function () 
 	{ 

@@ -20,11 +20,6 @@ namespace PresentationTier.Views
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
                 Response.Redirect("LoginPage.aspx");
             }
-            if (this.Session["Admin"].ToString() == "False".ToString())
-            {
-                Response.Redirect("ProjectsPage.aspx");
-            }
-
             if (this.Session["ActID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");

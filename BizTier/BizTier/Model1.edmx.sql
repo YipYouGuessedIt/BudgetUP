@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 06/29/2015 14:08:08
--- Generated from EDMX file: C:\Users\Henry\Downloads\BudgetUP-master\BudgetUP-master\BizTier\BizTier\Model1.edmx
+-- Date Created: 07/25/2015 15:28:36
+-- Generated from EDMX file: C:\Users\m\Desktop\New Folder\BudgetUP\BizTier\BizTier\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,14 +17,29 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_TravelAccommodation]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Accommodations] DROP CONSTRAINT [FK_TravelAccommodation];
+GO
 IF OBJECT_ID(N'[dbo].[FK_ActivityExpense]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Expenses] DROP CONSTRAINT [FK_ActivityExpense];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ObjectiveActivity]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Activities] DROP CONSTRAINT [FK_ObjectiveActivity];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TravelAirlineExpense]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[AirlineExpenses] DROP CONSTRAINT [FK_TravelAirlineExpense];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TravelAllowance]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Allowances] DROP CONSTRAINT [FK_TravelAllowance];
 GO
 IF OBJECT_ID(N'[dbo].[FK_BursaryNote]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Bursaries] DROP CONSTRAINT [FK_BursaryNote];
 GO
 IF OBJECT_ID(N'[dbo].[FK_BursaryTypeBursary]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Bursaries] DROP CONSTRAINT [FK_BursaryTypeBursary];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProjectBursary]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Bursaries] DROP CONSTRAINT [FK_ProjectBursary];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ExpenseContractor]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Contractors] DROP CONSTRAINT [FK_ExpenseContractor];
@@ -47,20 +62,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_FacultyUser]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_FacultyUser];
 GO
+IF OBJECT_ID(N'[dbo].[FK_TravelGautrain]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Gautrains] DROP CONSTRAINT [FK_TravelGautrain];
+GO
 IF OBJECT_ID(N'[dbo].[FK_IncomeNote]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Incomes] DROP CONSTRAINT [FK_IncomeNote];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ObjectiveActivity]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Activities] DROP CONSTRAINT [FK_ObjectiveActivity];
-GO
-IF OBJECT_ID(N'[dbo].[FK_Operation_TypeOperational]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Operationals] DROP CONSTRAINT [FK_Operation_TypeOperational];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PostLevelUPStaffMember]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UPStaffMembers] DROP CONSTRAINT [FK_PostLevelUPStaffMember];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ProjectBursary]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Bursaries] DROP CONSTRAINT [FK_ProjectBursary];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ProjectIncome]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Incomes] DROP CONSTRAINT [FK_ProjectIncome];
@@ -68,8 +74,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ProjectObjective]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Objectives] DROP CONSTRAINT [FK_ProjectObjective];
 GO
+IF OBJECT_ID(N'[dbo].[FK_Operation_TypeOperational]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Operationals] DROP CONSTRAINT [FK_Operation_TypeOperational];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PostLevelUPStaffMember]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UPStaffMembers] DROP CONSTRAINT [FK_PostLevelUPStaffMember];
+GO
 IF OBJECT_ID(N'[dbo].[FK_ProjectProject_Settings]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Projects] DROP CONSTRAINT [FK_ProjectProject_Settings];
+GO
+IF OBJECT_ID(N'[dbo].[FK_UserProject]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Projects] DROP CONSTRAINT [FK_UserProject];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RoleUser]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_RoleUser];
@@ -77,26 +92,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_TitleUser]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_TitleUser];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TravelAccommodation]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Accommodations] DROP CONSTRAINT [FK_TravelAccommodation];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TravelAirlineExpense]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[AirlineExpenses] DROP CONSTRAINT [FK_TravelAirlineExpense];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TravelAllowance]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Allowances] DROP CONSTRAINT [FK_TravelAllowance];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TravelGautrain]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Gautrains] DROP CONSTRAINT [FK_TravelGautrain];
-GO
 IF OBJECT_ID(N'[dbo].[FK_TravelVisa]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Visas] DROP CONSTRAINT [FK_TravelVisa];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserCredentialsUser]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[UserCredentials] DROP CONSTRAINT [FK_UserCredentialsUser];
 GO
-IF OBJECT_ID(N'[dbo].[FK_UserProject]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Projects] DROP CONSTRAINT [FK_UserProject];
+IF OBJECT_ID(N'[dbo].[FK_ExpensCar]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Cars] DROP CONSTRAINT [FK_ExpensCar];
 GO
 
 -- --------------------------------------------------
@@ -186,6 +189,9 @@ IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Visas]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Visas];
+GO
+IF OBJECT_ID(N'[dbo].[Cars]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Cars];
 GO
 
 -- --------------------------------------------------
@@ -441,7 +447,7 @@ GO
 
 -- Creating table 'Cars'
 CREATE TABLE [dbo].[Cars] (
-    [Id] int  NOT NULL,
+    [Id] int IDENTITY(1,1) NOT NULL,
     [UPFleet] bit  NOT NULL,
     [ExpensId] int  NOT NULL
 );
@@ -636,6 +642,7 @@ ADD CONSTRAINT [FK_TravelAccommodation]
     REFERENCES [dbo].[Travels]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TravelAccommodation'
 CREATE INDEX [IX_FK_TravelAccommodation]
@@ -650,6 +657,7 @@ ADD CONSTRAINT [FK_ActivityExpense]
     REFERENCES [dbo].[Activities]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ActivityExpense'
 CREATE INDEX [IX_FK_ActivityExpense]
@@ -664,6 +672,7 @@ ADD CONSTRAINT [FK_ObjectiveActivity]
     REFERENCES [dbo].[Objectives]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ObjectiveActivity'
 CREATE INDEX [IX_FK_ObjectiveActivity]
@@ -678,6 +687,7 @@ ADD CONSTRAINT [FK_TravelAirlineExpense]
     REFERENCES [dbo].[Travels]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TravelAirlineExpense'
 CREATE INDEX [IX_FK_TravelAirlineExpense]
@@ -692,6 +702,7 @@ ADD CONSTRAINT [FK_TravelAllowance]
     REFERENCES [dbo].[Travels]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TravelAllowance'
 CREATE INDEX [IX_FK_TravelAllowance]
@@ -706,6 +717,7 @@ ADD CONSTRAINT [FK_BursaryNote]
     REFERENCES [dbo].[Notes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BursaryNote'
 CREATE INDEX [IX_FK_BursaryNote]
@@ -720,6 +732,7 @@ ADD CONSTRAINT [FK_BursaryTypeBursary]
     REFERENCES [dbo].[BursaryTypes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BursaryTypeBursary'
 CREATE INDEX [IX_FK_BursaryTypeBursary]
@@ -734,6 +747,7 @@ ADD CONSTRAINT [FK_ProjectBursary]
     REFERENCES [dbo].[Projects]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectBursary'
 CREATE INDEX [IX_FK_ProjectBursary]
@@ -748,6 +762,7 @@ ADD CONSTRAINT [FK_ExpenseContractor]
     REFERENCES [dbo].[Expenses]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpenseContractor'
 CREATE INDEX [IX_FK_ExpenseContractor]
@@ -762,6 +777,7 @@ ADD CONSTRAINT [FK_ExpenseEquipment]
     REFERENCES [dbo].[Expenses]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpenseEquipment'
 CREATE INDEX [IX_FK_ExpenseEquipment]
@@ -776,6 +792,7 @@ ADD CONSTRAINT [FK_ExpenseNote]
     REFERENCES [dbo].[Notes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpenseNote'
 CREATE INDEX [IX_FK_ExpenseNote]
@@ -790,6 +807,7 @@ ADD CONSTRAINT [FK_ExpenseOperational]
     REFERENCES [dbo].[Expenses]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpenseOperational'
 CREATE INDEX [IX_FK_ExpenseOperational]
@@ -804,6 +822,7 @@ ADD CONSTRAINT [FK_ExpenseTravel]
     REFERENCES [dbo].[Expenses]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpenseTravel'
 CREATE INDEX [IX_FK_ExpenseTravel]
@@ -818,6 +837,7 @@ ADD CONSTRAINT [FK_ExpenseUPStaffMember]
     REFERENCES [dbo].[Expenses]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpenseUPStaffMember'
 CREATE INDEX [IX_FK_ExpenseUPStaffMember]
@@ -832,6 +852,7 @@ ADD CONSTRAINT [FK_FacultyUser]
     REFERENCES [dbo].[Faculties]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_FacultyUser'
 CREATE INDEX [IX_FK_FacultyUser]
@@ -846,6 +867,7 @@ ADD CONSTRAINT [FK_TravelGautrain]
     REFERENCES [dbo].[Travels]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TravelGautrain'
 CREATE INDEX [IX_FK_TravelGautrain]
@@ -860,6 +882,7 @@ ADD CONSTRAINT [FK_IncomeNote]
     REFERENCES [dbo].[Notes]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_IncomeNote'
 CREATE INDEX [IX_FK_IncomeNote]
@@ -874,6 +897,7 @@ ADD CONSTRAINT [FK_ProjectIncome]
     REFERENCES [dbo].[Projects]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectIncome'
 CREATE INDEX [IX_FK_ProjectIncome]
@@ -888,6 +912,7 @@ ADD CONSTRAINT [FK_ProjectObjective]
     REFERENCES [dbo].[Projects]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectObjective'
 CREATE INDEX [IX_FK_ProjectObjective]
@@ -902,6 +927,7 @@ ADD CONSTRAINT [FK_Operation_TypeOperational]
     REFERENCES [dbo].[Operation_Type]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_Operation_TypeOperational'
 CREATE INDEX [IX_FK_Operation_TypeOperational]
@@ -916,6 +942,7 @@ ADD CONSTRAINT [FK_PostLevelUPStaffMember]
     REFERENCES [dbo].[PostLevels]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PostLevelUPStaffMember'
 CREATE INDEX [IX_FK_PostLevelUPStaffMember]
@@ -930,6 +957,7 @@ ADD CONSTRAINT [FK_ProjectProject_Settings]
     REFERENCES [dbo].[Project_Settings]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectProject_Settings'
 CREATE INDEX [IX_FK_ProjectProject_Settings]
@@ -944,6 +972,7 @@ ADD CONSTRAINT [FK_UserProject]
     REFERENCES [dbo].[Users]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserProject'
 CREATE INDEX [IX_FK_UserProject]
@@ -958,6 +987,7 @@ ADD CONSTRAINT [FK_RoleUser]
     REFERENCES [dbo].[Roles]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_RoleUser'
 CREATE INDEX [IX_FK_RoleUser]
@@ -972,6 +1002,7 @@ ADD CONSTRAINT [FK_TitleUser]
     REFERENCES [dbo].[Titles]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TitleUser'
 CREATE INDEX [IX_FK_TitleUser]
@@ -986,6 +1017,7 @@ ADD CONSTRAINT [FK_TravelVisa]
     REFERENCES [dbo].[Travels]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TravelVisa'
 CREATE INDEX [IX_FK_TravelVisa]
@@ -1000,6 +1032,7 @@ ADD CONSTRAINT [FK_UserCredentialsUser]
     REFERENCES [dbo].[Users]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserCredentialsUser'
 CREATE INDEX [IX_FK_UserCredentialsUser]
@@ -1014,6 +1047,7 @@ ADD CONSTRAINT [FK_ExpensCar]
     REFERENCES [dbo].[Expenses]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpensCar'
 CREATE INDEX [IX_FK_ExpensCar]

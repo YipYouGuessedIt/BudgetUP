@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BizTier;
 
 namespace PresentationTier.Views
 {
@@ -67,40 +68,49 @@ namespace PresentationTier.Views
         {
             try
             {
-            int actID = Convert.ToInt32(Session["ActID"].ToString());
-            ServiceContracts sc = new ServiceContracts();
-            int noteID = sc.AddNotes(note.Text.ToString());
+                bool mi = checkdate();
+                if (mi == true)
+                {
+                    int actID = Convert.ToInt32(Session["ActID"].ToString());
+                    ServiceContracts sc = new ServiceContracts();
+                    int noteID = sc.AddNotes(note.Text.ToString());
 
-            //double amounts = Convert.ToDouble(AccommodationAmount.Text);
-            //amounts += Convert.ToDouble(AirlineAmount.Text);
-            //amounts += Convert.ToDouble(AllowanceAmount.Text);
-            //amounts += Convert.ToDouble(gautrainAmount.Text);
-            //amounts += Convert.ToDouble(visaAmount.Text);
-            double amounts = 0;
-            int expID = sc.AddExpense(actID,amounts,noteID);
+                    //double amounts = Convert.ToDouble(AccommodationAmount.Text);
+                    //amounts += Convert.ToDouble(AirlineAmount.Text);
+                    //amounts += Convert.ToDouble(AllowanceAmount.Text);
+                    //amounts += Convert.ToDouble(gautrainAmount.Text);
+                    //amounts += Convert.ToDouble(visaAmount.Text);
+                    double amounts = 0;
+                    int expID = sc.AddExpense(actID, amounts, noteID);
 
-            int travelID = sc.AddTravel(0, Convert.ToInt32(numofdays.Text), Convert.ToDateTime(sdate.Text), destination.Text, expID,destination0.Text);
-            if(fleet.SelectedIndex == 0)
-            {
-                sc.AddVisaExpense(0, travelID);
-            }
-            if(fleet0.SelectedIndex == 0)
-            {
-                sc.AddGautrainExpense(0, travelID);
-            }
-            if(fleet1.SelectedIndex == 0)
-            {
-                sc.AddAllowance(0, travelID);
-            }
-            if (fleet11.SelectedIndex == 0)
-            {
-                sc.AddAirline(Convert.ToBoolean(returnTicket.SelectedIndex), 0, travelID);
-            }
-            if (fleet3.SelectedIndex == 0)
-            {
-                sc.AddAccommodation(0, travelID);
-            }
-            Response.Redirect("IncomeandExpensesPage.aspx");
+                    int travelID = sc.AddTravel(0, Convert.ToInt32(numofdays.Text), Convert.ToDateTime(sdate.Text), destination.Text, expID, destination0.Text);
+                    if (fleet.SelectedIndex == 0)
+                    {
+                        sc.AddVisaExpense(0, travelID);
+                    }
+                    if (fleet0.SelectedIndex == 0)
+                    {
+                        sc.AddGautrainExpense(0, travelID);
+                    }
+                    if (fleet1.SelectedIndex == 0)
+                    {
+                        sc.AddAllowance(0, travelID);
+                    }
+                    if (fleet11.SelectedIndex == 0)
+                    {
+                        sc.AddAirline(Convert.ToBoolean(returnTicket.SelectedIndex), 0, travelID);
+                    }
+                    if (fleet3.SelectedIndex == 0)
+                    {
+                        sc.AddAccommodation(0, travelID);
+                    }
+                    Response.Redirect("IncomeandExpensesPage.aspx");
+                }
+                else
+                {
+                    errormsg.Visible = true;
+                    messageforerror.Text ="Date of departure is out of bounds of the Activity";
+                }
 }
             catch (Exception err)
             {
@@ -114,6 +124,22 @@ namespace PresentationTier.Views
         protected void Alerter()
         {
             
+        }
+
+        protected bool checkdate()
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var query = dbContext.Activities.Where(b => b.Id == Convert.ToInt32(Session["ActID"].ToString())).FirstOrDefault();
+                if (query == null)
+                    return false;
+
+                if (query.StartDate < Convert.ToDateTime(sdate.Text) || query.EndDate > Convert.ToDateTime(sdate.Text))
+                {
+                    return true;
+                }
+                return false;
+            }
         }
 
         protected void fleet2_SelectedIndexChanged(object sender, EventArgs e)

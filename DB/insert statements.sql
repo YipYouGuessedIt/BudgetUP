@@ -54,9 +54,9 @@ insert into Objectives values (1,'UX testing');
 
 use dbo
 go
-insert into Activities values(2,'Make files','5/09/12','5/09/12');
-insert into Activities values(2,'delegate tables','5/09/12','5/09/12');
-insert into Activities values(2,'Show worth','5/09/12','5/09/12');
+insert into Activities values(1,'Make files','5/09/12','5/09/12');
+insert into Activities values(1,'delegate tables','5/09/12','5/09/12');
+insert into Activities values(1,'Show worth','5/09/12','5/09/12');
 
 use dbo
 go

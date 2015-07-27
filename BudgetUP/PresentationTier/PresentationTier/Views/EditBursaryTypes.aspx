@@ -85,7 +85,7 @@
             <asp:TextBox ID="Years" runat="server" required type="number" CssClass="form-control"></asp:TextBox>
             <br />
             <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addBursaryType" />
+            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Save" onclick="addBursaryType" />
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Delete" onclick="DeleteBursary" /><br /><br />
         </div>
     </form>

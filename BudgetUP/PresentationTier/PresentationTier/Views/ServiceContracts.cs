@@ -1566,12 +1566,16 @@ namespace PresentationTier.Views
         /// <param name="travelID"></param>
         public void AddCarExpense(bool UPFleet,int exp)
         {
-            Car car = new Car();
-            car.UPFleet = UPFleet;
-            car.ExpensId = exp;
+            
+            
 
             using (var dbContext = new dboEntities())
             {
+                Car car = new Car();
+
+            car.UPFleet = UPFleet;
+            car.ExpensId = exp;
+            //car.Id = dbContext.Cars.Max(item => item.Id) + 1;
                 dbContext.Cars.Add(car);
                 dbContext.SaveChanges();
             }

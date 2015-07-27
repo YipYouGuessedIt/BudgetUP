@@ -103,6 +103,7 @@ namespace PresentationTier.Views
             {
             ServiceContracts sc = new ServiceContracts();
             sc.DeleteEmailDomain(Convert.ToInt32(this.Session["DomainID"].ToString()));
+            this.Session["DomainID"] = null;
             Response.Redirect("Settings.aspx");
             }
             catch (Exception err)

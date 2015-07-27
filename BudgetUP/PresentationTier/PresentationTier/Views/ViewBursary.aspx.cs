@@ -159,5 +159,22 @@ namespace PresentationTier.Views
                 messageforerror.Text = Class1.genericErr;
             }
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ServiceContracts m = new ServiceContracts();
+                m.DeleteBursary(Convert.ToInt32(this.Session["BursIDID"].ToString()));
+                this.Session["BursIDID"] = null;
+                Response.Redirect("IncomeandExpensesPage.aspx");
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
+        }
     }
 }

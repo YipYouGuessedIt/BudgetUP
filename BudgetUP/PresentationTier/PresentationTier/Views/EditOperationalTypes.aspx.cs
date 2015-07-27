@@ -99,6 +99,7 @@ namespace PresentationTier.Views
     {
             ServiceContracts sc = new ServiceContracts();
             sc.DeleteOperationalType(Convert.ToInt32(this.Session["OperationalTypeID"].ToString()));
+            this.Session["OperationalTypeID"] = null;
             Response.Redirect("Settings.aspx");
             }
             catch (Exception err)
@@ -122,6 +123,11 @@ namespace PresentationTier.Views
                 errormsg.Visible = true;
                 messageforerror.Text = Class1.genericErr;
             }
+        }
+
+        protected void OperationDescription_TextChanged(object sender, EventArgs e)
+        {
+
         }
         
     }

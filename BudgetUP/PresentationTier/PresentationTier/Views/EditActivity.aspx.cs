@@ -83,17 +83,26 @@ namespace PresentationTier.Views
                         DateTime end = Convert.ToDateTime(edate.Text);
                         if (m.StartDate > start || m.EndDate > end)
                         {
-                            ServiceContracts mb = new ServiceContracts();
-                            Activity p = new Activity();
-                            p.Id = Convert.ToInt32(Session["ActID"].ToString());
-                            p.ActivityName = ActName.Text;
-                            p.StartDate = Convert.ToDateTime(sdate.Text);
-                            p.EndDate = Convert.ToDateTime(edate.Text);
-                            mb.UpdateActivity(p);
+                            if (end >= start)
+                            {
+                                ServiceContracts mb = new ServiceContracts();
+                                Activity p = new Activity();
+                                p.Id = Convert.ToInt32(Session["ActID"].ToString());
+                                p.ActivityName = ActName.Text;
+                                p.StartDate = Convert.ToDateTime(sdate.Text);
+                                p.EndDate = Convert.ToDateTime(edate.Text);
+                                mb.UpdateActivity(p);
+                            }
+                            else
+                            {
+                                errormsg.Visible = true;
+                                messageforerror.Text = "End date is before start date";
+                            }
                         }
                         else
                         {
-
+                            errormsg.Visible = true;
+                            messageforerror.Text = "Activity dates outside of the Projects dates";
                         }
                         Response.Redirect("IncomeandExpensesPage.aspx");
                     }
@@ -116,7 +125,8 @@ namespace PresentationTier.Views
             ServiceContracts m = new ServiceContracts();
 
             m.DeleteUserProject(Convert.ToInt32(Session["ActID"].ToString()));
-            Response.Redirect("IncomeandExpensesPage.aspx");
+            Session["ActID"] = null;
+            Response.Redirect("ActivitiesPage.aspx");
             }
             catch (Exception err)
             {

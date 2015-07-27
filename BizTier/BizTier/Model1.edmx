@@ -399,7 +399,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UPFleet" Type="bit" Nullable="false" />
     <Property Name="ExpensId" Type="int" Nullable="false" />
   </EntityType>
@@ -1516,7 +1516,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UPFleet" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Expen" Relationship="dboModel.ExpensCar" FromRole="Car" ToRole="Expens" />
           <Property Name="ExpensId" Type="Int32" Nullable="false" />

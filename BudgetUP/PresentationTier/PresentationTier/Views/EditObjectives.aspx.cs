@@ -67,6 +67,7 @@ namespace PresentationTier.Views
             Objective n = new Objective();
             n.Id = Convert.ToInt32(Session["ObjectiveID"].ToString());
             n.ObjectiveName = ObjName.Text;
+            m.UpdateObjectives(n);
             Response.Redirect("ActivitiesPage.aspx");
                         }
             catch (Exception err)
@@ -83,7 +84,8 @@ namespace PresentationTier.Views
             {
             ServiceContracts m = new ServiceContracts();
             m.DeleteObjectives(Convert.ToInt32(Session["ObjectiveID"].ToString()));
-            Response.Redirect("ActivitiesPage.aspx");
+            Session["ObjectiveID"] = null;
+            Response.Redirect("ObjectivesPage.aspx");
             }
             catch (Exception err)
             {

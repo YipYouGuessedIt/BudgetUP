@@ -11,9 +11,11 @@ namespace PresentationTier.Views
     public partial class ProfilePage : System.Web.UI.Page
     {
         private int uc = 0;
+        private string em = "";
         protected void Page_Load(object sender, EventArgs e)
 
         {
+            errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -58,10 +60,12 @@ namespace PresentationTier.Views
                             name0.Text = p.Surname;
                             email.Text = query2.Email;
                             password.Text = query2.Password;
+                            password0.Text = query2.Password;
                             
 
                         }
                         uc = query2.Id;
+                        em = query2.Email;
                     }
                 }
 
@@ -130,33 +134,94 @@ namespace PresentationTier.Views
 
             }
         }
+        private Boolean checkEmailExists()
+        {
+            try
+            {
+                string dom = email.Text;
+                List<EmailDomain> cred = new List<EmailDomain>();
+                using (var dbContext = new dboEntities())
+                {
+                    var query = dbContext.UserCredentials.Where(b => b.Email == dom).FirstOrDefault();
+                    if (query == null)
+                    {
 
+                        return false;
+                    }
+                    if (query.Email != em)
+                    {
+                        errormsg.Visible = true;
+                        messageforerror.Text = "Email already exists";
+                        return true;
+                    }
+                    return false;
+
+                }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+                return false;
+            }
+        }
         protected void Unnamed6_Click(object sender, EventArgs e)
         {
-
-            User u = new User();
-            u.Id = Convert.ToInt32(Session["userID"].ToString());
-            u.Name = name.Text;
-            u.Surname = name0.Text;
-            u.TitleId = Convert.ToInt32(DropDownList4.SelectedValue);
-            u.RoleId = Convert.ToInt32(DropDownList2.SelectedValue);
-            u.FacultyId = Convert.ToInt32(DropDownList3.SelectedValue);
-            if (Session["Admin"].ToString() == "True".ToString())
+            if (password.Text == password0.Text)
             {
-                u.Admin = true;
+                if (this.checkEmailExists() == false)
+                {
+                    User u = new User();
+                    u.Id = Convert.ToInt32(Session["userID"].ToString());
+                    u.Name = name.Text;
+                    u.Surname = name0.Text;
+                    u.TitleId = Convert.ToInt32(DropDownList4.SelectedValue);
+                    u.RoleId = Convert.ToInt32(DropDownList2.SelectedValue);
+                    u.FacultyId = Convert.ToInt32(DropDownList3.SelectedValue);
+                    if (Session["Admin"].ToString() == "True".ToString())
+                    {
+                        u.Admin = true;
+                    }
+                    else
+                    {
+                        u.Admin = false;
+                    }
+                    ServiceContracts m = new ServiceContracts();
+                    m.UpdateUser(u);
+                    UserCredential c = new UserCredential();
+                    c.User_Id = Convert.ToInt32(Session["userID"].ToString());
+                    c.Email = email.Text;
+                    c.Password = password.Text;
+                    c.Id = uc;
+                    m.UpdateUserCredentials(c);
+                }
+                else
+                {
+                    errormsg.Visible = true;
+                    messageforerror.Text = "Email already exists";
+                }
             }
             else
             {
-                u.Admin = false;
+                errormsg.Visible = true;
+                messageforerror.Text = "Passwords do not match";
             }
-            ServiceContracts m = new ServiceContracts();
-            m.UpdateUser(u);
-            UserCredential c = new UserCredential();
-            c.User_Id = Convert.ToInt32(Session["userID"].ToString());
-            c.Email = email.Text;
-            c.Password = password.Text;
-            c.Id = uc;
-            m.UpdateUserCredentials(c);
+        }
+
+        protected void Unnamed1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errormsg.Visible = false;
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+            }
         }
     }
 }

@@ -76,3 +76,5 @@ C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTie
 C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.dll
 C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.pdb
 C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\obj\Debug\PresentationTier.csprojResolveAssemblyReference.cache
+C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\EPPlus.dll
+C:\Users\m\Desktop\New Folder\BudgetUP\BudgetUP\PresentationTier\PresentationTier\bin\EPPlus.xml

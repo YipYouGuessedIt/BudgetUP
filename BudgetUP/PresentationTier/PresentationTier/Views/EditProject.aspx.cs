@@ -156,6 +156,8 @@ namespace PresentationTier.Views
             ServiceContracts m = new ServiceContracts();
             
             m.DeleteUserProject(Convert.ToInt32(Session["projectID"].ToString()));
+            Session["projectID"] = null;
+            Response.Redirect("ProjectsPage.aspx");
              }
              catch (Exception err)
              {

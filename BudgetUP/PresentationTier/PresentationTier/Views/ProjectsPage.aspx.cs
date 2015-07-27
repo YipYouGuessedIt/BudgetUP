@@ -148,6 +148,7 @@ namespace PresentationTier.Views
             List<Project> proj = new List<Project>();
             using (var dbContext = new dboEntities())
             {
+                bool m = false;
                 var query = from Projects
                             in dbContext.Projects
                             select Projects;
@@ -158,6 +159,7 @@ namespace PresentationTier.Views
                 {
                     if (p.UserId == (int)Session["userID"])
                     {
+                        m = true;
                         LinkButton add = new LinkButton();
                         add.Text = p.Title + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                         add.ID = p.Id.ToString();
@@ -165,6 +167,10 @@ namespace PresentationTier.Views
                         add.Click += new EventHandler(clicker);
                         projectList.Controls.Add(add);
                     }
+                }
+                if(m == false)
+                {
+                    projnote.InnerText = "No items to be displayed";
                 }
 
             }

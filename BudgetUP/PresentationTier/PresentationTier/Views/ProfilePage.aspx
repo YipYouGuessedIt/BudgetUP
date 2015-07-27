@@ -15,7 +15,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
+        <div runat="server" id="errormsg">
+                <div id="errorinner">
+                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
+                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
+                </div>
+            </div>
                 <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -84,13 +89,14 @@
 
                 </asp:DropDownList><br />
                     <br />
-                <asp:Label runat="server">Name*</asp:Label><asp:TextBox runat="server" ID="name" required="true" name="name" CssClass="form-control" Height="25px">John Smith</asp:TextBox>
+                <asp:Label runat="server">Name*</asp:Label><asp:TextBox runat="server" ID="name" required="true" name="name" CssClass="form-control" ></asp:TextBox>
                     <br />
-                <asp:Label runat="server" ID="Label2">Surname*</asp:Label><asp:TextBox runat="server" ID="name0" required="true" name="name" CssClass="form-control" Height="25px">John Smith</asp:TextBox><br />
-                <asp:Label runat="server">Email Address* </asp:Label><asp:TextBox required="true"  type="email" runat="server" ID="email" name="email" CssClass="form-control" Height="25px"></asp:TextBox>
+                <asp:Label runat="server" ID="Label2">Surname*</asp:Label><asp:TextBox runat="server" ID="name0" required="true" name="name" CssClass="form-control" ></asp:TextBox><br />
+                <asp:Label runat="server">Email Address* </asp:Label><asp:TextBox required="true"  type="email" runat="server" ID="email" name="email" CssClass="form-control" ></asp:TextBox>
                     <br />
-                <asp:Label runat="server" ID="Label3">Password*</asp:Label><asp:TextBox required="true"  type="password" runat="server" ID="password"  name="email" CssClass="form-control" Height="25px"></asp:TextBox>
+                <asp:Label runat="server" ID="Label3">Password*</asp:Label><asp:TextBox required="true"  type="password" runat="server" ID="password"  name="email" CssClass="form-control" ></asp:TextBox>
                     <br />
+                <asp:Label runat="server" ID="Label4">Password confirm*</asp:Label><asp:TextBox required="true"  type="password" runat="server" ID="password0"  name="email" CssClass="form-control" ></asp:TextBox>
                     <br />
                 <asp:Label runat="server">Role*</asp:Label> 
                 <asp:DropDownList class="form-control" ID="DropDownList2" runat="server" OnInit="DropDownList2_Init">

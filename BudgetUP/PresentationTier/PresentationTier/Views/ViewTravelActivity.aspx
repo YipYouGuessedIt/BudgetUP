@@ -147,7 +147,9 @@
                 <hr />
                 <asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Edit" OnClick="Unnamed4_Click" /><br /><br />
+                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" OnClick="Unnamed4_Click" />
+                <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" OnClick="Button1_Click" Text="Remove" />
+                <br /><br />
             </div>
         </form>
 

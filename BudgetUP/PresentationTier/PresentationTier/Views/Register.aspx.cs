@@ -58,19 +58,23 @@ namespace PresentationTier.Views
             else
             {
                 bool m = checkEmailDomain();
+                bool emailexists = checkEmailExists();
                 if (m == true)
                 {
-                    int userID = sc.AddUser(Convert.ToInt32(title.SelectedValue), name.Text, surname.Text, Convert.ToInt32(roles.SelectedValue), Convert.ToInt32(faculty.SelectedValue));
-                    //select user here and get ID
+                    if (emailexists == false)
+                    {
+                        int userID = sc.AddUser(Convert.ToInt32(title.SelectedValue), name.Text, surname.Text, Convert.ToInt32(roles.SelectedValue), Convert.ToInt32(faculty.SelectedValue));
+                        //select user here and get ID
 
-                    sc.AddUserCredential(email.Text, Password.Text, userID);
-                    if (this.Session["Admin"] == null)
-                    {
-                        Response.Redirect("LoginPage.aspx");
-                    }
-                    else
-                    {
-                        Response.Redirect("Settings.aspx");
+                        sc.AddUserCredential(email.Text, Password.Text, userID);
+                        if (this.Session["Admin"] == null)
+                        {
+                            Response.Redirect("LoginPage.aspx");
+                        }
+                        else
+                        {
+                            Response.Redirect("Settings.aspx");
+                        }
                     }
                     
                 }
@@ -102,6 +106,35 @@ namespace PresentationTier.Views
                 return true;
 
             }
+            }
+            catch (Exception err)
+            {
+
+                errormsg.Visible = true;
+                messageforerror.Text = Class1.genericErr;
+                return false;
+            }
+        }
+
+        private Boolean checkEmailExists()
+        {
+            try
+            {
+                string dom = email.Text;
+                List<EmailDomain> cred = new List<EmailDomain>();
+                using (var dbContext = new dboEntities())
+                {
+                    var query = dbContext.UserCredentials.Where(b => b.Email == dom).FirstOrDefault();
+                    if (query == null)
+                    {
+
+                        return false;
+                    }
+                    errormsg.Visible = true;
+                    messageforerror.Text = "Email already exists";
+                    return true;
+
+                }
             }
             catch (Exception err)
             {

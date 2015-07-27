@@ -54,6 +54,8 @@ namespace PresentationTier.Views
             int userID = Convert.ToInt32(this.Session["userID"]);
             DateTime start = Convert.ToDateTime(sdate.Text);
             DateTime end = Convert.ToDateTime(edate.Text);
+            if (start >= DateTime.Today)
+            {
             if (end >= start)
             {
                 int length;
@@ -102,7 +104,18 @@ namespace PresentationTier.Views
                                 
                   }
                        
-            }    
+            }  
+            else
+            {
+                errormsg.Visible = true;
+                messageforerror.Text = "End date is befor start date";
+            }
+                }  
+            else
+            {
+                errormsg.Visible = true;
+                messageforerror.Text = "Start date is befor todays date";
+            }
 
  
                 
