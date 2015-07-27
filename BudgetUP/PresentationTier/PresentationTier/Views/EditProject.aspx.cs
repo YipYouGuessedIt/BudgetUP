@@ -14,7 +14,7 @@ namespace PresentationTier.Views
         {
             try
             { 
-            errormsg.Visible = true;
+            errormsg.Visible = false;
             if (Session["projectID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
