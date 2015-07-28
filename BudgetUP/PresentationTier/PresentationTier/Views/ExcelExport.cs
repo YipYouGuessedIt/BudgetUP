@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using BizTier;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -1017,7 +1018,7 @@ namespace PresentationTier.Views
                             foreach (Contractor item in activity.contrList)
                             {
                                 ws.Cells[row, col++].Value = item.Expens.Note_Id;
-                                ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+                                ws.Cells[row, col++].Value = "2." + objective.noteID + "." + activity.noteID;
 
                                 using (var dbContext = new dboEntities())
                                 {
@@ -1068,7 +1069,7 @@ namespace PresentationTier.Views
                             foreach (Operational item in activity.OperatList)
                             {
                                 ws.Cells[row, col++].Value = item.Expens.Note_Id;
-                                ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+                                ws.Cells[row, col++].Value = "3." + objective.noteID + "." + activity.noteID;
 
                                 using (var dbContext = new dboEntities())
                                 {
@@ -1128,7 +1129,7 @@ namespace PresentationTier.Views
                             foreach (Car item in activity.carList)
                             {
                                 ws.Cells[row, col++].Value = item.Expen.Note_Id;
-                                ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+                                ws.Cells[row, col++].Value = "4." + objective.noteID + "." + activity.noteID;
 
                                 using (var dbContext = new dboEntities())
                                 {
@@ -1191,7 +1192,7 @@ namespace PresentationTier.Views
                             foreach (Travel item in activity.travList)
                             {
                                 ws.Cells[row, col++].Value = item.Expens.Note_Id;
-                                ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+                                ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
 
                                 using (var dbContext = new dboEntities())
                                 {
@@ -1253,7 +1254,7 @@ namespace PresentationTier.Views
                             foreach (Equipment item in activity.equipList)
                             {
                                 ws.Cells[row, col++].Value = item.Expens.Note_Id;
-                                ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+                                ws.Cells[row, col++].Value = "6." + objective.noteID + "." + activity.noteID;
 
                                 using (var dbContext = new dboEntities())
                                 {
@@ -1294,7 +1295,7 @@ namespace PresentationTier.Views
                 foreach (Income item in projectInfo.incomeList)
                 {
                     ws.Cells[row, col++].Value = item.Note_Id;
-                    ws.Cells[row, col++].Value = "1." + itemID++;
+                    ws.Cells[row, col++].Value = "7." + itemID++;
 
                     using (var dbContext = new dboEntities())
                     {
@@ -1809,6 +1810,7 @@ namespace PresentationTier.Views
                 //range.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                 //range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
                 range.Style.Numberformat.Format = "R #,##0.00";
+                range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
             }
         }
 
@@ -1825,6 +1827,11 @@ namespace PresentationTier.Views
             using (var range = worksheet.Cells[row, startCol, row, endCol])
             {
                 range.Style.Font.Bold = true;
+                range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
                 range.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                 range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
             }
