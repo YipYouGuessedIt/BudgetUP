@@ -28,6 +28,10 @@ public partial class Admin_SysSettings
 
     public int MaximumProjectSpan { get; set; }
 
+    public double UPFleetDailyRate { get; set; }
+
+    public double FCkmRate { get; set; }
+
 }
 
 }

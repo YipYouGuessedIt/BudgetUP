@@ -20,9 +20,13 @@ public partial class Car
 
     public int Id { get; set; }
 
-    public bool UPFleet { get; set; }
-
     public int ExpensId { get; set; }
+
+    public int TypeofRental { get; set; }
+
+    public int Days { get; set; }
+
+    public int Kilometers { get; set; }
 
 
 

@@ -175,6 +175,8 @@
     <Property Name="SubventionRate" Type="float" Nullable="false" />
     <Property Name="InstitutionalCost" Type="float" Nullable="false" />
     <Property Name="MaximumProjectSpan" Type="int" Nullable="false" />
+    <Property Name="UPFleetDailyRate" Type="float" Nullable="false" />
+    <Property Name="FCkmRate" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="AirlineExpenses">
     <Key>
@@ -201,6 +203,7 @@
     <Property Name="BursaryTypeId" Type="int" Nullable="false" />
     <Property Name="ProjectId" Type="int" Nullable="false" />
     <Property Name="Note_Id" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="BursaryTypes">
     <Key>
@@ -317,6 +320,8 @@
     <Property Name="EscalationRate" Type="float" Nullable="false" />
     <Property Name="SubventionRate" Type="float" Nullable="false" />
     <Property Name="InstitutionalCost" Type="float" Nullable="false" />
+    <Property Name="UPFleetDailyRate" Type="float" Nullable="false" />
+    <Property Name="FCkmRate" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="Projects">
     <Key>
@@ -355,6 +360,7 @@
     <Property Name="Destination" Type="nvarchar" Nullable="false" MaxLength="200" />
     <Property Name="Expense_Id" Type="int" Nullable="false" />
     <Property Name="DepatureLocation" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TravellerName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="UPStaffMembers">
     <Key>
@@ -400,8 +406,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UPFleet" Type="bit" Nullable="false" />
     <Property Name="ExpensId" Type="int" Nullable="false" />
+    <Property Name="TypeofRental" Type="int" Nullable="false" />
+    <Property Name="Days" Type="int" Nullable="false" />
+    <Property Name="Kilometers" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_TravelAccommodation">
     <End Role="Travels" Type="dboModel.Store.Travels" Multiplicity="1" />
@@ -773,6 +781,8 @@
           <Property Name="SubventionRate" Type="Double" Nullable="false" />
           <Property Name="InstitutionalCost" Type="Double" Nullable="false" />
           <Property Name="MaximumProjectSpan" Type="Int32" Nullable="false" />
+          <Property Name="UPFleetDailyRate" Type="Double" Nullable="false" />
+          <Property Name="FCkmRate" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="AirlineExpens">
           <Key>
@@ -804,6 +814,7 @@
           <NavigationProperty Name="Note" Relationship="Self.FK_BursaryNote" FromRole="Bursaries" ToRole="Notes" />
           <NavigationProperty Name="BursaryType" Relationship="Self.FK_BursaryTypeBursary" FromRole="Bursaries" ToRole="BursaryTypes" />
           <NavigationProperty Name="Project" Relationship="Self.FK_ProjectBursary" FromRole="Bursaries" ToRole="Projects" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="BursaryType">
           <Key>
@@ -945,6 +956,8 @@
           <Property Name="SubventionRate" Type="Double" Nullable="false" />
           <Property Name="InstitutionalCost" Type="Double" Nullable="false" />
           <NavigationProperty Name="Projects" Relationship="Self.FK_ProjectProject_Settings" FromRole="Project_Settings" ToRole="Projects" />
+          <Property Name="UPFleetDailyRate" Type="Double" Nullable="false" />
+          <Property Name="FCkmRate" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -996,6 +1009,7 @@
           <NavigationProperty Name="Gautrains" Relationship="Self.FK_TravelGautrain" FromRole="Travels" ToRole="Gautrains" />
           <NavigationProperty Name="Visas" Relationship="Self.FK_TravelVisa" FromRole="Travels" ToRole="Visas" />
           <Property Name="DepatureLocation" Type="String" Nullable="false" />
+          <Property Name="TravellerName" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="UPStaffMember">
           <Key>
@@ -1517,9 +1531,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UPFleet" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Expen" Relationship="dboModel.ExpensCar" FromRole="Car" ToRole="Expens" />
           <Property Name="ExpensId" Type="Int32" Nullable="false" />
+          <Property Name="TypeofRental" Type="Int32" Nullable="false" />
+          <Property Name="Days" Type="Int32" Nullable="false" />
+          <Property Name="Kilometers" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="ExpensCar">
           <End Type="dboModel.Expens" Role="Expens" Multiplicity="1" />
@@ -1567,6 +1583,8 @@
           <ScalarProperty Name="SubventionRate" ColumnName="SubventionRate" />
           <ScalarProperty Name="InstitutionalCost" ColumnName="InstitutionalCost" />
           <ScalarProperty Name="MaximumProjectSpan" ColumnName="MaximumProjectSpan" />
+          <ScalarProperty Name="UPFleetDailyRate" ColumnName="UPFleetDailyRate" />
+          <ScalarProperty Name="FCkmRate" ColumnName="FCkmRate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1596,6 +1614,7 @@
           <ScalarProperty Name="BursaryTypeId" ColumnName="BursaryTypeId" />
           <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
           <ScalarProperty Name="Note_Id" ColumnName="Note_Id" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1726,6 +1745,8 @@
           <ScalarProperty Name="EscalationRate" ColumnName="EscalationRate" />
           <ScalarProperty Name="SubventionRate" ColumnName="SubventionRate" />
           <ScalarProperty Name="InstitutionalCost" ColumnName="InstitutionalCost" />
+          <ScalarProperty Name="UPFleetDailyRate" ColumnName="UPFleetDailyRate" />
+          <ScalarProperty Name="FCkmRate" ColumnName="FCkmRate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1768,6 +1789,7 @@
           <ScalarProperty Name="Destination" ColumnName="Destination" />
           <ScalarProperty Name="Expense_Id" ColumnName="Expense_Id" />
           <ScalarProperty Name="DepatureLocation" ColumnName="DepatureLocation" />
+          <ScalarProperty Name="TravellerName" ColumnName="TravellerName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1818,8 +1840,10 @@
       <EntityTypeMapping TypeName="IsTypeOf(dboModel.Car)">
         <MappingFragment StoreEntitySet="Cars">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UPFleet" ColumnName="UPFleet" />
           <ScalarProperty Name="ExpensId" ColumnName="ExpensId" />
+          <ScalarProperty Name="TypeofRental" ColumnName="TypeofRental" />
+          <ScalarProperty Name="Days" ColumnName="Days" />
+          <ScalarProperty Name="Kilometers" ColumnName="Kilometers" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

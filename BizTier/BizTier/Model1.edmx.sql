@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/25/2015 15:28:36
+-- Date Created: 07/29/2015 12:11:33
 -- Generated from EDMX file: C:\Users\m\Desktop\New Folder\BudgetUP\BizTier\BizTier\Model1.edmx
 -- --------------------------------------------------
 
@@ -222,7 +222,9 @@ CREATE TABLE [dbo].[Admin_SysSettings] (
     [EscalationRate] float  NOT NULL,
     [SubventionRate] float  NOT NULL,
     [InstitutionalCost] float  NOT NULL,
-    [MaximumProjectSpan] int  NOT NULL
+    [MaximumProjectSpan] int  NOT NULL,
+    [UPFleetDailyRate] float  NOT NULL,
+    [FCkmRate] float  NOT NULL
 );
 GO
 
@@ -248,7 +250,8 @@ CREATE TABLE [dbo].[Bursaries] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [BursaryTypeId] int  NOT NULL,
     [ProjectId] int  NOT NULL,
-    [Note_Id] int  NOT NULL
+    [Note_Id] int  NOT NULL,
+    [StartDate] datetime  NOT NULL
 );
 GO
 
@@ -364,7 +367,9 @@ CREATE TABLE [dbo].[Project_Settings] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [EscalationRate] float  NOT NULL,
     [SubventionRate] float  NOT NULL,
-    [InstitutionalCost] float  NOT NULL
+    [InstitutionalCost] float  NOT NULL,
+    [UPFleetDailyRate] float  NOT NULL,
+    [FCkmRate] float  NOT NULL
 );
 GO
 
@@ -402,7 +407,8 @@ CREATE TABLE [dbo].[Travels] (
     [DepartureDate] datetime  NOT NULL,
     [Destination] nvarchar(200)  NOT NULL,
     [Expense_Id] int  NOT NULL,
-    [DepatureLocation] nvarchar(max)  NOT NULL
+    [DepatureLocation] nvarchar(max)  NOT NULL,
+    [TravellerName] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -448,8 +454,10 @@ GO
 -- Creating table 'Cars'
 CREATE TABLE [dbo].[Cars] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [UPFleet] bit  NOT NULL,
-    [ExpensId] int  NOT NULL
+    [ExpensId] int  NOT NULL,
+    [TypeofRental] int  NOT NULL,
+    [Days] int  NOT NULL,
+    [Kilometers] int  NOT NULL
 );
 GO
 

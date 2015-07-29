@@ -46,6 +46,8 @@ public partial class Travel
 
     public string DepatureLocation { get; set; }
 
+    public string TravellerName { get; set; }
+
 
 
     public virtual ICollection<Accommodation> Accommodations { get; set; }

@@ -26,6 +26,8 @@ public partial class Bursary
 
     public int Note_Id { get; set; }
 
+    public System.DateTime StartDate { get; set; }
+
 
 
     public virtual Note Note { get; set; }

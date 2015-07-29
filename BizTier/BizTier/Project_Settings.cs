@@ -34,6 +34,10 @@ public partial class Project_Settings
 
     public double InstitutionalCost { get; set; }
 
+    public double UPFleetDailyRate { get; set; }
+
+    public double FCkmRate { get; set; }
+
 
 
     public virtual ICollection<Project> Projects { get; set; }
