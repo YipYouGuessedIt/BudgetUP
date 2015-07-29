@@ -93,7 +93,7 @@ namespace PresentationTier.Views
             {               
                 //start with excel
                 int col = 1;
-                int row = 2;
+                int row = 1;
                 int expenseNote = 1;
 
                 //column indexes
@@ -111,10 +111,10 @@ namespace PresentationTier.Views
 
                 //write Project details
                 ws.Cells[row, col].Value = projectInfo.projName;
-                FormatColumnHeadings(ws, col, 20, row++);
+                row++;
                 row++;
                 ws.Cells[row, col].Value = projectInfo.projGoal;
-                FormatColumnHeadings(ws, col, 20, row++);
+                row++;
                 row++;
 
                 firstAmountRow = row+1;
@@ -142,7 +142,13 @@ namespace PresentationTier.Views
 
                 //write total columns
                 ws.Cells[row, col].Value = "Total".ToUpper();
-                FormatHeadings(ws, 1, col, row);
+
+
+                FormatHeadings(ws, 1, col, 1);
+                FormatHeadings(ws, 1, col, 3);
+                FormatColumnHeadings(ws, 1, col, row);
+
+
                 LastAmountColumn = col  -1;
                 #endregion
 
@@ -433,6 +439,8 @@ namespace PresentationTier.Views
                                 {
                                     ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                     ws.Cells[row, col].Value = 0;
+                                    ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                    ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                     if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                     {
@@ -459,6 +467,8 @@ namespace PresentationTier.Views
                                 }
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                                 col = ExpenseColumns;
                                 row++;
                             }
@@ -478,6 +488,8 @@ namespace PresentationTier.Views
                                 {
                                     ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                     ws.Cells[row, col].Value = 0;
+                                    ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                    ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                     if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                     {
@@ -504,6 +516,8 @@ namespace PresentationTier.Views
                                 }
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                                 col = ExpenseColumns;
                                 row++;
                             }
@@ -523,6 +537,8 @@ namespace PresentationTier.Views
                                 {
                                     ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                     ws.Cells[row, col].Value = 0;
+                                    ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                    ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                     if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                     {
@@ -549,6 +565,8 @@ namespace PresentationTier.Views
                                 }
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                                 col = ExpenseColumns;
                                 row++;
                             }
@@ -568,6 +586,8 @@ namespace PresentationTier.Views
                                 {
                                     ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                     ws.Cells[row, col].Value = 0;
+                                    ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                    ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                     if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                     {
@@ -594,6 +614,8 @@ namespace PresentationTier.Views
                                 }
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                                 col = ExpenseColumns;
                                 row++;
                             }
@@ -613,6 +635,8 @@ namespace PresentationTier.Views
                                 {
                                     ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                     ws.Cells[row, col].Value = 0;
+                                    ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                    ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                     if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                     {
@@ -639,6 +663,8 @@ namespace PresentationTier.Views
                                 }
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                                 col = ExpenseColumns;
                                 row++;
                             }
@@ -702,7 +728,7 @@ namespace PresentationTier.Views
                 }
                 lastAmountRow = row;
                 
-                FormatAmountCells(ws,FirstAmountColumn,firstAmountRow,LastAmountColumn,lastAmountRow);
+                //FormatAmountCells(ws,FirstAmountColumn,firstAmountRow,LastAmountColumn,lastAmountRow);
                 
                 //Total Columns
                 ws.Cells[row, 1].Value = "Total Expenses";
@@ -713,14 +739,14 @@ namespace PresentationTier.Views
                     ws.Cells[row, i].Formula = SumRange(i, firstAmountRow, i, lastAmountRow-1);
                 }
                 #endregion
-
+                //FormatAmountCells(ws, 1, LastAmountColumn, row, row);
                 int ExpenseTotalRow = row;
                 row += 2;
 
                 #region Write Incomes
 
                 ws.Cells[row, 1].Value = "Minus other donations, in-kind support and pledges / Incomes and Donations (Pick one?)";
-                FormatAmountCells(ws, 1, LastAmountColumn, row, row);
+                
                 row++;
                 col = descriptionColumn;
 
@@ -832,7 +858,7 @@ namespace PresentationTier.Views
                     #endregion
                 }
                 incomeRowLast = row - 1;
-                FormatAmountCells(ws, FirstAmountColumn, firstAmountRow, LastAmountColumn, lastAmountRow);
+                //FormatAmountCells(ws, FirstAmountColumn, firstAmountRow, LastAmountColumn, lastAmountRow);
 
                 //Total Columns
                 ws.Cells[row, 1].Value = "Total Incomes";
@@ -917,10 +943,9 @@ namespace PresentationTier.Views
                     ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
                     ws.Cells[row, i].Formula = "=" + GetExcelColumnName(i) + SubTotalRow + "+" + GetExcelColumnName(i) + indirectTotals + "-" + GetExcelColumnName(i) + bursaryTotals;
                 }
-
+                int FinalTotalRow = row;
                 #endregion
-
-#endregion
+            #endregion
 
 
                 #region Notes
@@ -932,16 +957,23 @@ namespace PresentationTier.Views
 
                 row += 2;
                 ws.Cells[row, col].Value = "Budget Notes";
-                FormatHeadings(ws, 1, 5, row++);
+                FormatNoteHeading(ws, 1, 5, row++);
+                ws.Cells[row, 1, row, 5].Merge = true;
 
+                row++;
                 #region Write UP Staff
                 col=1;
-                ws.Cells[row++, col].Value = "1. UP Staff Members";
+                ws.Cells[row, col].Value = "1. UP Staff Members";
+                FormatNoteHeading(ws, 1, 5, row);
+                ws.Cells[row, 1, row, 5].Merge = true;
+                row++;
                 ws.Cells[row, col++].Value = "ID";
                 ws.Cells[row, col++].Value = "Note ID";
                 ws.Cells[row, col++].Value = "Note";
                 ws.Cells[row, col++].Value = "Subvention Levy";
                 ws.Cells[row, col++].Value = "Amount";
+                FormatNoteHeading(ws, 1, 5, row);
+
                 col = 1;
                 row++;
                 foreach (Proj.obj objective in projectInfo.objList)
@@ -999,11 +1031,16 @@ namespace PresentationTier.Views
 
                 #region Write Contractors
                 col=1;
-                ws.Cells[row++, col].Value = "2. External Service Provider";
+                ws.Cells[row, col].Value = "2. External Service Provider";
+                FormatNoteHeading(ws, 1, 4, row);
+                ws.Cells[row, 1, row, 4].Merge = true;
+                row++;
+
                 ws.Cells[row, col++].Value = "ID";
                 ws.Cells[row, col++].Value = "Note ID";
                 ws.Cells[row, col++].Value = "Note";
                 ws.Cells[row, col++].Value = "Amount";
+                FormatNoteHeading(ws, 1, 4, row);
                 row++;
                 col=1;
                 foreach (Proj.obj objective in projectInfo.objList)
@@ -1049,12 +1086,17 @@ namespace PresentationTier.Views
 
                 #region Write Operational Expense Notes
                 col = 1;
-                ws.Cells[row++, col].Value = "3. Operational Expense Notes";
+                ws.Cells[row, col].Value = "3. Operational Expense Notes";
+                FormatNoteHeading(ws, 1, 5, row);
+                ws.Cells[row, 1, row, 5].Merge = true;
+                row++;
+
                 ws.Cells[row, col++].Value = "ID";
                 ws.Cells[row, col++].Value = "Note ID";
                 ws.Cells[row, col++].Value = "Note";
                 ws.Cells[row, col++].Value = "Type";
                 ws.Cells[row, col++].Value = "Amount";
+                FormatNoteHeading(ws, 1, 5, row);
                 row++;
                 col = 1;
                 foreach (Proj.obj objective in projectInfo.objList)
@@ -1110,11 +1152,16 @@ namespace PresentationTier.Views
 
                 #region Write Car Notes
                 col = 1;
-                ws.Cells[row++, col].Value = "4. Car Expense Notes";
+                ws.Cells[row, col].Value = "4. Car Expense Notes";
+                FormatNoteHeading(ws, 1, 4, row);
+                ws.Cells[row, 1, row, 4].Merge = true;
+                row++;
+
                 ws.Cells[row, col++].Value = "ID";
                 ws.Cells[row, col++].Value = "Note ID";
                 ws.Cells[row, col++].Value = "Note";
                 ws.Cells[row, col++].Value = "UP Fleet";
+                FormatNoteHeading(ws, 1, 4, row);
                 row++;
                 col = 1;
                 foreach (Proj.obj objective in projectInfo.objList)
@@ -1165,7 +1212,11 @@ namespace PresentationTier.Views
 
                 #region Write Travel Notes
                 col = 1;
-                ws.Cells[row++, col].Value = "5. Travel Expense Notes";
+                ws.Cells[row, col].Value = "5. Travel Expense Notes";
+                FormatNoteHeading(ws, 1, 12, row);
+                ws.Cells[row, 1, row, 12].Merge = true;
+                row++;
+
                 ws.Cells[row, col++].Value = "ID";
                 ws.Cells[row, col++].Value = "Note ID";
                 ws.Cells[row, col++].Value = "Note";
@@ -1178,6 +1229,7 @@ namespace PresentationTier.Views
                 ws.Cells[row, col++].Value = "Allowance";
                 ws.Cells[row, col++].Value = "Gautrain";
                 ws.Cells[row, col++].Value = "Visa";
+                FormatNoteHeading(ws, 1, 12, row);
                 row++;
                 col = 1;
                 foreach (Proj.obj objective in projectInfo.objList)
@@ -1187,6 +1239,37 @@ namespace PresentationTier.Views
                         #region Write each expense
                         if (activity.travList.Count() != 0)
                         {
+                            bool bAccom = false;
+                            bool bAllow = false;
+                            bool bAirline = false;
+                            bool bVisa = false;
+                            bool bGautrain = false;
+
+                            for (int i = 0; i < activity.travList.Count(); i++)
+                            {
+                                if (activity.travBools.ElementAt(i).accomodation)
+                                {
+                                    bAccom = true;
+                                }
+                                if (activity.travBools.ElementAt(i).allowance)
+                                {
+                                    bAllow = true;
+                                }
+                                if (activity.travBools.ElementAt(i).airline)
+                                {
+                                    bAirline = true;
+                                }
+                                if (activity.travBools.ElementAt(i).visa)
+                                {
+                                    bVisa = true;
+                                }
+                                if (activity.travBools.ElementAt(i).gautrain)
+                                {
+                                    bGautrain = true;
+                                }
+                            }
+
+
                             //Write note value                                                      
 
                             foreach (Travel item in activity.travList)
@@ -1206,19 +1289,48 @@ namespace PresentationTier.Views
                                     }
                                 }
 
-                                ws.Cells[row, col++].Value =item.DepatureLocation;
+                                ws.Cells[row, col++].Value = item.DepatureLocation;
                                 ws.Cells[row, col++].Value = item.Destination;
                                 ws.Cells[row, col++].Value = item.DepartureDate;
                                 ws.Cells[row, col++].Value = item.DurationDays;
 
+                                if(bAccom == false)
+                                {
+                                    ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                    ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                                }
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col++].Value = 0;
+
+                                if (bAirline == false)
+                                {
+                                    ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                    ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                                }
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col++].Value = 0;
+
+                                if (bAllow == false)
+                                {
+                                    ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                    ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                                }
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col++].Value = 0;
+
+                                if (bGautrain == false)
+                                {
+                                    ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                    ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                                }
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col++].Value = 0;
+
+                                if (bVisa == false)
+                                {
+                                    ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                    ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                                }
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col++].Value = 0;
 
@@ -1235,12 +1347,18 @@ namespace PresentationTier.Views
 
                 #region Write Car Notes
                 col = 1;
-                ws.Cells[row++, col].Value = "6. Equipment Notes";
+                ws.Cells[row, col].Value = "6. Equipment Notes";
+                FormatNoteHeading(ws, 1, 4, row);
+                ws.Cells[row, 1, row, 4].Merge = true;
+                row++;
+
                 ws.Cells[row, col++].Value = "ID";
                 ws.Cells[row, col++].Value = "Note ID";
                 ws.Cells[row, col++].Value = "Note";
                 ws.Cells[row, col++].Value = "Item Amount";
+                FormatNoteHeading(ws, 1, 4, row);
                 row++;
+
                 col = 1;
                 foreach (Proj.obj objective in projectInfo.objList)
                 {
@@ -1284,11 +1402,16 @@ namespace PresentationTier.Views
 
                 #region Write Income Notes
                 col = 1;
-                ws.Cells[row++, col].Value = "7. Incomes/Donations/Gifts";
+                ws.Cells[row, col].Value = "7. Incomes/Donations/Gifts";
+                FormatNoteHeading(ws, 1, 4, row);
+                ws.Cells[row, 1, row, 4].Merge = true;
+                row++;
+
                 ws.Cells[row, col++].Value = "ID";
                 ws.Cells[row, col++].Value = "Note ID";
                 ws.Cells[row, col++].Value = "Note";
                 ws.Cells[row, col++].Value = "Item Amount";
+                FormatNoteHeading(ws, 1, 4, row);
                 row++;
                 col = 1;
                 int itemID = 1;
@@ -1322,11 +1445,17 @@ namespace PresentationTier.Views
                 #region Write UP Staff income
                 col = 1;
                 ws.Cells[row++, col].Value = "8. UP Staff Members Income Notes";
+                FormatNoteHeading(ws, 1, 5, row);
+                ws.Cells[row, 1, row, 5].Merge = true;
+                row++;
+
                 ws.Cells[row, col++].Value = "ID";
                 ws.Cells[row, col++].Value = "Note ID";
                 ws.Cells[row, col++].Value = "Note";
                 ws.Cells[row, col++].Value = "Subvention Levy";
                 ws.Cells[row, col++].Value = "Amount";
+                FormatNoteHeading(ws, 1, 5, row);
+
                 col = 1;
                 row++;
                 itemID = 1;
@@ -1371,10 +1500,15 @@ namespace PresentationTier.Views
                 #region WriteDonation
                 col = 1;
                 ws.Cells[row++, col].Value = "9. Bursaries/Scholarships";
+                FormatNoteHeading(ws, 1, 4, row);
+                ws.Cells[row, 1, row, 4].Merge = true;
+                row++;
+
                 ws.Cells[row, col++].Value = "ID";
                 ws.Cells[row, col++].Value = "Note ID";
                 ws.Cells[row, col++].Value = "Note";
                 ws.Cells[row, col++].Value = "Type";
+                FormatNoteHeading(ws, 1, 4, row);
                 col = 1;
                 row++;
                 itemID = 1;
@@ -1406,7 +1540,13 @@ namespace PresentationTier.Views
                 #endregion
 
                 //FInal Worksheet formatting
-                FormatDocumentCells(ws, 1, 1, 999, 999);
+                //for (int i = firstAmountRow; i < FinalTotalRow; i++)
+                //{
+                //    FormatDocumentCells(ws, 1, LastAmountColumn, firstAmountRow, lastAmountRow);
+                //}
+
+                FormatColumnHeadings(ws, col, LastAmountColumn, 1);
+                FormatColumnHeadings(ws, col, LastAmountColumn, 3);               
 
                 //Create and return file
                 pck.SaveAs(stream);
@@ -1810,7 +1950,7 @@ namespace PresentationTier.Views
                 //range.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                 //range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
                 range.Style.Numberformat.Format = "R #,##0.00";
-                range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                //range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
             }
         }
 
@@ -1818,7 +1958,11 @@ namespace PresentationTier.Views
         {
             using (var range = worksheet.Cells[startRow, startCol, endRow, endCol])
             {
-                range.AutoFitColumns();
+                //range.AutoFitColumns();
+                //range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                //range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                //range.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                //range.Style.Border.Right.Style = ExcelBorderStyle.Thin; 
             }
         }
 
@@ -1827,10 +1971,10 @@ namespace PresentationTier.Views
             using (var range = worksheet.Cells[row, startCol, row, endCol])
             {
                 range.Style.Font.Bold = true;
-                range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
-                range.Style.Border.Left.Style = ExcelBorderStyle.Thin;
-                range.Style.Border.Right.Style = ExcelBorderStyle.Thin;
-                range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                range.Style.Border.Top.Style = ExcelBorderStyle.Medium;
+                range.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
+                range[row, startCol].Style.Border.Left.Style = ExcelBorderStyle.Medium;
+                range[row, endCol].Style.Border.Right.Style = ExcelBorderStyle.Medium;               
 
                 range.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                 range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
@@ -1842,10 +1986,23 @@ namespace PresentationTier.Views
             using (var range = worksheet.Cells[ row, startCol, row, endCol])
             {
                 range.Style.Font.Bold = true;
+                range.Style.Border.Top.Style = ExcelBorderStyle.Medium;
                 //range.Style.Border.Top = BorderStyle.Solid;
                 //Excel.Borders borders = range.Borders;
                 //borders[Excel.XlBordersIndex.xlEdgeLeft].LineStyle = Excel.XlLineStyle.xlContinuous;
                 //range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            }
+        }
+
+        public void FormatNoteHeading(ExcelWorksheet worksheet, int startCol, int endCol, int row)
+        {
+            using (var range = worksheet.Cells[row, startCol, row, endCol])
+            {
+                range.Style.Font.Bold = true;
+                range.Style.Border.Top.Style = ExcelBorderStyle.Medium;
+                range.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
+                range.Style.Border.Left.Style = ExcelBorderStyle.Medium;
+                range.Style.Border.Right.Style = ExcelBorderStyle.Medium;  
             }
         }
 
@@ -1857,7 +2014,7 @@ namespace PresentationTier.Views
                 range.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                 range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
                 //range.Style.Font.VerticalAlign = VerticalAlign.Middle;
-                range.Style.Font.Size = 20;
+                range.Style.Font.Size = 10;
                 range.Style.ShrinkToFit = false;
             }
         }
@@ -1866,10 +2023,12 @@ namespace PresentationTier.Views
         {
             using (var range = worksheet.Cells[row, startCol, row, endCol])
             {
-                range.Style.Font.Bold = true;
                 range.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
-                range.Style.Font.Size = 10;
+                range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
+                range.Style.Font.Bold = true;
+                range.Merge = true;
+                range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                range.Style.Font.Size = 20;
                 range.Style.ShrinkToFit = false;
             }
         }
@@ -1879,7 +2038,7 @@ namespace PresentationTier.Views
             using (var range = worksheet.Cells[row, startCol, row, endCol])
             {
                 range.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                range.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.LightGray;
+                range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
             }
         }
         #endregion
