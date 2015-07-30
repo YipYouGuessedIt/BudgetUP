@@ -100,6 +100,7 @@ namespace PresentationTier.Views
                             sdate.Text = p.DepartureDate.Date.ToString("yyyy-MM-dd");
                             destination.Text = p.Destination;
                             destination0.Text = p.DepatureLocation;
+                            TextBox1.Text = p.TravellerName;
                             if (entry != null)
                             {
                                 fleet4.SelectedIndex = 0;
@@ -222,6 +223,7 @@ namespace PresentationTier.Views
                     t.DepartureDate = Convert.ToDateTime(sdate.Text);
                     t.Destination = destination.Text;
                     t.DepatureLocation = destination0.Text;
+                    t.TravellerName = TextBox1.Text;
                     m.UpdateTravel(t);
 
                     if (fleet4.SelectedIndex == 0)

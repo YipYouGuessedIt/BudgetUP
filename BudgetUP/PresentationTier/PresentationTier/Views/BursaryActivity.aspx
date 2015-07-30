@@ -76,6 +76,7 @@
                     <asp:ListItem Value="2">Doctoral</asp:ListItem>
                     <asp:ListItem Value="3">Post-doctoral fellow</asp:ListItem>
                 </asp:DropDownList><br /><br />
+                <asp:Label runat="server">Start of bursary*</asp:Label><asp:TextBox  required runat="server" type ="date" ID="sdate" name="date" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Notes*</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" OnClick="Unnamed4_Click" /><br /><br />

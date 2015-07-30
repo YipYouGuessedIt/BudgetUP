@@ -55,6 +55,9 @@ namespace PresentationTier.Views
                                 InstutionalCost.Text = p.Project_Settings.InstitutionalCost.ToString();
                                // MaximumSpan.Text = p.MaximumProjectSpan.ToString();
                                 Subvention.Text = p.Project_Settings.SubventionRate.ToString();
+                                uprate.Text = p.Project_Settings.UPFleetDailyRate.ToString();
+                                fc.Text = p.Project_Settings.FCkmRate.ToString();
+
                             }
                         }
                     }
@@ -89,6 +92,8 @@ namespace PresentationTier.Views
                         m.EscalationRate = Convert.ToDouble(EscalationRate.Text);
                         m.InstitutionalCost = Convert.ToDouble(InstutionalCost.Text);
                         m.SubventionRate = Convert.ToDouble(Subvention.Text);
+                        m.UPFleetDailyRate = Convert.ToInt32(uprate.Text);
+                        m.FCkmRate = Convert.ToInt32(fc.Text);
                         ServiceContracts n = new ServiceContracts();
                         n.UpdateProjectSettings(m);
                         Response.Redirect("ObjectivesPage.aspx");

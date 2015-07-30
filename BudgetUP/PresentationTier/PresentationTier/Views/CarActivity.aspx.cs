@@ -45,7 +45,7 @@ namespace PresentationTier.Views
             int noteID = sc.AddNotes(note.Text);
             int actID = Convert.ToInt32(this.Session["ActID"].ToString());
             int expID = sc.AddExpense(actID, Convert.ToDouble( quantity.Text) , noteID);
-            sc.AddCarExpense(Convert.ToBoolean(fleet.SelectedIndex), expID);
+            sc.AddCarExpense(Convert.ToInt32(fleet.SelectedValue), Convert.ToInt32(quantity.Text), Convert.ToInt32(TextBox1.Text), expID);
             Response.Redirect("IncomeandExpensesPage.aspx");
                         }
             catch (Exception err)

@@ -48,7 +48,9 @@ namespace PresentationTier.Views
                         if (!IsPostBack)
                         {
                             
-                            fleet.SelectedValue = Convert.ToBoolean(p.UPFleet).ToString();;
+                            fleet.SelectedValue = p.TypeofRental.ToString();
+                            TextBox1.Text = p.Kilometers.ToString();
+                            quantity.Text = p.Days.ToString();
                             quantity.Text = p.Expen.Amount.ToString();
                             note.Text = p.Expen.Note.UserNote;
 
@@ -75,7 +77,9 @@ namespace PresentationTier.Views
             Car c = new Car();
             Expens ex = new Expens();
             c.Id = Convert.ToInt32(Session["car"].ToString());
-            c.UPFleet = Convert.ToBoolean(fleet.SelectedIndex);
+            c.TypeofRental = Convert.ToInt32(fleet.SelectedValue);
+            c.Kilometers = Convert.ToInt32(TextBox1.Text);
+            c.Days = Convert.ToInt32(quantity.Text);
             c.ExpensId = expid;
             ex.Note_Id = notede;
             ex.Id = expid;

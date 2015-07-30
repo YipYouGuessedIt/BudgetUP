@@ -48,6 +48,7 @@ namespace PresentationTier.Views
                             {
 
                                 DropDownList2.SelectedValue = p.BursaryTypeId.ToString();
+                                sdate.Text = p.StartDate.Date.ToString("yyyy-MM-dd");
                                 note.Text = p.Note.UserNote;   
                             }
                             notede = p.Note_Id;
@@ -115,6 +116,7 @@ namespace PresentationTier.Views
             n.BursaryTypeId = Convert.ToInt32( DropDownList2.SelectedItem.Value);
             n.ProjectId = Convert.ToInt32(Session["ProjectID"].ToString());
             n.Note_Id = notede;
+            n.StartDate = Convert.ToDateTime(sdate.Text);
             Note no = new Note();
             no.Id = notede;
             no.UserNote = note.Text.ToString();

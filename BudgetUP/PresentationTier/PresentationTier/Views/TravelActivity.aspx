@@ -78,6 +78,10 @@
 		<hr/>
                 <br />
 
+                <asp:Label ID="Label1" runat="server" Text="Name of traveler*"></asp:Label>
+                <asp:TextBox runat="server" ID="name" required name="name" CssClass="form-control"></asp:TextBox>
+                <br />
+
                 <asp:Label ID="Label2" runat="server" Text="Number of days*"></asp:Label>
                 <asp:TextBox runat="server" ID="numofdays" required type="number" name="numofdays" CssClass="form-control"></asp:TextBox>
                 <br />

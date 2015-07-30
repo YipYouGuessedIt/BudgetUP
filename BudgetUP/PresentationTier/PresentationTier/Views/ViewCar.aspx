@@ -69,12 +69,15 @@
                 <h1>Car Expense</h1><hr />
                 		<p>Fill in the fields and click the add button to edit the current car expense.Note that all required fields are marked with a *.</p>
 		<hr/>
-                 <asp:Label runat="server">UP Fleet*</asp:Label><asp:DropDownList required runat="server" ID="fleet" CssClass="form-control">
-                    <asp:ListItem Value="0">Yes</asp:ListItem>
-                    <asp:ListItem Value="1">No</asp:ListItem>
+                 <asp:Label runat="server" ID="Label1">Type of rental*</asp:Label><asp:DropDownList required runat="server" ID="fleet" CssClass="form-control" >
+                    <asp:ListItem Value="1">UP Fleet</asp:ListItem>
+                    <asp:ListItem Value="2">External Rental</asp:ListItem>
+                    <asp:ListItem Value="3">Feul claim</asp:ListItem>
                 </asp:DropDownList><br />
-                 Amount*<asp:TextBox required type="number" runat="server" ID="quantity" name="quantity" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server">Notes*</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
+                                 Days*<asp:TextBox required type="number" runat="server" ID="quantity"  name="quantity" CssClass="form-control"></asp:TextBox><br />
+                 Kilometers*<asp:TextBox required type="number" runat="server" ID="TextBox1"  name="quantity" CssClass="form-control"></asp:TextBox><br />
+
+                <asp:Label runat="server" ID="Label2">Notes*</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" OnClick="Unnamed5_Click" />
                 <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" OnClick="Button1_Click" Text="Remove" />

@@ -164,12 +164,14 @@ namespace PresentationTier.Views
         /// <param name="escalationRate"></param>
         /// <param name="subventionRate"></param>
         /// <param name="institutionalCost"></param>
-        public void AddProjectSettings(double escalationRate, double subventionRate, double institutionalCost)
+        public void AddProjectSettings(double escalationRate, double subventionRate, double institutionalCost,double UPrate,double fc)
         {
             Project_Settings ps = new Project_Settings();
             ps.EscalationRate = escalationRate;
             ps.SubventionRate = subventionRate;
             ps.InstitutionalCost = institutionalCost;
+            ps.FCkmRate = fc;
+            ps.UPFleetDailyRate = UPrate;
 
             using (var dbContext = new dboEntities())
             {
@@ -193,6 +195,8 @@ namespace PresentationTier.Views
                 entry.InstitutionalCost = projectSettings.InstitutionalCost;
                 entry.SubventionRate = projectSettings.SubventionRate;
                 entry.EscalationRate = projectSettings.EscalationRate;
+                entry.FCkmRate = projectSettings.FCkmRate;
+                entry.UPFleetDailyRate = projectSettings.UPFleetDailyRate;
                 dbContext.SaveChanges();
             }
         }
@@ -218,7 +222,7 @@ namespace PresentationTier.Views
         /// <param name="bursaryTypeID"></param>
         /// <param name="projectID"></param>
         /// <param name="noteID"></param>
-        public void AddBursary(int bursaryTypeID, int projectID, int noteID)
+        public void AddBursary(int bursaryTypeID, int projectID, int noteID,DateTime start)
         {
             Bursary bursary = new Bursary();
             
@@ -226,6 +230,7 @@ namespace PresentationTier.Views
             bursary.BursaryTypeId = bursaryTypeID;
             bursary.ProjectId = projectID;
             bursary.Note_Id = noteID;
+            bursary.StartDate = start;
 
             using (var dbContext = new dboEntities())
             {
@@ -249,6 +254,7 @@ namespace PresentationTier.Views
                 entry.ProjectId = bursary.ProjectId;
                 entry.BursaryTypeId = bursary.BursaryTypeId;
                 entry.Note_Id = bursary.Note_Id;
+                entry.StartDate = bursary.StartDate;
                 dbContext.SaveChanges();
             }
         }
@@ -394,7 +400,7 @@ namespace PresentationTier.Views
         /// <param name="subventionRate"></param>
         /// <param name="escalationRate"></param>
         /// <param name="maximumProjectSpan"></param>
-        public void AddAdminSysSettings(double institutionalCost, double subventionRate, double escalationRate, int maximumProjectSpan) 
+        public void AddAdminSysSettings(double institutionalCost, double subventionRate, double escalationRate, int maximumProjectSpan, double rentalrate, double feulclaim) 
         {
             Admin_SysSettings admin = new Admin_SysSettings();
 
@@ -402,6 +408,9 @@ namespace PresentationTier.Views
             admin.SubventionRate = subventionRate;
             admin.EscalationRate = escalationRate;
             admin.MaximumProjectSpan = maximumProjectSpan;
+            admin.UPFleetDailyRate = rentalrate;
+            admin.FCkmRate = feulclaim;
+
 
             using (var dbContext = new dboEntities())
             {
@@ -426,6 +435,8 @@ namespace PresentationTier.Views
                 entry.SubventionRate = admin.SubventionRate;
                 entry.EscalationRate = admin.EscalationRate;
                 entry.MaximumProjectSpan = admin.MaximumProjectSpan;
+                entry.FCkmRate = admin.FCkmRate;
+                entry.UPFleetDailyRate = admin.UPFleetDailyRate;
                 dbContext.SaveChanges();
             }
         }
@@ -1337,10 +1348,11 @@ namespace PresentationTier.Views
         /// <param name="departureDate"></param>
         /// <param name="destination"></param>
         /// <param name="expenseID"></param>
-        public int AddTravel(int travellerNumber, int durationDays, DateTime departureDate, string destination, int expenseID,string departue)
+        public int AddTravel(int travellerNumber, int durationDays, DateTime departureDate, string destination, int expenseID,string departue,string name)
         {
             Travel travels = new Travel();
 
+            travels.TravellerName = name;
             travels.DepatureLocation = departue;
             travels.DurationDays = durationDays;
             travels.DepartureDate = departureDate;
@@ -1370,6 +1382,7 @@ namespace PresentationTier.Views
                 entry.DurationDays = travels.DurationDays;
                 entry.Destination = travels.Destination;
                 entry.DepartureDate = travels.DepartureDate;
+                entry.TravellerName = travels.TravellerName;
                 dbContext.SaveChanges();
             }
         }
@@ -1564,7 +1577,7 @@ namespace PresentationTier.Views
         /// <param name="UPFleet"></param>
         /// <param name="amount"></param>
         /// <param name="travelID"></param>
-        public void AddCarExpense(bool UPFleet,int exp)
+        public void AddCarExpense(int type,int days,int km,int exp)
         {
             
             
@@ -1573,7 +1586,9 @@ namespace PresentationTier.Views
             {
                 Car car = new Car();
 
-            car.UPFleet = UPFleet;
+            car.TypeofRental = type;
+            car.Kilometers = km;
+            car.Days = days;
             car.ExpensId = exp;
             //car.Id = dbContext.Cars.Max(item => item.Id) + 1;
                 dbContext.Cars.Add(car);
@@ -1594,7 +1609,10 @@ namespace PresentationTier.Views
                         .FirstOrDefault();
 
 
-                entry.UPFleet = car.UPFleet;
+               entry.TypeofRental = car.TypeofRental;
+               entry.Kilometers = car.Kilometers;
+               entry.Days = car.Days;
+               entry.ExpensId = car.ExpensId;
                 dbContext.SaveChanges();
             }
         }

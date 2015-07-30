@@ -49,11 +49,42 @@ namespace PresentationTier.Views
         {
             try
             {
-            ServiceContracts sc = new ServiceContracts();
-            int NoteID = sc.AddNotes(note.Text);
-            int projectID = Convert.ToInt32(this.Session["projectID"].ToString());
-            sc.AddBursary(Convert.ToInt32(bursaryType.SelectedValue), projectID, NoteID);
-            Response.Redirect("IncomeandExpensesPage.aspx");
+                using (var dbContext = new dboEntities())
+                {
+                    var query2 = from Project
+                                         in dbContext.Projects
+                                 select Project;
+
+                    foreach (Project m in query2)
+                    {
+                        if (m.Id.ToString() == Session["projectID"].ToString())
+                        {
+                            int n = Convert.ToInt32(bursaryType.SelectedValue);
+                            var query = dbContext.BursaryTypes.Where(b => b.Id == n ).FirstOrDefault();
+                            if (query != null)
+                            {
+                                DateTime start = Convert.ToDateTime(sdate.Text);
+                                
+                                start.AddYears(query.DurationYears);
+                                if (m.EndDate > start)
+                                {
+                                    ServiceContracts sc = new ServiceContracts();
+                                    int NoteID = sc.AddNotes(note.Text);
+                                    int projectID = Convert.ToInt32(this.Session["projectID"].ToString());
+                                    sc.AddBursary(Convert.ToInt32(bursaryType.SelectedValue), projectID, NoteID, Convert.ToDateTime(sdate.Text));
+                                    Response.Redirect("IncomeandExpensesPage.aspx");
+                                }
+                                else
+                                {
+                                    errormsg.Visible = true;
+                                    messageforerror.Text = "End date is befor start date";
+                                }
+                            }
+
+                        }
+                    }
+                }
+
             }
             catch (Exception err)
             {

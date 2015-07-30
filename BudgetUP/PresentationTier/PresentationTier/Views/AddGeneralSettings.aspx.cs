@@ -37,7 +37,7 @@ namespace PresentationTier.Views
         {
 
             ServiceContracts m = new ServiceContracts();
-            m.AddProjectSettings(Convert.ToDouble(EscalationRate.Text),Convert.ToDouble(Subvention.Text),Convert.ToDouble(InstutionalCost.Text));
+           // m.AddProjectSettings(Convert.ToDouble(EscalationRate.Text),Convert.ToDouble(Subvention.Text),Convert.ToDouble(InstutionalCost.Text));
             Response.Redirect("Settings.aspx");
 
         }

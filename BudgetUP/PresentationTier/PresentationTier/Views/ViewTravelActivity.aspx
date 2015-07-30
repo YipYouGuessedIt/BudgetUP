@@ -77,7 +77,9 @@
                 <p>Fill in the fields and click the save button to edit the current travel expense.Note that all required fields are marked with a *.</p>
 		<hr/>
                 <br />
-
+                                <asp:Label ID="Label1" runat="server" Text="Name of Traveler"></asp:Label>
+                <asp:TextBox runat="server" ID="TextBox1" required type="number" name="numofdays" CssClass="form-control"></asp:TextBox>
+                <br />
                 <asp:Label ID="Label2" runat="server" Text="Number of days*"></asp:Label>
                 <asp:TextBox runat="server" ID="numofdays" required type="number" name="numofdays" CssClass="form-control"></asp:TextBox>
                 <br />

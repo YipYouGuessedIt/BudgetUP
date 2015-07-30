@@ -83,7 +83,7 @@ namespace PresentationTier.Views
                     double amounts = 0;
                     int expID = sc.AddExpense(actID, amounts, noteID);
 
-                    int travelID = sc.AddTravel(0, Convert.ToInt32(numofdays.Text), Convert.ToDateTime(sdate.Text), destination.Text, expID, destination0.Text);
+                    int travelID = sc.AddTravel(0, Convert.ToInt32(numofdays.Text), Convert.ToDateTime(sdate.Text), destination.Text, expID, destination0.Text,name.Text);
                     if (fleet.SelectedIndex == 0)
                     {
                         sc.AddVisaExpense(0, travelID);

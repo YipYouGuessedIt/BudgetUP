@@ -1190,14 +1190,14 @@ namespace PresentationTier.Views
                                     }
                                 }
 
-                                if (item.UPFleet == false)
-                                {
-                                    ws.Cells[row, col++].Value = "No";
-                                }
-                                else
-                                {
-                                    ws.Cells[row, col++].Value = "Yes";
-                                }
+                                //if (item.UPFleet == false)
+                                //{
+                                //    ws.Cells[row, col++].Value = "No";
+                                //}
+                                //else
+                                //{
+                                //    ws.Cells[row, col++].Value = "Yes";
+                                //}
 
                                 col = 1;
                                 row++;

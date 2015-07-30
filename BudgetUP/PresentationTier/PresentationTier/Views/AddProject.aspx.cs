@@ -84,7 +84,7 @@ namespace PresentationTier.Views
                   if(num == value2)
                   {
                         ServiceContracts mn = new ServiceContracts();
-                        mn.AddProjectSettings(mi.EscalationRate, mi.SubventionRate, mi.InstitutionalCost);
+                        mn.AddProjectSettings(mi.EscalationRate, mi.SubventionRate, mi.InstitutionalCost,mi.UPFleetDailyRate,mi.FCkmRate);
                         var query2 = from Project_Settings
                         in dbContext.Project_Settings
                         select Project_Settings;

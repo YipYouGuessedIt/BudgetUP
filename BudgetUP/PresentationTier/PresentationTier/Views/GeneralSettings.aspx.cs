@@ -41,6 +41,8 @@ namespace PresentationTier.Views
                 bt.InstitutionalCost = Convert.ToDouble(InstutionalCost.Text);
                 bt.SubventionRate = Convert.ToDouble(Subvention.Text);
                 bt.MaximumProjectSpan =Convert.ToInt32( MaximumSpan.Text);
+                bt.UPFleetDailyRate = Convert.ToInt32(uprate.Text);
+                bt.MaximumProjectSpan = Convert.ToInt32(MaximumSpan.Text);
 
                 sc.UpdateAdminSysSettings(bt);
 

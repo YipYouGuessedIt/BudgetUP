@@ -72,6 +72,10 @@
                 <asp:Label runat="server">Subvention Rate*</asp:Label><asp:TextBox runat="server" type="number" ID="Subvention" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Maximum Project Span*</asp:Label><asp:TextBox runat="server" type="number" ID="MaximumSpan" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server">Indirect/instutional Cost*</asp:Label><asp:TextBox runat="server" type="number" ID="InstutionalCost" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                                <asp:Label runat="server">UP fleet daily rating*</asp:Label><asp:TextBox runat="server" type="number" ID="uprate" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+
+                                <asp:Label runat="server">Feul claim rate*</asp:Label><asp:TextBox runat="server" type="number" ID="fc" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+
             <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a>
             <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" OnClick="addBursaryType"/><br /><br />
         </div>
