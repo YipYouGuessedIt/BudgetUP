@@ -177,6 +177,7 @@
     <Property Name="MaximumProjectSpan" Type="int" Nullable="false" />
     <Property Name="UPFleetDailyRate" Type="float" Nullable="false" />
     <Property Name="FCkmRate" Type="float" Nullable="false" />
+    <Property Name="UPFleetKmRate" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="AirlineExpenses">
     <Key>
@@ -322,6 +323,7 @@
     <Property Name="InstitutionalCost" Type="float" Nullable="false" />
     <Property Name="UPFleetDailyRate" Type="float" Nullable="false" />
     <Property Name="FCkmRate" Type="float" Nullable="false" />
+    <Property Name="UPFleetKmRate" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="Projects">
     <Key>
@@ -783,6 +785,7 @@
           <Property Name="MaximumProjectSpan" Type="Int32" Nullable="false" />
           <Property Name="UPFleetDailyRate" Type="Double" Nullable="false" />
           <Property Name="FCkmRate" Type="Double" Nullable="false" />
+          <Property Name="UPFleetKmRate" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="AirlineExpens">
           <Key>
@@ -958,6 +961,7 @@
           <NavigationProperty Name="Projects" Relationship="Self.FK_ProjectProject_Settings" FromRole="Project_Settings" ToRole="Projects" />
           <Property Name="UPFleetDailyRate" Type="Double" Nullable="false" />
           <Property Name="FCkmRate" Type="Double" Nullable="false" />
+          <Property Name="UPFleetKmRate" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -1585,6 +1589,7 @@
           <ScalarProperty Name="MaximumProjectSpan" ColumnName="MaximumProjectSpan" />
           <ScalarProperty Name="UPFleetDailyRate" ColumnName="UPFleetDailyRate" />
           <ScalarProperty Name="FCkmRate" ColumnName="FCkmRate" />
+          <ScalarProperty Name="UPFleetKmRate" ColumnName="UPFleetKmRate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1747,6 +1752,7 @@
           <ScalarProperty Name="InstitutionalCost" ColumnName="InstitutionalCost" />
           <ScalarProperty Name="UPFleetDailyRate" ColumnName="UPFleetDailyRate" />
           <ScalarProperty Name="FCkmRate" ColumnName="FCkmRate" />
+          <ScalarProperty Name="UPFleetKmRate" ColumnName="UPFleetKmRate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/29/2015 12:11:33
+-- Date Created: 08/07/2015 11:37:33
 -- Generated from EDMX file: C:\Users\m\Desktop\New Folder\BudgetUP\BizTier\BizTier\Model1.edmx
 -- --------------------------------------------------
 
@@ -224,7 +224,8 @@ CREATE TABLE [dbo].[Admin_SysSettings] (
     [InstitutionalCost] float  NOT NULL,
     [MaximumProjectSpan] int  NOT NULL,
     [UPFleetDailyRate] float  NOT NULL,
-    [FCkmRate] float  NOT NULL
+    [FCkmRate] float  NOT NULL,
+    [UPFleetKmRate] float  NOT NULL
 );
 GO
 
@@ -369,7 +370,8 @@ CREATE TABLE [dbo].[Project_Settings] (
     [SubventionRate] float  NOT NULL,
     [InstitutionalCost] float  NOT NULL,
     [UPFleetDailyRate] float  NOT NULL,
-    [FCkmRate] float  NOT NULL
+    [FCkmRate] float  NOT NULL,
+    [UPFleetKmRate] float  NOT NULL
 );
 GO
 

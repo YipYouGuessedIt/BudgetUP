@@ -32,6 +32,8 @@ public partial class Admin_SysSettings
 
     public double FCkmRate { get; set; }
 
+    public double UPFleetKmRate { get; set; }
+
 }
 
 }

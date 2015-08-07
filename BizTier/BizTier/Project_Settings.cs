@@ -38,6 +38,8 @@ public partial class Project_Settings
 
     public double FCkmRate { get; set; }
 
+    public double UPFleetKmRate { get; set; }
+
 
 
     public virtual ICollection<Project> Projects { get; set; }
