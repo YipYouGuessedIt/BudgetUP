@@ -22,9 +22,11 @@ namespace PresentationTier.Views
             }
             //Response.Write("<script>alert('" + this.Session["Admin"].ToString() + "');</script>");
                     
-            String cont = "Welcome " + this.Session["userTitle"] + " " + this.Session["userSname"];
-            wecomemsg.InnerHtml = "<h1>" + cont + "</h1>";
+            //String cont = "Welcome " + this.Session["userTitle"] + " " + this.Session["userSname"];
+            
             AllProjects.Visible = false;
+            string cont = "Projects";
+            wecomemsg.InnerHtml = "<h1>" + cont + "</h1>";
             this.addtoProjectLists();
             if(this.Session["Admin"].ToString() == "True".ToString())
             {
@@ -71,6 +73,10 @@ namespace PresentationTier.Views
                                 select Projects;
                     proj = query2.ToList<Project>();
                     counter = 0;
+                    if(proj.Count <10)
+                    {
+                        AllProjects.Visible = false;
+                    }
                     foreach ( Project p in proj)
                    {
 
@@ -82,6 +88,7 @@ namespace PresentationTier.Views
                         add.ID = p.Id.ToString();
                         add.CssClass = "list-group-item";
                         add.Click += new EventHandler(clicker);
+                        add.ToolTip = "Click here to manage this projects budget";
                         PlaceHolder1.Controls.Add(add);
                     }
                     }
@@ -168,9 +175,32 @@ namespace PresentationTier.Views
                         projectList.Controls.Add(add);
                     }
                 }
+
+                int c = proj.Count;
+                if(c >= 10)
+                {
+                    ProjectSearch.Visible = true;
+                }
+                else
+                {
+                    ProjectSearch.Visible = false;
+                }
+
+                if(c==0)
+                {
+                    projectList.Visible = false;
+                }
+                
+                Button1.Text = "<span class='glyphicon glyphicon-search pull-right' hidden='hidden' aria-hidden='true''</span>";
+                //Button1.CssClass = "form form-control";
                 if(m == false)
                 {
-                    projnote.InnerText = "No items to be displayed";
+                    Div1.InnerHtml = "<p>Welcome " + this.Session["userTitle"] + " " + this.Session["userSname"] + ",this is your gateway to manage projects budget. Click on the button below to add project budgets.</p>";
+                }
+                else
+                {
+                    Div1.InnerHtml = "<p>Welcome " + this.Session["userTitle"] + " " + this.Session["userSname"] + ",this is your gateway to manage projects budgets. Below is a list of a;; the projects you created.Click on a project item to manage it.</p>";
+               
                 }
 
             }

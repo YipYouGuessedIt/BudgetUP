@@ -35,6 +35,7 @@
     <EntitySet Name="Users" EntityType="dboModel.Store.Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Visas" EntityType="dboModel.Store.Visas" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Cars" EntityType="dboModel.Store.Cars" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Verifications" EntityType="dboModel.Store.Verifications" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_TravelAccommodation" Association="dboModel.Store.FK_TravelAccommodation">
       <End Role="Travels" EntitySet="Travels" />
       <End Role="Accommodations" EntitySet="Accommodations" />
@@ -413,6 +414,15 @@
     <Property Name="Days" Type="int" Nullable="false" />
     <Property Name="Kilometers" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Verifications">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="VericicationCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateIssues" Type="datetime" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="FK_TravelAccommodation">
     <End Role="Travels" Type="dboModel.Store.Travels" Multiplicity="1" />
     <End Role="Accommodations" Type="dboModel.Store.Accommodations" Multiplicity="*" />
@@ -426,7 +436,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ActivityExpense">
-    <End Role="Activities" Type="dboModel.Store.Activities" Multiplicity="1" />
+    <End Role="Activities" Type="dboModel.Store.Activities" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Activities">
@@ -438,7 +450,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ObjectiveActivity">
-    <End Role="Objectives" Type="dboModel.Store.Objectives" Multiplicity="1" />
+    <End Role="Objectives" Type="dboModel.Store.Objectives" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Activities" Type="dboModel.Store.Activities" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Objectives">
@@ -498,7 +512,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProjectBursary">
-    <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="1" />
+    <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Bursaries" Type="dboModel.Store.Bursaries" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Projects">
@@ -510,7 +526,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ExpenseContractor">
-    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Contractors" Type="dboModel.Store.Contractors" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Expenses">
@@ -522,7 +540,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ExpenseEquipment">
-    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Equipments" Type="dboModel.Store.Equipments" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Expenses">
@@ -546,7 +566,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ExpenseOperational">
-    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Operationals" Type="dboModel.Store.Operationals" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Expenses">
@@ -558,7 +580,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ExpenseTravel">
-    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Travels" Type="dboModel.Store.Travels" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Expenses">
@@ -570,7 +594,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ExpenseUPStaffMember">
-    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="Expenses" Type="dboModel.Store.Expenses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="UPStaffMembers" Type="dboModel.Store.UPStaffMembers" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Expenses">
@@ -618,7 +644,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProjectIncome">
-    <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="1" />
+    <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Incomes" Type="dboModel.Store.Incomes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Projects">
@@ -630,7 +658,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProjectObjective">
-    <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="1" />
+    <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Objectives" Type="dboModel.Store.Objectives" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Projects">
@@ -666,7 +696,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProjectProject_Settings">
-    <End Role="Project_Settings" Type="dboModel.Store.Project_Settings" Multiplicity="1" />
+    <End Role="Project_Settings" Type="dboModel.Store.Project_Settings" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Project_Settings">
@@ -678,7 +710,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UserProject">
-    <End Role="Users" Type="dboModel.Store.Users" Multiplicity="1" />
+    <End Role="Users" Type="dboModel.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Projects" Type="dboModel.Store.Projects" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
@@ -738,7 +772,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="ExpensCar">
-    <End Role="Expens" Type="dboModel.Store.Expenses" Multiplicity="1" />
+    <End Role="Expens" Type="dboModel.Store.Expenses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Car" Type="dboModel.Store.Cars" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Expens">
@@ -1076,7 +1112,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ActivityExpense">
-          <End Role="Activities" Type="Self.Activity" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activity" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Expenses" Type="Self.Expens" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Activities">
@@ -1088,7 +1126,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ObjectiveActivity">
-          <End Role="Objectives" Type="Self.Objective" Multiplicity="1" />
+          <End Role="Objectives" Type="Self.Objective" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Activities" Type="Self.Activity" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Objectives">
@@ -1148,7 +1188,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProjectBursary">
-          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Bursaries" Type="Self.Bursary" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Projects">
@@ -1160,7 +1202,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExpenseContractor">
-          <End Role="Expenses" Type="Self.Expens" Multiplicity="1" />
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Contractors" Type="Self.Contractor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Expenses">
@@ -1172,7 +1216,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExpenseEquipment">
-          <End Role="Expenses" Type="Self.Expens" Multiplicity="1" />
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Equipments" Type="Self.Equipment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Expenses">
@@ -1196,7 +1242,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExpenseOperational">
-          <End Role="Expenses" Type="Self.Expens" Multiplicity="1" />
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Operationals" Type="Self.Operational" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Expenses">
@@ -1208,7 +1256,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExpenseTravel">
-          <End Role="Expenses" Type="Self.Expens" Multiplicity="1" />
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Travels" Type="Self.Travel" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Expenses">
@@ -1220,7 +1270,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ExpenseUPStaffMember">
-          <End Role="Expenses" Type="Self.Expens" Multiplicity="1" />
+          <End Role="Expenses" Type="Self.Expens" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="UPStaffMembers" Type="Self.UPStaffMember" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Expenses">
@@ -1268,7 +1320,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProjectIncome">
-          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Incomes" Type="Self.Income" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Projects">
@@ -1280,7 +1334,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProjectObjective">
-          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Objectives" Type="Self.Objective" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Projects">
@@ -1316,7 +1372,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProjectProject_Settings">
-          <End Role="Project_Settings" Type="Self.Project_Settings" Multiplicity="1" />
+          <End Role="Project_Settings" Type="Self.Project_Settings" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Projects" Type="Self.Project" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project_Settings">
@@ -1328,7 +1386,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserProject">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Projects" Type="Self.Project" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -1529,6 +1589,7 @@
             <End Role="Expens" EntitySet="Expenses" />
             <End Role="Car" EntitySet="Cars" />
           </AssociationSet>
+          <EntitySet Name="Verifications" EntityType="dboModel.Verification" />
         </EntityContainer>
         <EntityType Name="Car" >
           <Key>
@@ -1542,7 +1603,9 @@
           <Property Name="Kilometers" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="ExpensCar">
-          <End Type="dboModel.Expens" Role="Expens" Multiplicity="1" />
+          <End Type="dboModel.Expens" Role="Expens" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="dboModel.Car" Role="Car" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Expens">
@@ -1553,6 +1616,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Verification">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="Email" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="VericicationCode" Type="String" Nullable="false" />
+          <Property Name="DateIssues" Type="DateTime" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1850,6 +1922,16 @@
           <ScalarProperty Name="TypeofRental" ColumnName="TypeofRental" />
           <ScalarProperty Name="Days" ColumnName="Days" />
           <ScalarProperty Name="Kilometers" ColumnName="Kilometers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Verifications">
+      <EntityTypeMapping TypeName="IsTypeOf(dboModel.Verification)">
+        <MappingFragment StoreEntitySet="Verifications">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="VericicationCode" ColumnName="VericicationCode" />
+          <ScalarProperty Name="DateIssues" ColumnName="DateIssues" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

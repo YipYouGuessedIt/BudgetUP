@@ -14,13 +14,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
-    			<div runat="server" id="errormsg">
+
+    <form id="form1" runat="server">
+            			<div runat="server" id="errormsg">
                 <div id="errorinner">
                     <asp:Label ID="messageforerror" runat="server" ></asp:Label>
                     <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
                 </div>
             </div>
-    <form id="form1" runat="server">
                 <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -73,7 +74,7 @@
                 
                 <asp:Label runat="server">Indirect/instutional Cost*</asp:Label><asp:TextBox runat="server" type="number" step="0.001" ID="InstutionalCost" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
             <asp:Label runat="server">UP fleet daily rating*</asp:Label><asp:TextBox runat="server" type="number" ID="uprate" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-
+                <asp:Label runat="server">UP fleet Km rating*</asp:Label><asp:TextBox runat="server" type="number" ID="TextBox1" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
                                 <asp:Label runat="server">Feul claim rate*</asp:Label><asp:TextBox runat="server" type="number" ID="fc" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
 
                 <a href="ObjectivesPage.aspx" class="btn btn-info btn-lg"  >Back</a>

@@ -44,8 +44,17 @@ namespace PresentationTier.Views
 
                     if (p.Id.ToString() == Session["projectID"].ToString())
                     {
-                        heaserarea.InnerText = p.Title.ToString();
+                        heaserarea.InnerText = p.Title.ToString() + " details and objective list";
+                        DateTime s = p.StartDate.Value;
+                        DateTime en = p.EndDate.Value;
+                        Div2.InnerHtml = "<p><b>Overall objective:</b>" + p.Goal + "<p/><p><b>Dates:</b>" + s.ToString("yyyy/MM/dd") + " - " + en.ToString("yyyy/MM/dd") + "<p/>";
                         tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt " + p.Title.ToString();
+                        LinkButton DownloadReport = new LinkButton();
+                        DownloadReport.Text = "Download excel<span class='glyphicon glyphicon-download pull-right' hidden='hidden' aria-hidden='true''</span>";
+                        DownloadReport.ID = "DownloadReport";
+                        DownloadReport.CssClass = "btn-success btn-sm pull-right";
+                        DownloadReport.Click += new EventHandler(DownloadReport_Click);
+                        tree.Controls.Add(DownloadReport);
                     }
                 }
             }
@@ -97,6 +106,7 @@ namespace PresentationTier.Views
 
                 
                 proj = query.ToList<Objective>();
+                int c = 0;
                 foreach (Objective p in proj)
                 {
                     //Response.Write("<script>alert(' mdksnfc')</script>");
@@ -108,10 +118,35 @@ namespace PresentationTier.Views
                         add.ID = p.Id.ToString();
                         add.CssClass = "list-group-item";
                         add.Click += new EventHandler(clicker);
-
+                        c++;
                         ObjectiveLister.Controls.Add(add);
                     }
                 }
+                if (c >= 10)
+                {
+
+                    ObjectiveSearch.Visible = true;
+                }
+                else
+                {
+                    ObjectiveSearch.Visible = false;
+                }
+                if (c == 0)
+                {
+
+                    ObjectiveLister.Visible = false;
+                    Div1.InnerHtml = "<p>This is your gateway to manage objectives of your selected project. Click on the button below to add objectives or edit the project.</p>";
+                }
+                else
+                {
+                    Div1.InnerHtml = "<p>This is your gateway to manage objectives of your selected project. Below is a list of all the objective you created.Click on a objective item to manage it or edit the project.</p>";
+                }
+
+                Button1.Text = "<span class='glyphicon glyphicon-search pull-right' hidden='hidden' aria-hidden='true''</span>";
+                
+                    
+                
+               
 
             }
             }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 08/07/2015 11:37:33
+-- Date Created: 08/10/2015 17:48:47
 -- Generated from EDMX file: C:\Users\m\Desktop\New Folder\BudgetUP\BizTier\BizTier\Model1.edmx
 -- --------------------------------------------------
 
@@ -192,6 +192,9 @@ IF OBJECT_ID(N'[dbo].[Visas]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Cars]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Cars];
+GO
+IF OBJECT_ID(N'[dbo].[Verifications]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Verifications];
 GO
 
 -- --------------------------------------------------
@@ -463,6 +466,15 @@ CREATE TABLE [dbo].[Cars] (
 );
 GO
 
+-- Creating table 'Verifications'
+CREATE TABLE [dbo].[Verifications] (
+    [Email] nvarchar(max)  NOT NULL,
+    [VericicationCode] nvarchar(max)  NOT NULL,
+    [DateIssues] datetime  NOT NULL,
+    [UserID] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -641,6 +653,12 @@ ADD CONSTRAINT [PK_Cars]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [UserID] in table 'Verifications'
+ALTER TABLE [dbo].[Verifications]
+ADD CONSTRAINT [PK_Verifications]
+    PRIMARY KEY CLUSTERED ([UserID] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -666,7 +684,7 @@ ADD CONSTRAINT [FK_ActivityExpense]
     FOREIGN KEY ([ActivityId])
     REFERENCES [dbo].[Activities]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ActivityExpense'
@@ -681,7 +699,7 @@ ADD CONSTRAINT [FK_ObjectiveActivity]
     FOREIGN KEY ([ObjectiveId])
     REFERENCES [dbo].[Objectives]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ObjectiveActivity'
@@ -756,7 +774,7 @@ ADD CONSTRAINT [FK_ProjectBursary]
     FOREIGN KEY ([ProjectId])
     REFERENCES [dbo].[Projects]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectBursary'
@@ -771,7 +789,7 @@ ADD CONSTRAINT [FK_ExpenseContractor]
     FOREIGN KEY ([Expense_Id])
     REFERENCES [dbo].[Expenses]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpenseContractor'
@@ -786,7 +804,7 @@ ADD CONSTRAINT [FK_ExpenseEquipment]
     FOREIGN KEY ([Expense_Id])
     REFERENCES [dbo].[Expenses]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpenseEquipment'
@@ -816,7 +834,7 @@ ADD CONSTRAINT [FK_ExpenseOperational]
     FOREIGN KEY ([Expense_Id])
     REFERENCES [dbo].[Expenses]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpenseOperational'
@@ -831,7 +849,7 @@ ADD CONSTRAINT [FK_ExpenseTravel]
     FOREIGN KEY ([Expense_Id])
     REFERENCES [dbo].[Expenses]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpenseTravel'
@@ -846,7 +864,7 @@ ADD CONSTRAINT [FK_ExpenseUPStaffMember]
     FOREIGN KEY ([Expense_Id])
     REFERENCES [dbo].[Expenses]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpenseUPStaffMember'
@@ -906,7 +924,7 @@ ADD CONSTRAINT [FK_ProjectIncome]
     FOREIGN KEY ([ProjectId])
     REFERENCES [dbo].[Projects]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectIncome'
@@ -921,7 +939,7 @@ ADD CONSTRAINT [FK_ProjectObjective]
     FOREIGN KEY ([ProjectId])
     REFERENCES [dbo].[Projects]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectObjective'
@@ -966,7 +984,7 @@ ADD CONSTRAINT [FK_ProjectProject_Settings]
     FOREIGN KEY ([Project_Settings_Id])
     REFERENCES [dbo].[Project_Settings]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ProjectProject_Settings'
@@ -981,7 +999,7 @@ ADD CONSTRAINT [FK_UserProject]
     FOREIGN KEY ([UserId])
     REFERENCES [dbo].[Users]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_UserProject'
@@ -1056,7 +1074,7 @@ ADD CONSTRAINT [FK_ExpensCar]
     FOREIGN KEY ([ExpensId])
     REFERENCES [dbo].[Expenses]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ExpensCar'

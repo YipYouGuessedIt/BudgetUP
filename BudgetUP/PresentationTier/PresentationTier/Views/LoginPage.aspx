@@ -43,9 +43,10 @@
             
              <div id="AddProjects" class="contentArea"><br />
                 <h1>Login to BudgetUP</h1><hr />
-                <asp:Label runat="server">Username</asp:Label><asp:TextBox runat="server" ID="UserEmail" type="Email" name="User" CssClass="form-control" required></asp:TextBox><br />
+                <asp:Label runat="server">Username</asp:Label><asp:TextBox runat="server" ID="UserEmail" type="Email" name="User" autofocus CssClass="form-control" required></asp:TextBox><br />
                 <asp:Label runat="server">Password </asp:Label><asp:TextBox runat="server" ID="Pass" name="Pass" type="password" CssClass="form-control" required></asp:TextBox><br />
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Login" OnClick="Unnamed3_Click" /><br /><br />
+                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Login" OnClick="Unnamed3_Click" /><asp:HyperLink CssClass="frgt" runat="server" ToolTip="Recover lost password">Forgot Password?</asp:HyperLink>
+                 <br /><br />
             </div>
     
     </div>

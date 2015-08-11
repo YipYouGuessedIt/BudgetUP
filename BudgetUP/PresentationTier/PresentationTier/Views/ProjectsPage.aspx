@@ -74,27 +74,25 @@
             <div id="wecomemsg" runat="server"></div>
            
             <hr />
+            <div id="Div1" runat="server"></div>
+            <hr />
 
-            <div id="ProjectSearch">
-                		<h2>Search</h2>
-                    <p>type in here to filter the list of Projects you have created a budget for</p>
-                <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Projects..." ></asp:TextBox>
-			    <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" OnClick="Button1_Click" /><br />
+            <div id="ProjectSearch" runat="server" >
+                		
+                <asp:TextBox runat="server" autofocus="true" placeholder="Search" ID="searcher" CssClass="form-control-static"></asp:TextBox><asp:LinkButton ID="Button1" runat="server" CssClass="btn-info btn-lg btn gl" Text="" OnClick="Button1_Click" ></asp:LinkButton>
 			</div>
-
+            
             <div id="ProjectAdd">
-				<a href="AddProject.aspx" class="btn btn-info btn-lg"  >Add new project</a> <br />
+                <br />
+				<a href="AddProject.aspx" class="btna btn btn-info btn-lg pull-left "  >Add new project</a> <br /><br />
 			</div>
-
+            <br />
 			<div id="ProjectList" class="list-group">
-                <h3>Project List
-                </h3>
-                <p id="projnote" runat="server">Below is a list of Projects you have created a budget for,click on one to view it. </p>
                 <asp:PlaceHolder ID="projectList" runat="server"></asp:PlaceHolder>
 			</div>
               <div id="AllProjects" class="list-group" runat="server">
-                <h3>All projects</h3>
-                  <p>list of all Projects on the system</p>
+                <h3>Other users projects</h3>
+                  
                 <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
                   <br />
 			</div>

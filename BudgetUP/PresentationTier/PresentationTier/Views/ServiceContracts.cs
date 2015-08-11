@@ -164,7 +164,7 @@ namespace PresentationTier.Views
         /// <param name="escalationRate"></param>
         /// <param name="subventionRate"></param>
         /// <param name="institutionalCost"></param>
-        public void AddProjectSettings(double escalationRate, double subventionRate, double institutionalCost,double UPrate,double fc)
+        public void AddProjectSettings(double escalationRate, double subventionRate, double institutionalCost,double UPrate,double fc,double upKm)
         {
             Project_Settings ps = new Project_Settings();
             ps.EscalationRate = escalationRate;
@@ -172,6 +172,7 @@ namespace PresentationTier.Views
             ps.InstitutionalCost = institutionalCost;
             ps.FCkmRate = fc;
             ps.UPFleetDailyRate = UPrate;
+            ps.UPFleetKmRate = upKm;
 
             using (var dbContext = new dboEntities())
             {
@@ -197,6 +198,7 @@ namespace PresentationTier.Views
                 entry.EscalationRate = projectSettings.EscalationRate;
                 entry.FCkmRate = projectSettings.FCkmRate;
                 entry.UPFleetDailyRate = projectSettings.UPFleetDailyRate;
+                entry.UPFleetKmRate = projectSettings.UPFleetKmRate;
                 dbContext.SaveChanges();
             }
         }
@@ -400,7 +402,7 @@ namespace PresentationTier.Views
         /// <param name="subventionRate"></param>
         /// <param name="escalationRate"></param>
         /// <param name="maximumProjectSpan"></param>
-        public void AddAdminSysSettings(double institutionalCost, double subventionRate, double escalationRate, int maximumProjectSpan, double rentalrate, double feulclaim) 
+        public void AddAdminSysSettings(double institutionalCost, double subventionRate, double escalationRate, int maximumProjectSpan, double rentalrate, double feulclaim,double Kmrate) 
         {
             Admin_SysSettings admin = new Admin_SysSettings();
 
@@ -410,6 +412,7 @@ namespace PresentationTier.Views
             admin.MaximumProjectSpan = maximumProjectSpan;
             admin.UPFleetDailyRate = rentalrate;
             admin.FCkmRate = feulclaim;
+            admin.UPFleetKmRate = Kmrate;
 
 
             using (var dbContext = new dboEntities())
@@ -437,6 +440,7 @@ namespace PresentationTier.Views
                 entry.MaximumProjectSpan = admin.MaximumProjectSpan;
                 entry.FCkmRate = admin.FCkmRate;
                 entry.UPFleetDailyRate = admin.UPFleetDailyRate;
+                entry.UPFleetKmRate = admin.UPFleetKmRate;
                 dbContext.SaveChanges();
             }
         }
@@ -1798,8 +1802,61 @@ namespace PresentationTier.Views
             }
         }
         #endregion
-    
-    
+
+        #region Verification
+        public void AddVerification(int UserID,string Email, string Code,DateTime DateIssued)
+        {
+            Verification v = new Verification();
+
+            //these can be determined by other functions below
+            v.UserID = UserID;
+            v.Email = Email;
+            v.VericicationCode = Code;
+            v.DateIssues = DateIssued;
+
+            using (var dbContext = new dboEntities())
+            {
+                dbContext.Verifications.Add(v);
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="post"></param>
+        public void UpdatePostLevel(Verification v)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Verifications
+                        .Where(ad => ad.UserID == v.UserID)
+                        .FirstOrDefault();
+
+                entry.VericicationCode = v.VericicationCode;
+                entry.Email = v.Email;
+                entry.DateIssues = v.DateIssues;
+                dbContext.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="objectID"></param>
+        public void DeletePostLevel(int objectID)
+        {
+            using (var dbContext = new dboEntities())
+            {
+                var entry = dbContext.Verifications
+                        .Where(ad => ad.UserID == objectID)
+                        .FirstOrDefault();
+
+                dbContext.Verifications.Remove(entry);
+                dbContext.SaveChanges();
+            }
+        }
+        #endregion
 
     }
 }

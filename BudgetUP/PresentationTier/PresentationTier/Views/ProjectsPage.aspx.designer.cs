@@ -67,6 +67,24 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl wecomemsg;
         
         /// <summary>
+        /// Div1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
+        
+        /// <summary>
+        /// ProjectSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ProjectSearch;
+        
+        /// <summary>
         /// searcher control.
         /// </summary>
         /// <remarks>
@@ -82,16 +100,7 @@ namespace PresentationTier.Views {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
-        
-        /// <summary>
-        /// projnote control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl projnote;
+        protected global::System.Web.UI.WebControls.LinkButton Button1;
         
         /// <summary>
         /// projectList control.

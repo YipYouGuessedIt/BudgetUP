@@ -43,6 +43,7 @@ namespace PresentationTier.Views
                 bt.MaximumProjectSpan =Convert.ToInt32( MaximumSpan.Text);
                 bt.UPFleetDailyRate = Convert.ToInt32(uprate.Text);
                 bt.MaximumProjectSpan = Convert.ToInt32(MaximumSpan.Text);
+                bt.UPFleetKmRate = Convert.ToDouble(TextBox1.Text);
 
                 sc.UpdateAdminSysSettings(bt);
 
@@ -108,6 +109,9 @@ namespace PresentationTier.Views
                                 InstutionalCost.Text = p.InstitutionalCost.ToString();
                                 MaximumSpan.Text = p.MaximumProjectSpan.ToString();
                                 Subvention.Text = p.SubventionRate.ToString();
+                                TextBox1.Text = p.UPFleetKmRate.ToString();
+                                fc.Text = p.FCkmRate.ToString();
+                                uprate.Text = p.UPFleetDailyRate.ToString();
                             }
                         }
                         val++;

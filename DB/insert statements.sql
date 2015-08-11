@@ -32,11 +32,11 @@ insert into EmailDomains values ('up.co.za');
 use dbo
 go
 
-insert into Admin_SysSettings values(0.06,0.10,0.25,24);
+insert into Admin_SysSettings values(0.06,0.10,0.05,10,0.60,0.06,0.78);
 use dbo
 go
 
-insert into Project_Settings values(0.06,0.10,0.25);
+insert into Project_Settings values(0.06,0.10,0.25,0.26,0.05,0.60);
 use dbo
 go
 

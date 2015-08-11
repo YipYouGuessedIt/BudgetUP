@@ -147,6 +147,9 @@
     <Compile Include="UserCredential.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Verification.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Visa.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

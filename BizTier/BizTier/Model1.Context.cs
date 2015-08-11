@@ -90,6 +90,8 @@ public partial class dboEntities : DbContext
 
     public DbSet<Car> Cars { get; set; }
 
+    public DbSet<Verification> Verifications { get; set; }
+
 }
 
 }

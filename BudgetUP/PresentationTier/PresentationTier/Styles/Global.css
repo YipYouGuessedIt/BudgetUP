@@ -3,16 +3,29 @@
      /*background-color: rgb(215, 210, 209);*/
      background-color: rgb(161, 156, 155);
          height:99%;
+        
+         
 }
+
+
 
 div.treeView
 {
     width:80%;
+    height:30px;
    margin:0 auto;
     margin-top:auto;    
     background-color: rgb(215, 210, 209);
     color:black;
+    
 }
+#Div1 {
+    text-wrap: normal;
+    width: 50%;
+    margin-left: 25%;
+    text-align: center;
+}
+
 
 div.contentArea
 {
@@ -76,6 +89,7 @@ div.navbar-Footer {
  .btn
  {
      background-color: rgb(218,28,51);
+     
  }
 
  .form-control
@@ -99,3 +113,19 @@ div.navbar-Footer {
      margin:auto;
      margin-top:15%;
  }
+ .frgt
+ {
+     margin-left:7%;
+     position:absolute;
+ }
+ .btna{
+ 
+   margin-left:25%;
+
+ }
+ #DownloadReport
+ {
+     height:28px;
+ }
+
+

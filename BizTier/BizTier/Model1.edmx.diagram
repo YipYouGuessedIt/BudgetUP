@@ -62,6 +62,7 @@
         <AssociationConnector Association="dboModel.FK_UserCredentialsUser" ManuallyRouted="false" />
         <EntityTypeShape EntityType="dboModel.Car" Width="1.5" PointX="5.625" PointY="16.5" />
         <AssociationConnector Association="dboModel.ExpensCar" />
+        <EntityTypeShape EntityType="dboModel.Verification" Width="1.5" PointX="6.75" PointY="32.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
