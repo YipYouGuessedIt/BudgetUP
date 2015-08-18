@@ -70,8 +70,9 @@
              
         </div>
            
-            
+            <a href="ProjectsPage.aspx" class="back btn-info btn-lg"  >Back</a>
         <div class="contentArea"><br />
+            
             <h1 id="heaserarea" runat="server"></h1>
                         <hr />
             <div id="Div1" runat="server"></div>
@@ -79,14 +80,14 @@
             <div id="Div2" runat="server"></div>
 
             <div id="ObjectiveSearch" runat="server">
-                <asp:TextBox runat="server" autofocus="true" placeholder="Search" ID="searcher" CssClass="form-control-static"></asp:TextBox><asp:LinkButton ID="Button1" runat="server" CssClass="btn-info btn-lg btn gl" Text="" OnClick="Button1_Click" ></asp:LinkButton>
+                <asp:TextBox runat="server" autofocus="true" placeholder="Search" ID="searcher" CssClass="form-control-static" OnTextChanged="Button1_Click"></asp:TextBox><asp:LinkButton ID="Button1" runat="server" CssClass="ser" Text="" OnClick="Button1_Click" ></asp:LinkButton>
 			</div>
 
             <div id="ObjectiveAdd">
                 <hr />
                <a href="EditProject.aspx" class="btn btn-info btn-lg"  >Edit Project</a>
 				<a href="AddObjectives.aspx" class="btn btn-info btn-lg"  >Add new Objective</a>
-                <a href="ProjectsPage.aspx" class="btn btn-info btn-lg"  >Back</a>
+                
                 <br />
             </div>
 

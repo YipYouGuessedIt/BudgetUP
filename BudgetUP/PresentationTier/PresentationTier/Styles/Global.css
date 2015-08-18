@@ -4,11 +4,28 @@
      background-color: rgb(161, 156, 155);
          height:99%;
         
-         
+      
 }
+  .ser
+       {
+        
+        font-size:15px;
+        height:100px;
+        padding-top:100px;
+        
+       }
 
+  .ser>span
+ {
+      
+         border-radius:0px;
+         background-color:white;
+         width:50px;
+         line-height:35px;
+     
 
-
+         
+ }
 div.treeView
 {
     width:80%;
@@ -17,7 +34,7 @@ div.treeView
     margin-top:auto;    
     background-color: rgb(215, 210, 209);
     color:black;
-    
+    line-height:30px;
 }
 #Div1 {
     text-wrap: normal;
@@ -26,6 +43,15 @@ div.treeView
     text-align: center;
 }
 
+ .back
+ {
+     position:absolute;
+     margin-top:10px;
+    margin-left:10%;
+    border-radius:0px;
+    
+     
+ }
 
 div.contentArea
 {
@@ -41,6 +67,8 @@ div.contentArea
     background-color: rgb(215, 210, 209);
 
 }
+
+
 
 div.navbar-Footer {
     margin-bottom: 0%;
@@ -125,7 +153,10 @@ div.navbar-Footer {
  }
  #DownloadReport
  {
-     height:28px;
+     height:30px;
  }
+
+
+
 
 

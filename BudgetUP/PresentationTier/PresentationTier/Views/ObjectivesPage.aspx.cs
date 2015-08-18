@@ -50,7 +50,7 @@ namespace PresentationTier.Views
                         Div2.InnerHtml = "<p><b>Overall objective:</b>" + p.Goal + "<p/><p><b>Dates:</b>" + s.ToString("yyyy/MM/dd") + " - " + en.ToString("yyyy/MM/dd") + "<p/>";
                         tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt " + p.Title.ToString();
                         LinkButton DownloadReport = new LinkButton();
-                        DownloadReport.Text = "Download excel<span class='glyphicon glyphicon-download pull-right' hidden='hidden' aria-hidden='true''</span>";
+                        DownloadReport.Text = "<span class='glyphicon glyphicon-download pull-right' hidden='hidden' aria-hidden='true''</span> Download Excel";
                         DownloadReport.ID = "DownloadReport";
                         DownloadReport.CssClass = "btn-success btn-sm pull-right";
                         DownloadReport.Click += new EventHandler(DownloadReport_Click);
@@ -142,7 +142,7 @@ namespace PresentationTier.Views
                     Div1.InnerHtml = "<p>This is your gateway to manage objectives of your selected project. Below is a list of all the objective you created.Click on a objective item to manage it or edit the project.</p>";
                 }
 
-                Button1.Text = "<span class='glyphicon glyphicon-search pull-right' hidden='hidden' aria-hidden='true''</span>";
+                Button1.Text = "<span class='glyphicon glyphicon-search' hidden='hidden' aria-hidden='true''</span>";
                 
                     
                 

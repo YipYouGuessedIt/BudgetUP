@@ -1825,7 +1825,7 @@ namespace PresentationTier.Views
         /// 
         /// </summary>
         /// <param name="post"></param>
-        public void UpdatePostLevel(Verification v)
+        public void UpdateVerifications(Verification v)
         {
             using (var dbContext = new dboEntities())
             {
@@ -1844,7 +1844,7 @@ namespace PresentationTier.Views
         /// 
         /// </summary>
         /// <param name="objectID"></param>
-        public void DeletePostLevel(int objectID)
+        public void DeleteVerifications(int objectID)
         {
             using (var dbContext = new dboEntities())
             {
