@@ -22,16 +22,55 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
-
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Button1_Click(object sender, EventArgs e)
         {
             try
             {
-                errormsg.Visible = false;
+                if (searcher.Text == "")
+                {
+                    foreach (LinkButton m in BursaryList.Controls)
+                    {
+
+                        m.Visible = true;
+
+                    }
+                }
+                else
+                {
+                    foreach (LinkButton m in BursaryList.Controls)
+                    {
+                        if (m.Text.Split('<')[0].ToLower().ToString().Contains(searcher.Text.ToLower().ToString()))
+                        {
+                            m.Visible = true;
+                        }
+                        else
+                        {
+                            m.Visible = false;
+                        }
+                    }
+
+                }
+            }
+            catch (Exception err)
+            {
+
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+            }
+        }
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a>  &gt <a href='Settings.aspx'>Settings</a>  &gt View Operation type";
+
+            try
+            {
+                //errormsg.Visible = false;
                 if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -74,8 +113,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -83,46 +124,19 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
-            }
-        }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            if (searcher.Text == "")
-            {
-                foreach (LinkButton m in BursaryList.Controls)
-                {
-
-                    m.Visible = true;
-
-                }
-
-            }
-            else
-            {
-                foreach (LinkButton m in BursaryList.Controls)
-                {
-                    if (m.Text.Split('<')[0].ToLower().ToString().Contains(searcher.Text.ToLower().ToString()))
-                    {
-                        m.Visible = true;
-                    }
-                    else
-                    {
-
-                        m.Visible = false;
-                    }
-                }
-
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
 
             }
         }
+
+   
     }
 }

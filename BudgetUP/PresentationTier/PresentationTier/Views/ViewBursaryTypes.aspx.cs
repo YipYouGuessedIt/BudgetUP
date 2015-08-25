@@ -14,7 +14,8 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
+                tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a>  &gt <a href='Settings.aspx'>Settings</a>  &gt View bursary type";
             if (Session.Count == 0)
             {
 
@@ -43,22 +44,30 @@ namespace PresentationTier.Views
 
 
                 //px = query2;
+                int c = 0;
                 foreach (BursaryType v in query)
                 {
                     LinkButton add = new LinkButton();
                     add.Text = v.Description + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                     add.ID = v.Id.ToString() + "Income";
                     add.CssClass = "list-group-item";
+                    add.ToolTip = "click to edit bursary type";
                     add.Click += new EventHandler(Iclicker);
                     BursaryList.Controls.Add(add);                    
+                }
+                if(c < 10)
+                {
+                    ObjectiveSearch.Visible = false;
                 }
             }
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -74,8 +83,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -88,8 +99,47 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (searcher.Text == "")
+                {
+                    foreach (LinkButton m in BursaryList.Controls)
+                    {
+
+                        m.Visible = true;
+
+                    }
+                }
+                else
+                {
+                    foreach (LinkButton m in BursaryList.Controls)
+                    {
+                        if (m.Text.Split('<')[0].ToLower().ToString().Contains(searcher.Text.ToLower().ToString()))
+                        {
+                            m.Visible = true;
+                        }
+                        else
+                        {
+                            m.Visible = false;
+                        }
+                    }
+
+                }
+            }
+            catch (Exception err)
+            {
+
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
             }
         }
 
@@ -97,14 +147,16 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

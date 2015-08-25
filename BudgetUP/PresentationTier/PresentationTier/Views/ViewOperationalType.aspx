@@ -15,12 +15,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        			<div runat="server" id="errormsg">
-                <div id="errorinner">
-                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
-                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
-                </div>
-            </div>
+
     <div>
         <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
@@ -31,7 +26,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#">BudgetUP</a>
+                     <asp:LinkButton runat="server" CssClass=" navbar-brand btn btn-link " ><span class="glyphicon glyphicon-menu-left"></span></asp:LinkButton><img class=" navbar-brand img-responsive img-rounded" style=" padding:0; border-radius:0; margin-right:2px; margin-left:2px;"  src="../Images/logo.png"></img><a class="navbar-brand" href="#">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -53,7 +48,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#">BudgetUP</a>
+                     <asp:LinkButton runat="server" CssClass=" navbar-brand btn btn-link " ><span class="glyphicon glyphicon-menu-left"></span></asp:LinkButton><img class=" navbar-brand img-responsive img-rounded" style=" padding:0; border-radius:0; margin-right:2px; margin-left:2px;"  src="../Images/logo.png"></img><a class="navbar-brand" href="#">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar2">
                     <ul class="nav navbar-nav">
@@ -66,28 +61,50 @@
             </div>
         </nav></div>
 
+                             <div id="myModal" class="modal fade"  role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Error has occured</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="messageforerror" runat="server"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+                
+        <div id="tree" runat="server" class="treeView">
+             
+        </div>
+         <a href="Settings.aspx" class="back btn btn-info btn-lg"  >Back</a>
+
 
         <div class="contentArea"><br />
             <h1 id="heaserarea" runat="server">Operational Types</h1><hr />
             <!--<h2>Start and end date</h2>-->
             <div class="Incomesection">
-                <div id="IncomeorExpenseSearch">
-                    		<h2>Search</h2>
-                    <p>type in here to filter the list of operation type</p>
-				    <asp:TextBox runat="server" autofocus="true" ID="searcher" CssClass="form-control" placeholder="Search Operational Types..." ></asp:TextBox>
-			        <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" OnClick="Button1_Click" /><br />
-			    </div>
+              <div id="ObjectiveSearch"  runat="server" class="col-lg-2 pull-right serc">
+                            <div class="input-group">
+                                <asp:TextBox runat="server" autofocus="true" placeholder="Search" ID="searcher" CssClass=" form-control" OnTextChanged="Button1_Click"></asp:TextBox> 
+                                <span class="input-group-btn">
+                                    <asp:LinkButton runat="server" ID="LinkButton1" class="btn " style="background-color:white;" OnClick="Button1_Click"><span class='glyphicon glyphicon-search'></span></asp:LinkButton>
+                                </span>
+                            </div>
+                        </div>
                 <div id="IncomeorExpenseAdd">
                     <br /><br />
-                    <p>Click add to add a new operational type.Click back to go back to settings page</p>
-                    <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a><asp:Button runat="server"  class="btn btn-info btn-lg" Text="Add" OnClick="Unnamed1_Click" ></asp:Button>
-                    <br /><br />
-                
+                   
                     <div runat="server" id="lister">
 			            <div id="bl">
-                            <h3>Operational Types</h3>
-                            <p>Below is a list of all the operational types on the system</p>
-                            <asp:PlaceHolder ID="BursaryList" runat="server"></asp:PlaceHolder>	
+                             <asp:PlaceHolder ID="BursaryList" runat="server"></asp:PlaceHolder>	
                         </div>
                     </div>
 			    </div>

@@ -13,7 +13,7 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
             if (this.Session["ActID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -28,12 +28,16 @@ namespace PresentationTier.Views
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
+            tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt <a href='ObjectivesPage.aspx'>Project Details and Objective List</a> &gt <a href='ActivitiesPage.aspx'>Objective Details and Activity List</a> &gt <a href='IncomeandExpensesPage.aspx'>Activity Details</a> &gt  Add Car expense";
+
                         }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -41,18 +45,21 @@ namespace PresentationTier.Views
         {
             try
     {
+
             ServiceContracts sc = new ServiceContracts();
             int noteID = sc.AddNotes(note.Text);
             int actID = Convert.ToInt32(this.Session["ActID"].ToString());
             int expID = sc.AddExpense(actID, Convert.ToDouble( quantity.Text) , noteID);
-            sc.AddCarExpense(Convert.ToInt32(fleet.SelectedValue), Convert.ToInt32(quantity.Text), Convert.ToInt32(TextBox1.Text), expID);
+            sc.AddCarExpense(Convert.ToInt32(rental.SelectedValue), Convert.ToInt32(quantity.Text), Convert.ToInt32(TextBox1.Text), expID);
             Response.Redirect("IncomeandExpensesPage.aspx");
                         }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
             
         }
@@ -61,14 +68,16 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

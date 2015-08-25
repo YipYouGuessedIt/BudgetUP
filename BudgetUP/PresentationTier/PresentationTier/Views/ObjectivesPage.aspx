@@ -16,12 +16,25 @@
 <body>
     			
     <form id="form1" runat="server">
-        <div runat="server" id="errormsg">
-                <div id="errorinner">
-                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
-                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
-                </div>
-            </div>
+<div id="myModal" class="modal fade"  role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Error has occured</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="messageforerror" runat="server"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
             <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -31,7 +44,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#">BudgetUP</a>
+                     <asp:LinkButton runat="server" href="ProjectsPage.aspx" CssClass=" navbar-brand btn btn-link " ><span class="glyphicon glyphicon-menu-left"></span></asp:LinkButton><img class=" navbar-brand img-responsive img-rounded" style=" padding:0; border-radius:0; margin-right:2px; margin-left:2px;"  src="../Images/logo.png"></img><a class="navbar-brand" href="#">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -53,7 +66,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#">BudgetUP</a>
+                     <asp:LinkButton runat="server" href="ProjectsPage.aspx" CssClass=" navbar-brand btn btn-link " ><span class="glyphicon glyphicon-menu-left"></span></asp:LinkButton><img class=" navbar-brand img-responsive img-rounded" style=" padding:0; border-radius:0; margin-right:2px; margin-left:2px;"  src="../Images/logo.png"></img><a class="navbar-brand" href="#">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar2">
                     <ul class="nav navbar-nav">
@@ -78,21 +91,32 @@
             <div id="Div1" runat="server"></div>
             <hr />
             <div id="Div2" runat="server"></div>
+            <a href="EditProject.aspx" class="btn btn-info btn-lg"  >Edit Project</a>
+            
 
-            <div id="ObjectiveSearch" runat="server">
-                <asp:TextBox runat="server" autofocus="true" placeholder="Search" ID="searcher" CssClass="form-control-static" OnTextChanged="Button1_Click"></asp:TextBox><asp:LinkButton ID="Button1" runat="server" CssClass="ser" Text="" OnClick="Button1_Click" ></asp:LinkButton>
-			</div>
-
-            <div id="ObjectiveAdd">
+            <div id="ObjectiveAdd" class="">
                 <hr />
-               <a href="EditProject.aspx" class="btn btn-info btn-lg"  >Edit Project</a>
-				<a href="AddObjectives.aspx" class="btn btn-info btn-lg"  >Add new Objective</a>
-                
-                <br />
-            </div>
+               
 
+        				<asp:LinkButton id="buttonadd" runat="server" href="AddObjectives.aspx" class="btn btn-info btn-lg "  >Add Objective</asp:LinkButton> 
+
+                  <div id="ObjectiveSearch"  runat="server" class="col-lg-2 pull-right serc">
+                            <div class="input-group">
+                                <asp:TextBox runat="server" autofocus="true" placeholder="Search" ID="searcher" CssClass=" form-control" OnTextChanged="Button1_Click"></asp:TextBox> 
+                                <span class="input-group-btn">
+                                    <asp:LinkButton runat="server" ID="Button1" class="btn " style="background-color:white;" OnClick="Button1_Click"><span class='glyphicon glyphicon-search'></span></asp:LinkButton>
+                                </span>
+                            </div>
+                        </div>
+ 
+              
+               
+                
+                
+            </div>
+             <input type="hidden" />
 			<div id="ObjectiveList" class="list-group" runat="server">
-				
+				  <br />
                 <asp:PlaceHolder ID="ObjectiveLister" runat="server"></asp:PlaceHolder>			
 			</div>
         </div>

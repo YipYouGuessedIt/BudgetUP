@@ -198,6 +198,7 @@
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
     <Content Include="Images\orderedList2.png" />
@@ -211,7 +212,10 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\NavigationJS.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Views\AddBursaryType.aspx" />
     <Content Include="Views\AddDomains.aspx" />
     <Content Include="Views\AddDurationType.aspx" />

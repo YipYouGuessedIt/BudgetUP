@@ -14,7 +14,7 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -45,8 +45,11 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
+
             }
             
         }
@@ -73,10 +76,7 @@ namespace PresentationTier.Views
                                 select Projects;
                     proj = query2.ToList<Project>();
                     counter = 0;
-                    if(proj.Count <10)
-                    {
-                        AllProjects.Visible = false;
-                    }
+                    
                     foreach ( Project p in proj)
                    {
 
@@ -89,8 +89,13 @@ namespace PresentationTier.Views
                         add.CssClass = "list-group-item";
                         add.Click += new EventHandler(clicker);
                         add.ToolTip = "Click here to manage this projects budget";
+                        counter++;
                         PlaceHolder1.Controls.Add(add);
                     }
+                    }
+                    if (counter < 10)
+                    {
+                        AllProjects.Visible = false;
                     }
                 }
 
@@ -99,8 +104,10 @@ namespace PresentationTier.Views
         catch (Exception err)
         {
 
-            errormsg.Visible = true;
-            messageforerror.Text = Class1.genericErr;
+            //errormsg.Visible = true;
+            messageforerror.InnerHtml = Class1.genericErr;
+            ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
         }
 
         }
@@ -108,14 +115,16 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -141,8 +150,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
         /// <summary>
@@ -162,6 +173,7 @@ namespace PresentationTier.Views
                 
                 //
                 proj = query.ToList<Project>();
+                int l = 0;
                 foreach (Project p in proj)
                 {
                     if (p.UserId == (int)Session["userID"])
@@ -172,23 +184,28 @@ namespace PresentationTier.Views
                         add.ID = p.Id.ToString();
                         add.CssClass = "list-group-item";
                         add.Click += new EventHandler(clicker);
+                        add.ToolTip = "Click here to manage this projects budget";
                         projectList.Controls.Add(add);
+                        l++;
                     }
                 }
 
-                int c = proj.Count;
+                int c = l;
                 if(c >= 10)
                 {
                     ProjectSearch.Visible = true;
+                    buttonadd.CssClass = "btnb btn btn-info btn-lg ";
                 }
                 else
                 {
                     ProjectSearch.Visible = false;
+                    buttonadd.CssClass = "btna btn btn-info btn-lg ";
                 }
 
                 if(c==0)
                 {
                     projectList.Visible = false;
+                    buttonadd.CssClass = "btna btn btn-info btn-lg ";
                 }
                 
                 Button1.Text = "<span class='glyphicon glyphicon-search pull-right' hidden='hidden' aria-hidden='true''</span>";
@@ -199,7 +216,7 @@ namespace PresentationTier.Views
                 }
                 else
                 {
-                    Div1.InnerHtml = "<p>Welcome " + this.Session["userTitle"] + " " + this.Session["userSname"] + ",this is your gateway to manage projects budgets. Below is a list of a;; the projects you created.Click on a project item to manage it.</p>";
+                    Div1.InnerHtml = "<p>Welcome " + this.Session["userTitle"] + " " + this.Session["userSname"] + ",this is your gateway to manage projects budgets. Below is a list of all the projects you created.Click on a project item to manage it.</p>";
                
                 }
 
@@ -208,8 +225,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -282,8 +301,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 

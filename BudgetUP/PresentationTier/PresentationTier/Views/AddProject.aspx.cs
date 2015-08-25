@@ -14,7 +14,7 @@ namespace PresentationTier.Views
         {
             try
             { 
-            errormsg.Visible = false;
+            //errormsg.Visible = false;
             if (Session.Count == 0)
             {
 
@@ -36,12 +36,16 @@ namespace PresentationTier.Views
                 sdate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 edate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             }
+
+            treeviewer.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt Add Project";
+
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
         }
 
@@ -103,30 +107,34 @@ namespace PresentationTier.Views
                     num++;
                                 
                   }
+                  Response.Redirect("ObjectivesPage.aspx");
                        
             }  
             else
             {
-                errormsg.Visible = true;
-                messageforerror.Text = "End date is befor start date";
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = "End date is befor start date";
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
                 }  
             else
             {
-                errormsg.Visible = true;
-                messageforerror.Text = "Start date is befor todays date";
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = "Start date is befor todays date";
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
 
  
                 
             }
-            Response.Redirect("ObjectivesPage.aspx");
+            
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
         }
 
@@ -134,14 +142,15 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
         }
 

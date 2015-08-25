@@ -14,6 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
     <body>
+          <form id="form1" runat="server">
         <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -23,7 +24,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#">BudgetUP</a>
+                     <asp:LinkButton runat="server" CssClass=" navbar-brand btn btn-link " ><span class="glyphicon glyphicon-menu-left"></span></asp:LinkButton><img class=" navbar-brand img-responsive img-rounded" style=" padding:0; border-radius:0; margin-right:2px; margin-left:2px;"  src="../Images/logo.png"></img><a class="navbar-brand" href="#">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -45,7 +46,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#">BudgetUP</a>
+                     <asp:LinkButton runat="server" CssClass=" navbar-brand btn btn-link " ><span class="glyphicon glyphicon-menu-left"></span></asp:LinkButton><img class=" navbar-brand img-responsive img-rounded" style=" padding:0; border-radius:0; margin-right:2px; margin-left:2px;"  src="../Images/logo.png"></img><a class="navbar-brand" href="#">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar2">
                     <ul class="nav navbar-nav">
@@ -58,29 +59,68 @@
             </div>
         </nav></div>
 
-        <form id="form1" runat="server">
-            <div runat="server" id="errormsg">
-                <div id="errorinner">
-                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
-                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
-                </div>
-            </div>
+      
+  <div id="myModal2" class="modal fade"  role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="Div1" runat="server">Are you sure you want to delete the activity? All items under the activity will also be removed.</div>
+      </div>
+      <div class="modal-footer">
+           <asp:Button runat="server" CssClass="btn-info btn" Text="Delete" OnClick="Button1_Click" ID="Button2" />
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+            
+            <div id="myModal" class="modal fade"  role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Error has occured</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="messageforerror" runat="server"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+                    <div id="tree" runat="server" class="treeView">
+             
+                    </div>
+                            <a href="IncomeandExpensesPage.aspx" class=" back btn btn-info btn-lg"  >Back</a>
+           
             <div id="Add" class="contentArea"><br />
                 <h1>Car Expense</h1><hr />
                 		<p>Fill in the fields and click the add button to edit the current car expense.Note that all required fields are marked with a *.</p>
 		<hr/>
-                 <asp:Label runat="server" ID="Label1">Type of rental*</asp:Label><asp:DropDownList required runat="server" ID="fleet" CssClass="form-control" >
+                 <asp:Label runat="server" ID="Label1" Font-Bold="True">Type of rental*</asp:Label><asp:DropDownList required runat="server" ID="fleet" CssClass="form-control" >
                     <asp:ListItem Value="1">UP Fleet</asp:ListItem>
                     <asp:ListItem Value="2">External Rental</asp:ListItem>
                     <asp:ListItem Value="3">Feul claim</asp:ListItem>
                 </asp:DropDownList><br />
-                                 Days*<asp:TextBox required type="number" runat="server" ID="quantity"  name="quantity" CssClass="form-control"></asp:TextBox><br />
-                 Kilometers*<asp:TextBox required type="number" runat="server" ID="TextBox1"  name="quantity" CssClass="form-control"></asp:TextBox><br />
+                               <asp:Label ID="days" runat="server" Font-Bold="True">     Days*</asp:Label><asp:TextBox required type="number" runat="server" ID="quantity"  name="quantity" CssClass="form-control">0</asp:TextBox><br />
+                <asp:Label ID="km" runat="server" Font-Bold="True"> Kilometers*</asp:Label><asp:TextBox required type="number" runat="server" ID="TextBox1"  name="quantity" CssClass="form-control">0</asp:TextBox><br />
 
-                <asp:Label runat="server" ID="Label2">Notes*</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server" ID="Label2" Font-Bold="True">Notes*</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" OnClick="Unnamed5_Click" />
-                <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" OnClick="Button1_Click" Text="Remove" />
+                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Delete</button>
                 <br /><br />
             </div>
         </form>

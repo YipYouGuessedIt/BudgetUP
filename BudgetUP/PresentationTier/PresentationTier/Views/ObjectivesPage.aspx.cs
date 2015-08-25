@@ -15,7 +15,7 @@ namespace PresentationTier.Views
         {
             try
             { 
-            errormsg.Visible = false;
+            
             if (Session["projectID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -48,7 +48,7 @@ namespace PresentationTier.Views
                         DateTime s = p.StartDate.Value;
                         DateTime en = p.EndDate.Value;
                         Div2.InnerHtml = "<p><b>Overall objective:</b>" + p.Goal + "<p/><p><b>Dates:</b>" + s.ToString("yyyy/MM/dd") + " - " + en.ToString("yyyy/MM/dd") + "<p/>";
-                        tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt " + p.Title.ToString();
+                        tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt Project Details and Objective List" ;
                         LinkButton DownloadReport = new LinkButton();
                         DownloadReport.Text = "<span class='glyphicon glyphicon-download pull-right' hidden='hidden' aria-hidden='true''</span> Download Excel";
                         DownloadReport.ID = "DownloadReport";
@@ -64,8 +64,8 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+               // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
             }
         }
 
@@ -86,8 +86,8 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+               // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
             }
         }
         /// <summary>
@@ -113,23 +113,29 @@ namespace PresentationTier.Views
 
                     if (p.ProjectId.ToString() == Session["projectID"].ToString())
                     {
-                       LinkButton add = new LinkButton();
-                       add.Text = p.ObjectiveName + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
+                        LinkButton add = new LinkButton();
+                        add.Text = p.ObjectiveName + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                         add.ID = p.Id.ToString();
                         add.CssClass = "list-group-item";
                         add.Click += new EventHandler(clicker);
+                        add.ToolTip = "Click here to manage the objective";
                         c++;
                         ObjectiveLister.Controls.Add(add);
                     }
                 }
+                
                 if (c >= 10)
                 {
 
                     ObjectiveSearch.Visible = true;
+                    buttonadd.CssClass = "btnb btn btn-info btn-lg ";
                 }
                 else
                 {
                     ObjectiveSearch.Visible = false;
+                    buttonadd.CssClass = "btna btn btn-info btn-lg ";
+                    //ObjectiveList.InnerHtml += "<br/><br/><br/>";
+                    
                 }
                 if (c == 0)
                 {
@@ -141,8 +147,8 @@ namespace PresentationTier.Views
                 {
                     Div1.InnerHtml = "<p>This is your gateway to manage objectives of your selected project. Below is a list of all the objective you created.Click on a objective item to manage it or edit the project.</p>";
                 }
-
-                Button1.Text = "<span class='glyphicon glyphicon-search' hidden='hidden' aria-hidden='true''</span>";
+                
+               // Button1.Text = "<span class='glyphicon glyphicon-search' hidden='hidden' aria-hidden='true''</span>";
                 
                     
                 
@@ -153,8 +159,8 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+               // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
             }
         }
 
@@ -190,8 +196,8 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
             }
         }
 
@@ -199,14 +205,14 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+               // errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+               // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
             }
         }
 
@@ -229,8 +235,8 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+               // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
             }
         }
     }

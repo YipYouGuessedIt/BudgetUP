@@ -1,7 +1,12 @@
 ﻿$(document).ready(function () {
+    
+    var clicker = 0;
+   
+    
+
 
     $('#normalnav a[href = "Settings.aspx"]').hide();
-var clicker = 0;
+
     $('#fleet11').click(function () 
 	{ 
 	clicker++ ;
@@ -22,9 +27,37 @@ var clicker = 0;
 		}
 		clicker = 0;
 	}
-		
-	});
+    });
+    
+    $('#rental').click(function () {
+        clicker++;
+        //alert(clicker);
+        if (clicker == 2) {
+            //alert($(this).val());
+            if ($(this).val() == "2") {
+                //alert(clicker);
+                $('#quantity').show();
+                $('#TextBox1').hide();
+                $('#days').show();
+                $('#km').hide();
+            }
+            else if ($(this).val() == "3") {
+                $('#quantity').hide();
+                $('#TextBox1').show();
+                $('#days').show();
+                $('#km').hide();
+            }
+            else
+            {
+                $('#quantity').show();
+                $('#TextBox1').show();
+                $('#days').show();
+                $('#km').hide();
+            }
+            clicker = 0;
+        }
 
+    });
     $('#logout').click(function (e) {
         
         //alert('f');
@@ -52,3 +85,4 @@ var clicker = 0;
     });
     
 });
+

@@ -15,7 +15,7 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
             
             if (Session["BursIDID"] == null)
             {
@@ -56,13 +56,17 @@ namespace PresentationTier.Views
                     }
 
                 }
+                tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt <a href='ObjectivesPage.aspx'>Project Details and Objective List</a> &gt <a href='ActivitiesPage.aspx'>Objective Details and Activity List</a> &gt <a href='IncomeandExpensesPage.aspx'>Activity Details</a> &gt Edit Bursary";
+
 
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }   
             //}
         }
@@ -92,8 +96,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
 
         }
@@ -108,7 +114,27 @@ namespace PresentationTier.Views
         {
             try
             {
-           Response.Write(DropDownList2.SelectedValue + DropDownList2.SelectedItem);
+                using (var dbContext = new dboEntities())
+                {
+                    var query2 = from Project
+                                         in dbContext.Projects
+                                 select Project;
+
+                    foreach (Project ms in query2)
+                    {
+                        if (ms.Id.ToString() == Session["projectID"].ToString())
+                        {
+                            int ni = Convert.ToInt32(DropDownList2.SelectedValue);
+                            var query = dbContext.BursaryTypes.Where(b => b.Id == ni ).FirstOrDefault();
+                            if (query != null)
+                            {
+                                DateTime start = Convert.ToDateTime(sdate.Text);
+                                
+                                start.AddYears(query.DurationYears);
+                                if (ms.EndDate > start)
+                                {
+                             
+          // Response.Write(DropDownList2.SelectedValue + DropDownList2.SelectedItem);
             ServiceContracts m = new ServiceContracts();
             Bursary n = new Bursary();
             n.Id = Convert.ToInt32( Session["BursIDID"].ToString());
@@ -124,12 +150,27 @@ namespace PresentationTier.Views
             //Response.Write("<script>alert('"+ n.BursaryTypeId +"');</script>");
             m.UpdateBursary(n);
             Response.Redirect("IncomeandExpensesPage.aspx");
+                                }
+                                else
+                                {
+                                    ////errormsg.Visible = true;
+                                    messageforerror.InnerHtml = "Bursary duration does not fall into pojects date";
+                                    ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
+                                }
+                            }
+
+                        }
+                    }
+                }
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -142,8 +183,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -151,14 +194,16 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -174,8 +219,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

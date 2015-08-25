@@ -14,7 +14,7 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
             if (Session["ActID"] == null)
             {
                 Response.Redirect("ProjectsPage.aspx");
@@ -43,8 +43,12 @@ namespace PresentationTier.Views
 
                     if (p.Id.ToString() == Session["ActID"].ToString())
                     {
-                        heaserarea.InnerText = p.ActivityName.ToString();
-                        tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt <a href='ObjectivesPage.aspx'>" + p.Objective.Project.Title.ToString() + "</a> &gt <a href='ActivitiesPage.aspx'>" + p.Objective.ObjectiveName + "</a> &gt " + p.ActivityName.ToString() + "";
+                        heaserarea.InnerText =p.ActivityName.ToString() + " Details and income and expense list";
+                        tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt <a href='ObjectivesPage.aspx'>Project Details and Objective List</a> &gt <a href='ActivitiesPage.aspx'>Objective Details and Activity List</a> &gt Activity Details";
+                        DateTime s = p.StartDate;
+                        DateTime en = p.EndDate;
+                        Div2.InnerHtml = "<p><b>Activity name:</b>" + p.ActivityName + "<p/><p><b>Dates:</b>" + s.ToString("yyyy/MM/dd") + " - " + en.ToString("yyyy/MM/dd") + "<p/>";
+                      
                     }
                 }
             }
@@ -53,8 +57,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -104,8 +110,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
             
         }
@@ -122,8 +130,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -139,8 +149,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -151,6 +163,7 @@ namespace PresentationTier.Views
             {
                 //Response.Write("<script>alert(' mdksnfc')</script>");
                 List<Expens> px = new List<Expens>();
+                int total, burs = 0, don = 0, money = 0;
                 using (var dbContext2 = new dboEntities())
                 {
                     var query2 = from Objectives
@@ -175,6 +188,7 @@ namespace PresentationTier.Views
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
                                     Expenselist.Controls.Add(add);
+                                    money++;
                                 }
                             }
                             //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -191,6 +205,7 @@ namespace PresentationTier.Views
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
                                     Expenselist.Controls.Add(add);
+                                    money++;
                                 }
                             }
                             //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -207,6 +222,7 @@ namespace PresentationTier.Views
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
                                     Expenselist.Controls.Add(add);
+                                    money++;
                                 }
                             }
                             //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -223,6 +239,7 @@ namespace PresentationTier.Views
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
                                     Expenselist.Controls.Add(add);
+                                    money++;
                                 }
                             }
                             //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -246,6 +263,7 @@ namespace PresentationTier.Views
                                     {
                                         Expenselist.Controls.Add(add);
                                     }
+                                    money++;
                                 }
                             }
                             var query8 = from Objectives
@@ -261,6 +279,7 @@ namespace PresentationTier.Views
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
                                     Expenselist.Controls.Add(add);
+                                    money++;
                                 }
                             }
                         }
@@ -286,7 +305,7 @@ namespace PresentationTier.Views
                             add.CssClass = "list-group-item";
                             add.Click += new EventHandler(Iclicker);
                             IncomeList.Controls.Add(add);
-
+                            don++;
 
                         }
                     }
@@ -299,6 +318,7 @@ namespace PresentationTier.Views
 
 
                     //px = query2;
+                    
                     foreach (Bursary v in query3)
                     {
 
@@ -308,11 +328,56 @@ namespace PresentationTier.Views
                             add.Text = v.BursaryType.Description + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                             add.ID = v.Id.ToString() +"Burser";
                             add.CssClass = "list-group-item";
+                            add.ToolTip = "Click to view details of bursary";
                             add.Click += new EventHandler(Bclicker);
                             BusaryList.Controls.Add(add);
-
+                            burs++;
 
                         }
+                    }
+                    total = burs + money + don;
+                    if (total >= 10)
+                    {
+
+                        ObjectiveSearch.Visible = true;
+                        buttonadd.CssClass = "btnb btn btn-info btn-lg ";
+                    }
+                    else
+                    {
+                        ObjectiveSearch.Visible = false;
+                        buttonadd.CssClass = "btna btn btn-info btn-lg ";
+                        //ObjectiveList.InnerHtml += "<br/><br/><br/>";
+
+                    }
+                    if (money == 0)
+                    {
+
+                        el.Visible = false;
+                        Div1.InnerHtml = "<p>This is your gateway to manage incomes and expenses of your selected activity. Click on the button below to add incomes or expenses or edit the activity.</p>";
+                    }
+                    else
+                    {
+                        Div1.InnerHtml = "<p>This is the gateway to manage incomes and expenses of your selected activity. Below is a list of all the incomes or expenses you created.Click on a incomes or expenses item to manage it or edit the activity.</p>";
+                    }
+                    if (don == 0)
+                    {
+
+                        il.Visible = false;
+                        Div1.InnerHtml = "<p>This is your gateway to manage incomes and expenses of your selected activity. Click on the button below to add incomes or expenses or edit the activity.</p>";
+                    }
+                    else
+                    {
+                        Div1.InnerHtml = "<p>This is the gateway to manage incomes and expenses of your selected activity. Below is a list of all the incomes or expenses you created.Click on a incomes or expenses item to manage it or edit the activity.</p>";
+                    }
+                    if (burs == 0)
+                    {
+
+                        bl.Visible = false;
+                        Div1.InnerHtml = "<p>This is your gateway to manage incomes and expenses of your selected activity. Click on the button below to add incomes or expenses or edit the activity.</p>";
+                    }
+                    else
+                    {
+                        Div1.InnerHtml = "<p>This is the gateway to manage incomes and expenses of your selected activity. Below is a list of all the incomes or expenses you created.Click on a incomes or expenses item to manage it or edit the activity.</p>";
                     }
                 }
             }
@@ -320,8 +385,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
         //
@@ -373,8 +440,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -382,14 +451,16 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -447,8 +518,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

@@ -14,7 +14,7 @@ namespace PresentationTier.Views
         {
             try
             { 
-            errormsg.Visible = true;
+            //errormsg.Visible = true;
             if (Session.Count == 0)
             {
 
@@ -40,6 +40,7 @@ namespace PresentationTier.Views
             {
                 using (var dbContext = new dboEntities())
                 {
+                    treeviewer.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt <a href='ObjectivesPage.aspx'>Project Details and Objective List</a> &gt  <a href='EditProject.aspx'>Edit Project </a> %gt Edit Settings";
                     var query = from BursaryTypes
                                 in dbContext.Projects
                                 select BursaryTypes;
@@ -68,8 +69,9 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
         }
 
@@ -93,8 +95,8 @@ namespace PresentationTier.Views
                         m.EscalationRate = Convert.ToDouble(EscalationRate.Text);
                         m.InstitutionalCost = Convert.ToDouble(InstutionalCost.Text);
                         m.SubventionRate = Convert.ToDouble(Subvention.Text);
-                        m.UPFleetDailyRate = Convert.ToInt32(uprate.Text);
-                        m.FCkmRate = Convert.ToInt32(fc.Text);
+                        m.UPFleetDailyRate = Convert.ToDouble(uprate.Text);
+                        m.FCkmRate = Convert.ToDouble(fc.Text);
                         m.UPFleetKmRate = Convert.ToDouble(TextBox1.Text);
                         ServiceContracts n = new ServiceContracts();
                         n.UpdateProjectSettings(m);
@@ -110,8 +112,9 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
         }
 
@@ -119,14 +122,15 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
         }
     }

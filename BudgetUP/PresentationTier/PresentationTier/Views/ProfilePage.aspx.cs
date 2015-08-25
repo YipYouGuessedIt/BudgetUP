@@ -15,7 +15,9 @@ namespace PresentationTier.Views
         protected void Page_Load(object sender, EventArgs e)
 
         {
-            errormsg.Visible = false;
+            try
+            { 
+            //errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -35,6 +37,8 @@ namespace PresentationTier.Views
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
+            tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a>  &gt Profile";
+
             using (var dbContext = new dboEntities())
             {
                 var query = from Projects
@@ -69,6 +73,14 @@ namespace PresentationTier.Views
                     }
                 }
 
+            }
+            }
+            catch (Exception err)
+            {
+
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
         }
 
@@ -150,8 +162,10 @@ namespace PresentationTier.Views
                     }
                     if (query.Email != em)
                     {
-                        errormsg.Visible = true;
-                        messageforerror.Text = "Email already exists";
+                        //errormsg.Visible = true;
+                        messageforerror.InnerHtml = "Email already exists";
+                        ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
                         return true;
                     }
                     return false;
@@ -161,8 +175,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
                 return false;
             }
         }
@@ -198,14 +214,18 @@ namespace PresentationTier.Views
                 }
                 else
                 {
-                    errormsg.Visible = true;
-                    messageforerror.Text = "Email already exists";
+                    //errormsg.Visible = true;
+                    messageforerror.InnerHtml = "Email already exists";
+                    ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
                 }
             }
             else
             {
-                errormsg.Visible = true;
-                messageforerror.Text = "Passwords do not match";
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = "Passwords do not match";
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -213,14 +233,16 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

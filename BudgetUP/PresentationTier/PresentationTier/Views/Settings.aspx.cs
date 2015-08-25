@@ -15,7 +15,9 @@ namespace PresentationTier.Styles
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
+                tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a>  &gt Settings";
+
             if (Session.Count == 0)
             {
 
@@ -40,8 +42,10 @@ namespace PresentationTier.Styles
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -51,14 +55,16 @@ namespace PresentationTier.Styles
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

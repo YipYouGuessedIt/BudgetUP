@@ -11,17 +11,35 @@
 	    <script src="../bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="../Styles/Global.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="../Scripts/NavigationJS.js"></script>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div runat="server" id="errormsg">
-            
-                <div id="errorinner">
-                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
-                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
-                </div>
-                
-            </div>
+        <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+        
+         <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Small Modal</button>
+        <!-- Modal -->
+
+<div id="myModal" class="modal fade"  role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Error has occured</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="messageforerror" runat="server"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+        <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
             <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -30,7 +48,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
-                    <a class="navbar-brand" href="#">BudgetUP</a>
+                   
+                     
+                    <img class=" navbar-brand img-responsive img-rounded" style=" padding:0; border-radius:0; margin-right:2px;"  src="../Images/logo.png"></img>
+                    <a class="navbar-brand" href="#"> BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -43,8 +64,8 @@
             
              <div id="AddProjects" class="contentArea"><br />
                 <h1>Login to BudgetUP</h1><hr />
-                <asp:Label runat="server">Username</asp:Label><asp:TextBox runat="server" ID="UserEmail" type="Email" name="User" autofocus CssClass="form-control" required></asp:TextBox><br />
-                <asp:Label runat="server">Password </asp:Label><asp:TextBox runat="server" ID="Pass" name="Pass" type="password" CssClass="form-control" required></asp:TextBox><br />
+                <asp:Label runat="server" Font-Bold="True">Username</asp:Label><asp:TextBox runat="server" ID="UserEmail" type="Email" name="User" autofocus CssClass="form-control" required></asp:TextBox><br />
+                <asp:Label runat="server" Font-Bold="True">Password </asp:Label><asp:TextBox runat="server" ID="Pass" name="Pass" type="password" CssClass="form-control" required></asp:TextBox><br />
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Login" OnClick="Unnamed3_Click" /><asp:HyperLink CssClass="frgt" runat="server" ToolTip="Recover lost password">Forgot Password?</asp:HyperLink>
                  <br /><br />
             </div>

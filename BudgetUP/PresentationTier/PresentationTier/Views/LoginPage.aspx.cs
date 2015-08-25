@@ -13,7 +13,7 @@ namespace PresentationTier
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            errormsg.Visible = false;
+            //errormsg.Visible = false;
         }
 
         protected void Unnamed3_Click(object sender, EventArgs e)
@@ -31,8 +31,9 @@ namespace PresentationTier
                     }
                     else
                     {
-                        errormsg.Visible = true;
-                        messageforerror.Text = "The credentials entered were incorrect";
+                        //errormsg.Visible = true;
+                        messageforerror.InnerText = "The credentials entered were incorrect";
+                        ClientScript.RegisterStartupScript(GetType(),"", "  $('#myModal').modal('show');", true);
 
                     }
                 }
@@ -44,8 +45,9 @@ namespace PresentationTier
             catch(Exception err)
             {
                 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;   
+               // errormsg.Visible = true;
+                messageforerror.InnerText = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
         }
         /// <summary>
@@ -64,8 +66,10 @@ namespace PresentationTier
                 var query = dbContext.EmailDomains.Where(b => b.Domain == dom).FirstOrDefault();
                 if(query == null)
                 {
-                    errormsg.Visible = true;
-                    messageforerror.Text = "The domain entered was incorrect";
+                    //m.Attributes.
+                    //errormsg.Visible = true;
+                    messageforerror.InnerHtml = "The domain entered was incorrect";
+                    ClientScript.RegisterStartupScript(GetType(), "hwa", "  $('#myModal').modal('show');",true);
                     return false;
                 }
                 return true;
@@ -75,8 +79,8 @@ namespace PresentationTier
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                //messageforerror.Text = Class1.genericErr;
                 return false;
             }
         }
@@ -108,9 +112,10 @@ namespace PresentationTier
             }
             catch (Exception err)
             {
-
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                messageforerror.InnerText = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "  $('#myModal').modal('show');", true);
+                //errormsg.Visible = true;
+                //messageforerror.Text = Class1.genericErr;
                 return false;
             }
             
@@ -120,14 +125,15 @@ namespace PresentationTier
         {
             try
             {
-                errormsg.Visible = false;
+               // errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
-
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                messageforerror.InnerText = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "  $('#myModal').modal('show');", true);
+                //errormsg.Visible = true;
+                //messageforerror.Text = Class1.genericErr;
             }
         }
     }

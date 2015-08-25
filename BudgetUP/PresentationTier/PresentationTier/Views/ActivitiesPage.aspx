@@ -15,21 +15,36 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div runat="server" id="errormsg">
-                <div id="errorinner">
-                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
-                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
-                </div>
-            </div>
-    <        <div id="adminnav" runat="server">
+        <div id="myModal" class="modal fade"  role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Error has occured</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="messageforerror" runat="server"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+           <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <button type="button"  class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
+                    <asp:LinkButton runat="server" href="ObjectivesPage.aspx" CssClass=" navbar-brand btn btn-link " ><span class="glyphicon glyphicon-menu-left"></span></asp:LinkButton>
+                    <img class=" navbar-brand img-responsive img-rounded" style=" padding:0; border-radius:0; margin-right:2px; margin-left:2px;"  src="../Images/logo.png"></img>
                     <a class="navbar-brand" href="#">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -52,6 +67,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
                     </button>
+                    <asp:LinkButton runat="server" href="ObjectivesPage.aspx" CssClass=" navbar-brand btn btn-link " ><span class="glyphicon glyphicon-menu-left"></span></asp:LinkButton>
+                    <img class=" navbar-brand img-responsive img-rounded" style=" padding:0; border-radius:0; margin-right:2px; margin-left:2px;"  src="../Images/logo.png"></img>
+
+
                     <a class="navbar-brand" href="#">BudgetUP</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar2">
@@ -68,28 +87,36 @@
        
             
         </div>
+         <a href="ObjectivesPage.aspx" class=" back btn btn-info btn-lg"  >Back</a>
         <div class="contentArea">
             <br />
-            <h1 id="heaserarea" runat="server"></h1><hr />
-            <div id="ActivitySearch">
-                <hr />
-                <h2>Search</h2>
-                <p>type in here to filter the list of activities for this objective</p>
-				<asp:TextBox runat="server"  ID="searcher" CssClass="form-control" placeholder="Search Activities..." ></asp:TextBox>
-			    <asp:Button ID="Button1" runat="server" CssClass="btn-info btn-lg btn" Text="Search" OnClick="Button1_Click" /><br />
-                <hr />
-			</div>
+             <h1 id="heaserarea" runat="server"></h1>
+                        <hr />
+            <div id="Div1" runat="server"></div>
+            <hr />
+            <div id="Div2" runat="server"></div>
+            <a href="EditObjectives.aspx" class="btn btn-info btn-lg"  >Edit objective</a>
+            <hr />
+         
 
             <div id="ActivityAdd">
-                <p>Click on add to add a new activity or click back to go to the objectives page</p>
-				<a href="AddActivities1.aspx" class="btn btn-info btn-lg"  >Add new Activity</a>
-                <a href="EditObjectives.aspx" class="btn btn-info btn-lg"  >Edit objective</a>
-                <a href="ObjectivesPage.aspx" class="btn btn-info btn-lg"  >Back</a><br />
+              
+				<asp:LinkButton href="AddActivities1.aspx" id="buttonadd" runat="server" class="btn btn-info btn-lg"  >Add Activity</asp:LinkButton>
+                 <div id="ObjectiveSearch"  runat="server" class="col-lg-2 pull-right serc">
+                            <div class="input-group">
+                                <asp:TextBox runat="server" autofocus="true" placeholder="Search" ID="searcher" CssClass=" form-control" OnTextChanged="Button1_Click"></asp:TextBox> 
+                                <span class="input-group-btn">
+                                    <asp:LinkButton runat="server" ID="LinkButton1" class="btn " style="background-color:white;" OnClick="Button1_Click"><span class='glyphicon glyphicon-search'></span></asp:LinkButton>
+                                </span>
+                            </div>
+                        </div>
+ 
+                
+               
 			</div>
+            <br />
+			<div id="n" runat="server" class="list-group">
 
-			<div id="n" class="list-group">
-                <h3>Activity Lists</h3>
-                <p>Bellow is a list for all the activities that are associated with the current objective</p>
                 <asp:PlaceHolder ID="ActivityList" runat="server"></asp:PlaceHolder>
 
                <br />				

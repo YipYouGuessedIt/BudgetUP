@@ -15,7 +15,7 @@ namespace PresentationTier.Views
             try
             {
 
-            errormsg.Visible = false;
+            // errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 
@@ -41,12 +41,16 @@ namespace PresentationTier.Views
                 sdate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 edate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             }
+            treeviewer.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt <a href='ActivitiesPage.aspx'>Project Details and Objective List</a> &gt <a href='ObjectivesPage.aspx'>Objective Details and Activity List</a> &gt Add Activities";
+
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
 
         }
@@ -67,6 +71,10 @@ namespace PresentationTier.Views
                     {
                         DateTime start = Convert.ToDateTime(sdate.Text);
                         DateTime end = Convert.ToDateTime(edate.Text);
+                              if (start >= DateTime.Today)
+            {
+            if (end >= start)
+            {
                         if (m.StartDate > start || m.EndDate > end)
                         {
                             ServiceContracts sc = new ServiceContracts();
@@ -75,9 +83,25 @@ namespace PresentationTier.Views
                         }
                         else
                         {
-                            errormsg.Visible = true;
-                            messageforerror.Text = "End date is befor start date";
+                            // errormsg.Visible = true;
+                            messageforerror.InnerHtml = "Dates dont fall in projects bounds";
+                            ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
                         }
+            }
+            else
+            {
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = "End date is befor start date";
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+            }
+            }
+                              else
+                              {
+                                  //errormsg.Visible = true;
+                                  messageforerror.InnerHtml = "Start date is befor todays date";
+                                  ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+                              }
                         
                     }
                 }
@@ -87,8 +111,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -96,14 +122,16 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                // errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

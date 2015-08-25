@@ -6,7 +6,21 @@
         
       
 }
-  .ser
+
+ .btna{
+ 
+   margin-left:-36%;
+  
+
+ }
+
+#searcher
+       {
+        
+        width:150px;
+        
+       }
+ /* .ser
        {
         
         font-size:15px;
@@ -25,7 +39,7 @@
      
 
          
- }
+ }*/
 div.treeView
 {
     width:80%;
@@ -67,6 +81,10 @@ div.contentArea
     background-color: rgb(215, 210, 209);
 
 }
+
+
+
+
 
 
 
@@ -116,7 +134,7 @@ div.navbar-Footer {
  }
  .btn
  {
-     background-color: rgb(218,28,51);
+    /*background-color: rgb(218,28,51);*/ 
      
  }
 
@@ -146,17 +164,28 @@ div.navbar-Footer {
      margin-left:7%;
      position:absolute;
  }
- .btna{
+
+ .btnb{
  
-   margin-left:25%;
+   margin-left:9%;
 
  }
  #DownloadReport
  {
      height:30px;
  }
+ .serc
+ {
+    
+    margin-right:28%;
+     
+ }
+ 
 
-
+ .glyphicon
+ {
+     line-height:1.5;
+ }
 
 
 
