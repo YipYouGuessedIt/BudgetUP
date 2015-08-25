@@ -273,7 +273,7 @@ namespace PresentationTier.Views
 
             firstAmountRow = row+1;
 
-            #region Write Amount Table
+#region Write Amount Table
             #region Column Headings
             //write column headings
             ws.Cells[row, col++].Value = "Objectives".ToUpper();
@@ -598,7 +598,6 @@ namespace PresentationTier.Views
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
                                 ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -648,7 +647,6 @@ namespace PresentationTier.Views
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
                                 ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -698,7 +696,6 @@ namespace PresentationTier.Views
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
                                 ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -748,7 +745,6 @@ namespace PresentationTier.Views
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
                                 ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -798,7 +794,6 @@ namespace PresentationTier.Views
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
                                 ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -3943,8 +3938,24 @@ namespace PresentationTier.Views
 
             row += 2;
             ws.Cells[row, col].Value = "Budget Notes";
-            FormatNoteHeading(ws, 1, 5, row++);
             ws.Cells[row, 1, row, 5].Merge = true;
+            FormatNoteHeading(ws, 1, 5, row++);
+
+            ws.Cells[3, 7].Value = "Legend";
+            ws.Cells[3, 7, 3, 12].Merge = true;
+            FormatNoteHeading(ws, 7, 12, 3);
+
+            ws.Cells[4, 7].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+            ws.Cells[4, 7].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGreen);
+            ws.Cells[4, 8].Value = "These cells indicate values that should be entered by user or administrator.";
+            ws.Cells[4 ,8, 4, 12].Merge = true;
+            FormatNoteHeading(ws, 7, 12, 4);
+
+            ws.Cells[5, 7].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+            ws.Cells[5, 7].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+            ws.Cells[5, 8].Value = "These cells indicate values that should not be entered as they are not included in that expense.";
+            ws.Cells[5, 8, 5, 12].Merge = true;
+            FormatNoteHeading(ws, 7, 12, 5);
 
             row++;
             #region Write UP Staff
@@ -4154,7 +4165,7 @@ namespace PresentationTier.Views
             col = 1;
             ws.Cells[row, col].Value = "4. Car Expense Notes";
             FormatNoteHeading(ws, 1, 7, row);
-            ws.Cells[row, 1, row, 4].Merge = true;
+            ws.Cells[row, 1, row, 7].Merge = true;
             row++;
 
             ws.Cells[row, col++].Value = "ID";
@@ -4167,7 +4178,7 @@ namespace PresentationTier.Views
 
             projectInfo.Car_Amount_col = col;
             ws.Cells[row, col++].Value = "Amount";
-            FormatNoteHeading(ws, 1, 4, row);
+            FormatNoteHeading(ws, 1, 7, row);
             row++;
             projectInfo.Car_rowStart = row;
             col = 1;
@@ -4232,10 +4243,10 @@ namespace PresentationTier.Views
             ws.Cells[row, 1, row, 12].Merge = true;
             row++;
 
-            
+
             ws.Cells[row, col++].Value = "ID";
-            ws.Cells[row, col++].Value = "Note ID";
             projectInfo.Travel_ID_col = col;
+            ws.Cells[row, col++].Value = "Note ID";
             ws.Cells[row, col++].Value = "Note";
             ws.Cells[row, col++].Value = "Departure Location";
             ws.Cells[row, col++].Value = "Destination";
@@ -4246,8 +4257,8 @@ namespace PresentationTier.Views
 
             projectInfo.Travel_StartAmount_col = col;
             ws.Cells[row, col++].Value = "Accomodation";
-            ws.Cells[row, col++].Value = "Airline";
             ws.Cells[row, col++].Value = "Allowance";
+            ws.Cells[row, col++].Value = "Airline";
             ws.Cells[row, col++].Value = "Gautrain";
             projectInfo.Travel_EndAmount_col= col;
             ws.Cells[row, col++].Value = "Visa";
@@ -4324,41 +4335,77 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                                 ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
                             }
-                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                            ws.Cells[row, col++].Value = 0;
-
-                            if (bAirline == false)
+                            else
                             {
                                 ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGreen);
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
                             }
-                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                            ws.Cells[row, col++].Value = 0;
+                            
 
                             if (bAllow == false)
                             {
                                 ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                                 ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
                             }
-                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                            ws.Cells[row, col++].Value = 0;
+                            else
+                            {
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGreen);
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
+                            }
+
+                            if (bAirline == false)
+                            {
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
+                            }
+                            else
+                            {
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGreen);
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
+                            }
 
                             if (bGautrain == false)
                             {
                                 ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                                 ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
                             }
-                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                            ws.Cells[row, col++].Value = 0;
+                            else
+                            {
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGreen);
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
+                            }
 
                             if (bVisa == false)
                             {
                                 ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
                                 ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
                             }
-                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                            ws.Cells[row, col++].Value = 0;
+                            else
+                            {
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGreen);
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col++].Value = 0;
+                            }
 
                             col = 1;
                             row++;
