@@ -213,6 +213,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\car.js" />
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\NavigationJS.js" />
     <Content Include="Scripts\script.js" />

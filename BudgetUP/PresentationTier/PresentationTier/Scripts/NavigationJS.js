@@ -28,6 +28,12 @@
 		clicker = 0;
 	}
     });
+
+    $('#rental').load(
+
+
+
+        );
     
     $('#rental').click(function () {
         clicker++;
@@ -39,20 +45,20 @@
                 $('#quantity').show();
                 $('#TextBox1').hide();
                 $('#days').show();
-                $('#km').hide();
+                $('#kml').hide();
             }
             else if ($(this).val() == "3") {
                 $('#quantity').hide();
                 $('#TextBox1').show();
-                $('#days').show();
-                $('#km').hide();
+                $('#days').hide();
+                $('#kml').show();
             }
             else
             {
                 $('#quantity').show();
                 $('#TextBox1').show();
                 $('#days').show();
-                $('#km').hide();
+                $('#kml').show();
             }
             clicker = 0;
         }

@@ -9,6 +9,7 @@
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	    <script src="../bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+    <script src="../Scripts/car.js"></script>
     <script src="../Scripts/NavigationJS.js"></script>
         <link rel="stylesheet" href="../Styles/Global.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -109,13 +110,13 @@
                 <h1>Car Expense</h1><hr />
                 		<p>Fill in the fields and click the add button to edit the current car expense.Note that all required fields are marked with a *.</p>
 		<hr/>
-                 <asp:Label runat="server" ID="Label1" Font-Bold="True">Type of rental*</asp:Label><asp:DropDownList required runat="server" ID="fleet" CssClass="form-control" >
+                 <asp:Label runat="server" ID="Label1" Font-Bold="True">Type of rental*</asp:Label><asp:DropDownList required runat="server" ID="rental" CssClass="form-control" >
                     <asp:ListItem Value="1">UP Fleet</asp:ListItem>
                     <asp:ListItem Value="2">External Rental</asp:ListItem>
                     <asp:ListItem Value="3">Feul claim</asp:ListItem>
                 </asp:DropDownList><br />
-                               <asp:Label ID="days" runat="server" Font-Bold="True">     Days*</asp:Label><asp:TextBox required type="number" runat="server" ID="quantity"  name="quantity" CssClass="form-control">0</asp:TextBox><br />
-                <asp:Label ID="km" runat="server" Font-Bold="True"> Kilometers*</asp:Label><asp:TextBox required type="number" runat="server" ID="TextBox1"  name="quantity" CssClass="form-control">0</asp:TextBox><br />
+                            <div id="days" runat="server">   <asp:Label   Font-Bold="True">     Days*</asp:Label><asp:TextBox required type="number" runat="server" ID="quantity"  name="quantity" CssClass="form-control">0</asp:TextBox><br /></div>
+                <div id="kml" runat="server"><asp:Label   Font-Bold="True"> Kilometers*</asp:Label><asp:TextBox required type="number" runat="server" ID="TextBox1"  name="quantity" CssClass="form-control">0</asp:TextBox><br /></div>
 
                 <asp:Label runat="server" ID="Label2" Font-Bold="True">Notes*</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>

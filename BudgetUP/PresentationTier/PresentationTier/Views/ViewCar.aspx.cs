@@ -47,18 +47,21 @@ namespace PresentationTier.Views
                     {
                         if (!IsPostBack)
                         {
-                            
-                            fleet.SelectedValue = p.TypeofRental.ToString();
+                            int m = p.TypeofRental;
+                            rental.SelectedValue = p.TypeofRental.ToString();
                             TextBox1.Text = p.Kilometers.ToString();
                             quantity.Text = p.Days.ToString();
                             quantity.Text = p.Expen.Amount.ToString();
                             note.Text = p.Expen.Note.UserNote;
+                            
+                           // ClientScript.RegisterStartupScript(GetType(), "modalShower", "   if ($(this).val() == '2') { $('#quantity').show(); $('#TextBox1').hide();$('#days').show();$('#kml').hide(); } else if ($(this).val() == '3') {$('#quantity').hide();$('#TextBox1').show();$('#days').hide();$('#kml').show(); }else{$('#quantity').show();$('#TextBox1').show();$('#days').show(); $('#kml').show();}", true);
 
                         }
                         expid = p.ExpensId;
                         notede = p.Expen.Note_Id;
                     }
                 }
+
 
             }
             tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt <a href='ObjectivesPage.aspx'>Project Details and Objective List</a> &gt <a href='ActivitiesPage.aspx'>Objective Details and Activity List</a> &gt <a href='IncomeandExpensesPage.aspx'>Activity Details</a> &gt  Edit Travel";
@@ -81,7 +84,7 @@ namespace PresentationTier.Views
             Car c = new Car();
             Expens ex = new Expens();
             c.Id = Convert.ToInt32(Session["car"].ToString());
-            c.TypeofRental = Convert.ToInt32(fleet.SelectedValue);
+            c.TypeofRental = Convert.ToInt32(rental.SelectedValue);
             c.Kilometers = Convert.ToInt32(TextBox1.Text);
             c.Days = Convert.ToInt32(quantity.Text);
             c.ExpensId = expid;

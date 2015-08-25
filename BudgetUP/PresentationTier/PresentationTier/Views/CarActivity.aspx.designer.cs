@@ -67,15 +67,6 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.WebControls.DropDownList rental;
         
         /// <summary>
-        /// days control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label days;
-        
-        /// <summary>
         /// quantity control.
         /// </summary>
         /// <remarks>
@@ -83,15 +74,6 @@ namespace PresentationTier.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox quantity;
-        
-        /// <summary>
-        /// km control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label km;
         
         /// <summary>
         /// TextBox1 control.
