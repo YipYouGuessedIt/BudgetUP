@@ -14,14 +14,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div runat="server" id="errormsg">
-            
-                <div id="errorinner">
-                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
-                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK"  Font-Size="10px" Height="33px" />
-                </div>
-                
-            </div>
+        
             <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">

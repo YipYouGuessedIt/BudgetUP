@@ -85,16 +85,36 @@ namespace PresentationTier.Views
                     sc.UpdateVerifications(veri);
                 }
                 //Send email
-                MailMessage mailMessage = new MailMessage();
-                mailMessage.To.Add(userEmail);
-                mailMessage.From = new MailAddress("COS332Pop3@webmail.co.za");
-                mailMessage.Subject = "Budget UP verification Code";
-                mailMessage.Body = "Good day \r\n\r\n";
-                mailMessage.Body = "Your verification code is: " + temp + ".\r\n\r\n";
-                mailMessage.Body = "This verification code will expire at mid-night of the " + DateTime.Now.Date.ToString(@"yyyy-MM-dd");
-                SmtpClient smtpClient = new SmtpClient("mail.Webmail.co.za", 110);
-                smtpClient.Credentials = new System.Net.NetworkCredential("COS332Pop3@webmail.co.za", "Blah1234");
-                smtpClient.Send(mailMessage);
+                //MailMessage mailMessage = new MailMessage();
+                //mailMessage.To.Add(userEmail);
+                //mailMessage.From = new MailAddress("COS332Pop3@webmail.co.za");
+                //mailMessage.Subject = "Budget UP verification Code";
+                //mailMessage.Body = "Good day \r\n\r\n";
+                //mailMessage.Body = "Your verification code is: " + temp + ".\r\n\r\n";
+                //mailMessage.Body = "This verification code will expire at mid-night of the " + DateTime.Now.Date.ToString(@"yyyy-MM-dd");
+                //SmtpClient smtpClient = new SmtpClient("mail.Webmail.co.za", 110);
+                //smtpClient.Credentials = new System.Net.NetworkCredential("COS332Pop3@webmail.co.za", "Blah1234");
+                //smtpClient.Send(mailMessage);
+
+                string body = "Good day \r\n\r\n";
+                body += "Your verification code is: " + temp + ".\r\n\r\n";
+                body += "This verification code will expire at mid-night of the " + DateTime.Now.Date.ToString(@"yyyy-MM-dd");
+                
+
+                SmtpClient smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com", // smtp server address here…
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("budgetup2@gmail.com", "Blah1234"),
+                    Timeout = 30000,
+                };
+
+                MailMessage message = new MailMessage("budgetup2@gmail.com", "yipyouguessedit@gmail.com", "Budget UP verification Code", body);
+                smtp.Send(message);
+                //082 697 1523
 
 
                 Response.Redirect("ForgotPassword_Verification.aspx");

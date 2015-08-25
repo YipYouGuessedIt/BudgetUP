@@ -13,16 +13,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div runat="server" id="errormsg">
-            
-                <div id="errorinner">
-                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
-                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
-                </div>
-                
-            </div>
-            <nav class="navbar navbar-inverse">
+    <form id="form1" runat="server">        
+        <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -41,15 +33,15 @@
         </nav>
     <div>
             
-             <div id="AddProjects" class="contentArea"><br />
-                <h1>Password Recovery</h1><hr />
-                <h3>Please enter the verification password that was sent to your email</h3>
-                 <asp:Label runat="server">Username</asp:Label><asp:TextBox runat="server" ID="UserEmail" type="email" name="User" autofocus CssClass="form-control" required></asp:TextBox><br />
+    <div id="AddProjects" class="contentArea"><br />
+        <h1>Password Recovery</h1><hr />
+        <h3>Please enter the verification password that was sent to your email</h3>
+            <asp:Label runat="server">Username</asp:Label><asp:TextBox runat="server" ID="UserEmail" type="email" name="User" autofocus CssClass="form-control" required></asp:TextBox><br />
                 
-                <asp:Label runat="server">Verification code</asp:Label><asp:TextBox runat="server" ID="veriCode" type="text" name="User" autofocus CssClass="form-control" required></asp:TextBox><br />
-                <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Login" OnClick="Unnamed3_Click" />
-                 <br /><br />
-            </div>
+        <asp:Label runat="server">Verification code</asp:Label><asp:TextBox runat="server" ID="veriCode" type="text" name="User" autofocus CssClass="form-control" required></asp:TextBox><br />
+        <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Login" OnClick="Unnamed3_Click" />
+            <br /><br />
+    </div>
     
     </div>
     </form>

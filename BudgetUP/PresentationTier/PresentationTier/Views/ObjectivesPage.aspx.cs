@@ -220,7 +220,9 @@ namespace PresentationTier.Views
         {
             try
             {
+
                 ExcelExport temp = new ExcelExport();
+                temp.EmailBudget(Convert.ToInt32(Session["projectID"].ToString()), Convert.ToInt32(this.Session["userID"].ToString()));
                 var ProjectFile = temp.PrintProject(Convert.ToInt32(Session["projectID"].ToString()));
 
                 var memoryStream = new MemoryStream();

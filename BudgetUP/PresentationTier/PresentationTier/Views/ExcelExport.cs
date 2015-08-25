@@ -171,12 +171,12 @@ namespace PresentationTier.Views
 
                     Attachment attached = new Attachment(PrintProject(userID), projectInfo.projName + ' ' + DateTime.Now.ToString(@"yyyy-MM-dd") + ".xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
-                    //build email.
+                    ////build email.
                     string body = "";
-                    MailMessage mailMessage = new MailMessage();
-                    mailMessage.To.Add("yipyouguessedit@gmail.com");
-                    mailMessage.From = new MailAddress("kiritotester@gmail.com");
-                    mailMessage.Subject = projectInfo.projName + ' ' + DateTime.Now.ToString(@"yyyy-MM-dd");
+                    //MailMessage mailMessage = new MailMessage();
+                    //mailMessage.To.Add("yipyouguessedit@gmail.com");
+                    //mailMessage.From = new MailAddress("kiritotester@gmail.com");
+                    //mailMessage.Subject = projectInfo.projName + ' ' + DateTime.Now.ToString(@"yyyy-MM-dd");
 
                     string subject = projectInfo.projName + ' ' + DateTime.Now.ToString(@"yyyy-MM-dd");
 
@@ -186,7 +186,7 @@ namespace PresentationTier.Views
                     body += "Email: " + queryemail.First().Email + "\r\n\r\n";
                     body += "Please find budget attached.";
 
-                    mailMessage.Attachments.Add(attached);
+                    //mailMessage.Attachments.Add(attached);
 
                     //SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
                     //smtpClient.Credentials = new System.Net.NetworkCredential("kiritotester@gmail.com","BlazeTester2013");
@@ -196,7 +196,7 @@ namespace PresentationTier.Views
                     SmtpClient smtp = new SmtpClient
                     {
                         Host = "smtp.gmail.com", // smtp server address here…
-                        Port = 465,
+                        Port = 587,
                         EnableSsl = true,
                         DeliveryMethod = SmtpDeliveryMethod.Network,
                         UseDefaultCredentials = false,
@@ -205,6 +205,7 @@ namespace PresentationTier.Views
                     };
 
                     MailMessage message = new MailMessage("budgetup2@gmail.com", "yipyouguessedit@gmail.com", subject, body);
+                    message.Attachments.Add(attached);
                     smtp.Send(message);
                     //082 697 1523
                     return true;
@@ -4315,7 +4316,8 @@ namespace PresentationTier.Views
                             ws.Cells[row, col++].Value = item.DepatureLocation;
                             ws.Cells[row, col++].Value = item.Destination;
                             ws.Cells[row, col+100].Value = item.DepartureDate.Date;
-                            ws.Cells[row, col++].Value = item.DepartureDate.Date.ToString("dd/MM/yyyy");
+                            ws.Cells[row, col].Style.Numberformat.Format = "dd/mm/yyyy";
+                            ws.Cells[row, col++].Formula = /*item.DepartureDate.Date.ToString();*/ "=DATE(" + item.DepartureDate.Year + "," + item.DepartureDate.Month + "," + item.DepartureDate.Day + ")";
                             ws.Cells[row, col++].Value = item.DurationDays;
 
                             if(bAccom == false)

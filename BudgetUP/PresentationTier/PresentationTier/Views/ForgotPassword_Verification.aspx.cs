@@ -44,6 +44,11 @@ namespace PresentationTier.Views
                 {
                     Session["userID"] = entry.UserID;
 
+                    var user = dbContext.Users
+                        .Where(ad => ad.Id == entry.UserID)
+                        .FirstOrDefault();
+
+                    Session["Admin"] = user.Admin;
                     Response.Redirect("ObjectivesPage.aspx");
                 }
             }
