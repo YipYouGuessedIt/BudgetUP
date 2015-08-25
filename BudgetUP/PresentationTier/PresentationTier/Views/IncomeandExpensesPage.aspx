@@ -120,7 +120,7 @@
                    <br />
                 
 			    </div>
-            </div>
+         
             <div runat="server" id="lister">
 			    <div id="bl" runat="server">
                     <h3>Bursary</h3>
