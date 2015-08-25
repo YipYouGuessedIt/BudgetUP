@@ -8,6 +8,7 @@ using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Net.Mail;
 
 namespace PresentationTier.Views
 {
@@ -38,7 +39,8 @@ namespace PresentationTier.Views
             public int Travel_ID_col;
             public int Travel_StartDate_col;
             public int Travel_EndDate_col;
-            public int Travel_Amount_col;
+            public int Travel_StartAmount_col;
+            public int Travel_EndAmount_col;
             #endregion
             #region Incomes
             public int incomes_rowStart;
@@ -149,6 +151,71 @@ namespace PresentationTier.Views
         
 
         #endregion
+
+        public Boolean EmailBudget(int ProjectID, int userID)
+        {
+            try
+            {
+                //get user details
+                using (var dbContext = new dboEntities())
+                {
+                    //get project details
+                    var queryuser = from users
+                                in dbContext.Users
+                                       where users.Id == userID
+                                       select users;
+                    var queryemail = from userCred
+                                in dbContext.UserCredentials
+                                     where userCred.Id == userID
+                                     select userCred;
+
+                    Attachment attached = new Attachment(PrintProject(userID), projectInfo.projName + ' ' + DateTime.Now.ToString(@"yyyy-MM-dd") + ".xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+                    //build email.
+                    string body = "";
+                    MailMessage mailMessage = new MailMessage();
+                    mailMessage.To.Add("yipyouguessedit@gmail.com");
+                    mailMessage.From = new MailAddress("kiritotester@gmail.com");
+                    mailMessage.Subject = projectInfo.projName + ' ' + DateTime.Now.ToString(@"yyyy-MM-dd");
+
+                    string subject = projectInfo.projName + ' ' + DateTime.Now.ToString(@"yyyy-MM-dd");
+
+                    body = "Project approval request regarding the following project: " + projectInfo.projName + ".\r\n\r\n";
+                    body += "Project owner details:\r\n";
+                    body += "Name: " + queryuser.First().Title + " " + queryuser.First().Name + " " + queryuser.First().Surname +"\r\n";
+                    body += "Email: " + queryemail.First().Email + "\r\n\r\n";
+                    body += "Please find budget attached.";
+
+                    mailMessage.Attachments.Add(attached);
+
+                    //SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                    //smtpClient.Credentials = new System.Net.NetworkCredential("kiritotester@gmail.com","BlazeTester2013");
+                    //smtpClient.EnableSsl = true;
+                    //smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    //smtpClient.Send(mailMessage);
+                    SmtpClient smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com", // smtp server address here…
+                        Port = 465,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new System.Net.NetworkCredential("budgetup2@gmail.com", "Blah1234"),
+                        Timeout = 30000,
+                    };
+
+                    MailMessage message = new MailMessage("budgetup2@gmail.com", "yipyouguessedit@gmail.com", subject, body);
+                    smtp.Send(message);
+                    //082 697 1523
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
 
         public Stream PrintProject(int ProjectID)
         {
@@ -304,17 +371,17 @@ namespace PresentationTier.Views
                                 {
                                     if (monthCount > MonthInc)
                                     {
-                                        total += upstaff.Expens.Amount/AmountOfMonths;
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
                                         int years = monthCount / 12;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.upStaff_rowStart, projectInfo.upStaff_rowEnd, projectInfo.upStaff_Amount_col,projectInfo.upStaff_StartDate_col, projectInfo.upStaff_EndDate_col, projectInfo.upStaff_ID_col, "1." + objective.noteID + "." + activity.noteID, tempStartDate,tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
                                         colSub++;
                                     }
                                     else
                                     {
-                                        total += upstaff.Expens.Amount/AmountOfMonths;
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.upStaff_rowStart, projectInfo.upStaff_rowEnd, projectInfo.upStaff_Amount_col, projectInfo.upStaff_StartDate_col, projectInfo.upStaff_EndDate_col, projectInfo.upStaff_ID_col, "1." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
                                     }
                                 }
                             }
@@ -356,14 +423,14 @@ namespace PresentationTier.Views
                                         total += listRowValue.Expens.Amount / AmountOfMonths;
                                         int years = monthCount / 12;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Contractors_rowStart, projectInfo.Contractors_rowEnd, projectInfo.Contractors_Amount_col, projectInfo.Contractors_StartDate_col, projectInfo.Contractors_EndDate_col, projectInfo.Contractors_ID_col, "2." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
                                         colSub++;
                                     }
                                     else
                                     {
                                         total += listRowValue.Expens.Amount / AmountOfMonths;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Contractors_rowStart, projectInfo.Contractors_rowEnd, projectInfo.Contractors_Amount_col, projectInfo.Contractors_StartDate_col, projectInfo.Contractors_EndDate_col, projectInfo.Contractors_ID_col, "2." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
                                     }
                                 }
                             }
@@ -405,14 +472,16 @@ namespace PresentationTier.Views
                                         total += listRowValue.Expens.Amount / AmountOfMonths;
                                         int years = monthCount / 12;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Operational_rowStart, projectInfo.Operational_rowEnd, projectInfo.Operational_Amount_col, projectInfo.Operational_StartDate_col, projectInfo.Operational_EndDate_col, projectInfo.Operational_ID_col, "3." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+
                                         colSub++;
                                     }
                                     else
                                     {
                                         total += listRowValue.Expens.Amount / AmountOfMonths;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Operational_rowStart, projectInfo.Operational_rowEnd, projectInfo.Operational_Amount_col, projectInfo.Operational_StartDate_col, projectInfo.Operational_EndDate_col, projectInfo.Operational_ID_col, "3." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+
                                     }
                                 }
                             }
@@ -433,7 +502,7 @@ namespace PresentationTier.Views
                     if (activity.carList.Count() != 0)
                     {
                         ws.Cells[row, col++].Value = "Car Expenses";
-
+                        int noteIDCol = col;
                         //Write note value
                         ws.Cells[row, col++].Value = "4." + objective.noteID + "." + activity.noteID;
                         int colSub = 1;
@@ -451,19 +520,20 @@ namespace PresentationTier.Views
                                 {
                                     if (monthCount > MonthInc)
                                     {
-                                        total += listRowValue.Expen.Amount / AmountOfMonths;
+                                        total += listRowValue.Expen.Amount;
                                         int years = monthCount / 12;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_StartDate_col, projectInfo.Car_EndDate_col, projectInfo.Car_ID_col, "4." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths;
+
                                         colSub++;
                                     }
                                     else
                                     {
                                         total += listRowValue.Expen.Amount / AmountOfMonths;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_StartDate_col, projectInfo.Car_EndDate_col, projectInfo.Car_ID_col, "4." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) +"/ " +AmountOfMonths;
                                     }
-                                }
+                                } 
                             }
                             monthCount++;
                             tempStartDate = tempStartDate.AddMonths(1);
@@ -517,6 +587,7 @@ namespace PresentationTier.Views
                             ws.Cells[row, col++].Value = "Accomodation";
 
                             //Write note value
+                            int NoteIDCol = col;
                             ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
                             int colSub = 1;
                             tempStartDate = projectInfo.startDate;
@@ -535,14 +606,14 @@ namespace PresentationTier.Views
                                         total += 0;
                                         int years = monthCount / 12;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_Amount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, "5." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.Year,tempStartDate.Month)));
                                         colSub++;
                                     }
                                     else
                                     {
                                         total += 0;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_Amount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, "5." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.Year,tempStartDate.Month)));
                                     }
 
                                 }
@@ -565,6 +636,7 @@ namespace PresentationTier.Views
                         {
                             ws.Cells[row, col++].Value = "Per Diem";
 
+                            int NoteIDCol = col;
                             //Write note value
                             ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
                             int colSub = 1;
@@ -584,14 +656,14 @@ namespace PresentationTier.Views
                                         total += 0;
                                         int years = monthCount / 12;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_Amount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, "5." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col+1, projectInfo.Travel_StartAmount_col+1, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.Month)));
                                         colSub++;
                                     }
                                     else
                                     {
                                         total += 0;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_Amount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, "5." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col +1, projectInfo.Travel_StartAmount_col +1, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.Month)));
                                     }
 
                                 }
@@ -614,6 +686,7 @@ namespace PresentationTier.Views
                         {
                             ws.Cells[row, col++].Value = "Airline";
 
+                            int NoteIDCol = col;
                             //Write note value
                             ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
                             int colSub = 1;
@@ -633,14 +706,14 @@ namespace PresentationTier.Views
                                         total += 0;
                                         int years = monthCount / 12;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_Amount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, "5." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col+2, projectInfo.Travel_StartAmount_col+2, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.Month)));
                                         colSub++;
                                     }
                                     else
                                     {
                                         total += 0;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_Amount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, "5." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col+2, projectInfo.Travel_StartAmount_col+2, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.Month)));
                                     }
 
                                 }
@@ -663,6 +736,7 @@ namespace PresentationTier.Views
                         {
                             ws.Cells[row, col++].Value = "Gautrain";
 
+                            int NoteIDCol = col;
                             //Write note value
                             ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
                             int colSub = 1;
@@ -682,14 +756,14 @@ namespace PresentationTier.Views
                                         total += 0;
                                         int years = monthCount / 12;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_Amount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, "5." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col+3, projectInfo.Travel_StartAmount_col+3, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.Month)));
                                         colSub++;
                                     }
                                     else
                                     {
                                         total += 0;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_Amount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, "5." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col+3, projectInfo.Travel_StartAmount_col+3, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.Month)));
                                     }
 
                                 }
@@ -712,6 +786,7 @@ namespace PresentationTier.Views
                         {
                             ws.Cells[row, col++].Value = "Visa";
 
+                            int NoteIDCol = col;
                             //Write note value
                             ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
                             int colSub = 1;
@@ -731,14 +806,14 @@ namespace PresentationTier.Views
                                         total += 0;
                                         int years = monthCount / 12;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_Amount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, "5." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col+4, projectInfo.Travel_StartAmount_col+4, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.Month)));
                                         colSub++;
                                     }
                                     else
                                     {
                                         total += 0;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_Amount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, "5." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col+4, projectInfo.Travel_StartAmount_col+4, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.Month)));
                                     }
 
                                 }
@@ -784,14 +859,14 @@ namespace PresentationTier.Views
                                         total += listRowValue.Expens.Amount / AmountOfMonths;
                                         int years = monthCount / 12;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.equipment_rowStart, projectInfo.equipment_rowEnd, projectInfo.equipment_Amount_col, projectInfo.equipment_StartDate_col, projectInfo.equipment_EndDate_col, projectInfo.equipment_ID_col, "6." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
                                         colSub++;
                                     }
                                     else
                                     {
                                         total += listRowValue.Expens.Amount / AmountOfMonths;
                                         ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.equipment_rowStart, projectInfo.equipment_rowEnd, projectInfo.equipment_Amount_col, projectInfo.equipment_StartDate_col, projectInfo.equipment_EndDate_col, projectInfo.equipment_ID_col, "6." + objective.noteID + "." + activity.noteID, tempStartDate, tempStartDate);
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
                                     }
                                 }
                             }
@@ -1015,8 +1090,8 @@ namespace PresentationTier.Views
                     tempStartDate = tempStartDate.AddMonths(1);
                 }
 
-                ws.Cells[row, lastAmountRow+1].Style.Numberformat.Format = "R #,##0.00";
-                ws.Cells[row, lastAmountRow+1].Formula = SumRange(firstAmountRow, row, lastAmountRow, row - 1);
+                ws.Cells[row, LastAmountColumn + 1].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, LastAmountColumn + 1].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
             }
             bursaryTotals = row++;
             #endregion
@@ -1033,24 +1108,2825 @@ namespace PresentationTier.Views
             #endregion
         #endregion
 
-            //FInal Worksheet formatting
-            //for (int i = firstAmountRow; i < FinalTotalRow; i++)
-            //{
-            //    FormatDocumentCells(ws, 1, LastAmountColumn, firstAmountRow, lastAmountRow);
-            //}
-
-            FormatColumnHeadings(ws, col, LastAmountColumn, 1);
-            FormatColumnHeadings(ws, col, LastAmountColumn, 3);
+            //FormatColumnHeadings(ws, col, LastAmountColumn, 1);
+            //FormatColumnHeadings(ws, col, LastAmountColumn, 3);
             return pck;
         }
 
         ExcelPackage createQuarterlySheet(ExcelPackage pck)
         {
+            //start with excel
+            int col = 1;
+            int row = 1;
+
+            //column indexes
+            int FirstAmountColumn = 1;
+            int LastAmountColumn = 1;
+            int ExpenseColumns = 1;
+            int objectiveColumn = 1;
+            int firstAmountRow = 1;
+            int lastAmountRow = 1;
+            int descriptionColumn = 1;
+            int expenseNote = 0;
+
+            //Create the worksheet
+            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Budget - Quarterly");
+
+
+            //write Project details
+            ws.Cells[row, col].Value = projectInfo.projName;
+            row++;
+            row++;
+            ws.Cells[row, col].Value = projectInfo.projGoal;
+            row++;
+            row++;
+
+            firstAmountRow = row + 1;
+
+            #region Write Amount Table
+            #region Column Headings
+            //write column headings
+            ws.Cells[row, col++].Value = "Objectives".ToUpper();
+            ws.Cells[row, col++].Value = "Activities".ToUpper();
+            ws.Cells[row, col++].Value = "Start Date".ToUpper();
+            ws.Cells[row, col++].Value = "End Date".ToUpper();
+            ws.Cells[row, col].Value = "Description of expenses".ToUpper();
+            descriptionColumn = col++;
+            ws.Cells[row, col++].Value = "Note";
+
+            //Write the months / years
+            FirstAmountColumn = col;
+            var start = projectInfo.startDate;
+            var end = projectInfo.endDate;
+            while (start < end)
+            {
+                ws.Cells[row, col++].Value = start.ToString("MMMM yyyy");
+                start = start.AddMonths(3);
+            }
+
+            //write total columns
+            ws.Cells[row, col].Value = "Total".ToUpper();
+
+
+            FormatHeadings(ws, 1, col, 1);
+            FormatHeadings(ws, 1, col, 3);
+            FormatColumnHeadings(ws, 1, col, row);
+
+
+            LastAmountColumn = col - 1;
+            #endregion
+
+            //reset for next row
+            col = 1;
+            row++;
+            int MonthInc = 12;
+            objectiveColumn = col;
+            firstAmountRow = row;
+            int objCount = 0;
+            //start writing in data for main part
+            #region Write objective (Expense portion)
+            //Write each objective
+            foreach (Proj.obj objective in projectInfo.objList)
+            {
+                if (objCount != 0)
+                {
+                    FormatSpacers(ws, 1, LastAmountColumn + 1, row++);
+                }
+                objCount++;
+                //firstAmountRow = row;
+                col = objectiveColumn;
+                ws.Cells[row, col++].Value = objective.objName;
+                int activityColumn = col;
+
+                #region Write each activity
+                //Write each activity
+                foreach (Proj.obj.act activity in objective.ActivitysList)
+                {
+                    expenseNote = 1;
+                    col = activityColumn;
+                    ws.Cells[row, col++].Value = activity.actName.ToString();
+                    ws.Cells[row, col++].Value = activity.startDate.Date.ToString("dd MMMM yyyy");
+                    ws.Cells[row, col++].Value = activity.endDate.Date.ToString("dd MMMM yyyy");
+                    int AmountOfMonths = ((activity.endDate.Year - activity.startDate.Year) * 12) + activity.endDate.Month - activity.startDate.Month;
+                    if (AmountOfMonths == 0)
+                    {
+                        AmountOfMonths = 1;
+                    }
+                    ExpenseColumns = col;
+                    double total = 0;
+                    int monthCount = 3;
+                    DateTime tempStartDate = projectInfo.startDate;
+
+                    #region Write each expense
+
+                    #region UP staff
+                    //====================UP staff====================    
+                    if (activity.upstaffList.Count() != 0)
+                    {
+                        ws.Cells[row, col++].Value = "UP Personnel Costs";
+
+                        //Write note value
+                        ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+                        int colSub = 1;
+                        tempStartDate = projectInfo.startDate;
+                        monthCount = 1;
+
+                        while (tempStartDate < projectInfo.endDate)
+                        {
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Value = 0;
+
+                            foreach (UPStaffMember upstaff in activity.upstaffList)
+                            {
+                                if (activity.startDate <= tempStartDate.AddMonths(2) && activity.endDate >= tempStartDate.AddMonths(2))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved * 3;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*3";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(1) && activity.endDate >= tempStartDate.AddMonths(1))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved * 2;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*2";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                            }
+                            monthCount += 3;
+                            tempStartDate = tempStartDate.AddMonths(3);
+                            col++;
+                            total = 0;
+                        }
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                        col = ExpenseColumns;
+                        row++;
+                    }
+                    #endregion
+
+                    #region Contractors
+                    //=================Contractors===================
+                    if (activity.contrList.Count() != 0)
+                    {
+                        ws.Cells[row, col++].Value = "External consultant costs ";
+
+                        //Write note value
+                        ws.Cells[row, col++].Value = "2." + objective.noteID + "." + activity.noteID;
+                        int colSub = 1;
+                        tempStartDate = projectInfo.startDate;
+                        monthCount = 1;
+
+                        while (tempStartDate < projectInfo.endDate)
+                        {
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Value = 0;
+
+                            foreach (Contractor listRowValue in activity.contrList)
+                            {
+                                if (activity.startDate <= tempStartDate.AddMonths(2) && activity.endDate >= tempStartDate.AddMonths(2))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 3;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 3;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(1) && activity.endDate >= tempStartDate.AddMonths(1))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 2;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 2;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                            }
+                            monthCount += 3;
+                            tempStartDate = tempStartDate.AddMonths(3);
+                            col++;
+                            total = 0;
+                        }
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                        col = ExpenseColumns;
+                        row++;
+                    }
+                    #endregion
+
+                    #region Operational Costs
+                    //=================Operational===================
+                    if (activity.OperatList.Count() != 0)
+                    {
+                        ws.Cells[row, col++].Value = "Operational expenses";
+
+                        //Write note value
+                        ws.Cells[row, col++].Value = "3." + objective.noteID + "." + activity.noteID;
+                        int colSub = 1;
+                        tempStartDate = projectInfo.startDate;
+                        monthCount = 1;
+
+                        while (tempStartDate < projectInfo.endDate)
+                        {
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Value = 0;
+
+                            foreach (Operational listRowValue in activity.OperatList)
+                            {
+                                if (activity.startDate <= tempStartDate.AddMonths(2) && activity.endDate >= tempStartDate.AddMonths(2))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 3;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 3;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(1) && activity.endDate >= tempStartDate.AddMonths(1))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 2;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 2;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                            }
+                            monthCount += 3;
+                            tempStartDate = tempStartDate.AddMonths(3);
+                            col++;
+                            total = 0;
+                        }
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                        col = ExpenseColumns;
+                        row++;
+                    }
+                    #endregion
+
+                    #region Cars
+                    //====================Car Travels====================    
+                    if (activity.carList.Count() != 0)
+                    {
+                        ws.Cells[row, col++].Value = "Car Expenses";
+                        int noteIDCol = col;
+                        //Write note value
+                        ws.Cells[row, col++].Value = "4." + objective.noteID + "." + activity.noteID;
+                        int colSub = 1;
+                        tempStartDate = projectInfo.startDate;
+                        monthCount = 1;
+
+                        while (tempStartDate < projectInfo.endDate)
+                        {
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Value = 0;
+
+                            foreach (Car listRowValue in activity.carList)
+                            {
+                                if (activity.startDate <= tempStartDate.AddMonths(2) && activity.endDate >= tempStartDate.AddMonths(2))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expen.Amount / AmountOfMonths * 3;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 3";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expen.Amount / AmountOfMonths ;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 3";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(1) && activity.endDate >= tempStartDate.AddMonths(1))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expen.Amount / AmountOfMonths * 2;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 2";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expen.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 2";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expen.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths;
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expen.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths;
+                                    }
+                                }
+                            }
+                            monthCount += 3;
+                            tempStartDate = tempStartDate.AddMonths(3);
+                            col++;
+                            total = 0;
+                        }
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                        col = ExpenseColumns;
+                        row++;
+                    }
+                    #endregion
+
+                    #region Travel
+                    //====================Other Travels====================    
+                    if (activity.travList.Count() != 0)
+                    {
+                        bool bAccom = false;
+                        bool bAllow = false;
+                        bool bVisa = false;
+                        bool bGautrain = false;
+                        bool bAirline = false;
+
+                        for (int i = 0; i < activity.travList.Count(); i++)
+                        {
+                            if (activity.travBools.ElementAt(i).accomodation)
+                            {
+                                bAccom = true;
+                            }
+                            if (activity.travBools.ElementAt(i).allowance)
+                            {
+                                bAllow = true;
+                            }
+                            if (activity.travBools.ElementAt(i).airline)
+                            {
+                                bAirline = true;
+                            }
+                            if (activity.travBools.ElementAt(i).visa)
+                            {
+                                bVisa = true;
+                            }
+                            if (activity.travBools.ElementAt(i).gautrain)
+                            {
+                                bGautrain = true;
+                            }
+                        }
+
+                        #region Write Acomodation
+                        if (bAccom)
+                        {
+                            ws.Cells[row, col++].Value = "Accomodation";
+
+                            //Write note value
+                            int NoteIDCol = col;
+                            ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
+                            int colSub = 1;
+                            tempStartDate = projectInfo.startDate;
+                            monthCount = 1;
+                            while (tempStartDate < projectInfo.endDate)
+                            {
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = 0;
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+
+                                if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += 0;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.AddMonths(3).Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.AddMonths(3).Month)));
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += 0;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.AddMonths(3).Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.AddMonths(3).Month)));
+                                    }
+
+                                }
+                                monthCount += 3;
+                                tempStartDate = tempStartDate.AddMonths(3);
+                                col++;
+                                total = 0;
+                            }
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                            col = ExpenseColumns;
+                            row++;
+                        }
+                        #endregion
+
+                        #region Write Allowance
+                        if (bAllow)
+                        {
+                            ws.Cells[row, col++].Value = "Per Diem";
+
+                            int NoteIDCol = col;
+                            //Write note value
+                            ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
+                            int colSub = 1;
+                            tempStartDate = projectInfo.startDate;
+                            monthCount = 1;
+                            while (tempStartDate < projectInfo.endDate)
+                            {
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = 0;
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+
+                                if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += 0;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 1, projectInfo.Travel_StartAmount_col + 1, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.AddMonths(3).Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.AddMonths(3).Month)));
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += 0;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 1, projectInfo.Travel_StartAmount_col + 1, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.AddMonths(3).Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.AddMonths(3).Month)));
+                                    }
+
+                                }
+                                monthCount += 3;
+                                tempStartDate = tempStartDate.AddMonths(3);
+                                col++;
+                                total = 0;
+                            }
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                            col = ExpenseColumns;
+                            row++;
+                        }
+                        #endregion
+
+                        #region Write Airline
+                        if (bAirline)
+                        {
+                            ws.Cells[row, col++].Value = "Airline";
+
+                            int NoteIDCol = col;
+                            //Write note value
+                            ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
+                            int colSub = 1;
+                            tempStartDate = projectInfo.startDate;
+                            monthCount = 1;
+                            while (tempStartDate < projectInfo.endDate)
+                            {
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = 0;
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+
+                                if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += 0;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 2, projectInfo.Travel_StartAmount_col + 2, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.AddMonths(3).Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.AddMonths(3).Month)));
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += 0;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 2, projectInfo.Travel_StartAmount_col + 2, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.AddMonths(3).Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.AddMonths(3).Month)));
+                                    }
+
+                                }
+                                monthCount += 3;
+                                tempStartDate = tempStartDate.AddMonths(3);
+                                col++;
+                                total = 0;
+                            }
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                            col = ExpenseColumns;
+                            row++;
+                        }
+                        #endregion
+
+                        #region Write Gautrain
+                        if (bGautrain)
+                        {
+                            ws.Cells[row, col++].Value = "Gautrain";
+
+                            int NoteIDCol = col;
+                            //Write note value
+                            ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
+                            int colSub = 1;
+                            tempStartDate = projectInfo.startDate;
+                            monthCount = 1;
+                            while (tempStartDate < projectInfo.endDate)
+                            {
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = 0;
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+
+                                if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += 0;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 3, projectInfo.Travel_StartAmount_col + 3, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.AddMonths(3).Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.AddMonths(3).Month)));
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += 0;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 3, projectInfo.Travel_StartAmount_col + 3, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.AddMonths(3).Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.AddMonths(3).Month)));
+                                    }
+
+                                }
+                                monthCount += 3;
+                                tempStartDate = tempStartDate.AddMonths(3);
+                                col++;
+                                total = 0;
+                            }
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                            col = ExpenseColumns;
+                            row++;
+                        }
+                        #endregion
+
+                        #region Write Visa
+                        if (bVisa)
+                        {
+                            ws.Cells[row, col++].Value = "Visa";
+
+                            int NoteIDCol = col;
+                            //Write note value
+                            ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
+                            int colSub = 1;
+                            tempStartDate = projectInfo.startDate;
+                            monthCount = 1;
+                            while (tempStartDate < projectInfo.endDate)
+                            {
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = 0;
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+
+                                if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += 0;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 4, projectInfo.Travel_StartAmount_col + 4, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.AddMonths(3).Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.AddMonths(3).Month)));
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += 0;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 4, projectInfo.Travel_StartAmount_col + 4, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.Year, tempStartDate.AddMonths(3).Month, DateTime.DaysInMonth(tempStartDate.Year, tempStartDate.AddMonths(3).Month)));
+                                    }
+
+                                }
+                                monthCount += 3;
+                                tempStartDate = tempStartDate.AddMonths(3);
+                                col++;
+                                total = 0;
+                            }
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                            col = ExpenseColumns;
+                            row++;
+                        }
+                        #endregion
+                    }
+                    #endregion
+
+                    #region Equipment
+                    //====================Equipment====================    
+                    if (activity.equipList.Count() != 0)
+                    {
+                        ws.Cells[row, col++].Value = "Equipment";
+
+                        //Write note value
+                        ws.Cells[row, col++].Value = "6." + objective.noteID + "." + activity.noteID;
+                        int colSub = 1;
+                        tempStartDate = projectInfo.startDate;
+                        monthCount = 1;
+
+                        while (tempStartDate < projectInfo.endDate)
+                        {
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Value = 0;
+
+                            foreach (Equipment listRowValue in activity.equipList)
+                            {
+                                if (activity.startDate <= tempStartDate.AddMonths(2) && activity.endDate >= tempStartDate.AddMonths(2))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 3;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 3;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(1) && activity.endDate >= tempStartDate.AddMonths(1))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 2;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths * 2;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                            }
+                            monthCount += 3;
+                            tempStartDate = tempStartDate.AddMonths(3);
+                            col++;
+                            total = 0;
+                        }
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                        col = ExpenseColumns;
+                        row++;
+                    }
+                    #endregion
+                    #endregion
+                }
+                #endregion
+                //row++;
+
+            }
+            lastAmountRow = row;
+
+            //FormatAmountCells(ws,FirstAmountColumn,firstAmountRow,LastAmountColumn,lastAmountRow);
+
+            //Total Columns
+            ws.Cells[row, 1].Value = "Total Expenses";
+            FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
+            for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+            {
+                ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, i].Formula = SumRange(i, firstAmountRow, i, lastAmountRow - 1);
+            }
+            #endregion
+            //FormatAmountCells(ws, 1, LastAmountColumn, row, row);
+            int ExpenseTotalRow = row;
+            row += 2;
+
+            #region Write Incomes
+
+            ws.Cells[row, 1].Value = "Minus other donations, in-kind support and pledges / Incomes and Donations (Pick one?)";
+
+            row++;
+            col = descriptionColumn;
+
+            int incomeRowStart = row + 1;
+            int incomeRowLast = 1;
+
+            #region Donations
+            if (projectInfo.incomeList.Count() != 0)
+            {
+                int AmountOfMonths = ((projectInfo.endDate.Year - projectInfo.startDate.Year) * 12) + projectInfo.endDate.Month - projectInfo.startDate.Month;
+                double total = 0;
+                int colSub = 1;
+                DateTime tempStartDate = projectInfo.startDate;
+                int monthCount = 1;
+                int noteID = 1;
+                foreach (Income income in projectInfo.incomeList)
+                {
+
+                    ws.Cells[row, col++].Value = income.DonorName;
+                    //Write note value
+                    ws.Cells[row, col++].Value = "7." + noteID++;
+
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, col].Value = 0;
+
+                    while (tempStartDate < projectInfo.endDate)
+                    {
+                        if (projectInfo.startDate <= tempStartDate && projectInfo.endDate >= tempStartDate)
+                        {
+                            if (monthCount > MonthInc)
+                            {
+                                total += income.Amount / AmountOfMonths *3;
+                                int years = monthCount / 12;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = total;
+                                colSub++;
+                            }
+                            else
+                            {
+                                total += income.Amount / AmountOfMonths *3;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = total;
+                            }
+                        }
+                        monthCount += 3;
+                        tempStartDate = tempStartDate.AddMonths(3);
+                        col++;
+                        total = 0;
+                    }
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, LastAmountColumn + 1].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                    col = ExpenseColumns;
+                    tempStartDate = projectInfo.startDate;
+                    row++;
+                }
+            }
+            #endregion
+
+            #region up staff income
+            if (projectInfo.staffIncome.Count() != 0)
+            {
+                double total = 0;
+                int colSub = 1;
+                DateTime tempStartDate = projectInfo.startDate;
+                int AmountOfMonths = ((projectInfo.endDate.Year - projectInfo.startDate.Year) * 12) + projectInfo.endDate.Month - projectInfo.startDate.Month;
+
+                int monthCount = 1;
+                int noteID = 1;
+                foreach (UPStaffMember income in projectInfo.staffIncome)
+                {
+
+                    ws.Cells[row, col++].Value = "UP Staff";
+                    //Write note value
+                    ws.Cells[row, col++].Value = "8." + noteID++;
+
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, col].Value = 0;
+
+                    while (tempStartDate < projectInfo.endDate)
+                    {
+                        if (projectInfo.startDate <= tempStartDate && projectInfo.endDate >= tempStartDate)
+                        {
+                            if (monthCount > MonthInc)
+                            {
+                                total += income.Expens.Amount / AmountOfMonths *3;
+                                int years = monthCount / 12;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = total;
+                                colSub++;
+                            }
+                            else
+                            {
+                                total += income.Expens.Amount / AmountOfMonths *3;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = total;
+                            }
+                        }
+                        monthCount += 3;
+                        tempStartDate = tempStartDate.AddMonths(3);
+                        col++;
+                        total = 0;
+                    }
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, LastAmountColumn + 1].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                    col = ExpenseColumns;
+                    tempStartDate = projectInfo.startDate;
+                    row++;
+                }
+            #endregion
+            }
+            incomeRowLast = row - 1;
+            //FormatAmountCells(ws, FirstAmountColumn, firstAmountRow, LastAmountColumn, lastAmountRow);
+
+            //Total Columns
+            ws.Cells[row, 1].Value = "Total Incomes";
+            FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
+            for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+            {
+                ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, i].Formula = SumRange(i, incomeRowStart, i, incomeRowLast - 1);
+            }
+            int incomeTotals = row;
+            #endregion
+
+            row = row + 2;
+            #region Incomes - Expenses
+            ws.Cells[row, 1].Value = "Sub Total";
+            ws.Cells[row, FirstAmountColumn - 1].Value = "*";
+            FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
+            for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+            {
+                ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, i].Formula = MinusStuff(i, ExpenseTotalRow, i, incomeTotals);
+            }
+            int SubTotalRow = row;
+            #endregion
+
+            row = row + 1;
+            #region INSTITUTIONAL/ INDIRECT COST
+            int indirectTotals = 1;
+            ws.Cells[row, 1].Value = "INSTITUTIONAL/ INDIRECT COST";
+            FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
+            for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+            {
+                ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, i].Formula = "=(" + GetExcelColumnName(i) + SubTotalRow + "* " + projectInfo.projSettings.InstitutionalCost + ")";
+            }
+            indirectTotals = row;
+            #endregion
+
+
+            row = row + 2;
+            #region bursaries/Scholarships
+            int bursaryTotals = 1;
+            ws.Cells[row, 1].Value = "Bursaries/Scholarships";
+
+            //Write note value
+            ws.Cells[row, FirstAmountColumn - 1].Value = "9";
+            col = FirstAmountColumn;
+            if (projectInfo.bursaryList.Count() != 0)
+            {
+                int AmountOfMonths = ((projectInfo.endDate.Year - projectInfo.startDate.Year) * 12) + projectInfo.endDate.Month - projectInfo.startDate.Month;
+                if (AmountOfMonths == 0)
+                {
+                    AmountOfMonths = 1;
+                }
+                double total = 0;
+                DateTime tempStartDate = projectInfo.startDate;
+                int monthCount = 1;
+                while (tempStartDate >= projectInfo.startDate && tempStartDate <= projectInfo.endDate)
+                {
+                    foreach (BursaryType bursary in projectInfo.bursaryList)
+                    {
+                        total += (bursary.AnnualCost / AmountOfMonths) *3;
+                    }
+
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, col++].Value = total;
+                    total = 0;
+                    tempStartDate = tempStartDate.AddMonths(3);
+                }
+
+                ws.Cells[row, LastAmountColumn + 1].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, LastAmountColumn + 1].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+            }
+            bursaryTotals = row++;
+            #endregion
+
+            #region FUNDING OPPORTUNITY
+            ws.Cells[row, 1].Value = "FUNDING OPPORTUNITY";
+            FormatFinalTotal(ws, 1, LastAmountColumn + 1, row);
+            for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+            {
+                ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, i].Formula = "=" + GetExcelColumnName(i) + SubTotalRow + "+" + GetExcelColumnName(i) + indirectTotals + "-" + GetExcelColumnName(i) + bursaryTotals;
+            }
+            int FinalTotalRow = row;
+            #endregion
+            #endregion
+
+            //FormatColumnHeadings(ws, col, LastAmountColumn, 1);
+            //FormatColumnHeadings(ws, col, LastAmountColumn, 3);
             return pck;
         }
 
         ExcelPackage createYearlySheet(ExcelPackage pck)
         {
+            //start with excel
+            int col = 1;
+            int row = 1;
+
+            //column indexes
+            int FirstAmountColumn = 1;
+            int LastAmountColumn = 1;
+            int ExpenseColumns = 1;
+            int objectiveColumn = 1;
+            int firstAmountRow = 1;
+            int lastAmountRow = 1;
+            int descriptionColumn = 1;
+            int expenseNote = 0;
+
+            //Create the worksheet
+            ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Budget - Yearly");
+
+
+            //write Project details
+            ws.Cells[row, col].Value = projectInfo.projName;
+            row++;
+            row++;
+            ws.Cells[row, col].Value = projectInfo.projGoal;
+            row++;
+            row++;
+
+            firstAmountRow = row + 1;
+
+            #region Write Amount Table
+            #region Column Headings
+            //write column headings
+            ws.Cells[row, col++].Value = "Objectives".ToUpper();
+            ws.Cells[row, col++].Value = "Activities".ToUpper();
+            ws.Cells[row, col++].Value = "Start Date".ToUpper();
+            ws.Cells[row, col++].Value = "End Date".ToUpper();
+            ws.Cells[row, col].Value = "Description of expenses".ToUpper();
+            descriptionColumn = col++;
+            ws.Cells[row, col++].Value = "Note";
+
+            //Write the months / years
+            FirstAmountColumn = col;
+            var start = projectInfo.startDate;
+            var end = projectInfo.endDate;
+            while (start < end)
+            {
+                ws.Cells[row, col++].Value = start.ToString("MMMM yyyy");
+                start = start.AddMonths(12);
+            }
+
+            //write total columns
+            ws.Cells[row, col].Value = "Total".ToUpper();
+
+
+            FormatHeadings(ws, 1, col, 1);
+            FormatHeadings(ws, 1, col, 3);
+            FormatColumnHeadings(ws, 1, col, row);
+
+
+            LastAmountColumn = col - 1;
+            #endregion
+
+            //reset for next row
+            col = 1;
+            row++;
+            int MonthInc = 12;
+            objectiveColumn = col;
+            firstAmountRow = row;
+            int objCount = 0;
+            //start writing in data for main part
+            #region Write objective (Expense portion)
+            //Write each objective
+            foreach (Proj.obj objective in projectInfo.objList)
+            {
+                if (objCount != 0)
+                {
+                    FormatSpacers(ws, 1, LastAmountColumn + 1, row++);
+                }
+                objCount++;
+                //firstAmountRow = row;
+                col = objectiveColumn;
+                ws.Cells[row, col++].Value = objective.objName;
+                int activityColumn = col;
+
+                #region Write each activity
+                //Write each activity
+                foreach (Proj.obj.act activity in objective.ActivitysList)
+                {
+                    expenseNote = 1;
+                    col = activityColumn;
+                    ws.Cells[row, col++].Value = activity.actName.ToString();
+                    ws.Cells[row, col++].Value = activity.startDate.Date.ToString("dd MMMM yyyy");
+                    ws.Cells[row, col++].Value = activity.endDate.Date.ToString("dd MMMM yyyy");
+                    int AmountOfMonths = ((activity.endDate.Year - activity.startDate.Year) * 12) + activity.endDate.Month - activity.startDate.Month;
+                    if (AmountOfMonths == 0)
+                    {
+                        AmountOfMonths = 1;
+                    }
+                    ExpenseColumns = col;
+                    double total = 0;
+                    int monthCount = 3;
+                    DateTime tempStartDate = projectInfo.startDate;
+
+                    #region Write each expense
+
+                    #region UP staff
+                    //====================UP staff====================    
+                    if (activity.upstaffList.Count() != 0)
+                    {
+                        ws.Cells[row, col++].Value = "UP Personnel Costs";
+
+                        //Write note value
+                        ws.Cells[row, col++].Value = "1." + objective.noteID + "." + activity.noteID;
+                        int colSub = 1;
+                        tempStartDate = projectInfo.startDate;
+                        monthCount = 1;
+
+                        while (tempStartDate < projectInfo.endDate)
+                        {
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Value = 0;
+
+                            foreach (UPStaffMember upstaff in activity.upstaffList)
+                            {
+                                if (activity.startDate <= tempStartDate.AddMonths(11) && activity.endDate >= tempStartDate.AddMonths(11))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved * 12;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row)+ "*12";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*12";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(10) && activity.endDate >= tempStartDate.AddMonths(10))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*11";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*11";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(9) && activity.endDate >= tempStartDate.AddMonths(9))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved ;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*10";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*10";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(8) && activity.endDate >= tempStartDate.AddMonths(8))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row)+"*9";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*9";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(7) && activity.endDate >= tempStartDate.AddMonths(7))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*8";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*8";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(6) && activity.endDate >= tempStartDate.AddMonths(6))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row)+"*7";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*7";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(5) && activity.endDate >= tempStartDate.AddMonths(5))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*6";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*6";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(4) && activity.endDate >= tempStartDate.AddMonths(4))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row)+ "*5";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*5";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(3) && activity.endDate >= tempStartDate.AddMonths(3))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row)+"*4";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*4";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(2) && activity.endDate >= tempStartDate.AddMonths(2))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row)+"*3";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*3";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(1) && activity.endDate >= tempStartDate.AddMonths(1))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved * 2;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*2";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += (upstaff.Expens.Amount / 12 / 30 / AmountOfMonths) * upstaff.DaysInvolved;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                            }
+                            monthCount += 12;
+                            tempStartDate = tempStartDate.AddMonths(12);
+                            col++;
+                            total = 0;
+                        }
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                        col = ExpenseColumns;
+                        row++;
+                    }
+                    #endregion
+
+                    #region Contractors
+                    //=================Contractors===================
+                    if (activity.contrList.Count() != 0)
+                    {
+                        ws.Cells[row, col++].Value = "External consultant costs ";
+
+                        //Write note value
+                        ws.Cells[row, col++].Value = "2." + objective.noteID + "." + activity.noteID;
+                        int colSub = 1;
+                        tempStartDate = projectInfo.startDate;
+                        monthCount = 1;
+
+                        while (tempStartDate < projectInfo.endDate)
+                        {
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Value = 0;
+
+                            foreach (Contractor listRowValue in activity.contrList)
+                            {
+                                if (activity.startDate <= tempStartDate.AddMonths(11) && activity.endDate >= tempStartDate.AddMonths(11))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*12";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*12";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(10) && activity.endDate >= tempStartDate.AddMonths(10))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*11";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*11";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(9) && activity.endDate >= tempStartDate.AddMonths(9))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*10";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*10";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(8) && activity.endDate >= tempStartDate.AddMonths(8))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*9";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*9";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(7) && activity.endDate >= tempStartDate.AddMonths(7))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*8";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*8";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(6) && activity.endDate >= tempStartDate.AddMonths(6))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*7";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*7";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(5) && activity.endDate >= tempStartDate.AddMonths(5))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*6";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*6";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(4) && activity.endDate >= tempStartDate.AddMonths(4))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*5";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*5";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(3) && activity.endDate >= tempStartDate.AddMonths(3))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*4";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*4";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(2) && activity.endDate >= tempStartDate.AddMonths(2))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*3";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*3";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(1) && activity.endDate >= tempStartDate.AddMonths(1))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*2";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                            }
+                            monthCount += 12;
+                            tempStartDate = tempStartDate.AddMonths(12);
+                            col++;
+                            total = 0;
+                        }
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                        col = ExpenseColumns;
+                        row++;
+                    }
+                    #endregion
+
+                    #region Operational Costs
+                    //=================Operational===================
+                    if (activity.OperatList.Count() != 0)
+                    {
+                        ws.Cells[row, col++].Value = "Operational expenses";
+
+                        //Write note value
+                        ws.Cells[row, col++].Value = "3." + objective.noteID + "." + activity.noteID;
+                        int colSub = 1;
+                        tempStartDate = projectInfo.startDate;
+                        monthCount = 1;
+
+                        while (tempStartDate < projectInfo.endDate)
+                        {
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Value = 0;
+
+                            foreach (Operational listRowValue in activity.OperatList)
+                            {
+                                if (activity.startDate <= tempStartDate.AddMonths(11) && activity.endDate >= tempStartDate.AddMonths(11))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*12";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*12";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(10) && activity.endDate >= tempStartDate.AddMonths(10))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*11";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*11";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(9) && activity.endDate >= tempStartDate.AddMonths(9))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*10";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*10";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(8) && activity.endDate >= tempStartDate.AddMonths(8))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*9";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*9";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(7) && activity.endDate >= tempStartDate.AddMonths(7))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*8";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*8";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(6) && activity.endDate >= tempStartDate.AddMonths(6))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*7";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*7";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(5) && activity.endDate >= tempStartDate.AddMonths(5))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*6";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*6";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(4) && activity.endDate >= tempStartDate.AddMonths(4))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*5";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*5";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(3) && activity.endDate >= tempStartDate.AddMonths(3))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*4";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*4";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(2) && activity.endDate >= tempStartDate.AddMonths(2))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*3";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*3";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(1) && activity.endDate >= tempStartDate.AddMonths(1))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*2";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*2";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                            }
+                            monthCount += 12;
+                            tempStartDate = tempStartDate.AddMonths(12);
+                            col++;
+                            total = 0;
+                        }
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                        col = ExpenseColumns;
+                        row++;
+                    }
+                    #endregion
+
+                    #region Cars
+                    //====================Car Travels====================    
+                    if (activity.carList.Count() != 0)
+                    {
+                        ws.Cells[row, col++].Value = "Car Expenses";
+                        int noteIDCol = col;
+                        //Write note value
+                        ws.Cells[row, col++].Value = "4." + objective.noteID + "." + activity.noteID;
+                        int colSub = 1;
+                        tempStartDate = projectInfo.startDate;
+                        monthCount = 1;
+
+                        while (tempStartDate < projectInfo.endDate)
+                        {
+                            //ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths * 3;
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Value = 0;
+
+                            foreach (Car upstaff in activity.carList)
+                            {
+                                if (activity.startDate <= tempStartDate.AddMonths(11) && activity.endDate >= tempStartDate.AddMonths(11))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 12";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 12";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(10) && activity.endDate >= tempStartDate.AddMonths(10))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 11";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 11";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(9) && activity.endDate >= tempStartDate.AddMonths(9))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 10";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 10";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(8) && activity.endDate >= tempStartDate.AddMonths(8))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 9"; 
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 9";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(7) && activity.endDate >= tempStartDate.AddMonths(7))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 8";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 8";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(6) && activity.endDate >= tempStartDate.AddMonths(6))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 7";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 7";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(5) && activity.endDate >= tempStartDate.AddMonths(5))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 6";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 6";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(4) && activity.endDate >= tempStartDate.AddMonths(4))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 5";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 5";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(3) && activity.endDate >= tempStartDate.AddMonths(3))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 4";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 4";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(2) && activity.endDate >= tempStartDate.AddMonths(2))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 3";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 3";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(1) && activity.endDate >= tempStartDate.AddMonths(1))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 2";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths + "* 2"; 
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths;
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Car_rowStart, projectInfo.Car_rowEnd, projectInfo.Car_Amount_col, projectInfo.Car_ID_col, noteIDCol, row) + "/ " + AmountOfMonths;
+                                    }
+                                }
+                            }
+                            monthCount += 12;
+                            tempStartDate = tempStartDate.AddMonths(12);
+                            col++;
+                            total = 0;
+                        }
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                        col = ExpenseColumns;
+                        row++;
+                    }
+                    #endregion
+
+                    #region Travel
+                    //====================Other Travels====================    
+                    if (activity.travList.Count() != 0)
+                    {
+                        bool bAccom = false;
+                        bool bAllow = false;
+                        bool bVisa = false;
+                        bool bGautrain = false;
+                        bool bAirline = false;
+
+                        for (int i = 0; i < activity.travList.Count(); i++)
+                        {
+                            if (activity.travBools.ElementAt(i).accomodation)
+                            {
+                                bAccom = true;
+                            }
+                            if (activity.travBools.ElementAt(i).allowance)
+                            {
+                                bAllow = true;
+                            }
+                            if (activity.travBools.ElementAt(i).airline)
+                            {
+                                bAirline = true;
+                            }
+                            if (activity.travBools.ElementAt(i).visa)
+                            {
+                                bVisa = true;
+                            }
+                            if (activity.travBools.ElementAt(i).gautrain)
+                            {
+                                bGautrain = true;
+                            }
+                        }
+
+                        #region Write Acomodation
+                        if (bAccom)
+                        {
+                            ws.Cells[row, col++].Value = "Accomodation";
+
+                            //Write note value
+                            int NoteIDCol = col;
+                            ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
+                            int colSub = 1;
+                            tempStartDate = projectInfo.startDate;
+                            monthCount = 1;
+                            while (tempStartDate < projectInfo.endDate)
+                            {
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = 0;
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+
+                                if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += 0;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.AddYears(1).Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.AddYears(1).Year, tempStartDate.Month)));
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += 0;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartAmount_col, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.AddYears(1).Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.AddYears(1).Year, tempStartDate.Month)));
+                                    }
+
+                                }
+                                monthCount += 12;
+                                tempStartDate = tempStartDate.AddMonths(12);
+                                col++;
+                                total = 0;
+                            }
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                            col = ExpenseColumns;
+                            row++;
+                        }
+                        #endregion
+
+                        #region Write Allowance
+                        if (bAllow)
+                        {
+                            ws.Cells[row, col++].Value = "Per Diem";
+
+                            int NoteIDCol = col;
+                            //Write note value
+                            ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
+                            int colSub = 1;
+                            tempStartDate = projectInfo.startDate;
+                            monthCount = 1;
+                            while (tempStartDate < projectInfo.endDate)
+                            {
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = 0;
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+
+                                if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += 0;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 1, projectInfo.Travel_StartAmount_col + 1, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.AddYears(1).Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.AddYears(1).Year, tempStartDate.Month)));
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += 0;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 1, projectInfo.Travel_StartAmount_col + 1, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.AddYears(1).Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.AddYears(1).Year, tempStartDate.Month)));
+                                    }
+
+                                }
+                                monthCount += 12;
+                                tempStartDate = tempStartDate.AddMonths(12);
+                                col++;
+                                total = 0;
+                            }
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                            col = ExpenseColumns;
+                            row++;
+                        }
+                        #endregion
+
+                        #region Write Airline
+                        if (bAirline)
+                        {
+                            ws.Cells[row, col++].Value = "Airline";
+
+                            int NoteIDCol = col;
+                            //Write note value
+                            ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
+                            int colSub = 1;
+                            tempStartDate = projectInfo.startDate;
+                            monthCount = 1;
+                            while (tempStartDate < projectInfo.endDate)
+                            {
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = 0;
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+
+                                if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += 0;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 2, projectInfo.Travel_StartAmount_col + 2, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.AddYears(1).Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.AddYears(1).Year, tempStartDate.Month)));
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += 0;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 2, projectInfo.Travel_StartAmount_col + 2, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.AddYears(1).Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.AddYears(1).Year, tempStartDate.Month)));
+                                    }
+
+                                }
+                                monthCount += 12;
+                                tempStartDate = tempStartDate.AddMonths(12);
+                                col++;
+                                total = 0;
+                            }
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                            col = ExpenseColumns;
+                            row++;
+                        }
+                        #endregion
+
+                        #region Write Gautrain
+                        if (bGautrain)
+                        {
+                            ws.Cells[row, col++].Value = "Gautrain";
+
+                            int NoteIDCol = col;
+                            //Write note value
+                            ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
+                            int colSub = 1;
+                            tempStartDate = projectInfo.startDate;
+                            monthCount = 1;
+                            while (tempStartDate < projectInfo.endDate)
+                            {
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = 0;
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+
+                                if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += 0;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 3, projectInfo.Travel_StartAmount_col + 3, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.AddYears(1).Year, tempStartDate.AddMonths(3).Month, DateTime.DaysInMonth(tempStartDate.AddYears(1).Year, tempStartDate.Month)));
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += 0;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 3, projectInfo.Travel_StartAmount_col + 3, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.AddYears(1).Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.AddYears(1).Year, tempStartDate.Month)));
+                                    }
+
+                                }
+                                monthCount += 12;
+                                tempStartDate = tempStartDate.AddMonths(12);
+                                col++;
+                                total = 0;
+                            }
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                            col = ExpenseColumns;
+                            row++;
+                        }
+                        #endregion
+
+                        #region Write Visa
+                        if (bVisa)
+                        {
+                            ws.Cells[row, col++].Value = "Visa";
+
+                            int NoteIDCol = col;
+                            //Write note value
+                            ws.Cells[row, col++].Value = "5." + objective.noteID + "." + activity.noteID;
+                            int colSub = 1;
+                            tempStartDate = projectInfo.startDate;
+                            monthCount = 1;
+                            while (tempStartDate < projectInfo.endDate)
+                            {
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = 0;
+                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+
+                                if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += 0;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 4, projectInfo.Travel_StartAmount_col + 4, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.AddYears(1).Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.AddYears(1).Year, tempStartDate.Month)));
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += 0;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row, projectInfo.Travel_rowStart, projectInfo.Travel_rowEnd, projectInfo.Travel_StartAmount_col + 4, projectInfo.Travel_StartAmount_col + 4, projectInfo.Travel_StartDate_col, projectInfo.Travel_EndDate_col, projectInfo.Travel_ID_col, NoteIDCol, row, new DateTime(tempStartDate.Year, tempStartDate.Month, 1), new DateTime(tempStartDate.AddYears(1).Year, tempStartDate.Month, DateTime.DaysInMonth(tempStartDate.AddYears(1).Year, tempStartDate.Month)));
+                                    }
+
+                                }
+                                monthCount += 12;
+                                tempStartDate = tempStartDate.AddMonths(12);
+                                col++;
+                                total = 0;
+                            }
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
+                            col = ExpenseColumns;
+                            row++;
+                        }
+                        #endregion
+                    }
+                    #endregion
+
+                    #region Equipment
+                    //====================Equipment====================    
+                    if (activity.equipList.Count() != 0)
+                    {
+                        ws.Cells[row, col++].Value = "Equipment";
+
+                        //Write note value
+                        ws.Cells[row, col++].Value = "6." + objective.noteID + "." + activity.noteID;
+                        int colSub = 1;
+                        tempStartDate = projectInfo.startDate;
+                        monthCount = 1;
+
+                        while (tempStartDate < projectInfo.endDate)
+                        {
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col].Value = 0;
+
+                            foreach (Equipment listRowValue in activity.equipList)
+                            {
+                                if (activity.startDate <= tempStartDate.AddMonths(11) && activity.endDate >= tempStartDate.AddMonths(11))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*12";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*12";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(10) && activity.endDate >= tempStartDate.AddMonths(10))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*11";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*11";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(9) && activity.endDate >= tempStartDate.AddMonths(9))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*10";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*10";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(8) && activity.endDate >= tempStartDate.AddMonths(8))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*9";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*9";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(7) && activity.endDate >= tempStartDate.AddMonths(7))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*8";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*8";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(6) && activity.endDate >= tempStartDate.AddMonths(6))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*7";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*7";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(5) && activity.endDate >= tempStartDate.AddMonths(5))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*6";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*6";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(4) && activity.endDate >= tempStartDate.AddMonths(4))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*5";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*5";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(3) && activity.endDate >= tempStartDate.AddMonths(3))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*4";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*4";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(2) && activity.endDate >= tempStartDate.AddMonths(2))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row) + "*3";
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*3";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate.AddMonths(1) && activity.endDate >= tempStartDate.AddMonths(1))
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row) + "*2";
+                                    }
+                                }
+                                else if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
+                                {
+                                    if (monthCount > MonthInc)
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        int years = monthCount / 12;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, years, col - colSub, row);
+                                        colSub++;
+                                    }
+                                    else
+                                    {
+                                        total += listRowValue.Expens.Amount / AmountOfMonths;
+                                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                        ws.Cells[row, col].Formula = compoundInterest(total, projectInfo.projSettings.EscalationRate, 1, 0, col - colSub, row);
+                                    }
+                                }
+                            }
+                            monthCount += 12;
+                            tempStartDate = tempStartDate.AddMonths(12);
+                            col++;
+                            total = 0;
+                        }
+                        ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                        ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                        col = ExpenseColumns;
+                        row++;
+                    }
+                    #endregion
+                    #endregion
+                }
+                #endregion
+                //row++;
+
+            }
+            lastAmountRow = row;
+
+            //FormatAmountCells(ws,FirstAmountColumn,firstAmountRow,LastAmountColumn,lastAmountRow);
+
+            //Total Columns
+            ws.Cells[row, 1].Value = "Total Expenses";
+            FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
+            for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+            {
+                ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, i].Formula = SumRange(i, firstAmountRow, i, lastAmountRow - 1);
+            }
+            #endregion
+            //FormatAmountCells(ws, 1, LastAmountColumn, row, row);
+            int ExpenseTotalRow = row;
+            row += 2;
+
+            #region Write Incomes
+
+            ws.Cells[row, 1].Value = "Minus other donations, in-kind support and pledges / Incomes and Donations (Pick one?)";
+
+            row++;
+            col = descriptionColumn;
+
+            int incomeRowStart = row + 1;
+            int incomeRowLast = 1;
+
+            #region Donations
+            if (projectInfo.incomeList.Count() != 0)
+            {
+                int AmountOfMonths = ((projectInfo.endDate.Year - projectInfo.startDate.Year) * 12) + projectInfo.endDate.Month - projectInfo.startDate.Month;
+                double total = 0;
+                int colSub = 1;
+                DateTime tempStartDate = projectInfo.startDate;
+                int monthCount = 1;
+                int noteID = 1;
+                foreach (Income income in projectInfo.incomeList)
+                {
+
+                    ws.Cells[row, col++].Value = income.DonorName;
+                    //Write note value
+                    ws.Cells[row, col++].Value = "7." + noteID++;
+
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, col].Value = 0;
+
+                    while (tempStartDate < projectInfo.endDate)
+                    {
+                        if (projectInfo.startDate <= tempStartDate && projectInfo.endDate >= tempStartDate)
+                        {
+                            if (monthCount > MonthInc)
+                            {
+                                total += income.Amount / AmountOfMonths * 12;
+                                int years = monthCount / 12;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = total;
+                                colSub++;
+                            }
+                            else
+                            {
+                                total += income.Amount / AmountOfMonths * 12;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = total;
+                            }
+                        }
+                        monthCount+= 12;
+                        tempStartDate = tempStartDate.AddMonths(12);
+                        col++;
+                        total = 0;
+                    }
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, LastAmountColumn + 1].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                    col = ExpenseColumns;
+                    tempStartDate = projectInfo.startDate;
+                    row++;
+                }
+            }
+            #endregion
+
+            #region up staff income
+            if (projectInfo.staffIncome.Count() != 0)
+            {
+                double total = 0;
+                int colSub = 1;
+                DateTime tempStartDate = projectInfo.startDate;
+                int AmountOfMonths = ((projectInfo.endDate.Year - projectInfo.startDate.Year) * 12) + projectInfo.endDate.Month - projectInfo.startDate.Month;
+
+                int monthCount = 1;
+                int noteID = 1;
+                foreach (UPStaffMember income in projectInfo.staffIncome)
+                {
+
+                    ws.Cells[row, col++].Value = "UP Staff";
+                    //Write note value
+                    ws.Cells[row, col++].Value = "8." + noteID++;
+
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, col].Value = 0;
+
+                    while (tempStartDate < projectInfo.endDate)
+                    {
+                        if (projectInfo.startDate <= tempStartDate && projectInfo.endDate >= tempStartDate)
+                        {
+                            if (monthCount > MonthInc)
+                            {
+                                total += income.Expens.Amount / AmountOfMonths * 12;
+                                int years = monthCount / 12;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = total;
+                                colSub++;
+                            }
+                            else
+                            {
+                                total += income.Expens.Amount / AmountOfMonths * 12;
+                                ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                                ws.Cells[row, col].Value = total;
+                            }
+                        }
+                        monthCount += 12;
+                        tempStartDate = tempStartDate.AddMonths(12);
+                        col++;
+                        total = 0;
+                    }
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, LastAmountColumn + 1].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+                    col = ExpenseColumns;
+                    tempStartDate = projectInfo.startDate;
+                    row++;
+                }
+            #endregion
+            }
+            incomeRowLast = row - 1;
+            //FormatAmountCells(ws, FirstAmountColumn, firstAmountRow, LastAmountColumn, lastAmountRow);
+
+            //Total Columns
+            ws.Cells[row, 1].Value = "Total Incomes";
+            FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
+            for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+            {
+                ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, i].Formula = SumRange(i, incomeRowStart, i, incomeRowLast - 1);
+            }
+            int incomeTotals = row;
+            #endregion
+
+            row = row + 2;
+            #region Incomes - Expenses
+            ws.Cells[row, 1].Value = "Sub Total";
+            ws.Cells[row, FirstAmountColumn - 1].Value = "*";
+            FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
+            for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+            {
+                ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, i].Formula = MinusStuff(i, ExpenseTotalRow, i, incomeTotals);
+            }
+            int SubTotalRow = row;
+            #endregion
+
+            row = row + 1;
+            #region INSTITUTIONAL/ INDIRECT COST
+            int indirectTotals = 1;
+            ws.Cells[row, 1].Value = "INSTITUTIONAL/ INDIRECT COST";
+            FormatColumnTotal(ws, 1, LastAmountColumn + 1, row);
+            for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+            {
+                ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, i].Formula = "=(" + GetExcelColumnName(i) + SubTotalRow + "* " + projectInfo.projSettings.InstitutionalCost + ")";
+            }
+            indirectTotals = row;
+            #endregion
+
+
+            row = row + 2;
+            #region bursaries/Scholarships
+            int bursaryTotals = 1;
+            ws.Cells[row, 1].Value = "Bursaries/Scholarships";
+
+            //Write note value
+            ws.Cells[row, FirstAmountColumn - 1].Value = "9";
+            col = FirstAmountColumn;
+            if (projectInfo.bursaryList.Count() != 0)
+            {
+                int AmountOfMonths = ((projectInfo.endDate.Year - projectInfo.startDate.Year) * 12) + projectInfo.endDate.Month - projectInfo.startDate.Month;
+                if (AmountOfMonths == 0)
+                {
+                    AmountOfMonths = 1;
+                }
+                double total = 0;
+                DateTime tempStartDate = projectInfo.startDate;
+                int monthCount = 1;
+                while (tempStartDate >= projectInfo.startDate && tempStartDate <= projectInfo.endDate)
+                {
+                    foreach (BursaryType bursary in projectInfo.bursaryList)
+                    {
+                        total += (bursary.AnnualCost / AmountOfMonths)*12;
+                    }
+
+                    ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                    ws.Cells[row, col++].Value = total;
+                    total = 0;
+                    tempStartDate = tempStartDate.AddMonths(12);
+                }
+                ws.Cells[row, LastAmountColumn + 1].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, LastAmountColumn + 1].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
+            }
+            bursaryTotals = row++;
+            #endregion
+
+            #region FUNDING OPPORTUNITY
+            ws.Cells[row, 1].Value = "FUNDING OPPORTUNITY";
+            FormatFinalTotal(ws, 1, LastAmountColumn + 1, row);
+            for (int i = FirstAmountColumn; i <= LastAmountColumn + 1; i++)
+            {
+                ws.Cells[row, i].Style.Numberformat.Format = "R #,##0.00";
+                ws.Cells[row, i].Formula = "=" + GetExcelColumnName(i) + SubTotalRow + "+" + GetExcelColumnName(i) + indirectTotals + "-" + GetExcelColumnName(i) + bursaryTotals;
+            }
+            int FinalTotalRow = row;
+            #endregion
+            #endregion
+
+            //FormatColumnHeadings(ws, col, LastAmountColumn, 1);
+            //FormatColumnHeadings(ws, col, LastAmountColumn, 3);
             return pck;
         }
 
@@ -1062,7 +3938,7 @@ namespace PresentationTier.Views
             ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Notes");
             //Write main notes heading
 
-            ws.Cells[row, col].Value = "*The indirect/institutional cost, charged by the University of Pretoria on all projects, is [current percentage]% of total project expenses";
+            ws.Cells[row, col].Value = "*The indirect/institutional cost, charged by the University of Pretoria on all projects, is "+ projectInfo.projSettings.InstitutionalCost +"% of total project expenses";
 
             row += 2;
             ws.Cells[row, col].Value = "Budget Notes";
@@ -1080,10 +3956,6 @@ namespace PresentationTier.Views
             projectInfo.upStaff_ID_col = col;
             ws.Cells[row, col++].Value = "Note ID";
             ws.Cells[row, col++].Value = "Note";
-            projectInfo.upStaff_StartDate_col = col;
-            ws.Cells[row, col++].Value = "Start Date";
-            projectInfo.upStaff_EndDate_col = col;
-            ws.Cells[row, col++].Value = "End Date";
             ws.Cells[row, col++].Value = "Subvention Levy";
             projectInfo.upStaff_Amount_col = col;
             ws.Cells[row, col++].Value = "Amount";
@@ -1122,10 +3994,6 @@ namespace PresentationTier.Views
                                     ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
                                 }
                             }
-                            //Start Date
-                            ws.Cells[row, col++].Value = activity.startDate.ToString();
-                            //End Date
-                            ws.Cells[row, col++].Value = activity.endDate.ToString();
 
                             if (upstaff.SubventionLevy == false)
                             {
@@ -1138,7 +4006,7 @@ namespace PresentationTier.Views
 
 
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                            ws.Cells[row, col++].Value = upstaff.Expens.Amount;
+                            ws.Cells[row, col++].Value = upstaff.Expens.Amount/ 12 / 30 * upstaff.DaysInvolved;
                             col = 1;
                             row++;
                         }
@@ -1162,10 +4030,6 @@ namespace PresentationTier.Views
             projectInfo.Contractors_ID_col = col;
             ws.Cells[row, col++].Value = "Note ID";
             ws.Cells[row, col++].Value = "Note";
-            projectInfo.upStaff_StartDate_col = col;
-            ws.Cells[row, col++].Value = "Start Date";
-            projectInfo.upStaff_EndDate_col = col;
-            ws.Cells[row, col++].Value = "End Date";
             projectInfo.Contractors_Amount_col = col;
             ws.Cells[row, col++].Value = "Amount";
             FormatNoteHeading(ws, 1, 4, row);
@@ -1201,11 +4065,6 @@ namespace PresentationTier.Views
                             }
 
 
-                            //Start Date
-                            ws.Cells[row, col++].Value = activity.startDate.ToString();
-                            //End Date
-                            ws.Cells[row, col++].Value = activity.endDate.ToString();
-
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col++].Value = item.Expens.Amount;
                             col = 1;
@@ -1231,10 +4090,6 @@ namespace PresentationTier.Views
             projectInfo.Operational_ID_col = col;
             ws.Cells[row, col++].Value = "Note ID";
             ws.Cells[row, col++].Value = "Note";
-            projectInfo.upStaff_StartDate_col = col;
-            ws.Cells[row, col++].Value = "Start Date";
-            projectInfo.upStaff_EndDate_col = col;
-            ws.Cells[row, col++].Value = "End Date";
             ws.Cells[row, col++].Value = "Type";
             projectInfo.Operational_Amount_col = col;
             ws.Cells[row, col++].Value = "Amount";
@@ -1268,11 +4123,6 @@ namespace PresentationTier.Views
                                 }
 
 
-                                //Start Date
-                                ws.Cells[row, col++].Value = activity.startDate.ToString();
-                                //End Date
-                                ws.Cells[row, col++].Value = activity.endDate.ToString();
-
                                 var queryOp = from operation
                                             in dbContext.Operation_Type
                                             where operation.Id == item.Operation_TypeId
@@ -1302,20 +4152,23 @@ namespace PresentationTier.Views
             #region Write Car Notes
             col = 1;
             ws.Cells[row, col].Value = "4. Car Expense Notes";
-            FormatNoteHeading(ws, 1, 4, row);
+            FormatNoteHeading(ws, 1, 7, row);
             ws.Cells[row, 1, row, 4].Merge = true;
             row++;
 
             ws.Cells[row, col++].Value = "ID";
+            projectInfo.Car_ID_col = col;
             ws.Cells[row, col++].Value = "Note ID";
             ws.Cells[row, col++].Value = "Note";
-            projectInfo.upStaff_StartDate_col = col;
-            ws.Cells[row, col++].Value = "Start Date";
-            projectInfo.upStaff_EndDate_col = col;
-            ws.Cells[row, col++].Value = "End Date";
-            ws.Cells[row, col++].Value = "UP Fleet";
+            ws.Cells[row, col++].Value = "Rental Type";
+            ws.Cells[row, col++].Value = "Days";
+            ws.Cells[row, col++].Value = "Kilometres";
+
+            projectInfo.Car_Amount_col = col;
+            ws.Cells[row, col++].Value = "Amount";
             FormatNoteHeading(ws, 1, 4, row);
             row++;
+            projectInfo.Car_rowStart = row;
             col = 1;
             foreach (Proj.obj objective in projectInfo.objList)
             {
@@ -1335,19 +4188,20 @@ namespace PresentationTier.Views
                             {
                                 var queryNotes = from note
                                             in dbContext.Notes
-                                                where note.Id == item.Expen.Note_Id
-                                                select note;
+                                                 where note.Id == item.Expen.Note_Id
+                                                 select note;
                                 foreach (Note qn in queryNotes)
                                 {
                                     ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
                                 }
                             }
 
+                            ws.Cells[row, col++].Value = item.TypeofRental;
+                            ws.Cells[row, col++].Value = item.Days;
+                            ws.Cells[row, col++].Value = item.Kilometers;
 
-                            //Start Date
-                            ws.Cells[row, col++].Value = activity.startDate.ToString();
-                            //End Date
-                            ws.Cells[row, col++].Value = activity.endDate.ToString();
+                            ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
+                            ws.Cells[row, col++].Value = 0;
 
                             //if (item.UPFleet == false)
                             //{
@@ -1365,6 +4219,7 @@ namespace PresentationTier.Views
                     #endregion
                 }
             }
+            projectInfo.Car_rowEnd = row - 1;
             #endregion
 
             row += 2;
@@ -1376,24 +4231,29 @@ namespace PresentationTier.Views
             ws.Cells[row, 1, row, 12].Merge = true;
             row++;
 
+            
             ws.Cells[row, col++].Value = "ID";
             ws.Cells[row, col++].Value = "Note ID";
+            projectInfo.Travel_ID_col = col;
             ws.Cells[row, col++].Value = "Note";
-            projectInfo.upStaff_StartDate_col = col;
-            ws.Cells[row, col++].Value = "Start Date";
-            projectInfo.upStaff_EndDate_col = col;
-            ws.Cells[row, col++].Value = "End Date";
             ws.Cells[row, col++].Value = "Departure Location";
             ws.Cells[row, col++].Value = "Destination";
+            projectInfo.Travel_StartDate_col = col;
+            projectInfo.Travel_EndDate_col = col;
             ws.Cells[row, col++].Value = "Departure Date";
             ws.Cells[row, col++].Value = "Duration (Days)";
+
+            projectInfo.Travel_StartAmount_col = col;
             ws.Cells[row, col++].Value = "Accomodation";
             ws.Cells[row, col++].Value = "Airline";
             ws.Cells[row, col++].Value = "Allowance";
             ws.Cells[row, col++].Value = "Gautrain";
+            projectInfo.Travel_EndAmount_col= col;
             ws.Cells[row, col++].Value = "Visa";
+            
             FormatNoteHeading(ws, 1, 12, row);
             row++;
+            projectInfo.Travel_rowStart = row;
             col = 1;
             foreach (Proj.obj objective in projectInfo.objList)
             {
@@ -1452,15 +4312,10 @@ namespace PresentationTier.Views
                                 }
                             }
 
-
-                            //Start Date
-                            ws.Cells[row, col++].Value = activity.startDate.ToString();
-                            //End Date
-                            ws.Cells[row, col++].Value = activity.endDate.ToString();
-
                             ws.Cells[row, col++].Value = item.DepatureLocation;
                             ws.Cells[row, col++].Value = item.Destination;
-                            ws.Cells[row, col++].Value = item.DepartureDate;
+                            ws.Cells[row, col+100].Value = item.DepartureDate.Date;
+                            ws.Cells[row, col++].Value = item.DepartureDate.Date.ToString("dd/MM/yyyy");
                             ws.Cells[row, col++].Value = item.DurationDays;
 
                             if(bAccom == false)
@@ -1510,11 +4365,12 @@ namespace PresentationTier.Views
                     #endregion
                 }
             }
+            projectInfo.Travel_rowEnd = row-1;
             #endregion
 
             row += 2;
 
-            #region Write Car Notes
+            #region Write Equipment Notes
             col = 1;
             ws.Cells[row, col].Value = "6. Equipment Notes";
             FormatNoteHeading(ws, 1, 4, row);
@@ -1524,10 +4380,6 @@ namespace PresentationTier.Views
             ws.Cells[row, col++].Value = "ID";
             ws.Cells[row, col++].Value = "Note ID";
             ws.Cells[row, col++].Value = "Note";
-            projectInfo.upStaff_StartDate_col = col;
-            ws.Cells[row, col++].Value = "Start Date";
-            projectInfo.upStaff_EndDate_col = col;
-            ws.Cells[row, col++].Value = "End Date";
             ws.Cells[row, col++].Value = "Item Amount";
             FormatNoteHeading(ws, 1, 4, row);
             row++;
@@ -1558,12 +4410,6 @@ namespace PresentationTier.Views
                                     ws.Cells[row, col++].Value = qn.UserNote + "\n\r\n\r";
                                 }
                             }
-
-
-                            //Start Date
-                            ws.Cells[row, col++].Value = activity.startDate.ToString();
-                            //End Date
-                            ws.Cells[row, col++].Value = activity.endDate.ToString();
 
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col++].Value = item.Expens.Amount;
@@ -1721,6 +4567,7 @@ namespace PresentationTier.Views
 
             return pck;
         }
+   
         #region Math
         public string MinusStuff(int col1, int row1, int col2, int row2)
         {
@@ -1741,17 +4588,38 @@ namespace PresentationTier.Views
             return sum;
         }
 
-        public string compoundInterest(double amount, double interestRate, int timesPerYear, int years, int col, int row, int NoteStartRow, int NoteEndRow, int AmountCol, int StartDateCol,int endDateCol, int noteIDCol, string noteID, DateTime startDate, DateTime endDate)
+        public string compoundInterest(double amount, double interestRate, int timesPerYear, int years, int col, int row, int NoteStartRow, int NoteEndRow, int AmountStartCol,int AmountEndCol, int StartDateCol,int endDateCol, int noteIDCol, int noteID, int notIDrow, DateTime startDate, DateTime endDate)
+        {
+            //double body = 1 + (interestRate / timesPerYear);
+            //double exponent = timesPerYear * years;
+            //amount = amount * Math.Pow(body, exponent);
+            /*string sum = "=" + amount + "* POWER(1+" + (interestRate / timesPerYear) + "," + timesPerYear * years + ")";*/
+            string sum = "=SUMIFS(Notes!$" + GetExcelColumnName(AmountStartCol) + "$" + NoteStartRow + ":$" + GetExcelColumnName(AmountEndCol) + "$" + NoteEndRow + ", ";
+            sum += "Notes!$" + GetExcelColumnName(StartDateCol) + "$" + NoteStartRow + ":$" + GetExcelColumnName(StartDateCol) + "$" + NoteEndRow + ", \">=\"&DATE(" + startDate.Year + "," + startDate.Month + "," + startDate.Day + "),";
+            sum += "Notes!$" + GetExcelColumnName(endDateCol) + "$" + NoteStartRow + ":$" + GetExcelColumnName(endDateCol) + "$" + NoteEndRow + ", \"<=\"&DATE(" + endDate.Year + "," + endDate.Month + "," + endDate.Day + "),";
+            sum += "Notes!$" + GetExcelColumnName(noteIDCol) + "$" + NoteStartRow + ":$" + GetExcelColumnName(noteIDCol) + "$" + NoteEndRow + ", \"=\"&" + GetExcelColumnName(noteID) + notIDrow + " )";
+            //sum += "* POWER(1+" + ((interestRate/100) / timesPerYear) + "," + timesPerYear * years + ")";
+            return sum;
+        }
+
+        public string compoundInterest(double amount, double interestRate, int timesPerYear, int years, int col, int row, int NoteStartRow, int NoteEndRow, int AmountCol, int noteIDCol, int noteID, int notIDrow)
         {
             //double body = 1 + (interestRate / timesPerYear);
             //double exponent = timesPerYear * years;
             //amount = amount * Math.Pow(body, exponent);
             /*string sum = "=" + amount + "* POWER(1+" + (interestRate / timesPerYear) + "," + timesPerYear * years + ")";*/
             string sum = "=SUMIFS(Notes!$" + GetExcelColumnName(AmountCol) + "$" + NoteStartRow + ":$" + GetExcelColumnName(AmountCol) + "$" + NoteEndRow + ", ";
-            sum += "Notes!$" + GetExcelColumnName(StartDateCol) + "$" + NoteStartRow + ":$" + GetExcelColumnName(StartDateCol) + "$" + NoteEndRow + ", \">=\"  + &DATE(" + startDate.Year + "," + startDate.Month + "," + startDate.Day + "),";
-            sum += "Notes!$" + GetExcelColumnName(endDateCol) + "$" + NoteStartRow + ":$" + GetExcelColumnName(endDateCol) + "$" + NoteEndRow + ", \">=\"  + &DATE(" + endDate.Year + "," + endDate.Month + "," + endDate.Day + "),";
-            sum += "Notes!$" + GetExcelColumnName(noteIDCol) + "$" + NoteStartRow + ":$" + GetExcelColumnName(noteIDCol) + "$" + NoteEndRow + ", \"=\"" + noteID + " )";
-            sum += "* POWER(1+" + (interestRate / timesPerYear) + "," + timesPerYear * years + ")";
+            sum += "Notes!$" + GetExcelColumnName(noteIDCol) + "$" + NoteStartRow + ":$" + GetExcelColumnName(noteIDCol) + "$" + NoteEndRow + ", \"=\"&" + GetExcelColumnName(noteID) + notIDrow + " )";
+            //sum += "* POWER(1+" + ((interestRate / 100) / timesPerYear) + "," + timesPerYear * years + ")";
+            return sum;
+        }
+
+        public string compoundInterest(double amount, double interestRate, int timesPerYear, int years, int col, int row)
+        {
+            //double body = 1 + (interestRate / timesPerYear);
+            //double exponent = timesPerYear * years;
+            //amount = amount * Math.Pow(body, exponent);
+            string sum = "=" + amount + "* POWER(1+" + ((interestRate / 100) / timesPerYear) + "," + timesPerYear * years + ")";
             return sum;
         }
 
@@ -2179,6 +5047,10 @@ namespace PresentationTier.Views
 
         public void FormatColumnHeadings(ExcelWorksheet worksheet, int startCol, int endCol, int row)
         {
+            //if(endCol - startCol > 10)
+            //{
+            //    endCol = startCol + 10;
+            //}
             using (var range = worksheet.Cells[row, startCol, row, endCol])
             {
                 range.Style.Font.Bold = true;

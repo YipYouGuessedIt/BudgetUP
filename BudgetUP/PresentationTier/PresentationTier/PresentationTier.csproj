@@ -237,6 +237,8 @@
     <Content Include="Views\EditRoles.aspx" />
     <Content Include="Views\editSettings.aspx" />
     <Content Include="Views\EditTitle.aspx" />
+    <Content Include="Views\ForgotPassword.aspx" />
+    <Content Include="Views\ForgotPassword_Verification.aspx" />
     <Content Include="Views\GeneralSettings.aspx" />
     <Content Include="Views\ManageUsers.aspx" />
     <Content Include="Views\OtherProfilePage.aspx" />
@@ -535,6 +537,20 @@
     </Compile>
     <Compile Include="Views\EventLogger.cs" />
     <Compile Include="Views\ExcelExport.cs" />
+    <Compile Include="Views\ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ForgotPassword_Verification.aspx.cs">
+      <DependentUpon>ForgotPassword_Verification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ForgotPassword_Verification.aspx.designer.cs">
+      <DependentUpon>ForgotPassword_Verification.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\GeneralSettings.aspx.cs">
       <DependentUpon>GeneralSettings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
