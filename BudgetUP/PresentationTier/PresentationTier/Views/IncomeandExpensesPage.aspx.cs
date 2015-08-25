@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BizTier;
+using System.IO;
 
 namespace PresentationTier.Views
 {
@@ -51,6 +52,20 @@ namespace PresentationTier.Views
                       
                     }
                 }
+
+                LinkButton DownloadReport = new LinkButton();
+                DownloadReport.Text = "<span class='glyphicon glyphicon-download pull-right' hidden='hidden' aria-hidden='true''</span> Download Excel";
+                DownloadReport.ID = "DownloadReport";
+                DownloadReport.CssClass = "btn-success btn-sm pull-right";
+                DownloadReport.Click += new EventHandler(DownloadReport_Click);
+                tree.Controls.Add(DownloadReport);
+
+                LinkButton EmailReport = new LinkButton();
+                EmailReport.Text = "<span class='glyphicon glyphicon-envelope pull-right' hidden='hidden' aria-hidden='true''</span> DRIS Submit";
+                EmailReport.ID = "EmailReport";
+                EmailReport.CssClass = "btn-warning btn-sm pull-right";
+                EmailReport.Click += new EventHandler(EmailReport_Click);
+                tree.Controls.Add(EmailReport);
             }
             this.addDynamics();
                         }
@@ -522,6 +537,47 @@ namespace PresentationTier.Views
                 messageforerror.InnerHtml = Class1.genericErr;
                 ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
 
+            }
+        }
+
+        protected void DownloadReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                ExcelExport temp = new ExcelExport();
+                var ProjectFile = temp.PrintProject(Convert.ToInt32(Session["projectID"].ToString()));
+
+                var memoryStream = new MemoryStream();
+                ProjectFile.CopyTo(memoryStream);
+
+                Response.Clear();
+                Response.ContentType = "application/force-download";
+                Response.AddHeader("content-disposition", "attachment; filename=" + temp.ProjectName + " " + DateTime.Now.ToString(@"yyyy-MM-dd") + ".xlsx");
+                Response.BinaryWrite(memoryStream.ToArray());
+                Response.End();
+            }
+            catch (Exception err)
+            {
+
+                // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+            }
+        }
+
+        protected void EmailReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                ExcelExport temp = new ExcelExport();
+                temp.EmailBudget(Convert.ToInt32(Session["projectID"].ToString()), Convert.ToInt32(this.Session["userID"].ToString()));
+            }
+            catch (Exception err)
+            {
+
+                // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
             }
         }
     }
