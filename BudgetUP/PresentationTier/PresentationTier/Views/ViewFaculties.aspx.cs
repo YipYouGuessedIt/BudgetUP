@@ -102,7 +102,7 @@ namespace PresentationTier.Views
                             in dbContext.Faculties
                             select OperationalTypes;
 
-
+                int c = 0;
                 //px = query2;
                 foreach (Faculty v in query)
                 {
@@ -112,6 +112,11 @@ namespace PresentationTier.Views
                     add.CssClass = "list-group-item";
                     add.Click += new EventHandler(Eclicker);
                     BursaryList.Controls.Add(add);
+                    c++;
+                }
+                if (c < 10)
+                {
+                    ObjectiveSearch.Visible = false;
                 }
             }
             }

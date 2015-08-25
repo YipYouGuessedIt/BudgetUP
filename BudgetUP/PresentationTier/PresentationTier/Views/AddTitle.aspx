@@ -59,7 +59,7 @@
             </div>
         </nav></div>
 
-    <div id="myModal" class="modal fade"  role="dialog">
+   <div id="myModal" class="modal fade"  role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -72,23 +72,27 @@
         <div id="messageforerror" runat="server"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
 
   </div>
 </div>
+
+                 <div id="tree" runat="server" class="treeView">
+             
+        </div>
+             <a href="Settings.aspx" class="back btn btn-info btn-lg"  >Back</a>
         <div id="Add" class="contentArea">
             <br />
             <h1>Add Title</h1><hr />
             		<p>Fill in the fields and click the add button to add a new Title.Note that all required fields are marked with a *.</p>
 		<hr/>
             <br />
-            <asp:label runat="server">Title*</asp:label>
+            <asp:label runat="server" Font-Bold="True">Title*</asp:label>
             <br/>
-            <asp:TextBox ID="FacultyName" runat="server" required CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="FacultyName" runat="server" required CssClass="form-control" MaxLength="35"></asp:TextBox>
             <br />
-            <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Add" onclick="addRole" /><br /><br />
         </div>
     </form>

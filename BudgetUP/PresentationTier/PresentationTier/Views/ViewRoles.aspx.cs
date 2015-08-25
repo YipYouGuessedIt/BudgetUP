@@ -43,7 +43,7 @@ namespace PresentationTier.Views
                             in dbContext.Roles
                             select roles;
 
-
+                int c = 0;
                 //px = query2;
                 foreach (Role v in query)
                 {
@@ -53,7 +53,12 @@ namespace PresentationTier.Views
                     add.CssClass = "list-group-item";
                     add.ToolTip = "click to manage role";
                     add.Click += new EventHandler(Iclicker);
-                    RolesList.Controls.Add(add);                    
+                    RolesList.Controls.Add(add);
+                    c++;
+                }
+                if (c < 10)
+                {
+                    ObjectiveSearch.Visible = false;
                 }
             }
             }

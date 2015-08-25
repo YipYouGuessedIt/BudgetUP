@@ -79,19 +79,24 @@
 
   </div>
 </div>
+       
+
+                 <div id="tree" runat="server" class="treeView">
+             
+        </div>
+             <a href="Settings.aspx" class="back btn btn-info btn-lg"  >Back</a>
         <div id="Add" class="contentArea">
             <br />
             <h1>Add Post</h1><hr />
             		<p>Fill in the fields and click the add button to add a new Post.Note that all required fields are marked with a *.</p>
 		<hr/>
             <br />
-            <asp:label runat="server">Post Name*</asp:label>
+            <asp:label runat="server" Font-Bold="True">Post Name*</asp:label>
             <br/>
-            <asp:TextBox ID="FacultyName" runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="FacultyName" runat="server" CssClass="form-control" MaxLength="35"></asp:TextBox>
             <br />
-            Salary Amount(In Rands)*<asp:TextBox ID="FacultyName0" type="number" runat="server" required CssClass="form-control"></asp:TextBox>
+            <asp:label runat="server" Font-Bold="True"> Salary Amount(In Rands)*</asp:label><asp:TextBox ID="FacultyName0" type="number" runat="server" required CssClass="form-control"></asp:TextBox>
             <br />
-            <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Add" onclick="addRole" /><br /><br />
         </div>
     </form>

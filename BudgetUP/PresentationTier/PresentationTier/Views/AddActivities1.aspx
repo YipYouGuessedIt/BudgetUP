@@ -102,7 +102,7 @@
                 <h1>Add Activity</h1><hr />
                 <p>Fill in the fields and click the add button to add a new Activity.Note that all required fields are marked with a *.</p>
                 <hr />
-                <asp:Label runat="server">Activity Name*</asp:Label><asp:TextBox runat="server" ID="ActName" required name="ActName" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server" Font-Bold="True">Activity Name*</asp:Label><asp:TextBox runat="server" ID="ActName" required name="ActName" CssClass="form-control" MaxLength="50"></asp:TextBox><br />
                 <asp:Label runat="server" Font-Bold="True">Start Date* </asp:Label>
                 
                 <div class="input-group datetimepicker5 col-lg-6 " style="margin-left:25%">

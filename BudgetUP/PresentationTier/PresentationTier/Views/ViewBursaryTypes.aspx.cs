@@ -53,7 +53,8 @@ namespace PresentationTier.Views
                     add.CssClass = "list-group-item";
                     add.ToolTip = "click to edit bursary type";
                     add.Click += new EventHandler(Iclicker);
-                    BursaryList.Controls.Add(add);                    
+                    BursaryList.Controls.Add(add);
+                    c++;
                 }
                 if(c < 10)
                 {

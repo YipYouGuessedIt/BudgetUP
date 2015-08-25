@@ -29,8 +29,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -38,7 +40,9 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a>  &gt <a href='Settings.aspx'>Settings</a>  &gt Edit Titles Type";
+
+                //errormsg.Visible = false;
             if (Session.Count == 0)
             {
                 // Response.Write("<script>alert('Credentials is incorrect')</script>");
@@ -87,8 +91,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -104,8 +110,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -113,14 +121,16 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                //errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                //errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

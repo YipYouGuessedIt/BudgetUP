@@ -99,6 +99,7 @@ namespace PresentationTier.Views
 
 
                 //px = query2;
+                int c = 0;
                 foreach (Operation_Type v in query)
                 {
                     LinkButton add = new LinkButton();
@@ -107,6 +108,11 @@ namespace PresentationTier.Views
                     add.CssClass = "list-group-item";
                     add.Click += new EventHandler(Eclicker);
                     BursaryList.Controls.Add(add);
+                    c++;
+                }
+                if (c < 10)
+                {
+                    ObjectiveSearch.Visible = false;
                 }
             }
             }

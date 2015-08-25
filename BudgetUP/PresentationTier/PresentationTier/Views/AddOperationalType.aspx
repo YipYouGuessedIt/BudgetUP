@@ -76,17 +76,21 @@
 
   </div>
 </div>
+
+         <div id="tree" runat="server" class="treeView">
+             
+        </div>
+             <a href="Settings.aspx" class="back btn btn-info btn-lg"  >Back</a>
         <div id="Add" class="contentArea">
             <br />
             <h1>Add Operational Type</h1><hr />
             <p>Fill in the fields and click the add button to add a new operational type.Note that all required fields are marked with a *.</p>
 		    <hr/>
             <br />
-            <asp:label runat="server">Operational Type Name*</asp:label>
+            <asp:label runat="server" Font-Bold="True">Operational Type Name*</asp:label>
             <br/>
-            <asp:TextBox ID="OperationName" runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="OperationName" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
             <br />
-            <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Add" onclick="addOperationalType" /><br /><br />
         </div>
     </form>

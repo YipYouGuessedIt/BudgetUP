@@ -91,6 +91,7 @@ namespace PresentationTier.Views
 
                 }
             }
+            tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a>  &gt <a href='Settings.aspx'>Settings</a>  &gt Edit Bursary Type";
             }
             catch (Exception err)
             {

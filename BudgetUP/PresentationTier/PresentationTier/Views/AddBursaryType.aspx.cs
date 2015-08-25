@@ -34,12 +34,16 @@ namespace PresentationTier.Views
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
+            tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a>  &gt <a href='Settings.aspx'>Settings</a>  &gt Add Bursary Type";
+
             }
             catch (Exception err)
             {
 
                 // errormsg.Visible.Visible = true;
                 messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -56,6 +60,8 @@ namespace PresentationTier.Views
 
                 // errormsg.Visible.Visible = true;
                 messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -71,6 +77,8 @@ namespace PresentationTier.Views
 
                 // errormsg.Visible.Visible = true;
                 messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

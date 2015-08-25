@@ -60,12 +60,50 @@
         </nav></div>
 
     
-        			<div runat="server" id="errormsg">
-                <div id="errorinner">
-                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
-                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
-                </div>
-            </div>
+  <div id="myModal" class="modal fade"  role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Error has occured</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="messageforerror" runat="server"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+        <div id="myModal2" class="modal fade"  role="dialog">
+          <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="Div1" runat="server">Are you sure you want to delete the item?.</div>
+      </div>
+      <div class="modal-footer">
+           <asp:Button runat="server" CssClass="btn-info btn" Text="Delete" OnClick="Button1_Click" ID="Button2" />
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+         <div id="tree" runat="server" class="treeView">
+             
+        </div>
+                            <a href="Settings.aspx" class=" back btn btn-info btn-lg"  >Back</a>
+        
         <div id="Add" class="contentArea">
             <br />
             <h1>Edit Title</h1><hr />

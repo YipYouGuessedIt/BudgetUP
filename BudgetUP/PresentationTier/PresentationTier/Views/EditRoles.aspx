@@ -60,27 +60,62 @@
             </div>
         </nav></div>
 
-    
-        			<div runat="server" id="errormsg">
-                <div id="errorinner">
-                    <asp:Label ID="messageforerror" runat="server" ></asp:Label>
-                    <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn-info btn-lg btn" Text="OK" OnClick="Unnamed1_Click" Font-Size="10px" Height="33px" />
-                </div>
-            </div>
+            			<div id="myModal" class="modal fade"  role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Error has occured</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="messageforerror" runat="server"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+        <div id="myModal2" class="modal fade"  role="dialog">
+          <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="Div1" runat="server">Are you sure you want to delete the item?.</div>
+      </div>
+      <div class="modal-footer">
+           <asp:Button runat="server" CssClass="btn-info btn" Text="Delete" OnClick="DeleteRoles" ID="Button2" />
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+         <div id="tree" runat="server" class="treeView">
+             
+        </div>
+                            <a href="Settings.aspx" class=" back btn btn-info btn-lg"  >Back</a>
         <div id="Add" class="contentArea">
             <br />
             <h1>Edit Roles</h1><hr />
             		<p>Fill in the fields and click the add button to edit the current Role.Note that all required fields are marked with a *.</p>
 		<hr/>
             <br />
-            <asp:label runat="server">Role Name*</asp:label>
+            <asp:label runat="server" Font-Bold="True">Role Name*</asp:label>
             <br/>
-            <asp:TextBox ID="RoleDescription" runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="RoleDescription" runat="server" CssClass="form-control" MaxLength="100"></asp:TextBox>
             <br />
-            <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Save" onclick="addBursary" />
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Delete" onclick="DeleteRoles" /><br /><br />
-        </div>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Delete</button>        </div>
+
     </form>
 </body>
 </html>

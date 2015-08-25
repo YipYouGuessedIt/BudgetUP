@@ -79,15 +79,19 @@
 
   </div>
 </div>
+                 <div id="tree" runat="server" class="treeView">
+             
+        </div>
+             <a href="Settings.aspx" class="back btn btn-info btn-lg"  >Back</a>
         <div id="Add" class="contentArea">
             <br />
             <h1>Add Role</h1><hr />
             		<p>Fill in the fields and click the add button to add a new Role.Note that all required fields are marked with a *.</p>
 		<hr/>
             <br />
-            <asp:label runat="server">Role Name*</asp:label>
+            <asp:label runat="server" Font-Bold="True">Role Name*</asp:label>
             <br/>
-            <asp:TextBox ID="RoleName" runat="server" required CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="RoleName" runat="server" required CssClass="form-control" MaxLength="50"></asp:TextBox>
             <br />
             <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Add" onclick="addRole" /><br /><br />

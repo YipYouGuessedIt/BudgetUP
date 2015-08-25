@@ -34,12 +34,15 @@ namespace PresentationTier.Views
                 adminnav.Visible = false;
                 normalnav.Visible = true;
             }
+            tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a>  &gt <a href='Settings.aspx'>Settings</a>  &gt Add Operation Type";
+
             }
             catch (Exception err)
             {
 
                 // errormsg.Visible = true;
-                messageforerror.InnerHtml = Class1.genericErr;ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
 
             }
         }

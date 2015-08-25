@@ -80,6 +80,10 @@
 
   </div>
 </div>
+         <div id="tree" runat="server" class="treeView">
+             
+        </div>
+             <a href="Settings.aspx" class="back btn btn-info btn-lg"  >Back</a>
         <div id="Add" class="contentArea">
             <br />
             <h1>Add Faculty</h1><hr />

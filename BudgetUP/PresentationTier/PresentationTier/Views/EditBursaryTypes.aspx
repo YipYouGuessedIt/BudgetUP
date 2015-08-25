@@ -79,29 +79,50 @@
 
   </div>
 </div>
+        <div id="myModal2" class="modal fade"  role="dialog">
+          <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="Div1" runat="server">Are you sure you want to delete the item?.</div>
+      </div>
+      <div class="modal-footer">
+           <asp:Button runat="server" CssClass="btn-info btn" Text="Delete" OnClick="DeleteBursary" ID="Button2" />
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+         <div id="tree" runat="server" class="treeView">
+             
+        </div>
+                            <a href="Settings.aspx" class=" back btn btn-info btn-lg"  >Back</a>
         <div id="Add" class="contentArea">
             <br />
             <h1>Edit Bursary Type</h1><hr />
             		<p>Fill in the fields and click the add button to edit the current bursary type.Note that all required fields are marked with a *.</p>
 		<hr/>
             <br />
-            <asp:label runat="server">Bursary Name*</asp:label>
+            <asp:label runat="server" Font-Bold="True">Bursary Name*</asp:label>
             <br/>
-            <asp:TextBox ID="BursaryDescription" required runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="BursaryDescription" required runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
             <br />
-            <asp:Label ID="Label1" runat="server"  Text="Annual cost(in Rands)*"></asp:Label>
+            <asp:Label ID="Label1" runat="server"  Text="Annual cost(in Rands)*" Font-Bold="True"></asp:Label>
             <br />
             <asp:TextBox ID="AnnualCost" runat="server" required type="number" CssClass="form-control"></asp:TextBox>
             <br />
-            <asp:Label ID="Label4" runat="server"  Text="Years*"></asp:Label>
+            <asp:Label ID="Label4" runat="server"  Text="Years*" Font-Bold="True"></asp:Label>
             <br />
             <asp:TextBox ID="Years" runat="server" required type="number" CssClass="form-control"></asp:TextBox>
             <br />
-            <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Save" onclick="addBursaryType" />
-            <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Delete" onclick="DeleteBursary" /><br /><br />
-        </div>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Delete</button>        </div>
     </form>
 </body>
 </html>

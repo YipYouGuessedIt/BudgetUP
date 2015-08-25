@@ -15,7 +15,9 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a>  &gt <a href='Settings.aspx'>Settings</a>  &gt View Domain";
+
+                // errormsg.Visible = false;
             if (Session.Count == 0)
             {
 
@@ -45,6 +47,7 @@ namespace PresentationTier.Views
 
 
                 //px = query2;
+                int c = 0;
                 foreach (EmailDomain v in query)
                 {
                     LinkButton add = new LinkButton();
@@ -53,14 +56,21 @@ namespace PresentationTier.Views
                     add.CssClass = "list-group-item";
                     add.Click += new EventHandler(Eclicker);
                     BursaryList.Controls.Add(add);
+                    c++;
+                }
+                if (c < 10)
+                {
+                    ObjectiveSearch.Visible = false;
                 }
             }
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -68,14 +78,16 @@ namespace PresentationTier.Views
         {
             try
             {
-                errormsg.Visible = false;
+                // errormsg.Visible = false;
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
         protected void Eclicker(object sender, EventArgs e)
@@ -90,8 +102,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -130,8 +144,10 @@ namespace PresentationTier.Views
             catch (Exception err)
             {
 
-                errormsg.Visible = true;
-                messageforerror.Text = Class1.genericErr;
+                // errormsg.Visible = true;
+                messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

@@ -49,6 +49,15 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl messageforerror;
         
         /// <summary>
+        /// tree control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tree;
+        
+        /// <summary>
         /// RoleName control.
         /// </summary>
         /// <remarks>

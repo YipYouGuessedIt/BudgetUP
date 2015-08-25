@@ -87,25 +87,27 @@
 
   </div>
 </div>
+
+                <div id="tree" runat="server" class="treeView">
+             
+        </div>
+             <a href="Settings.aspx" class="back btn btn-info btn-lg"  >Back</a>
         <div id="Add" class="contentArea">
             <br />
-            <h1>Add Bursary</h1><hr />
-            <p>Fill in the fields and click the add button to add a new Bursary Type.Note that all required fields are marked with a *.</p>
-		    <hr />
+            
             <br />
-            <asp:label runat="server">Bursary Name*</asp:label>
+            <asp:label runat="server" Font-Bold="True">Bursary Name*</asp:label>
             <br/>
-            <asp:TextBox ID="BursaryDescription" runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="BursaryDescription" runat="server" CssClass="form-control" MaxLength="199"></asp:TextBox>
             <br />
-            <asp:Label ID="Label1" runat="server" Text="Annual cost*"></asp:Label>
+            <asp:Label ID="Label1" runat="server" Text="Annual cost*" Font-Bold="True"></asp:Label>
             <br />
             <asp:TextBox ID="AnnualCost" runat="server" type="number" CssClass="form-control"></asp:TextBox>
             <br />
-            <asp:Label ID="Label4" runat="server" Text="Years*"></asp:Label>
+            <asp:Label ID="Label4" runat="server" Text="Years*" Font-Bold="True"></asp:Label>
             <br />
             <asp:TextBox ID="Years" runat="server" type="number" CssClass="form-control"></asp:TextBox>
             <br />
-            <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Add" onclick="addBursary" /><br /><br />
         </div>
     </form>

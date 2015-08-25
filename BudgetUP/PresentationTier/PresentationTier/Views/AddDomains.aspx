@@ -79,6 +79,11 @@
 
   </div>
 </div>
+
+                 <div id="tree" runat="server" class="treeView">
+             
+        </div>
+             <a href="Settings.aspx" class="back btn btn-info btn-lg"  >Back</a>
         <div id="Add" class="contentArea">
             <br />
             <h1>Add Domain</h1><hr />
@@ -89,7 +94,6 @@
             <br/>
             <asp:TextBox ID="FacultyName" runat="server" CssClass="form-control"></asp:TextBox>
             <br />
-            <a href="Settings.aspx" class="btn btn-info btn-lg">Back</a>
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Add" onclick="addRole" /><br /><br />
         </div>
     </form>
