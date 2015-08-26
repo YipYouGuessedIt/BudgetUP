@@ -20,104 +20,113 @@ namespace PresentationTier.Views
 
         protected void Unnamed3_Click(object sender, EventArgs e)
         {
-            ServiceContracts sc = new ServiceContracts();
-            string userEmail = UserEmail.Text;
-            int userID;
-            String temp ="";
-            using(var dbContext = new dboEntities())
+            try
             {
-                var checkEmail = dbContext.Verifications
-                        .Where(ad => ad.Email == userEmail)
-                        .FirstOrDefault();
 
-                if(checkEmail == null || checkEmail.UserID == null)
+                ServiceContracts sc = new ServiceContracts();
+                string userEmail = UserEmail.Text;
+                int userID;
+                String temp = "";
+                using (var dbContext = new dboEntities())
                 {
-                    var entry = dbContext.UserCredentials
-                        .Where(ad => ad.Email == userEmail)
-                        .FirstOrDefault();
+                    var checkEmail = dbContext.Verifications
+                            .Where(ad => ad.Email == userEmail)
+                            .FirstOrDefault();
 
-                    userID = entry.User_Id;
-
-                    //createCode
-                    using(MD5 md5 = MD5.Create())
+                    if (checkEmail == null || checkEmail.UserID == null)
                     {
-                        byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(userEmail + DateTime.Now.Day);
-                        byte[] hash = md5.ComputeHash(inputBytes);
-                        StringBuilder sb = new StringBuilder();
-                        for (int i = 0; i < 8; i++)
+                        var entry = dbContext.UserCredentials
+                            .Where(ad => ad.Email == userEmail)
+                            .FirstOrDefault();
+
+                        userID = entry.User_Id;
+
+                        //createCode
+                        using (MD5 md5 = MD5.Create())
                         {
-                            sb.Append(hash[i].ToString("X2"));
+                            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(userEmail + DateTime.Now.Day);
+                            byte[] hash = md5.ComputeHash(inputBytes);
+                            StringBuilder sb = new StringBuilder();
+                            for (int i = 0; i < 8; i++)
+                            {
+                                sb.Append(hash[i].ToString("X2"));
+                            }
+                            temp = sb.ToString();
                         }
-                        temp = sb.ToString();
+
+
+                        sc.AddVerification(userID, userEmail, temp, DateTime.Now);
                     }
-
-
-                    sc.AddVerification(userID, userEmail,temp, DateTime.Now);
-                }
-                else
-                {
-                    Verification veri = new Verification();
-
-                    var entry = dbContext.UserCredentials
-                        .Where(ad => ad.Email == userEmail)
-                        .FirstOrDefault();
-
-                    userID = entry.User_Id;
-
-                    //createCode
-                    using(MD5 md5 = MD5.Create())
+                    else
                     {
-                        byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(userEmail + DateTime.Now.Day);
-                        byte[] hash = md5.ComputeHash(inputBytes);
-                        StringBuilder sb = new StringBuilder();
-                        for (int i = 0; i < 8; i++)
+                        Verification veri = new Verification();
+
+                        var entry = dbContext.UserCredentials
+                            .Where(ad => ad.Email == userEmail)
+                            .FirstOrDefault();
+
+                        userID = entry.User_Id;
+
+                        //createCode
+                        using (MD5 md5 = MD5.Create())
                         {
-                            sb.Append(hash[i].ToString("X2"));
+                            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(userEmail + DateTime.Now.Day);
+                            byte[] hash = md5.ComputeHash(inputBytes);
+                            StringBuilder sb = new StringBuilder();
+                            for (int i = 0; i < 8; i++)
+                            {
+                                sb.Append(hash[i].ToString("X2"));
+                            }
+                            temp = sb.ToString();
                         }
-                        temp = sb.ToString();
+
+                        veri.UserID = entry.User_Id;
+                        veri.Email = userEmail;
+                        veri.DateIssues = DateTime.Now;
+                        veri.VericicationCode = temp;
+
+                        sc.UpdateVerifications(veri);
                     }
+                    //Send email
+                    //MailMessage mailMessage = new MailMessage();
+                    //mailMessage.To.Add(userEmail);
+                    //mailMessage.From = new MailAddress("COS332Pop3@webmail.co.za");
+                    //mailMessage.Subject = "Budget UP verification Code";
+                    //mailMessage.Body = "Good day \r\n\r\n";
+                    //mailMessage.Body = "Your verification code is: " + temp + ".\r\n\r\n";
+                    //mailMessage.Body = "This verification code will expire at mid-night of the " + DateTime.Now.Date.ToString(@"yyyy-MM-dd");
+                    //SmtpClient smtpClient = new SmtpClient("mail.Webmail.co.za", 110);
+                    //smtpClient.Credentials = new System.Net.NetworkCredential("COS332Pop3@webmail.co.za", "Blah1234");
+                    //smtpClient.Send(mailMessage);
 
-                    veri.UserID = entry.User_Id;
-                    veri.Email = userEmail;
-                    veri.DateIssues = DateTime.Now;
-                    veri.VericicationCode = temp;
+                    string body = "Good day \r\n\r\n";
+                    body += "Your verification code is: " + temp + ".\r\n\r\n";
+                    body += "This verification code will expire at mid-night of the " + DateTime.Now.Date.ToString(@"yyyy-MM-dd");
 
-                    sc.UpdateVerifications(veri);
+
+                    SmtpClient smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com", // smtp server address here…
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new System.Net.NetworkCredential("budgetup2@gmail.com", "Blah1234"),
+                        Timeout = 30000,
+                    };
+
+                    MailMessage message = new MailMessage("budgetup2@gmail.com", "yipyouguessedit@gmail.com", "Budget UP verification Code", body);
+                    smtp.Send(message);
+                    //082 697 1523
+
+
+                    Response.Redirect("ForgotPassword_Verification.aspx");
                 }
-                //Send email
-                //MailMessage mailMessage = new MailMessage();
-                //mailMessage.To.Add(userEmail);
-                //mailMessage.From = new MailAddress("COS332Pop3@webmail.co.za");
-                //mailMessage.Subject = "Budget UP verification Code";
-                //mailMessage.Body = "Good day \r\n\r\n";
-                //mailMessage.Body = "Your verification code is: " + temp + ".\r\n\r\n";
-                //mailMessage.Body = "This verification code will expire at mid-night of the " + DateTime.Now.Date.ToString(@"yyyy-MM-dd");
-                //SmtpClient smtpClient = new SmtpClient("mail.Webmail.co.za", 110);
-                //smtpClient.Credentials = new System.Net.NetworkCredential("COS332Pop3@webmail.co.za", "Blah1234");
-                //smtpClient.Send(mailMessage);
-
-                string body = "Good day \r\n\r\n";
-                body += "Your verification code is: " + temp + ".\r\n\r\n";
-                body += "This verification code will expire at mid-night of the " + DateTime.Now.Date.ToString(@"yyyy-MM-dd");
-                
-
-                SmtpClient smtp = new SmtpClient
-                {
-                    Host = "smtp.gmail.com", // smtp server address here…
-                    Port = 587,
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential("budgetup2@gmail.com", "Blah1234"),
-                    Timeout = 30000,
-                };
-
-                MailMessage message = new MailMessage("budgetup2@gmail.com", "yipyouguessedit@gmail.com", "Budget UP verification Code", body);
-                smtp.Send(message);
-                //082 697 1523
-
-
-                Response.Redirect("ForgotPassword_Verification.aspx");
+            }
+            catch(Exception f)
+            {
+                messageforerror.InnerText = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "  $('#myModal').modal('show');", true);
             }
         }
     }

@@ -19,38 +19,53 @@ namespace PresentationTier.Views
 
         protected void Unnamed3_Click(object sender, EventArgs e)
         {
-            string veriPassword = veriCode.Text;
-            string Email = UserEmail.Text;
-            string temp;
-            using (MD5 md5 = MD5.Create())
+            try
             {
-                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(Email + DateTime.Now.Day);
-                byte[] hash = md5.ComputeHash(inputBytes);
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < 8; i++)
+                string veriPassword = veriCode.Text;
+                string Email = UserEmail.Text;
+                string temp;
+                using (MD5 md5 = MD5.Create())
                 {
-                    sb.Append(hash[i].ToString("X2"));
+                    byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(Email + DateTime.Now.Day);
+                    byte[] hash = md5.ComputeHash(inputBytes);
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < 8; i++)
+                    {
+                        sb.Append(hash[i].ToString("X2"));
+                    }
+                    temp = sb.ToString();
                 }
-                temp = sb.ToString();
+
+                using (var dbContext = new dboEntities())
+                {
+                    var entry = dbContext.Verifications
+                            .Where(ad => ad.Email == Email)
+                            .FirstOrDefault();
+
+                    if (veriPassword == entry.VericicationCode)
+                    {
+                        Session["userID"] = entry.UserID;
+
+                        var user = dbContext.Users
+                            .Where(ad => ad.Id == entry.UserID)
+                            .FirstOrDefault();
+
+                        Session["Admin"] = user.Admin;
+
+                        this.Session["userTitle"] = user.Title.Description;
+                        this.Session["userSname"] = user.Surname;
+                        this.Session["Admin"] = user.Admin;
+
+                        Response.Redirect("ObjectivesPage.aspx");
+
+
+                    }
+                }
             }
-
-            using(var dbContext = new dboEntities())
+            catch (Exception f)
             {
-                var entry = dbContext.Verifications
-                        .Where(ad => ad.Email == Email)
-                        .FirstOrDefault();
-
-                if (veriPassword == entry.VericicationCode)
-                {
-                    Session["userID"] = entry.UserID;
-
-                    var user = dbContext.Users
-                        .Where(ad => ad.Id == entry.UserID)
-                        .FirstOrDefault();
-
-                    Session["Admin"] = user.Admin;
-                    Response.Redirect("ObjectivesPage.aspx");
-                }
+                messageforerror.InnerText = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "hwa", "  $('#myModal').modal('show');", true);
             }
         }
     }
