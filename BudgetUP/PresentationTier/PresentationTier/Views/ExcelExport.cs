@@ -273,7 +273,7 @@ namespace PresentationTier.Views
 
             firstAmountRow = row+1;
 
-#region Write Amount Table
+            #region Write Amount Table
             #region Column Headings
             //write column headings
             ws.Cells[row, col++].Value = "Objectives".ToUpper();
@@ -597,7 +597,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -624,8 +623,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -646,7 +643,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -673,8 +669,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -695,7 +689,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -722,8 +715,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -744,7 +735,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -771,8 +761,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -793,7 +781,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -820,8 +807,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -1596,8 +1581,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -1624,8 +1607,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -1646,8 +1627,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -1674,8 +1653,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -1696,8 +1673,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -1724,8 +1699,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -1746,8 +1719,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -1774,8 +1745,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -1796,8 +1765,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -1824,8 +1791,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -3223,8 +3188,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -3251,8 +3214,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -3273,8 +3234,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -3301,8 +3260,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -3323,8 +3280,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -3351,8 +3306,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -3373,8 +3326,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -3401,8 +3352,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -3423,8 +3372,6 @@ namespace PresentationTier.Views
                             {
                                 ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                                 ws.Cells[row, col].Value = 0;
-                                ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                                ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
 
                                 if (activity.startDate <= tempStartDate && activity.endDate >= tempStartDate)
                                 {
@@ -3451,8 +3398,6 @@ namespace PresentationTier.Views
                             }
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
                             ws.Cells[row, col].Formula = SumRange(FirstAmountColumn, row, LastAmountColumn, row);
-                            ws.Cells[row, col].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
-                            ws.Cells[row, col].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightPink);
                             col = ExpenseColumns;
                             row++;
                         }
@@ -4187,7 +4132,7 @@ namespace PresentationTier.Views
                 foreach (Proj.obj.act activity in objective.ActivitysList)
                 {
                     #region Write each expense
-                    if (activity.OperatList.Count() != 0)
+                    if (activity.carList.Count() != 0)
                     {
                         //Write note value                                                      
 
@@ -4208,12 +4153,37 @@ namespace PresentationTier.Views
                                 }
                             }
 
-                            ws.Cells[row, col++].Value = item.TypeofRental;
+                            double amount;
+                            if(item.TypeofRental == 0)
+                            {// UP Fleet
+                                double NumKM = item.Kilometers;
+                                double NumDays = item.Days;
+                                double DayRate = projectInfo.projSettings.UPFleetDailyRate;
+                                double KMRate = projectInfo.projSettings.UPFleetKmRate;
+                                amount = (NumKM * NumDays * KMRate) + (NumDays * DayRate);
+                                ws.Cells[row, col++].Value = "UP Fleet";
+                            }
+                            else if (item.TypeofRental == 1)
+                            {//External Rental
+                                ws.Cells[row, col+3].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                ws.Cells[row, col+3].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGreen);
+                                ws.Cells[row, col++].Value = "External Rental";
+                                amount = 0;
+
+                            }
+                            else // it is 2
+                            {//Fuel Claim
+                                double NumKM = item.Kilometers;
+                                double KMRate = projectInfo.projSettings.UPFleetKmRate;
+                                amount = NumKM * KMRate;
+                                ws.Cells[row, col++].Value = "Fuel Claim";
+                            }
+                            
                             ws.Cells[row, col++].Value = item.Days;
                             ws.Cells[row, col++].Value = item.Kilometers;
 
                             ws.Cells[row, col].Style.Numberformat.Format = "R #,##0.00";
-                            ws.Cells[row, col++].Value = 0;
+                            ws.Cells[row, col++].Value = amount;
 
                             //if (item.UPFleet == false)
                             //{
@@ -4439,7 +4409,7 @@ namespace PresentationTier.Views
                 foreach (Proj.obj.act activity in objective.ActivitysList)
                 {
                     #region Write each expense
-                    if (activity.OperatList.Count() != 0)
+                    if (activity.equipList.Count() != 0)
                     {
                         //Write note value                                                      
 
@@ -4793,6 +4763,7 @@ namespace PresentationTier.Views
                                 if(upStaffMember.SubventionLevy == false)
                                 {
                                     projectInfo.staffIncome.Add(upStaffMember);
+                                    tempActivity.upstaffList.Add(upStaffMember);
                                 }
                                 else
                                 {
