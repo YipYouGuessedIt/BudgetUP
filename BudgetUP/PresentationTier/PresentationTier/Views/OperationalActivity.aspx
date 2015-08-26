@@ -88,8 +88,8 @@
                 		<p>Fill in the fields and click the add button to add a new operational activity.Note that all required fields are marked with a *.</p>
 		<hr/>
                  <asp:Label runat="server" Font-Bold="True">Operation Type*</asp:Label><asp:DropDownList required runat="server" ID="oppType" name="quantity" CssClass="form-control" OnInit="oppType_Init" OnSelectedIndexChanged="oppType_SelectedIndexChanged"></asp:DropDownList><br />
-                 <asp:Label runat="server" Font-Bold="True">Quantity*</asp:Label><asp:TextBox required type="number" runat="server" ID="quantity" name="quantity" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server" Font-Bold="True">Total per unit(in Rands and VAT inclusive)*</asp:Label><asp:TextBox required runat="server" type="number" ID="amount" name="amount" CssClass="form-control"></asp:TextBox><br />
+                 <asp:Label runat="server" Font-Bold="True">Quantity*</asp:Label><asp:TextBox required min="0" type="number" runat="server" ID="quantity" name="quantity" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server" Font-Bold="True">Total per unit(in Rands and VAT inclusive)*</asp:Label><asp:TextBox required runat="server" min="0" type="number" ID="amount" name="amount" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server" Font-Bold="True">Notes</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" OnClick="Unnamed5_Click" /><br /><br />
             </div>

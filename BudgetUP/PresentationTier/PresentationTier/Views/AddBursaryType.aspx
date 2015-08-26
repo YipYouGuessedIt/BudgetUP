@@ -102,11 +102,11 @@
             <br />
             <asp:Label ID="Label1" runat="server" Text="Annual cost*" Font-Bold="True"></asp:Label>
             <br />
-            <asp:TextBox ID="AnnualCost" runat="server" type="number" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="AnnualCost" runat="server" type="number" min="0" CssClass="form-control"></asp:TextBox>
             <br />
             <asp:Label ID="Label4" runat="server" Text="Years*" Font-Bold="True"></asp:Label>
             <br />
-            <asp:TextBox ID="Years" runat="server" type="number" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="Years" runat="server" type="number" min="0" CssClass="form-control"></asp:TextBox>
             <br />
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Add" onclick="addBursary" /><br /><br />
         </div>

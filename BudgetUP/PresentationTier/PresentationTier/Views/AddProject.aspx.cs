@@ -54,6 +54,7 @@ namespace PresentationTier.Views
             try { 
             using (var dbContext = new dboEntities())
             {
+                bool msd = false;
             ServiceContracts project = new ServiceContracts();
             int userID = Convert.ToInt32(this.Session["userID"]);
             DateTime start = Convert.ToDateTime(sdate.Text);
@@ -75,52 +76,64 @@ namespace PresentationTier.Views
                         length = 1;
                     }
                 }
-
+                
                  var query = from adminSyssettings
                  in dbContext.Admin_SysSettings
                  select adminSyssettings;
 
                  int value2 = query.Count<Admin_SysSettings>();
                  int num = 1;
-
+                
                   foreach (Admin_SysSettings mi in query)
                   {
                   if(num == value2)
                   {
-                        ServiceContracts mn = new ServiceContracts();
-                        mn.AddProjectSettings(mi.EscalationRate, mi.SubventionRate, mi.InstitutionalCost,mi.UPFleetDailyRate,mi.FCkmRate,mi.UPFleetKmRate);
-                        var query2 = from Project_Settings
-                        in dbContext.Project_Settings
-                        select Project_Settings;
-
-                        int value = query2.Count<Project_Settings>();
-                        int counter = 1;
-                        foreach (Project_Settings m in query2)
-                        {
-                            if (counter == value)
-                            {
-                                this.Session["projectID"] = project.AddUserProject(userID, title.Text, goal.Text, length, m.Id , start, end);
-                            }
-                            counter++;
-                        }
+                      if (length < (mi.MaximumProjectSpan *12))
+                      {
+                          ServiceContracts mn = new ServiceContracts();
+                          mn.AddProjectSettings(mi.EscalationRate, mi.SubventionRate, mi.InstitutionalCost, mi.UPFleetDailyRate, mi.FCkmRate, mi.UPFleetKmRate);
+                          var query2 = from Project_Settings
+                          in dbContext.Project_Settings
+                                       select Project_Settings;
+                          msd = true;
+                          int value = query2.Count<Project_Settings>();
+                          int counter = 1;
+                          foreach (Project_Settings m in query2)
+                          {
+                              if (counter == value)
+                              {
+                                  this.Session["projectID"] = project.AddUserProject(userID, title.Text, goal.Text, length, m.Id, start, end);
+                              }
+                              counter++;
+                          }
+                      }
+                      
                   }
                     num++;
                                 
                   }
+                if(msd)
+                {
                   Response.Redirect("ObjectivesPage.aspx");
-                       
+                }
+                else
+                      {
+                          messageforerror.InnerHtml = "Project exceeds the maximum project span";
+                          ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+           
+                      }
             }  
             else
             {
                 //errormsg.Visible = true;
-                messageforerror.InnerHtml = "End date is befor start date";
+                messageforerror.InnerHtml = "End date is before start date";
                 ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
                 }  
             else
             {
                 //errormsg.Visible = true;
-                messageforerror.InnerHtml = "Start date is befor todays date";
+                messageforerror.InnerHtml = "Start date is before todays date";
                 ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
 

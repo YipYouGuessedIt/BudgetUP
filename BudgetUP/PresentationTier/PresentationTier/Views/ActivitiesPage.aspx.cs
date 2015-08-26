@@ -246,6 +246,8 @@ namespace PresentationTier.Views
 
                 ExcelExport temp = new ExcelExport();
                 temp.EmailBudget(Convert.ToInt32(Session["projectID"].ToString()), Convert.ToInt32(this.Session["userID"].ToString()));
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal2').modal('show');", true);
+
             }
             catch (Exception err)
             {

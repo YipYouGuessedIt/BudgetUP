@@ -115,11 +115,11 @@
             <br />
             <asp:Label ID="Label1" runat="server"  Text="Annual cost(in Rands)*" Font-Bold="True"></asp:Label>
             <br />
-            <asp:TextBox ID="AnnualCost" runat="server" required type="number" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="AnnualCost" runat="server" required type="number" min="0" CssClass="form-control"></asp:TextBox>
             <br />
             <asp:Label ID="Label4" runat="server"  Text="Years*" Font-Bold="True"></asp:Label>
             <br />
-            <asp:TextBox ID="Years" runat="server" required type="number" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="Years" runat="server" required type="number" min="0" CssClass="form-control"></asp:TextBox>
             <br />
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Save" onclick="addBursaryType" />
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Delete</button>        </div>

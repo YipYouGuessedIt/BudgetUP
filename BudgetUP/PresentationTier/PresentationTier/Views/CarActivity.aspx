@@ -93,8 +93,8 @@
                     <asp:ListItem Value="2">External Rental</asp:ListItem>
                     <asp:ListItem Value="3">Fuel claim</asp:ListItem>
                 </asp:DropDownList><br />
-                           <div id="days"> <asp:Label  runat="server">     Days*</asp:Label><asp:TextBox required type="number" runat="server" ID="quantity"  name="quantity" CssClass="form-control">0</asp:TextBox><br /></div>
-                <div id="kml"><asp:Label  runat="server"> Kilometers*</asp:Label><asp:TextBox required type="number" runat="server" ID="TextBox1"  name="quantity" CssClass="form-control">0</asp:TextBox><br /></div>
+                           <div id="days"> <asp:Label ID="dayslab"  runat="server">     Days*</asp:Label><asp:TextBox required min="0" type="number" runat="server" ID="quantity"  name="quantity" CssClass="form-control">0</asp:TextBox><br /></div>
+                <div id="kml"><asp:Label ID="kmlab"  runat="server"> Kilometers*</asp:Label><asp:TextBox required type="number" min="0" runat="server" ID="TextBox1"  name="quantity" CssClass="form-control">0</asp:TextBox><br /></div>
 
                 <asp:Label runat="server">Notes*</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Add" OnClick="Unnamed5_Click" /><br /><br />

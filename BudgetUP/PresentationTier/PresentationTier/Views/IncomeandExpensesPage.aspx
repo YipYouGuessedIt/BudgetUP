@@ -15,6 +15,27 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
+        <div id="myModal2" class="modal fade"  role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Error has occured</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="Div3" runat="server"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
              <div id="myModal" class="modal fade"  role="dialog">
   <div class="modal-dialog">
 
@@ -105,10 +126,10 @@
                         <asp:ListItem Value="5">Travel (Expense)</asp:ListItem>
                         <asp:ListItem Value="8">Car (Expense)</asp:ListItem>
                         <asp:ListItem Value="6">Bursaries/Scholoarships</asp:ListItem>
-                        <asp:ListItem Value="7">Donations(Income)</asp:ListItem>
+                        <asp:ListItem Value="7"> Donations, in-kind support and pledges(Income)</asp:ListItem>
                     </asp:DropDownList><br /><br />
 
-				    <asp:Button runat="server" id="buttonadd" class="btn btn-info btn-lg" Text="Add a item" OnClick="Unnamed1_Click" ></asp:Button>
+				    <asp:Button runat="server" id="buttonadd" class="btn btn-info btn-lg" Text="Add an item" OnClick="Unnamed1_Click" ></asp:Button>
                    <div id="ObjectiveSearch"  runat="server" class="col-lg-2 pull-right serc">
                             <div class="input-group">
                                 <asp:TextBox runat="server" autofocus="true" placeholder="Search" ID="searcher" CssClass=" form-control" OnTextChanged="Button1_Click"></asp:TextBox> 
@@ -124,17 +145,17 @@
             <div runat="server" id="lister">
 			    <div id="bl" runat="server">
                     <h3>Bursary</h3>
-                    <p>Below is a list of all the bursaries associated with the activity.Click to view</p>
+                    <p>Below is a list of all the bursaries associated with the activity. Click to view</p>
                     <asp:PlaceHolder ID="BusaryList" runat="server"></asp:PlaceHolder>	
                 </div>
                 <div id="il" runat="server">
                     <h3>Income</h3>
-                    <p>Below is a list of all the Incomes associated with the activity.Click to view</p>
+                    <p>Below is a list of all the Incomes associated with the activity. Click to view</p>
                     <asp:PlaceHolder ID="IncomeList" runat="server"></asp:PlaceHolder>	
                 </div>
                  <div id="el" runat="server">
                     <h3>Expense</h3>
-                     <p>Below is a list of all the Expenses associated with the activity.Click to view</p>
+                     <p>Below is a list of all the expenses associated with the activity. Click to view</p>
                     <asp:PlaceHolder ID="Expenselist" runat="server"></asp:PlaceHolder>	
                 </div>
             </div>

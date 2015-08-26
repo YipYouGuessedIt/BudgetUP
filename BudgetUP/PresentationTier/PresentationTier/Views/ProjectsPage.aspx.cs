@@ -212,11 +212,11 @@ namespace PresentationTier.Views
                 //Button1.CssClass = "form form-control";
                 if(m == false)
                 {
-                    Div1.InnerHtml = "<p>Welcome " + this.Session["userTitle"] + " " + this.Session["userSname"] + ",this is your gateway to manage projects budget. Click on the button below to add project budgets.</p>";
+                    Div1.InnerHtml = "<p>Welcome " + this.Session["userTitle"] + " " + this.Session["userSname"] + ",this is your gateway to manage projects budget. Click on the button below to add project budgets. Above are buttons that will allow you to download the report for the project you are in as well as submit the report to DRIS</p>";
                 }
                 else
                 {
-                    Div1.InnerHtml = "<p>Welcome " + this.Session["userTitle"] + " " + this.Session["userSname"] + ",this is your gateway to manage projects budgets. Below is a list of all the projects you created.Click on a project item to manage it.</p>";
+                    Div1.InnerHtml = "<p>Welcome " + this.Session["userTitle"] + " " + this.Session["userSname"] + ",this is your gateway to manage projects budgets. Below is a list of all the projects you created.Click on a project item to manage it. Above are buttons that will allow you to download the report for the project you are in as well as submit the report to DRIS</p>";
                
                 }
 

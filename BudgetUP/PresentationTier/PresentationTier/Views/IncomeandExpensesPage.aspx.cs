@@ -44,11 +44,11 @@ namespace PresentationTier.Views
 
                     if (p.Id.ToString() == Session["ActID"].ToString())
                     {
-                        heaserarea.InnerText =p.ActivityName.ToString() + " Details and income and expense list";
+                        heaserarea.InnerText =p.ActivityName.ToString() + " details";
                         tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt <a href='ObjectivesPage.aspx'>Project Details and Objective List</a> &gt <a href='ActivitiesPage.aspx'>Objective Details and Activity List</a> &gt Activity Details";
                         DateTime s = p.StartDate;
                         DateTime en = p.EndDate;
-                        Div2.InnerHtml = "<p><b>Activity name:</b>" + p.ActivityName + "<p/><p><b>Dates:</b>" + s.ToString("yyyy/MM/dd") + " - " + en.ToString("yyyy/MM/dd") + "<p/>";
+                        Div2.InnerHtml = "<p><b>Activity name:</b>" + p.ActivityName + "<p/><p><b>Duration:</b>" + s.ToString("yyyy/MM/dd") + " - " + en.ToString("yyyy/MM/dd") + "<p/>";
                       
                     }
                 }
@@ -232,7 +232,7 @@ namespace PresentationTier.Views
                                 if (m.Expense_Id == v.Id)
                                 {
                                     LinkButton add = new LinkButton();
-                                    add.Text = m.Operation_Type.Description + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
+                                    add.Text = m.Operation_Type.Description + " operation<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                                     add.ID = m.Id.ToString() + ";;operational";
                                     add.CssClass = "list-group-item";
                                     add.Click += new EventHandler(Eclicker);
@@ -249,9 +249,9 @@ namespace PresentationTier.Views
                                 if (m.Expense_Id == v.Id)
                                 {
                                     LinkButton add = new LinkButton();
-                                    add.Text = "Travel" + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
+                                    add.Text = m.TravellerName + " to " + m.Destination + " <span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                                     add.ID = m.Id.ToString() + ";;travel";
-                                    add.CssClass = "list-group-item";
+                                    add.CssClass = "over list-group-item";
                                     add.Click += new EventHandler(Eclicker);
                                     Expenselist.Controls.Add(add);
                                     money++;
@@ -266,19 +266,22 @@ namespace PresentationTier.Views
                                 if (m.Expense_Id == v.Id)
                                 {
                                     LinkButton add = new LinkButton();
-                                    add.Text = "UP Staff member" + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
+                                    add.Text = "UP Staff member("+ m.PostLevel.Description+ ")<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                                     add.ID = m.Id.ToString() + ";;staff";
-                                    add.CssClass = "list-group-item";
+                                    add.CssClass = "over list-group-item";
                                     add.Click += new EventHandler(Eclicker);
                                     if (m.SubventionLevy == false)
                                     {
                                         IncomeList.Controls.Add(add);
+                                        don++;
+                                        
                                     }
                                     else
                                     {
                                         Expenselist.Controls.Add(add);
+                                        money++;
                                     }
-                                    money++;
+                                   
                                 }
                             }
                             var query8 = from Objectives
@@ -288,10 +291,28 @@ namespace PresentationTier.Views
                             {
                                 if (m.ExpensId == v.Id)
                                 {
+                                    string type = "";
+                                    if(m.TypeofRental ==1)
+                                    {
+                                        type = "UPFleet";
+                                    }
+                                    else if (m.TypeofRental ==2)
+                                    {
+                                        type = "External";
+                                    }
+                                    else if (m.TypeofRental == 3)
+                                    {
+                                        type = "Fuel claim";
+                                    }
+                                    else
+                                    {
+                                        type = "none";
+                                    }
+
                                     LinkButton add = new LinkButton();
-                                    add.Text = "Car" + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
+                                    add.Text = "Car("+ type + ")<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                                     add.ID = m.Id.ToString() + ";;car";
-                                    add.CssClass = "list-group-item";
+                                    add.CssClass = "over  list-group-item";
                                     add.Click += new EventHandler(Eclicker);
                                     Expenselist.Controls.Add(add);
                                     money++;
@@ -317,7 +338,7 @@ namespace PresentationTier.Views
                             LinkButton add = new LinkButton();
                             add.Text = v.DonorName + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                             add.ID = v.Id.ToString()+"Income";
-                            add.CssClass = "list-group-item";
+                            add.CssClass = "over list-group-item";
                             add.Click += new EventHandler(Iclicker);
                             IncomeList.Controls.Add(add);
                             don++;
@@ -342,7 +363,7 @@ namespace PresentationTier.Views
                             LinkButton add = new LinkButton();
                             add.Text = v.BursaryType.Description + "<span class='glyphicon glyphicon-menu-right pull-right' hidden='hidden' aria-hidden='true'></span>";
                             add.ID = v.Id.ToString() +"Burser";
-                            add.CssClass = "list-group-item";
+                            add.CssClass = "over list-group-item";
                             add.ToolTip = "Click to view details of bursary";
                             add.Click += new EventHandler(Bclicker);
                             BusaryList.Controls.Add(add);
@@ -382,7 +403,7 @@ namespace PresentationTier.Views
                     }
                     else
                     {
-                        Div1.InnerHtml = "<p>This is the gateway to manage incomes and expenses of your selected activity. Below is a list of all the incomes or expenses you created.Click on a incomes or expenses item to manage it or edit the activity.</p>";
+                        Div1.InnerHtml = "<p>This is the gateway to manage incomes and expenses of your selected activity. Below is a list of all the incomes or expenses you created.Click on a incomes or expenses item to manage or edit the activity.</p>";
                     }
                     if (burs == 0)
                     {
@@ -392,7 +413,7 @@ namespace PresentationTier.Views
                     }
                     else
                     {
-                        Div1.InnerHtml = "<p>This is the gateway to manage incomes and expenses of your selected activity. Below is a list of all the incomes or expenses you created.Click on a incomes or expenses item to manage it or edit the activity.</p>";
+                        Div1.InnerHtml = "<p>This is the gateway to manage incomes and expenses of your selected activity. Below is a list of all the incomes or expenses you created.Click on a incomes or expenses item to manage or edit the activity.</p>";
                     }
                 }
             }
@@ -562,6 +583,8 @@ namespace PresentationTier.Views
 
                 // errormsg.Visible = true;
                 messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -572,12 +595,16 @@ namespace PresentationTier.Views
 
                 ExcelExport temp = new ExcelExport();
                 temp.EmailBudget(Convert.ToInt32(Session["projectID"].ToString()), Convert.ToInt32(this.Session["userID"].ToString()));
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal2').modal('show');", true);
+
             }
             catch (Exception err)
             {
 
                 // errormsg.Visible = true;
                 messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

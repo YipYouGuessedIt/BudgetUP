@@ -100,7 +100,7 @@
                     <asp:ListItem Value="3">Post-doctoral fellow</asp:ListItem>
                 </asp:DropDownList><br /><br />
                 <asp:Label runat="server" Font-Bold="True">Start of bursary*</asp:Label>              
-                  <div class="input-group datetimepicker5 col-lg-6 " style="margin-left:25%">
+                  <div class="input-group datetimepicker5 col-lg-6 col-md-6 col-sm-6 col-xs-6 " style="margin-left:25%">
                                <asp:TextBox required   runat="server" ID="sdate" name="sdate" CssClass="form-control">2015-01-01</asp:TextBox>
                                 <span class="input-group-addon" style="background-color:white">
                                     <span class="glyphicon glyphicon-calendar"></span>

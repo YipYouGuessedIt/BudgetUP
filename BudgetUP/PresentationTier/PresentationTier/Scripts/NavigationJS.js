@@ -46,12 +46,14 @@
                 $('#TextBox1').hide();
                 $('#days').show();
                 $('#kml').hide();
+                $('#kmlab').text = ("Kilometers*");
             }
             else if ($(this).val() == "3") {
                 $('#quantity').hide();
                 $('#TextBox1').show();
                 $('#days').hide();
                 $('#kml').show();
+                $('#kmlab').text("Kilometers per day*");
             }
             else
             {
@@ -59,6 +61,7 @@
                 $('#TextBox1').show();
                 $('#days').show();
                 $('#kml').show();
+                $('#kmlab').text("Kilometers*");
             }
             clicker = 0;
         }

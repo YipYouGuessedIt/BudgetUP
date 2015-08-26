@@ -31,6 +31,15 @@ namespace PresentationTier.Views {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl messageforerror;
         
         /// <summary>
+        /// Div3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div3;
+        
+        /// <summary>
         /// adminnav control.
         /// </summary>
         /// <remarks>

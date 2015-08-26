@@ -40,15 +40,23 @@
 
          
  }*/
+ .over
+ {
+         overflow-wrap:break-word;
+    white-space:pre-wrap;
+ }
 div.treeView
 {
     width:80%;
-    height:30px;
+    
+    max-height:60px;
    margin:0 auto;
     margin-top:auto;    
     background-color: rgb(215, 210, 209);
     color:black;
     line-height:30px;
+    overflow-wrap:break-word;
+    white-space:pre-wrap;
 }
 #Div1 {
     text-wrap: normal;

@@ -84,7 +84,7 @@ namespace PresentationTier.Views
                         else
                         {
                             // errormsg.Visible = true;
-                            messageforerror.InnerHtml = "Dates dont fall in projects bounds";
+                            messageforerror.InnerHtml = "Dates do not fall in projects bounds";
                             ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
 
                         }
@@ -92,14 +92,14 @@ namespace PresentationTier.Views
             else
             {
                 //errormsg.Visible = true;
-                messageforerror.InnerHtml = "End date is befor start date";
+                messageforerror.InnerHtml = "End date is before start date";
                 ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
             }
             }
                               else
                               {
                                   //errormsg.Visible = true;
-                                  messageforerror.InnerHtml = "Start date is befor todays date";
+                                  messageforerror.InnerHtml = "Start date is before todays date";
                                   ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
                               }
                         

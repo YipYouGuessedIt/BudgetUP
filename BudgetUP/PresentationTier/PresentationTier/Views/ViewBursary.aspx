@@ -5,14 +5,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>View Bursary</title>
-    <link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="../bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+     <script src="../Scripts/jquery-1.8.2.min.js"></script>
+    	<link href="../bootstrap/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet"/>
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"/>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+            <script src="../Scripts/script.js"></script>
+    <script src="../Scripts/moment.min.js"></script>
+    <script src="../Scripts/bootstrap-datetimepicker.min.js"></script>
+	    <script src="../bootstrap/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script>
+
     <script src="../Scripts/NavigationJS.js"></script>
-    <link rel="stylesheet" href="../Styles/Global.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
+
+        <link rel="stylesheet" href="../Styles/Global.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    </head>
 <body>
       <form id="form1" runat="server">
     <div id="adminnav" runat="server">
@@ -119,7 +125,7 @@
             <br />
             <asp:Label runat="server">Start of bursary*</asp:Label>
             
-                      <div class="input-group datetimepicker5 col-lg-6 " style="margin-left:25%">
+                      <div class="input-group datetimepicker5 col-lg-6 col-md-6 col-sm-6 col-xs-6 " style="margin-left:25%">
                                <asp:TextBox required   runat="server" ID="sdate" name="date" CssClass="form-control">2015-01-01</asp:TextBox>
                                 <span class="input-group-addon" style="background-color:white">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -128,7 +134,7 @@
                 <br />
             <asp:Label runat="server">Notes</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5" required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
 
-            <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg">Back</a>
+            
             <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" OnClick="Unnamed4_Click" />
                                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Delete</button>
             <br />

@@ -84,8 +84,8 @@
                               <a href="IncomeandExpensesPage.aspx" class="back btn btn-info btn-lg"  >Back</a>
 
             <div id="Add" class="contentArea"><br />
-                <h1>Donation</h1><hr />
-                		<p>Fill in the fields and click the add button to add a new Donation.Note that all required fields are marked with a *.</p>
+                <h1> donations, in-kind support and pledges</h1><hr />
+                		<p>Fill in the fields and click the add button to add a new  donations, in-kind support and pledges. Note that all required fields are marked with a *.</p>
 		<hr/>
                 <asp:Label runat="server" Font-Bold="True">Name of doner/funding agency</asp:Label><asp:TextBox runat="server" ID="name" required name="name" CssClass="form-control" MaxLength="199"></asp:TextBox><br />
                 <asp:Label runat="server" Font-Bold="True">Value(in rands)*</asp:Label><asp:TextBox required runat="server" ID="amount" name="amount" CssClass="form-control"></asp:TextBox><br />

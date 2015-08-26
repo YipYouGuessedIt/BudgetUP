@@ -95,7 +95,7 @@
             <br/>
             <asp:TextBox ID="FacultyName" runat="server" CssClass="form-control" MaxLength="35"></asp:TextBox>
             <br />
-            <asp:label runat="server" Font-Bold="True"> Salary Amount(In Rands)*</asp:label><asp:TextBox ID="FacultyName0" type="number" runat="server" required CssClass="form-control"></asp:TextBox>
+            <asp:label runat="server" Font-Bold="True"> Salary Amount(In Rands)*</asp:label><asp:TextBox ID="FacultyName0" min="0" type="number" runat="server" required CssClass="form-control"></asp:TextBox>
             <br />
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Add" onclick="addRole" /><br /><br />
         </div>

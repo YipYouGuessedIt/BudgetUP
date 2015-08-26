@@ -34,6 +34,26 @@
 
   </div>
 </div>
+
+        <div id="myModal2" class="modal fade"  role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Email confirmation</h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="Div3" runat="server">email has been sent</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
            <div id="adminnav" runat="server">
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">

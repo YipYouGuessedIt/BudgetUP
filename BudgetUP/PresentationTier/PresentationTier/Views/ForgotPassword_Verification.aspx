@@ -35,7 +35,7 @@
             
     <div id="AddProjects" class="contentArea"><br />
         <h1>Password Recovery</h1><hr />
-        <h3>Please enter the verification password that was sent to your email</h3>
+        <h3>Please enter the verification password that was sent to your email.Please change your password at your profile page.</h3>
             <asp:Label runat="server">Username</asp:Label><asp:TextBox runat="server" ID="UserEmail" type="email" name="User" autofocus CssClass="form-control" required></asp:TextBox><br />
                 
         <asp:Label runat="server">Verification code</asp:Label><asp:TextBox runat="server" ID="veriCode" type="text" name="User" autofocus CssClass="form-control" required></asp:TextBox><br />

@@ -110,7 +110,7 @@
                 		<p>Fill in the fields and click the save button to edit the current Service provider.Note that all required fields are marked with a *.</p>
 		<hr/>
                 <asp:Label runat="server" Font-Bold="True">Name of contractor*</asp:Label><asp:TextBox runat="server" ID="name" required name="name" CssClass="form-control" MaxLength="199"></asp:TextBox><br />
-                <asp:Label runat="server" Font-Bold="True">Amount(in Rands)*</asp:Label><asp:TextBox required runat="server" ID="amount" type="number" name="amount" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server" Font-Bold="True">Amount(in Rands)*</asp:Label><asp:TextBox required min="0" runat="server" ID="amount" type="number" name="amount" CssClass="form-control"></asp:TextBox><br />
                 <asp:Label runat="server" Font-Bold="True">Notes</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" OnClick="Unnamed4_Click" />
                                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Delete</button>

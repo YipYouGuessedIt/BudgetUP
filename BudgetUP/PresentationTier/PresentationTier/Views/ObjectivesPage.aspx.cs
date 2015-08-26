@@ -47,7 +47,7 @@ namespace PresentationTier.Views
                         heaserarea.InnerText = p.Title.ToString() + " details and objective list";
                         DateTime s = p.StartDate.Value;
                         DateTime en = p.EndDate.Value;
-                        Div2.InnerHtml = "<p><b>Overall objective:</b>" + p.Goal + "<p/><p><b>Dates:</b>" + s.ToString("yyyy/MM/dd") + " - " + en.ToString("yyyy/MM/dd") + "<p/>";
+                        Div2.InnerHtml = "<p><b>Overall objective:</b>" + p.Goal + "<p/><p><b>Duration:</b>" + s.ToString("yyyy/MM/dd") + " - " + en.ToString("yyyy/MM/dd") + "<p/>";
                         tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt Project Details and Objective List" ;
 
                         LinkButton DownloadReport = new LinkButton();
@@ -74,6 +74,8 @@ namespace PresentationTier.Views
 
                // errormsg.Visible = true;
                 messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -96,6 +98,8 @@ namespace PresentationTier.Views
 
                // errormsg.Visible = true;
                 messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
         /// <summary>
@@ -206,6 +210,8 @@ namespace PresentationTier.Views
 
                 //errormsg.Visible = true;
                 messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -221,6 +227,8 @@ namespace PresentationTier.Views
 
                // errormsg.Visible = true;
                 messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -246,6 +254,8 @@ namespace PresentationTier.Views
 
                 // errormsg.Visible = true;
                 messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
 
@@ -255,13 +265,17 @@ namespace PresentationTier.Views
             {
 
                 ExcelExport temp = new ExcelExport();
-                temp.EmailBudget(Convert.ToInt32(Session["projectID"].ToString()), Convert.ToInt32(this.Session["userID"].ToString()));                
+                temp.EmailBudget(Convert.ToInt32(Session["projectID"].ToString()), Convert.ToInt32(this.Session["userID"].ToString()));
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal2').modal('show');", true);
+
             }
             catch (Exception err)
             {
 
                 // errormsg.Visible = true;
                 messageforerror.InnerHtml = Class1.genericErr;
+                ClientScript.RegisterStartupScript(GetType(), "modalShower", "  $('#myModal').modal('show');", true);
+
             }
         }
     }

@@ -100,16 +100,16 @@
 		<hr/>
                 <br />
 
-                <asp:Label ID="Label1" runat="server" Text="Name of traveler*" Font-Bold="True"></asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="Name of traveller*" Font-Bold="True"></asp:Label>
                 <asp:TextBox runat="server" ID="name" required name="name" CssClass="form-control" MaxLength="199" OnTextChanged="name_TextChanged"></asp:TextBox>
                 <br />
 
                 <asp:Label ID="Label2" runat="server" Text="Number of days*" Font-Bold="True"></asp:Label>
-                <asp:TextBox runat="server" ID="numofdays" required type="number" name="numofdays" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox runat="server" ID="numofdays" required type="number" min="0" name="numofdays" CssClass="form-control"></asp:TextBox>
                 <br />
 
                 <asp:Label runat="server" Font-Bold="True">Estimated date of depature* </asp:Label>
-                <div class="input-group datetimepicker5 col-lg-6 " style="margin-left:25%">
+                <div class="input-group datetimepicker5 col-lg-6 col-md-6 col-sm-6 col-xs-6 " style="margin-left:25%">
                                <asp:TextBox required   runat="server" ID="sdate" name="sdate" CssClass="form-control">2015-01-01</asp:TextBox>
                                 <span class="input-group-addon" style="background-color:white">
                                     <span class="glyphicon glyphicon-calendar"></span>

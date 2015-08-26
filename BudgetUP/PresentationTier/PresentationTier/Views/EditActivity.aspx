@@ -119,7 +119,7 @@
                 <asp:Label runat="server" Font-Bold="True">Activity Name*</asp:Label><asp:TextBox runat="server" ID="ActName" required name="ActName" CssClass="form-control" MaxLength="199"></asp:TextBox><br />
                <asp:Label runat="server" Font-Bold="True">Start Date* </asp:Label>
                 
-                <div class="input-group datetimepicker5 col-lg-6 " style="margin-left:25%">
+                <div class="input-group datetimepicker5 col-lg-6 col-md-6 col-sm-6 col-xs-6 " style="margin-left:25%">
                                <asp:TextBox required   runat="server" ID="sdate" name="sdate" CssClass="form-control">2015-01-01</asp:TextBox>
                                 <span class="input-group-addon" style="background-color:white">
                                     <span class="glyphicon glyphicon-calendar"></span>
@@ -129,7 +129,7 @@
                 
                  <asp:Label runat="server" Font-Bold="True">End Date* </asp:Label>
                                 <div class="input-group datetimepicker5 col-lg-6 " style="margin-left:25%">
-                              <asp:TextBox required  runat="server" ID="edate"  name="sdate" CssClass="form-control datetimepicker5"></asp:TextBox><br />
+                              <asp:TextBox required  runat="server" ID="edate"  name="sdate" CssClass="form-control"></asp:TextBox><br />
                  <span class="input-group-addon" style="background-color:white">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>

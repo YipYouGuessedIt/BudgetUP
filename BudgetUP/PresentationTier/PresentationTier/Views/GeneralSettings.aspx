@@ -90,13 +90,13 @@
                 <h1>General Settings</h1><hr />
                 		<p>Fill in the fields and click the add button to edit the current Activity.Note that all required fields are marked with a *.</p>
 		<hr/>
-                <asp:Label runat="server" Font-Bold="True">Escalation Rate*</asp:Label><asp:TextBox runat="server" type="number" step="0.001" ID="EscalationRate" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server" Font-Bold="True">Subvention Rate*</asp:Label><asp:TextBox runat="server" type="number" step="0.001" ID="Subvention" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server" Font-Bold="True">Maximum Project Span*</asp:Label><asp:TextBox runat="server" type="number" step="0.001" ID="MaximumSpan" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server" Font-Bold="True">Indirect/instutional Cost*</asp:Label><asp:TextBox runat="server" type="number" step="0.001" ID="InstutionalCost" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-                                <asp:Label runat="server" Font-Bold="True">UP fleet daily rate*</asp:Label><asp:TextBox runat="server" step="0.001" type="number" ID="uprate" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-                                <asp:Label runat="server" Font-Bold="True">UP fleet daily KM rate*</asp:Label><asp:TextBox runat="server" step="0.001" type="number" ID="TextBox1" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
-                                <asp:Label runat="server" Font-Bold="True">Feul claim rate*</asp:Label><asp:TextBox runat="server" step="0.001" type="number" ID="fc" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server" Font-Bold="True">Escalation Rate*</asp:Label><asp:TextBox runat="server" min="0" type="number" step="0.001" ID="EscalationRate" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server" Font-Bold="True">Subvention Rate*</asp:Label><asp:TextBox runat="server" min="0" type="number" step="0.001" ID="Subvention" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server" Font-Bold="True">Maximum Project Span*</asp:Label><asp:TextBox runat="server" min="0" type="number" step="0.001" ID="MaximumSpan" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server" Font-Bold="True">Indirect/instutional Cost*</asp:Label><asp:TextBox runat="server" min="0" type="number" step="0.001" ID="InstutionalCost" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                                <asp:Label runat="server" Font-Bold="True">UP fleet daily rate*</asp:Label><asp:TextBox runat="server" min="0" step="0.001" type="number" ID="uprate" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                                <asp:Label runat="server" Font-Bold="True">UP fleet daily KM rate*</asp:Label><asp:TextBox runat="server" min="0" step="0.001" type="number" ID="TextBox1" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
+                                <asp:Label runat="server" Font-Bold="True">Feul claim rate*</asp:Label><asp:TextBox runat="server" min="0" step="0.001" type="number" ID="fc" required="true" name="name" CssClass="form-control"></asp:TextBox><br />
 
             <a href="Settings.aspx" class="btn btn-info btn-lg"  >Back</a>
             <asp:Button runat="server" CssClass="btn-info btn-lg btn" Text="Save" OnClick="addBursaryType"/><br /><br />

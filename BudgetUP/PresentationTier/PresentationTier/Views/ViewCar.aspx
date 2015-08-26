@@ -115,8 +115,8 @@
                     <asp:ListItem Value="2">External Rental</asp:ListItem>
                     <asp:ListItem Value="3">Feul claim</asp:ListItem>
                 </asp:DropDownList><br />
-                            <div id="days" runat="server">   <asp:Label   Font-Bold="True">     Days*</asp:Label><asp:TextBox required type="number" runat="server" ID="quantity"  name="quantity" CssClass="form-control">0</asp:TextBox><br /></div>
-                <div id="kml" runat="server"><asp:Label   Font-Bold="True"> Kilometers*</asp:Label><asp:TextBox required type="number" runat="server" ID="TextBox1"  name="quantity" CssClass="form-control">0</asp:TextBox><br /></div>
+                            <div id="days" runat="server">   <asp:Label   Font-Bold="True">     Days*</asp:Label><asp:TextBox min="0" required type="number" runat="server" ID="quantity"  name="quantity" CssClass="form-control">0</asp:TextBox><br /></div>
+                <div id="kml" runat="server"><asp:Label   Font-Bold="True"> Kilometers*</asp:Label><asp:TextBox required min="0" type="number" runat="server" ID="TextBox1"  name="quantity" CssClass="form-control">0</asp:TextBox><br /></div>
 
                 <asp:Label runat="server" ID="Label2" Font-Bold="True">Notes*</asp:Label><asp:TextBox TextMode="multiline" Columns="50" Rows="5"  required runat="server" ID="note" name="note" CssClass="form-control"></asp:TextBox><br />
                 <a href="IncomeandExpensesPage.aspx" class="btn btn-info btn-lg"  >Back</a>

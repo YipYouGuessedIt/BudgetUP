@@ -85,7 +85,7 @@
             <div id="Add" class="contentArea"><br />
                 <h1>Personnel Involvment</h1>
                 <hr />
-                		<p>Fill in the fields and click the add button to add a new Personel involvment.Note that all required fields are marked with a *.</p>
+                		<p>Fill in the fields and click the add button to add a new Personel involvment. Note that all required fields are marked with a *.</p>
 		<hr/>
                 
                 <asp:Label runat="server" Font-Bold="True">Select Post level </asp:Label>
@@ -94,9 +94,9 @@
                     <asp:ListItem Value="2">Lecturer</asp:ListItem>
                 </asp:DropDownList><br />
                 <asp:Label ID="Label1" runat="server" Text="Duration of involvement (in days)*" Font-Bold="True"></asp:Label>
-                <asp:TextBox runat="server" ID="numofdays" type="number" required name="numofdays" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox runat="server" ID="numofdays" type="number" min="0" required name="numofdays" CssClass="form-control"></asp:TextBox>
                 <br />
-                <asp:Label runat="server" Font-Bold="True">Subventilation levy *</asp:Label>
+                <asp:Label runat="server" Font-Bold="True">Subvention levy *</asp:Label>
                <asp:DropDownList class="form-control" ID="DropDownList1" required runat="server">
                     <asp:ListItem Value="0">No</asp:ListItem>
                     <asp:ListItem Value="1">Yes</asp:ListItem>

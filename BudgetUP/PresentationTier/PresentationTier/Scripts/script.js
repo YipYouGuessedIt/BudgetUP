@@ -7,6 +7,8 @@ $(document).ready(
 	});
 		$('.datetimepicker6').datetimepicker({
 		format: "YYYY/MM/DD"
-	});
+		});
+
+		
 		
 });

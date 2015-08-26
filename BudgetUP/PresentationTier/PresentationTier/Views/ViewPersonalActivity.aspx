@@ -116,7 +116,7 @@
                     <asp:ListItem Value="2">Lecturer</asp:ListItem>
                 </asp:DropDownList><br />
                 <asp:Label ID="Label1" runat="server" Text="">Duration of involvement*</asp:Label>
-                <asp:TextBox runat="server" ID="numofdays" type="number" required name="numofdays" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox runat="server" ID="numofdays" min="0" type="number" required name="numofdays" CssClass="form-control"></asp:TextBox>
                 <br />
                 <asp:Label runat="server">Subventilation levy* </asp:Label>
                <asp:DropDownList class="form-control" ID="DropDownList1" runat="server">

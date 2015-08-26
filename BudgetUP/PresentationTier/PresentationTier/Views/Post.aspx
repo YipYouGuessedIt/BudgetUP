@@ -114,7 +114,7 @@
             <br/>
             <asp:TextBox ID="FacultyName" runat="server" required CssClass="form-control"></asp:TextBox>
             <br />
-            <asp:label runat="server" Font-Bold="True">Salary Amount*</asp:label><asp:TextBox ID="FacultyName0" type="number" required runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:label runat="server" Font-Bold="True">Salary Amount*</asp:label><asp:TextBox ID="FacultyName0" min="0" type="number" required runat="server" CssClass="form-control"></asp:TextBox>
             <br />
             <asp:button runat="server" cssclass="btn-info btn-lg btn" text="Edit" onclick="addRole" />
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Delete</button>        </div>
