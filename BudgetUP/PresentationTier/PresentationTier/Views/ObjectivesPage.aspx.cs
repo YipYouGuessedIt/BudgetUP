@@ -47,7 +47,7 @@ namespace PresentationTier.Views
                         heaserarea.InnerText = p.Title.ToString() + " details and objective list";
                         DateTime s = p.StartDate.Value;
                         DateTime en = p.EndDate.Value;
-                        Div2.InnerHtml = "<p><b>Overall objective:</b>" + p.Goal + "<p/><p><b>Duration:</b>" + s.ToString("yyyy/MM/dd") + " - " + en.ToString("yyyy/MM/dd") + "<p/>";
+                        Div2.InnerHtml = "<p><b>Overall objective: </b>" + p.Goal + "<p/><p><b>Duration: </b>" + s.ToString("yyyy/MM/dd") + " - " + en.ToString("yyyy/MM/dd") + "<p/>";
                         tree.InnerHtml = "<a href='ProjectsPage.aspx'>Projects</a> &gt Project Details and Objective List" ;
 
                         LinkButton DownloadReport = new LinkButton();
@@ -157,7 +157,7 @@ namespace PresentationTier.Views
                 }
                 else
                 {
-                    Div1.InnerHtml = "<p>This is your gateway to manage objectives of your selected project. Below is a list of all the objective you created.Click on a objective item to manage it or edit the project.</p>";
+                    Div1.InnerHtml = "<p>This is your gateway to manage objectives of your selected project. Below is a list of all the objective you created. Click on a objective item to manage it or edit the project.</p>";
                 }
                 
                // Button1.Text = "<span class='glyphicon glyphicon-search' hidden='hidden' aria-hidden='true''</span>";

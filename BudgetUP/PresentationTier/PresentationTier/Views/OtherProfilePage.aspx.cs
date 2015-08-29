@@ -191,7 +191,7 @@ namespace PresentationTier.Views
         {
             try
             {
-            if (password.Text != passwordconfirm.Text)
+            if (password.Text == passwordconfirm.Text)
             {
                 bool mi = checkEmailDomain();
                 if (mi == true)
