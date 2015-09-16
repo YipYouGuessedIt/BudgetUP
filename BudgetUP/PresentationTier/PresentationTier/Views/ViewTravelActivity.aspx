@@ -25,7 +25,7 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>                        
@@ -120,8 +120,8 @@
                 <p>Fill in the fields and click the save button to edit the current travel expense.Note that all required fields are marked with a *.</p>
 		<hr/>
                 <br />
-                                <asp:Label ID="Label1" runat="server" Text="Name of Traveler" Font-Bold="True"></asp:Label>
-                <asp:TextBox runat="server" ID="TextBox1" required type="number" min="0" name="numofdays" CssClass="form-control" MaxLength="199"></asp:TextBox>
+                                <asp:Label ID="Label1" runat="server" Text="Name of Traveler*" Font-Bold="True"></asp:Label>
+                <asp:TextBox runat="server" ID="TextBox1" required type="text" min="0" name="numofdays" CssClass="form-control" MaxLength="199"></asp:TextBox>
                 <br />
                 <asp:Label ID="Label2" runat="server" Text="Number of days*" Font-Bold="True"></asp:Label>
                 <asp:TextBox runat="server" ID="numofdays" required type="number" min="0" name="numofdays" CssClass="form-control"></asp:TextBox>
@@ -175,8 +175,6 @@
                 </asp:DropDownList>
                 <br />
 
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                </asp:UpdatePanel>
 
                 <asp:Label runat="server" Font-Bold="True">Return Ticket </asp:Label>
                 <asp:DropDownList class="form-control" ID="returnTicket" runat="server">

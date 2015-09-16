@@ -207,6 +207,7 @@ namespace PresentationTier.Views
                     MailMessage message = new MailMessage("budgetup2@gmail.com", "yipyouguessedit@gmail.com", subject, body);
                     message.Attachments.Add(attached);
                     smtp.Send(message);
+                   
                     //082 697 1523
                     return true;
                 }

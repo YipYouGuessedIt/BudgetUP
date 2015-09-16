@@ -92,7 +92,7 @@
         <div id="Div1" runat="server">Are you sure you want to delete the item?.</div>
       </div>
       <div class="modal-footer">
-           <asp:Button runat="server" CssClass="btn-info btn" Text="Delete" OnClick="Button1_Click" ID="Button2" />
+           <asp:Button runat="server" CssClass="btn-info btn" Text="Delete" OnClick="DeleteFaculty" ID="Button2" />
         <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
       </div>
     </div>
