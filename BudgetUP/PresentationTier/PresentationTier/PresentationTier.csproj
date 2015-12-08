@@ -51,6 +51,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -218,6 +220,12 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\NavigationJS.js" />
     <Content Include="Scripts\script.js" />
+    <None Include="Service References\CurrencyConverter\configuration91.svcinfo" />
+    <None Include="Service References\CurrencyConverter\configuration.svcinfo" />
+    <None Include="Service References\CurrencyConverter\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Views\AddBursaryType.aspx" />
     <Content Include="Views\AddDomains.aspx" />
     <Content Include="Views\AddDurationType.aspx" />
@@ -319,6 +327,7 @@
     <None Include="Scripts\_references.js" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="Views\Logout.ashx" />
+    <None Include="Service References\CurrencyConverter\CurrencyConvertor.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -388,6 +397,11 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\CurrencyConverter\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Views\AddBursaryType.aspx.cs">
       <DependentUpon>AddBursaryType.aspx</DependentUpon>
@@ -879,6 +893,12 @@
   <ItemGroup>
     <Content Include="Account\Web.config" />
     <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CurrencyConverter\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

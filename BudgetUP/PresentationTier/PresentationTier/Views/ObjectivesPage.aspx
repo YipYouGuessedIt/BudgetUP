@@ -23,13 +23,23 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Please select the currency report</h4>
+                        <h4 class="modal-title">Please select the currency for report</h4>
                     </div>
                     <div class="modal-body">
-
-                        <div id="Div4" runat="server"></div>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Dropdown Example
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">HTML</a></li>
+                                <li><a href="#">CSS</a></li>
+                                <li><a href="#">JavaScript</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Continue</button>
                         <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                     </div>
                 </div>
