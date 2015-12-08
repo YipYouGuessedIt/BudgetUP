@@ -17,6 +17,26 @@
 
     <form id="form1" runat="server">
 
+        <div id="currencySelection" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Please select the currency report</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="Div4" runat="server"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
         <div id="myModal2" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -36,6 +56,7 @@
 
             </div>
         </div>
+
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
 

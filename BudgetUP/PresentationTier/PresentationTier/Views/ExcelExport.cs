@@ -164,6 +164,7 @@ namespace PresentationTier.Views
                                 in dbContext.Users
                                        where users.Id == userID
                                        select users;
+
                     var queryemail = from userCred
                                 in dbContext.UserCredentials
                                      where userCred.Id == userID
@@ -182,8 +183,8 @@ namespace PresentationTier.Views
 
                     body = "Project approval request regarding the following project: " + projectInfo.projName + ".\r\n\r\n";
                     body += "Project owner details:\r\n";
-                    body += "Name: " + queryuser.First().Title + " " + queryuser.First().Name + " " + queryuser.First().Surname +"\r\n";
-                    body += "Email: " + queryemail.First().Email + "\r\n\r\n";
+                    body += "Name: " + queryuser.First().Title.Description.ToString() + " " + queryuser.First().Name.ToString() + " " + queryuser.First().Surname.ToString() + "\r\n";
+                    body += "Email: " + queryemail.First().Email.ToString() + "\r\n\r\n";
                     body += "Please find budget attached.";
 
                     //mailMessage.Attachments.Add(attached);
@@ -1142,10 +1143,12 @@ namespace PresentationTier.Views
             FirstAmountColumn = col;
             var start = projectInfo.startDate;
             var end = projectInfo.endDate;
+            int quarter = 1;
             while (start < end)
             {
-                ws.Cells[row, col++].Value = start.ToString("MMMM yyyy");
+                ws.Cells[row, col++].Value = "Quarter " + quarter;//start.ToString("MMMM yyyy");
                 start = start.AddMonths(3);
+                quarter++;
             }
 
             //write total columns
